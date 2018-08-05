@@ -1,0 +1,42 @@
+.mui-col-xs-4,
+.mui-col-xs-8 {
+	height: 100%;
+	overflow-y: auto;
+}
+
+.mui-segmented-control .mui-control-item {
+	line-height: 40px;
+	width: 100%;
+	text-align: center;
+	padding-right: 10px;
+}
+
+.mui-segmented-control .mui-control-item img {
+	width: 25px;
+	vertical-align: middle;
+}
+
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+	background-color: #F9F9F9;
+	color: #41cea9;
+}
+
+.mui-table-view-cell {
+	padding: 8px;
+	text-align: center;
+	background-color: #F9F9F9;
+}
+
+.mui-table-view:after,
+.mui-table-view-cell:after {
+	height: 0px;
+}
+
+.mui-segmented-control.mui-segmented-control-inverted.mui-segmented-control-vertical .mui-control-item,
+.mui-segmented-control.mui-segmented-control-inverted.mui-segmented-control-vertical .mui-control-item.mui-active {
+	border-bottom: none;
+}
+
+.mui-control-content {
+	font-size: 0.9em;
+}

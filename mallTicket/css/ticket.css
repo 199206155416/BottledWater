@@ -1,0 +1,22 @@
+.mui-table-view .mui-media-object {
+	line-height: 75px;
+	max-width: 75px;
+	height: 75px;
+}
+.itemName {
+	color: black;
+	font-size: 0.9em;
+}
+
+.price {
+	margin-top: 10px;
+	font-size: 1em;
+}
+
+.curprice {
+	color: #41CEA9;
+}
+.preprice {
+	color: black;
+	text-decoration:line-through
+}

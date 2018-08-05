@@ -1,0 +1,45 @@
+
+
+.mui-input-row {
+    height: 1rem;
+}
+.own-group{
+	background: #fff;
+	padding: .7rem .3rem 0 .3rem;
+}
+.mui-input-row:after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #ccc;
+}
+.mui-input-row label {
+    float: left;
+    width: 1.3rem;
+    padding: 0;
+    font-size: .28rem;
+    line-height: 1rem;
+    color: #555;
+}
+.mui-input-row label~input, .mui-input-row label~select, .mui-input-row label~textarea {
+    float: left;
+    width: 65%;
+    margin-bottom: 0;
+    padding-left: 0;
+    border: 0;
+    font-size: .24rem;
+    line-height: 1rem;
+    color: #555;
+}
+.mui-btn-block {
+    font-size: .3rem;
+    line-height: 2.2em;
+    padding: .1rem 0;
+    border-radius: .12rem;
+    background: #60a3fb;
+}

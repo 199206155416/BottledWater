@@ -1,0 +1,22 @@
+.emptyAddress {
+	text-align: center;
+	margin-top: 50px;
+	font-size: 0.9em;
+}
+
+h5 {
+	color: black
+}
+
+.name {
+	float: left;
+}
+
+.number {
+	float: right;
+}
+
+.address {
+	padding-top: 2px;
+	clear: both;
+}

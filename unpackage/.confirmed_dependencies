@@ -1,0 +1,45 @@
+{
+	"index.html": {
+		"refer": [
+			"mallCategory/category.html",
+			"mallTicket/ticket.html",
+			"mallIndex/home.html",
+			"myCenter/mine.html",
+			"template.html",
+			"mallCart/cart.html",
+			"myCenter/login.html",
+			"appIndex/home.html",
+			"login/login.html",
+			"appMall/index.html"
+		],
+		"resources": [
+			"mallIndex/home.html",
+			"mallTicket/ticket.html",
+			"appIndex/home.html",
+			"mallCategory/category.html"
+		]
+	},
+	"template.html": {
+		"refer": [
+			"template-main-third.html",
+			"template-main-second.html",
+			"template-main-first.html",
+			"mallIndex/product-detail-needtem.html",
+			"mallCategory/category-detail-new-needtem.html",
+			"myCenter/login.html",
+			"myCenter/register-needtem.html",
+			"myCenter/forget-psd-needtem.html",
+			"myCenter/address-needtem.html",
+			"myCenter/change-address-needtem.html",
+			"myCenter/change-email-needtem.html",
+			"appIndex/product-detail-needtem.html",
+			"appMall/product-detail-needtem.html",
+			"appMall/productDetail.html"
+		]
+	},
+	"mallCategory/category.html": {
+		"refer": [
+			"index.html"
+		]
+	}
+}

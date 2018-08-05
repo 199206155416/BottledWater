@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>E3</title>
+    <link rel="stylesheet" type="text/css" href="../common/css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../common/css/own.css"/>
+    <link rel="stylesheet" type="text/css" href="../common/css/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="../common/css/mui.picker.min.css"/>
+   	<link rel="stylesheet" href="./css/address-needtem.css" />
+</head>
+<body>
+	<div class="mui-content" >
+		<form class="mui-input-group">
+			<div class="mui-input-row">
+				<input type="text" class="mui-input-clear" placeholder="收货人姓名" />
+			</div>
+			<div class="mui-input-row">
+				<input type="text" class="mui-input-clear" placeholder="手机号码" />
+			</div>
+			<div class="mui-input-row" id="addressPicker">
+				<label>省、市、区</label>
+			</div>
+			<div class="mui-input-row" style="height: 4em; padding-top: 2px;">
+				<textarea placeholder="详细地址"></textarea>
+			</div>
+		</form>
+	</div>
+
+	<script src="../common/js/mui.min.js" charset="UTF-8"></script>
+	<script src="../common/js/city.data-3.js" charset="UTF-8"></script>
+	<script src="../common/js/mui.picker.min.js" charset="UTF-8"></script>
+	<script src="../common/js/own.js" charset="UTF-8"></script>
+	<script src="address-needtem.js" charset="UTF-8"></script>
+</body>
+</html>

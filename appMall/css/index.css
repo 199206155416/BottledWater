@@ -1,0 +1,89 @@
+body{
+	background: #f4f4f4;
+}
+
+/* 频道列表 */
+.channel-list{
+	width: 7.5rem;
+	margin-bottom: .2rem;
+	background: #fff;
+	display: flex;
+	display: -webkit-flex;
+	flex-wrap: wrap;
+	-webkit-flex: wrap;
+	padding: .1rem;
+}
+.channel-item{
+	width: 25%;
+	padding: .2rem 0 0 0;
+}
+.channel-item-logo{
+	display: block;
+	width: 1rem;
+	margin: 0 auto;
+}
+.channel-item-label{
+	font-size: .24rem;
+	line-height: .44rem;
+	color: #666;
+	text-align: center;
+}
+
+
+/* 商品列表 */
+.goods-list{
+	display: flex;
+	display: -webkit-flex;
+	flex-wrap: wrap;
+	-webkit-flex-wrap: wrap;
+	background: #fff;
+	position: relative;
+}
+.goods-list:before{
+	position: absolute;
+	bottom: 0;
+    width: 100%;
+    height: 2px;
+    content: '';
+    background-color: #fff;
+    z-index: 10;
+}
+.goods-list:after{
+	position: absolute;
+	right: 0;
+    width: 2px;
+    height: 100%;
+    content: '';
+    background-color: #fff;
+    z-index: 10;
+}
+.goods-item{
+	width: 50%;
+	padding: .3rem;
+}
+.goods-item-wrap{
+	position: relative;
+}
+.goods-item-wrap:before{
+	position: absolute;
+	top: 0;
+    bottom: 0;
+    right: -.3rem;
+    width: 1px;
+    content: '';
+    -webkit-transform: scaleX(.5);
+    transform: scaleX(.5);
+    background-color: #ccc;
+}
+
+.goods-item-wrap:after{
+	position: absolute;
+	bottom: -.3rem;
+    left: 0;
+    right: 0;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #ccc;
+}

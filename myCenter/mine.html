@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0 , maximum-scale=1.0, user-scalable=0">
+	<meta name="format-detection" content="telephone=no">
+	<title>我的</title>
+	<link type="text/css" href="../common/css/plugin/mui.min.css"/>
+	<link rel="stylesheet" href="../common/css/public.css">
+	<link rel="stylesheet" href="css/mine.css" />
+	<script src="../common/js/remScale.js"></script>
+</head>
+<body>
+	<!-- container -->
+	<div class="container">
+		<header class='header'>
+			<div class="myIndex_right" id='message_btn'>
+				<span id="domInfoCount" style="display:none;"></span>
+			</div>
+			<div class="user_info">
+				<div class="user_img">
+					<img id="grxx" src="./img/index/personimg.png" alt="">
+				</div>
+				<div id='user_name' class="user_name">张三</div>
+				<div id='myLoginId' class="user_phone">13126812315</div>
+			</div>
+		</header>
+		<!-- 订单 -->
+		<div class="my_order">
+			<div class="order_title" id='my_order'>
+				<p class='order_title_label'>全部订单</p>
+				<p class='more_btn' style="line-height: 0;"></p>
+			</div>
+			<div id='open_order' class="order_classify">
+				<div class='wait_pay_order' type="1" id='wait_pay_order'>待付款<span class='badge'></span></div>
+				<div class='wait_send_order' type="2" id='wait_send_order'>待发货<span class='badge'></span></div>
+				<div class='wait_receive_order' type="3" id='wait_receive_order'>待收货<span class='badge'></span></div>
+				<div class='success_order' type="4" id='success_order'>已完成</div>
+				<div class='success_order' type="5" id='success_order'>退换/售后</div>
+			</div>
+		</div>	
+		<div class="myIndex_list clearfix">
+			<ul>
+				<li>
+					<div class='li_wrap'>
+						<p>账户余额</p>
+						<p class='account_balance_price' id='lAccountBalance'></p>
+					</div>
+				</li>
+				<li id='all_bill'>
+					<div class='li_wrap'>
+						<p>优惠券</p>
+						<p class='more_btn'></p>
+					</div>
+				</li>
+			</ul>
+			<ul>
+               	<li id='my_collect'>
+					<div class='li_wrap'>
+						<p>安全中心</p>
+						<p class='more_btn'></p>
+					</div>
+				</li>
+				<li id='discount_ticket'>
+					<div class='li_wrap'>
+						<p>地址管理</p>
+						<p class='more_btn'></p>
+					</div>
+				</li>
+			</ul>
+			<ul>
+				<li id='safety_center'>
+					<div class='li_wrap'>
+						<p>我的邀请</p>
+						<p class='more_btn'></p>
+					</div>
+				</li>
+				<li id='address_manage'>
+					<div class='li_wrap'>
+						<p>我的水桶</p>
+						<p class='more_btn'></p>
+					</div>
+				</li>
+				<li>
+					<div class='li_wrap'>
+						<p>我的水票</p>
+						<p class='more_btn'></p>
+					</div>
+				</li>		
+			</ul>
+			<ul>
+				<li id='set'>
+					<div class='li_wrap'>
+						<p>客服</p>
+						<p class='more_btn'></p>
+					</div>
+				</li>
+				<li>
+					<div class='li_wrap'>
+						<p>更多</p>
+						<p class='more_btn'>400-625-9898</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="credit_limit_modal">
+		<div class="modal_content">
+			<div class="modal_title">额度详情</div>
+			<div class="modal_body">
+				<div class="usable_limit">
+					<div class="usable_limit_label">可用额度</div>
+					<div class="usable_limit_price" id='usable_limit_price'></div>
+				</div>
+				<div class="all_limit">
+					<div class="all_limit_label">总授信额度</div>
+					<div class="all_limit_price"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="../common/js/include.js" level="1"></script>
+<script src="mine.js"></script>
+</html>

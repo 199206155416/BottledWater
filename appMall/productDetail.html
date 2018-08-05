@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0"/>
+		<meta name="format-detection" content="telephone=no">
+		<link type="text/css" rel="stylesheet"  href="../common/css/plugin/swiper.min.css">
+		<link rel="stylesheet" href="../common/css/public.css">
+		<link rel="stylesheet" href="css/productDetail.css">	
+		<script src="../common/js/remScale.js"></script>
+		<title>商城详情</title>
+	</head>
+	<body>
+	<header class="mui-bar mui-bar-nav">
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	</header>
+
+		
+		<!--
+        	作者：zltwht@vip.qq.com
+        	时间：2017-02-22
+        	描述：商品详情
+        -->
+        <div class="swiper-pages">
+    		<div class="swiper-wrapper">
+    			<div class="mallTapDetall">
+					<div class="swiper-container" id="banner-swiper">
+						<div class="swiper-wrapper" id="slide_a">
+							<img  src="img/mrenDetail.png">
+						</div>
+						<div class="swiper-pagination" id="pagination"></div>
+						<div class="positBorderBottom"></div>
+					</div>
+					<div class="goodsSaleTime" style="display: none">距开售还剩<span id="saleCountDown"></span></div>
+					<div class="detailContent clearfix">
+						<h3 id="strDetail_id"></h3>
+							<!--收藏  -->
+						<div class="enshrine "  id="enshrine">
+						<img  src="img/shoucang.png">
+						     <span>收藏</span> 
+						</div>	
+						
+						<p id="strNotice"></p>
+						<div class="sale">优惠价：</div><div class="detailGoodsMoney" id="nPrice_id"></div>
+						<div class='partner-rebate' id='partnerRebate'>
+							<div class='rebate-label'>我的特权</div>
+							<div class='rebate-price' id='rebatePrice'></div>
+						</div>
+					</div>
+					<div class="promotion clearfix">
+						<span class="promotionFont">促销：</span>
+						<div class="promotionInfo">
+							<div class="feeLabellingNum"><img src="img/mian@2x.png" />分<span id="feeLabellingNum">3</span>期免服务费</div>
+							<div class="subtractionNum"><img src="img/jian1@2x.png" />分<span id="subtractionNum">6</span>期首付立减</div>
+						</div>
+					</div>
+					<div id="appDetailApprove" class="detailClass clearfix">
+						<img src="img/mallArrow.png" />
+						<span id="spanSelect" class="yxz">已选：</span>
+						<div id="appendRove">
+						
+						
+						</div>
+					</div>
+			
+			<div class="goodsHint clearfix">
+				<ul>
+					<li>
+						<img src="img/justIco.png"/>		
+						正品保证
+					
+					
+					</li>
+					<li class="paddTopLe">
+						<img src="img/fenIco.png"/>	
+						 <span>0</span>息分期价格透明			
+					</li>
+					<li class="paddingLeftWu">
+						<img src="img/df77Ico.png"/>				
+						七天退货
+					</li>
+					<li>
+						<img src="img/bao_Ico.png"/>
+						全国联保
+					</li>
+					<li class="paddleftRig">
+						<img src="img/LStage.png"/>
+						客户经理一对一服务
+					</li>
+					<li class="paddingLeftWu">
+						<img src="img/you_Ico.png"/>
+						全场包邮
+					</li>
+				</ul>			
+			</div>
+			<div class="recommendGrayHr"></div>
+			
+			<div class="detailRecommend">
+				<div class="detailRecommendConten">						
+					为您推荐			
+				</div>
+				<div class="wire"></div>
+			</div>
+			<div id="RecommendListTemp" style="display: none">
+					<div class="swiper-slide">
+						<img src="#strLogoURL#"/>
+						<div>#strTitle#</div>
+						<p>月供：¥#nForTheMonth#起</p>
+					</div>		
+			</div>
+			<div class="recommendGoodsList">
+		        <div class="swiper-wrapper recommendPaddLeft" id="recomGoodsList">
+		          <!--  <div class="swiper-slide">
+						<img src="http://file.dafy.com.cn/file/20170703/bdacd491015e4b599010244d29997b24.jpg"/>
+						<div>苹果（Apple）ip hone7苹果苹果苹果</div>
+						<p>首付：¥28.00</p>
+					</div>
+		            <div class="swiper-slide">
+						<img src="http://file.dafy.com.cn/file/20170703/bdacd491015e4b599010244d29997b24.jpg"/>
+						<div>苹果（Apple）ip hone7苹果苹果苹果苹果苹果</div>
+						<p>首付：¥28.00</p>
+					</div>            
+					<div class="swiper-slide">
+						<img src="http://file.dafy.com.cn/file/20170703/bdacd491015e4b599010244d29997b24.jpg"/>
+						<div>苹果（Apple）ip hone7苹果苹果苹果苹果苹果</div>
+						<p>首付：¥28.00</p>
+					</div>            
+					<div class="swiper-slide">
+						<img src="http://file.dafy.com.cn/file/20170703/bdacd491015e4b599010244d29997b24.jpg"/>
+						<div>苹果（Apple）ip hone7苹果苹果苹果苹果</div>
+						<p>首付：¥28.00</p>
+					</div>
+					<div class="swiper-slide">
+						<img src="http://file.dafy.com.cn/file/20170703/bdacd491015e4b599010244d29997b24.jpg"/>
+						<div>苹果（Apple）ip hone7...</div>
+						<p>首付：¥28.00</p>
+					</div>
+		            <div class="swiper-slide">
+						<img src="http://file.dafy.com.cn/file/20170703/bdacd491015e4b599010244d29997b24.jpg"/>
+						<div>苹果（Apple）ip hone7...</div>
+						<p>首付：¥28.00</p>
+					</div> -->
+		        </div>
+		     </div>
+						
+			<div class="detailIcon">				
+				<div class="detailConten">							
+					商品详情			
+				</div>
+				<div class="wire"></div>				
+			</div>
+			<img src="img/notice.jpg" style="margin:.1rem 0 0"/>
+			<div class="mallDetailImgList">
+				<div class="mallDetailLeftLine"></div>
+				<div class="mallDetailRightLine"></div>
+				<div class="mallDetail" id="mallDetail">
+					
+				</div>	
+							
+				<img src="img/mallStageExplain.jpg"/>			
+			</div>
+				
+		
+		</div>
+				
+  			</div>   	
+ 		</div>
+		
+		<!--
+        	作者：zltwht@vip.qq.com
+        	时间：2017-02-22
+        	描述：规格参数页
+        -->
+        <div id="paramTemp" style="display: none">
+       		 <li><span class="backleft"><span class="title">#parTitle#</span></span><span class="backright"><span class="rightcont">#parContent#</span></span></li>
+        
+        </div>
+
+	     <div class="mallTapDetall"  style="display: none;">
+				<div id="strSaleExplain">
+					
+				</div>
+        </div>	
+
+		
+		<!--
+        	作者：zltwht@vip.qq.com
+        	时间：2017-02-22
+        	描述：分期选择
+        -->
+        <div class="mallbackground backselectPop" style="display: none;"></div>
+		<div class="mallSelection  clearfix"  style="display: none;">
+			<div class="seleHead clearfix">
+					<img src="img/goodsClose.png"  class="mallclose"/>
+					<div class="popupThimg">
+						<div class="detailLootAll">已抢光</div>
+						<img id="selectIMG" src="" />
+					</div>					
+					<div class="popupright clearfix">
+						<div class="paddLeft">
+							<p id="strDetail_id1"></p>
+							<div class="money" id="productMoney"></div>					
+						</div>						
+					</div>
+			</div>
+			<div id="optionSelect" class="optionSelect">
+				<div id="mallSku">
+				
+				
+				</div>
+			<!-- 
+				<div class="class">
+					<h3>颜色</h3>
+					<span class="row">磨砂黑</span>
+					<span>金色</span>
+					<span>银色</span>
+					<span>银色</span>
+					<span>银色</span>
+				</div>
+				<div class="class">
+					<h3>颜色</h3>
+					<span class="row">磨砂黑</span>
+					<span>金色</span>
+					<span>银色</span>
+					<span>银色</span>
+					<span>银色</span>
+				</div>
+				<div class="class">
+					<h3>运营商</h3>
+					<span class="row">磨砂黑</span>
+					<span>金色</span>
+					<span>银色</span>
+					<span>银色</span>
+					<span>银色</span>
+				</div>			
+			
+			 -->
+			 <div id="stageSelect">
+			 
+			 </div>
+			 <div class="stageClass classtop clearfix">
+				 <div class="leftNum">			 
+					 数量
+				 </div>
+				<div class="addNum">
+					<div id="upreduce" class="left">-</div>
+					
+					<div  id='num_id' class="content">1</div>
+					<div id="addnumId" class="right">+</div>
+					
+				</div>	
+				<div class="purchaseUser">每个ID每月限购<span id="maxGoodsNum">1</span>件</div>				
+			</div>
+			<div class="insurance_Width" id="appreciation" style="display: none;">
+				<div class="insurance" index="2" >
+					<div class="goodsInsurance">
+						<div class="leftServerName">增值服务</div>
+						<div id="goods_Referral"  class="rightServerReferral">服务介绍<img src="img/mark.png"/></div>
+					</div>
+			
+					<div id="appreItem">
+
+					
+					</div>
+					
+				</div>
+			 </div>
+			
+			<div id="firstPriceID">
+			
+			
+			</div>
+				
+
+			<div class="staMoneyId" id="staMoneyId">
+				<div class="monthlyMessage">
+					<div class="paymentLeft"><span class="row">首付:</span><span id="subFirstMoney" class="colorOrange"></span><span id="firstMoney" class="colorGray"></span></div>
+					<div class="paymentCenter"></div>
+				</div>
+				<div class="monthlyTrueMessage">	
+						
+					<div class="paymentRight">			
+						<span>每月支付:</span><span id="nForTheMonth"  class="colorOrange"></span><span class="serverPrice" style="display: none;"> (含服务费<span id="serverPrice" style="display: none"></span>)</span>
+					</div>
+			</div>
+			</div>
+		</div>
+		</div>
+		<div id="affirmOrder" class="commonBottom commonShowBottomColor paramBottom stageBottom" style="display:none;"></div>
+		
+		<script src="../common/js/commonJS/swiper.min.js"></script><!-- 160908 lhh 备注：轮播图 -->
+		<script type="text/javascript" src="../common/js/include.js" level="1"></script>	
+		<script type="text/javascript" src="goodsDetail.js"></script>
+	</body>
+</html>
