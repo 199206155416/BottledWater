@@ -1,0 +1,28 @@
+body{
+	background: #f4f4f4;
+}
+.mui-content>.mui-table-view:first-child {
+    margin-top: .3rem;
+}
+.mui-table-view:before {
+    height: 0;
+}
+.mui-table-view:after {
+    height: 0;
+}
+.mui-table-view-cell>a:not(.mui-btn) {
+    font-size: .28rem;
+    line-height: .44rem;
+    color: #555;
+}
+.mui-table-view-cell:after {
+    position: absolute;
+    right: 15px;
+    bottom: 0;
+    left: 15px;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
+}

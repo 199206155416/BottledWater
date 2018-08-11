@@ -206,7 +206,8 @@
 					"mallCart/cart.html",
 					"myCenter/login.html",
 					"login/login.html",
-					"appMall/index.html"
+					"appMall/index.html",
+					"appCart/cart.html"
 				],
 				"priority": 0
 			},
@@ -226,7 +227,8 @@
 					"myCenter/change-email-needtem.html",
 					"appIndex/product-detail-needtem.html",
 					"appMall/product-detail-needtem.html",
-					"appMall/productDetail.html"
+					"appMall/productDetail.html",
+					"login/register.html"
 				],
 				"priority": 0
 			},

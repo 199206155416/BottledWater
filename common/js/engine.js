@@ -1,21 +1,34 @@
 (function(own) {
-	var prefix = 'http://47.93.61.246/api';
+	// 请求前缀
+	own.prefix = 'http://47.93.61.246/api';
 
+	// 接口请求打印日志
+	own.ajaxLog = function(e){
+		console.log(e);
+		if(e.resCode != 0){
+			mui.toast(e.result);
+		}
+	};
+
+	// 存储数据
+	own.setStringValue = function(name, str){
+		localStorage.setItem(name, str);
+	}
 
 	//当页面hide的时候将其中的页面close掉
 	own.closeChildWebviewOfhide = function(currentWebview, closedWebviewId) {
-			currentWebview.addEventListener('hide', function() {
+		currentWebview.addEventListener('hide', function() {
 
-				var closeWeb = plus.webview.getWebviewById(closedWebviewId);
+			var closeWeb = plus.webview.getWebviewById(closedWebviewId);
 
-				if (!currentWebview.getURL() || !closeWeb) {
-					return;
-				}
-				closeWeb.close();
-				closeWeb = null;
-			}, false);
-		}
-		//当页面close的时候将其中的页面close掉
+			if (!currentWebview.getURL() || !closeWeb) {
+				return;
+			}
+			closeWeb.close();
+			closeWeb = null;
+		}, false);
+	}
+	//当页面close的时候将其中的页面close掉
 	own.closeChildWebviewOfclose = function(currentWebview, closedWebviewId) {
 		currentWebview.addEventListener('close', function() {
 			var closeWeb = plus.webview.getWebviewById(closedWebviewId);
@@ -118,6 +131,6 @@
 		var main = plus.webview.currentWebview();
 		menu.show();
 		
-	}
+	};
 
 })(window);

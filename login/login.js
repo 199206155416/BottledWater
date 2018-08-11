@@ -1,13 +1,20 @@
-mui.init({
-	swipeBack: true
-});
 var account;
 var psd;
 var login;
 var register;
 var repsd;
 var loginWebview;
+
+mui.init({
+	swipeBack: true
+});
+
 mui.plusReady(function() {
+	// 登陆
+	login();
+	// 点击跳转注册页
+	goToRegister();
+
 	// account = document.querySelector('input[type="text"]');
 	// psd = document.querySelector('input[type="password"]');
 	// login = document.getElementById('loginBtn');
@@ -66,3 +73,77 @@ mui.plusReady(function() {
 	// 	})
 	// }, false);
 });
+
+/**
+ * 忘记密码
+ */
+function forgetPassword(){
+	$("#forgetPassword").on("click", function(){
+		pushWebView({
+			webType: 'newWebview_First',
+			id: 'login/forgetPassword.html',
+			href: 'login/forgetPassword.html',
+			aniShow: getaniShow(),
+			title: "注册",
+			isBars: false,
+			barsIcon: '',
+			extendOptions: {}
+		})
+	})
+};
+
+/**
+ * 点击跳转注册页
+ */
+function goToRegister(){
+	$("#registerBtn").on("click", function(){
+		pushWebView({
+			webType: 'newWebview_First',
+			id: 'login/register.html',
+			href: 'login/register.html',
+			aniShow: getaniShow(),
+			title: "注册",
+			isBars: false,
+			barsIcon: '',
+			extendOptions: {}
+		})
+	})
+};
+
+/**
+ * 点击登陆
+ */
+function login(){
+	$("#loginBtn").on("click", function(){
+		var strMobile = $("#mobile").val().trim();
+		var strPassword = $("#password").val().trim();
+
+		$.ajax({
+			url: prefix + "/user/login",
+			type: "POST",
+			dataType: "json",
+			data: {
+				mobile: strMobile,
+				password: strPassword
+			},
+			success: function(e){
+				ajaxLog(e);
+
+				if(e.resCode == 0){
+					
+					var result = e.result;
+					// 存储id
+					setStringValue(id, result.id);
+					// 存储电话
+					setStringValue(mobile, result.mobile);
+					// 存储姓名
+					setStringValue(roleNames, result.roleNames);
+					// 存储启用状态
+					setStringValue(loginFlag, result.loginFlag);
+
+				}
+			}
+		})
+	})
+};
+

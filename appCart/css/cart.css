@@ -1,0 +1,11 @@
+.goods-wrap{
+	display: flex;
+	display: -webkit-flex;
+
+}
+.is-checked-goods{
+
+	width: .3rem;
+	flex-shrink: 0;
+	-webkit-flex-shrink: 0;
+}

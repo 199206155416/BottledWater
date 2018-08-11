@@ -8,6 +8,9 @@ var register;
 var repsd;
 var loginWebview;
 mui.plusReady(function() {
+	// 注册
+	register();
+
 	// account = document.querySelector('input[type="text"]');
 	// psd = document.querySelector('input[type="password"]');
 	// login = document.getElementById('loginBtn');
@@ -66,3 +69,34 @@ mui.plusReady(function() {
 	// 	})
 	// }, false);
 });
+
+/**
+ * 注册
+ * @author xuezhenxiang
+ */
+function register(){
+	$("#registerBtn").on("click", function(){
+		var mobile = $("#mobile").val().trim();
+		var password = $("#password").val().trim();
+		var strUserSmsCode = $("#strUserSmsCode").val().trim();
+
+		$.ajax({
+			url: prefix + "/user/register",
+			type: "POST",
+			dataType: "json",
+			data: {
+				mobile: mobile,
+				password: password,
+				strUserSmsCode: strUserSmsCode
+			},
+			success: function(e){
+				ajaxLog(e);
+
+				if(e.resCode == 0){
+					mui.back();
+					mui.toast('注册成功');
+				}
+			}
+		})
+	});
+};

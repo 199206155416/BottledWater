@@ -89,73 +89,26 @@
 	</ul>
 
 	<!-- 商品列表 -->
-	<div id="goodsList">
+	<div id="goodsList"></div>
+
+	<!-- 商品列表模板 -->
+	<div id="goodsListTemplate" style="display: none;">
 		<div>
-			<img src="./image/1.jpg" />
-			<ul class="goods-list">
-				<li class="goods-item" id="1">
-					<div class="goods-item-wrap">
-						<div class="goods-img"><img src="./image/2.jpg" /></div>
-						<div class="goods-name">农夫山泉 桶装水 饮用天然水 （2桶起订）</div>
-						<div class="goods-size">规格：19L</div>
-						<div class="goods-price">售价： ￥28.00</div>
-					</div>
-				</li>
-				<li class="goods-item" id="2">
-					<div class="goods-item-wrap">
-						<div class="goods-img"><img src="./image/2.jpg" /></div>
-						<div class="goods-name">农夫山泉 桶装水 饮用天然水 （2桶起订）</div>
-						<div class="goods-size">规格：19L</div>
-						<div class="goods-price">售价： ￥28.00</div>
-					</div>
-				</li>
-				<li class="goods-item" id="3">
-					<div class="goods-item-wrap">
-						<div class="goods-img"><img src="./image/2.jpg" /></div>
-						<div class="goods-name">农夫山泉 桶装水 饮用天然水 （2桶起订）</div>
-						<div class="goods-size">规格：19L</div>
-						<div class="goods-price">售价： ￥28.00</div>
-					</div>
-				</li>
-				<li class="goods-item" id="4">
-					<div class="goods-item-wrap">
-						<div class="goods-img"><img src="./image/2.jpg" /></div>
-						<div class="goods-name">农夫山泉 桶装水 饮用天然水 （2桶起订）</div>
-						<div class="goods-size">规格：19L</div>
-						<div class="goods-price">售价： ￥28.00</div>
-					</div>
-				</li>
-			</ul>
+			<img src="#activityImg#" />
+			<ul class="goods-list"></ul>
 		</div>
-		<div>
-			<img src="./image/1.jpg" />
-			<ul class="goods-list">
-				<li class="goods-item" id="5">
-					<div class="goods-item-wrap">
-						<div class="goods-img"><img src="./image/2.jpg" /></div>
-						<div class="goods-name">农夫山泉 桶装水 饮用天然水 （2桶起订）</div>
-						<div class="goods-size">规格：19L</div>
-						<div class="goods-price">售价： ￥28.00</div>
-					</div>
-				</li>
-				<li class="goods-item" id="6">
-					<div class="goods-item-wrap">
-						<div class="goods-img"><img src="./image/2.jpg" /></div>
-						<div class="goods-name">农夫山泉 桶装水 饮用天然水 （2桶起订）</div>
-						<div class="goods-size">规格：19L</div>
-						<div class="goods-price">售价： ￥28.00</div>
-					</div>
-				</li>
-				<li class="goods-item" id="7">
-					<div class="goods-item-wrap">
-						<div class="goods-img"><img src="./image/2.jpg" /></div>
-						<div class="goods-name">农夫山泉 桶装水 饮用天然水 （2桶起订）</div>
-						<div class="goods-size">规格：19L</div>
-						<div class="goods-price">售价： ￥28.00</div>
-					</div>
-				</li>
-			</ul>
-		</div>
+	</div>
+
+	<!-- 商品模板 -->
+	<div id="goodsTemplate" style="display: none;">
+		<li class="goods-item" id="#id#">
+			<div class="goods-item-wrap">
+				<div class="goods-img"><img src="#strMainImg#" /></div>
+				<div class="goods-name">#strGoodsName#</div>
+				<div class="goods-slogn">#goodsSlogn#</div>
+				<div class="goods-price">售价： ￥#defaultSkuPrice#</div>
+			</div>
+		</li>
 	</div>
 </div>
 </body>
