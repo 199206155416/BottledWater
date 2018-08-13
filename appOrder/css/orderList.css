@@ -1,0 +1,359 @@
+body {
+	background: #f4f4f4;
+}
+.goods_enshrine{
+	position:absolute;
+	right:0.3rem;
+	font-size:0.28rem;
+	color: #777777;
+}
+.orderPageHeight .mallDetallTop {
+	-webkit-box-shadow: none;   
+	-moz-box-shadow: none;  
+	box-shadow: none;  
+}
+.completeOrderTap {
+	position: fixed;
+	top: .88rem;
+	z-index: 10;
+	width: 7.5rem;
+	height: 0.8rem;
+	overflow:auto;
+	font-size: 0.28rem;
+	background: #FFFFFF;	
+}
+.completeOrderTap::after{
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 1px;
+	transform: scaleY(.5);
+	-webkit-transform: scaleY(.5);
+	background: rgba(0,0,0,.2);
+}
+.completeOrderTap ul {
+	display: flex;
+	display: -ms-flexbox;      /* TWEENER - IE 10 */
+	display: -webkit-flex;     /* NEW - Chrome */
+}
+.completeOrderTap li{
+	/* float: left; */
+	line-height: 0.8rem;
+	box-sizing: border-box;
+	height: 0.8rem;
+	color: #999999;
+	/* padding: 0 0.5rem; */
+	text-align: center;
+	flex: 1;
+	-webkit-flex: 1;          /* Chrome */
+	-ms-flex: 1;              /* IE 10 */
+	min-width: 20%;
+}
+
+.completeOrderTap .row {			
+	color: #60a3fb;
+	position: relative;
+}
+.completeOrderTap .row::after {
+	content: "";
+	display: block;
+	width: 1.2rem;
+	height: 1px;
+	background: #60a3fb;
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	margin-left: -0.6rem;
+}
+.completeOrderList {
+
+	overflow-y: scroll;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    position: absolute;
+    top: 1.68rem;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.completeOrderList ul {
+	padding-bottom: 0.1px;
+	overflow: hidden;
+}
+.comOrderList {
+	margin-bottom: 0.2rem;
+	background: #ffffff;
+}
+.comOrderWidth {
+	width: 7.5rem;
+	border-bottom: 1px solid #f2f2f2;
+}
+.comOrderList .comOrderNumber {
+	height: 0.7rem;
+	background: #FFFFFF ;
+	float:left;
+	
+	line-height: 0.7rem;
+	font-size: 0.26rem;
+	color: #777777;
+	padding-left: 0.29rem;
+}
+
+
+.comOrderList .comOrderState {
+	height: 0.7rem;
+	background: #FFFFFF ;
+	float:right;
+	
+	line-height: 0.7rem;
+	font-size: 0.26rem;
+	color: #777777;
+	padding-right: 0.29rem;
+}
+.comOrderList .comOrderState .orderIcon {
+	float: right;
+	width: 0.3rem;
+	height: 0.3rem;
+	background: url(../img/ic_xiaodeback_nor@2x.png) no-repeat center;
+	background-size: 0.3rem;
+	margin: 0.21rem 0.3rem 0 0;
+}
+.completeOrderList .null {
+	height: 0.2rem;
+	background: #FFFFFF;
+}
+.comOrderGoods {
+	background: #FAFAFA;
+	padding: 0.07rem 0 0.1rem 0.3rem;
+}
+.comOrderList .comOrderGoods .goods_img {
+	width: 1.5rem;
+	height:1.5rem;
+	float: left;
+	text-align:center;
+	background: #FFFFFF;
+	line-height:1.5rem;
+	margin: 0.03rem 0.2rem 0 0;
+	border-radius: 0.1rem;
+}
+.comOrderList .comOrderGoods .goods_img img {
+	width: 1.3rem;
+	height: 1.3rem;
+}
+.orderGoodsInfo {
+	width: 5rem;
+	float: left;
+}
+.orderGoodsInfo .goodsTitle {	
+
+ 
+    font-size: 0.28rem;
+    color: #555555;
+}
+.orderGoodsInfo .orderMoney {
+	/* margin-top: 0.1rem; */
+	height: 0.45rem;
+	line-height: 0.4rem;
+}
+.orderGoodsInfo .goodsInfos {
+	font-size: 0.24rem;
+	color: #999999;
+	height: 0.45rem;
+	line-height: 0.45rem;
+}
+.orderGoodsInfo .goodsNum {
+	font-size: 0.28rem;
+	color: #999999;
+	margin-top: 0.12rem;
+}
+.orderGoodsInfo .goodsInfos span {
+	margin-right: 0.26rem;
+}
+.orderGoodsInfo .goodsPrice {
+	margin-top: 0.1rem;
+	color: #60a3fb;
+	font-size: 0.28rem;
+	font-weight: bold;
+}
+.goodsPayMoney {
+	background: #FFFFFF;
+	padding:0.15rem 0.3rem 0.1rem 0.3rem;
+
+}
+.goodsPayMoney .fontSet {
+	font-size: 0.28rem;
+	color: #777777;	
+	height: 0.58rem;
+	line-height: 0.58rem;
+	overflow: hidden;	
+}
+.goodsPayMoney .goodsFirstPay {
+	float: left;
+}
+.goodsPayMoney .goodsPayment {
+	float: right;
+}
+.goodsPayMoney .goodsTitleMoney {
+	font-size: 0.28rem;
+	color: #777777;		
+	height: 0.53rem;
+	line-height: 0.53rem;
+	
+}
+.goodsPayMoney .goodsTitleMoney .goodsMoneyNum {
+	color: #60a3fb;
+	font-weight: bold;
+}
+.goodsPayMoney .goodsTitleMoney .font32 {
+	
+	font-size: 0.32rem;
+	
+}
+.goods_broken{
+	       background: #FAFAFA;
+}
+.goods_broken .order_GoodsInfo{
+	width:calc(100% - 2.2rem);
+	float:left;
+	margin-left:1.9rem;
+	  border-top:1px solid#F2F5F7;
+}
+.goods_broken .order_GoodsInfo .goods_broken_top{
+	width:calc(100% - 0.1rem);
+	     padding-top: 0.24rem;
+    padding-bottom: 0.06rem;
+    font-size:0.24rem;
+     color: #777777;
+     padding-left:0.1rem;
+}
+.goods_broken .order_GoodsInfo .goods_broken_tit{
+	    font-size: 0.24rem;
+    color: #777777;
+       display: inline-block;
+        margin-left: -0.08rem;
+ 
+}
+
+.goods_broken .order_GoodsInfo .goods_broken_state{
+	    font-size: 0.24rem;
+    color: #777777;
+       display: inline-block;
+       float:right;
+}
+.goods_broken .order_GoodsInfo  .order_money{
+	width:calc(100% - 0.1rem);
+	    padding-bottom: 0.22rem;
+	 padding-left:0.1rem;
+}
+.goods_broken .order_GoodsInfo  .order_money .goods_price{
+	 margin-top: 0.1rem;
+    color: #60a3fb;
+    font-size: 0.28rem;
+    font-weight: bold;
+}
+.goods_broken .order_GoodsInfo  .order_money .goods_num{
+    font-size: 0.28rem;
+    color: #999999;
+    margin-top: 0.12rem;
+}
+.checkBill {
+	height: 0.8rem;
+	margin-left: 0.3rem;
+	border-top: 1px solid #f2f2f2;
+}
+.checkBill div {
+	float: right;
+	width: 1.5rem;
+	height: 0.52rem;
+	line-height: 0.52rem;
+	text-align: center;
+	font-size: 0.28rem;
+	margin-top: 0.2rem;
+
+}
+.checkBill div .pamentPadding {
+	
+	padding-right: .05rem;
+}
+.checkBill div:first-of-type {
+	background: #60a3fb;
+	border-radius: 0.1rem;
+	border: 1px solid #60a3fb;
+	margin: 0.2rem 0.35rem 0 0.2rem;
+	color: #FFFFFF;
+}
+.checkBill div:last-of-type {
+	border: 1px solid #cccccc;
+	border-radius: 0.1rem;
+	color: #999999;
+}
+.checkBill .payment:active {
+	
+	background: rgba(226,89,23,1);
+		
+}
+
+.logistics {
+	height: 0.8rem;
+	margin: 0 0 0 0.3rem;
+	border-top: 1px solid #f2f5f7;
+}
+.logistics span {
+	float: right;
+	width: 1.5rem;
+	height: 0.5rem;
+	line-height: 0.5rem;
+	border: 1px solid #e5e5e5;
+	border-radius: 0.1rem;
+	text-align: center;
+	font-size: 0.24rem;
+	color: #666666;
+	margin: 0.12rem 0.3rem 0 0;
+
+}
+.downCountClass {
+	width: 7.5rem;
+    text-align: right;
+    background: #FFFFFF;
+    margin: 0.03rem 0 0.09rem 0;
+    font-size: 0.22rem;
+    color: #999999;
+    display:none;
+    padding-bottom: 0.15rem;
+	
+}
+.downCountClass p{
+	padding: .02rem 0.35rem 0 0;
+}
+
+.downCountClass p span {
+	color: #60a3fb;
+}
+
+
+.mui-poppicker-header .mui-poppicker-btn-ok {
+    position: absolute;
+    width: 6.9rem;
+    height: 0.7rem;
+    text-align: center;
+    line-height: 0.5rem;
+    bottom: 0.6rem;
+    left: 0.3rem;
+    background: #60a3fb;
+    z-index: 100;
+    color: #ffffff;
+    font-size: 0.3rem;
+    border-radius: 0.05rem;
+}
+
+.deliveryBottomTitle {
+	width:100%;
+	position: absolute;
+	text-align: center;
+	font-size: 0.28rem;
+	color: #666666;
+	bottom: 0.12rem;
+	margin: 0 auto;
+}

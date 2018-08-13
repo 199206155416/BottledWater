@@ -1,0 +1,566 @@
+body {
+	position: relative;
+	width: 7.5rem;
+	overflow: hidden;
+}
+.mallHeaderHeight {
+	/* z-index: 10;
+	position: relative; */
+	background: #ffffff;
+	/* width: 7.5rem;
+	overflow: hidden; */
+} 
+.rankArea {
+	width: 7.5rem;
+	height: 0.8rem;
+	position: fixed; 
+	top: 0.89rem;
+	left: 0; 
+	z-index: 8;
+	background: #ffffff;
+	box-shadow: 0 -5px 10px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0 -5px 10px rgba(0,0,0,0.2);
+}
+.rankArea li {
+	float: left;
+	width: 1.85rem;
+	text-align: center;
+	height: 0.5rem;
+	line-height: 0.5rem;
+	border-right: 1px solid #f4f4f4;
+	margin-top: 0.16rem;
+	font-size: 0.28rem;
+	color: #999999;
+}
+.rankArea li:last-of-type {
+	border-right: none;
+}
+.synthesize {
+	display: inline-block;
+	width: 0.14rem;
+	height: 0.08rem;
+	margin: 0 0 0.05rem 0.05rem;
+	position: relative;
+}
+.synImg {
+	width: 0.14rem;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.priceSort {
+	display: inline-block;
+	width: 0.14rem;
+	height: 0.21rem;
+	position: relative;
+	margin: 0 0 0 0.05rem;
+}
+.priceImg {
+	width: 0.14rem;
+}
+.filterImg {
+	width: 0.27rem;
+	margin: 0 0 0.05rem 0.05rem;
+}
+.topImg {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.bottomImg {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+.goodsRoll {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: absolute;
+    top: 165px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    -webkit-overflow-scrolling:touch;
+}
+.widthpad {
+	width: 95%;
+	margin: 0 auto;
+}
+.width95pad {
+	width: 95%;
+	margin: 0 auto;
+}
+.mallList {
+	width: 7.5rem;	
+	/* height:8rem; */		
+	background: #ffffff;	
+	position: relative; 
+	/* transform:rotate(7deg);
+	-ms-transform:translate3d(0,0,0); 	IE 9
+	-moz-transform:translate3d(0,0,0); 	Firefox
+	-webkit-transform:translate3d(0,0,0); Safari 和 Chrome
+	-o-transform:translate3d(0,0,0); 	Opera */
+}
+.mallList li {
+	overflow: hidden;
+	border-bottom: 1px solid #f2f5f7;
+}
+.mallProduct .productImg {
+	border-bottom: none;
+}
+.mallList li:active{	
+	background: #f2f2f2;
+	
+}
+.cutLimg {
+    width: 2.2rem;
+    box-sizing: border-box;
+    position: relative;
+  
+    float: left;
+    margin:0.4rem 0.1rem 0 0;
+    text-align: center;
+		
+}
+.lootAll {
+	
+	width: 1rem;
+	height: 1rem;
+	background: rgba(0,0,0,0.5);
+	text-align: center;
+	line-height: 1rem;
+	position: absolute;
+	top:50%;
+	z-index:1;
+	right:0;
+	left:0;
+	margin:0 auto;
+	border-radius: 50%;
+	margin-top: -0.5rem;
+	color: #FFFFFF;
+	display:none;
+	font-size: 0.24rem;
+	
+}
+.mallMark {
+
+	height: 0.7rem;
+	background: #FF8482;
+	font-size: 0.24rem;
+	line-height: 0.32rem;
+	color: #FFF;
+	top: 1.5rem;
+	left: 0rem;
+	text-align: center;
+	width:0.7rem;
+	border-radius: 50%;
+	position: absolute;
+	z-index:5;
+	line-height: 0.25rem;
+	-webkit-box-pack:center; 
+	-moz-box-pack:center; 
+	-webkit-box-align:center; 
+	-moz-box-align:center; 
+	display: box; 
+	display: -webkit-box; 
+	display: -moz-box; 		
+
+	
+}
+.cutLimg img {
+    width: 2.2rem;
+    height: 2.2rem;
+}
+.rightMallcontent {
+	width: 4.7rem;
+	box-sizing: border-box;
+	padding-bottom: 0.4rem;
+	float: right;
+}
+.hrTitle {
+	
+    color: #444;
+    line-height: 0.4rem;
+    padding-top: 0.4rem;
+    font-size: 0.28rem;
+    height: 1.35rem;
+    
+}
+.goodsMoney{
+	color: #919191;
+	font-size: 0.32rem;
+	overflow: hidden;
+}
+.goodsMoney .yjMoney{
+	font-size: 0.26rem;
+}
+.rightMallcontent .mallActivity {
+	
+	color: #999999;
+	font-size: 0.24rem;
+	height:0.58rem;
+	line-height:0.55rem;
+	display:none;
+
+}
+.fenqi{
+	display: none;
+}
+.quane{
+	display: none;
+	margin-bottom: 0.35rem; 
+}
+.symbol {			
+	font-size: 0.26rem;
+}
+.rightMallcontent .sjColor {
+	font-size: 0.32rem;
+	color: #60a3fb;
+	display:block;
+	font-weight:bold;
+	float:left;
+	margin-right: 0.3rem;
+}
+.rightMallcontent .sfColor {
+	display:block;
+	float:left;
+	color: #60a3fb;
+	line-height:0.5rem;
+	font-size: 0.24rem;
+	
+}
+.rightMallcontent .sfMoney{
+	font-weight: 100;
+	font-size: 0.26rem;
+	color: #60a3fb;
+    display: block;
+    float:left;
+    line-height: 0.5rem;
+}
+.rightMallcontent .lenThHeight {
+	line-height: 0.4rem;
+}
+.rightMallcontent .mallListBotton {	
+	height: 0.35rem;
+	line-height: 0.35rem;
+	/* font-size: 0.24rem;
+	color: #999999;
+	border-radius: 0.15rem; */
+	
+    font-size: 0.26rem;
+    color: #60a3fb;
+    font-weight: bold;
+}
+.rightMallcontent .mallListpaddTop {
+	padding-top: 0.05rem;
+}
+.mallListBotton span{
+	float: left;
+	vertical-align: middle;
+}
+.mallListBotton .ygMoney{
+	/* font-size: 0.26rem;
+	display: block;
+	float:left;
+	line-height: 0.33rem; */
+	font-size: 0.28rem;
+	display: block;
+	float:left;
+	/* line-height: 0.38rem; */
+	vertical-align: middle;
+} 
+.mallListBotton .lineMoneyHeight {
+	
+	line-height: 0.38rem;
+	
+}
+.qiFont {
+	font-size: 0.24rem;
+	/* line-height: 0.38rem; */
+	vertical-align: middle;
+}
+.mallListBotton .bottclick {
+	width: 0.85rem;
+	height: 0.35rem;
+	text-align: center;
+	line-height: 0.35rem;
+	font-size: 0.24rem;
+	margin-left: 0.22rem;
+	display: inline-block;
+	border: 1px solid #FD386D;
+	border-radius: 0.15rem;
+	color: #FF2F65;
+}
+#brandList {
+	position: relative;
+	z-index: 120;
+
+}
+.goodsLeftsfMoney {
+	
+	display:inline-block;
+
+
+	font-weight: bold;
+  margin-right: 0.3rem;
+}
+
+.goodsLeftsfMoney  .sfText {
+	font-size: 0.24rem;
+	color: #60a3fb;
+	display:inline-block;
+
+}
+.goodsLeftsfMoney .sfLeftMoney {
+	
+	font-size: 0.3rem;
+	color: #60a3fb;
+	display:inline-block;
+	line-height: 0.4rem;
+
+}
+
+.goodsLeftsfMoney .sfLeftMoney:first-letter {	
+	font-size: 0.26rem;
+}
+
+.goodsRightfMoney {
+	display:inline-block;
+	font-size: 0.26rem;
+	color: #999999;
+}
+
+.goodsRightfMoney .syGoodsText {	
+	font-size: 0.24rem;
+}
+
+.goodsRightfMoney .yjGoodsfh {
+	font-size: 0.26rem;	
+}
+.listDown {	
+	height: 0.7rem;
+	line-height: 0.7rem;
+	text-align:center;
+	color: #cccccc;
+	display: none;	
+}
+.listDown img {	
+	width: 0.3rem;
+	height: 0.3rem;
+	border-radius: 50%;
+	margin-bottom: 0.04rem;
+}
+.down4gLoad {	
+	height: 0.7rem;
+	line-height: 0.7rem;
+	text-align:center;
+	color: #999999;
+	display: none;
+	font-size: 0.24rem;
+}
+.down4gLoad img {
+	width: 0.4rem;
+	height: 0.4rem;
+	margin-right:0.1rem;
+	margin-bottom: 0.04rem;
+}
+.rotateImg180 {
+		transform: rotate(180deg);
+		-webkit-transform: rotate(180deg);
+		-moz-transform: rotate(180deg);
+		-o-transform: rotate(180deg);
+		-ms-transform: rotate(180deg);	
+}
+.rotateBottImg
+{
+	animation:mymove 0.7s 1;
+	-webkit-animation:mymove 0.7s 1;				
+}
+
+@-webkit-keyframes mymove /*Safari and Chrome*/
+{
+	from {
+		    transform: rotate(0deg);
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+		}
+	to {
+		    transform: rotate(360deg);
+            -webkit-transform: rotate(360deg);
+            -moz-transform: rotate(360deg);
+            -o-transform: rotate(360deg);
+            -ms-transform: rotate(360deg);
+		}
+}
+.widthAnimation
+{
+	animation:widthmove 0.7s 1;
+	-webkit-animation:widthmove 0.7s 1;				
+	animation-fill-mode : forwards;
+	-webkit-animation-fill-mode:forwards; /* Safari 和 Chrome */
+}
+
+@-webkit-keyframes widthmove /*Safari and Chrome*/
+{
+	from {
+			width:100%;
+		}
+	to {
+			width:95%;
+		}
+}
+/* 列表底部广告 */
+.mallProduct {	
+	width:7.5rem;
+}
+.mallProduct li {
+	width: 7.5rem;
+	background:#FFF;	
+}
+.mallProduct li img {
+	width: 100%;
+}
+#mallProduct {
+	display: none;
+}
+/*点击筛选后黑色背景 */
+.background {
+	width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 152;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.7);
+}
+/*筛选*/
+.brandFilter {
+	width: 5.8rem;
+	height: 100%;
+	background: #FFFFFF;
+	position: fixed;
+	right: -6rem;
+	top: 0;
+	z-index: 170; 
+	color: #666666;
+	display: none;
+	
+}
+.brandBox {
+	width: 100%;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: scroll;	
+}
+.brandBox::-webkit-scrollbar {
+	display: none;
+}
+.brandAnimation1
+{
+	animation:brandmove 0.5s 1;
+	-webkit-animation:brandmove 0.5s 1;				
+	animation-fill-mode : forwards;
+	-webkit-animation-fill-mode:forwards; /* Safari 和 Chrome */
+}
+@-webkit-keyframes brandmove /*Safari and Chrome*/
+{
+	from {
+			right:-6rem;
+		}
+	to {
+			right:0;
+		}
+}
+.brandAnimation2
+{
+	animation:brandmove2 0.5s 1;
+	-webkit-animation:brandmove2 0.5s 1;				
+	animation-fill-mode : forwards;
+	-webkit-animation-fill-mode:forwards; /* Safari 和 Chrome */
+}
+@-webkit-keyframes brandmove2 /*Safari and Chrome*/
+{
+	from {
+			right:0;
+		}
+	to {
+			right:-6rem;
+		}
+}
+.scroll-y {
+	width: 7.5rem;
+	z-index: 0;
+	overflow-y: scroll;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    padding-top: 1.6rem;
+}
+.backGround {
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.7); 
+	position: absolute;
+	top: 0;
+	z-index: 160;
+}
+.brandName {
+	height: 0.9rem;
+	line-height: 0.9rem;
+	font-size: 0.3rem;
+	padding: 0 0 0 0.4rem;
+}
+.selectBtn {
+	height: 0.88rem;
+	line-height: 0.88rem;
+	position: absolute;
+	background: #60a3fb;		
+	color: #FFFFFF;
+	bottom: 0;
+	left: 0;
+	font-size: 0.3rem;
+	z-index: 171;
+}
+/* .btn {
+	width: 2.9rem;
+	float: left;
+	text-align: center;	
+} */
+.resize {	
+	border-top: 1px solid #cccccc;
+}
+.comfirm {
+	width: 5.8rem;
+	display: block;
+	text-align: center;
+}
+.brandList {
+	padding: 0 0 2rem 0.3rem;
+}
+.brandList li {
+	float: left;
+	width: 1.6rem;
+	height: 0.5rem;
+	border-radius: 0.08rem;
+	line-height: 0.5rem;
+	text-align: center;
+	border: 1px solid rgba(0,0,0,0.2);
+	font-size: 0.26rem;
+	margin: 0 0.16rem 0.2rem 0;
+}
+.brandList .selected {
+	border: 1px solid #60a3fb;
+	color: #60a3fb;
+	background: url(../../mallIndex/img/pitchBottom.png) no-repeat right bottom;
+	background-size: 0.25rem;
+}
+.rankArea .selected {
+	color: #60a3fb;
+}

@@ -1,0 +1,110 @@
+body {
+	background: #f4f4f4;
+}
+/*收货地址*/
+.mallDetallTop span {
+	color: #666666;
+}
+#showArea {
+	padding-bottom: .8rem;
+}
+.addressDetailInfo {
+	padding-top: 0.3rem;
+	background: #FFFFFF;
+	margin-bottom: 0.2rem;
+	
+}
+.addressDetailInfo img {
+	width: .16rem;
+	position: absolute;
+	top: 50%;
+	right: 0;
+	margin-top: -0.3rem;
+}
+.receiveInfo {
+	margin: 0 0.3rem 0;
+	background-size: 0.3rem;
+	padding-bottom: 0.2rem; 
+	border-bottom: 1px solid #f2f5f7;
+	position: relative;
+}
+.receiveInfo div {
+	padding-bottom: 0.03rem;
+	overflow: hidden;
+}
+.receiveInfo .fontInfo {
+	font-size: 0.26rem;
+	color: #999999;
+	width: 1.1rem;
+	display: inline-block;
+}
+.receiveInfo .font_left {
+	float: left;
+	width: 1.1rem;
+}
+.receiveInfo .font_right {
+	float: left;
+	width: 4.9rem;
+	margin-left: 0.05rem;
+	font-size: 0.26rem;
+	color: #666666;
+}
+.receiveInfo span {
+	font-size: 0.26rem;
+	color: #666666;
+}
+.editInfo {
+	height: 0.8rem;
+	line-height: 0.8rem;
+	padding: 0 0.3rem;
+}
+.editInfo span {
+	display: inline-block;
+}
+.editInfo .defaultAddress {
+	width: 1.6rem;
+	background: url(../img/ic_yuanquan_nor@2x.png) no-repeat left center;
+	background-size: 0.3rem;
+	color: #999999;
+	text-align: right;
+}
+.editInfo .editAddress {
+	width: 0.95rem;
+	float: right;
+	background: url(../img/ic_bianji_nor@2x.png) no-repeat left center;
+	background-size: 0.34rem;	
+	color: #999999;
+	text-align: right;
+}
+.editInfo .delAddress {
+	width: 1rem;
+	float: right;
+	background: url(../img/ic_shanchu_nor@2x.png) no-repeat left center;
+	background-size: 0.34rem;
+	color: #999999;
+	text-align: right;
+	margin-left: 0.5rem;
+}
+.addressDetailInfo .selected {
+	background: url(../img/ic_yuanquan_press@2x.png) no-repeat left center;
+	background-size: 0.3rem;
+}
+.ressSubmit {
+	width: 7.5rem;
+	height: 0.88rem;
+	background: #60a3fb;
+	color: #FFF;
+	font-size: 0.3rem;
+	margin: 0 auto;
+	position: fixed;
+	bottom: 0;
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+	-webkit-align-items: center;
+	justify-content: center;
+	-webkit-justify-content: center;
+}
+.hide_arrow{
+	display: none;
+}

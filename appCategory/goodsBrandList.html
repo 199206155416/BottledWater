@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+   	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0"/>
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="../common/css/public.css">
+	<link rel="stylesheet" href="css/goodsBrandList.css">	
+	<script src="../common/js/remScale.js"></script>
+	<title>达飞商城</title>
+</head>
+<body>
+    <div class="mallHeaderHeight">
+		<div class="mallFixedTop">
+			<div class="mallDetallTop clearfix" style='box-shadow: none; -webkit-box-shadow: none;'>		
+				<img src="../mallIndex/img/top/mallback.png" onclick="back();" />
+				<span class="mallTopTitle" id="mallUp"></span>								
+			</div>
+		</div>
+	</div>	
+	<div class="rankArea">
+		<ul class="clearfix" id="sort">
+			<li class="synthesizeSort selected" id="synthesizeSort" sortType="1">
+				综合
+				<!-- <span class="synthesize"><img src="../img/goods/orangeDown.png" class="synImg"/></span> -->
+			</li>
+			<li id="saleNum" sortType="20">
+				销量				
+			</li>
+			<li id="costNum" sortType="21">
+				价格
+				<span id="" class="priceSort">
+					<img src="img/grayUp.png" class="priceImg topImg"/>
+					<img src="img/grayDown.png" class="priceImg bottomImg"/>
+				</span>
+			</li>
+			<li id="filtrate" class="filtrate">
+				筛选
+				<img src="img/filter.png" class="filterImg"/>
+			</li>
+		</ul>
+	</div>
+	<div>
+		<div class="goodsRoll" id="goodsRoll">
+			<!-- 商品列表模板 -->
+			<div id="mallListTemp" style="display: none">
+				<li>				
+					<div class="widthpad">
+						<div class="cutLimg">		
+						    <div class="lootAll">已抢光</div>
+							<div class="mallMark">#nLablead#</div>
+							<img src="#strLogoURL#" data-original="#strLogoURL#"/>
+						</div>			
+						<div class="rightMallcontent clearfix">
+							<div class="hrTitle">#strTitle#</div>
+							<div class="mallActivity">#strNotice#</div>
+							<!-- 分期使用 -->
+							<div id="fenqi" class="fenqi">
+								<div class="goodsMoney">
+									<div class="goodsRightfMoney"><span class="syGoodsText"><!-- 售价： --></span><span class="yjGoodsfh">¥</span>#nPrice#</div>
+								</div>
+								<div class="mallListBotton ">
+									<span>月供：</span><span class="ygMoney">¥#nForTheMonth#</span><span class='qiFont'>起</span><span class="ygMoney" style="display: none">&nbsp;X&nbsp;#nTermForHomePage#<span>期</span></span>
+								</div>
+							</div>
+							<!-- 全额使用 -->
+							<div id="quane" class="quane">
+								<div class="goodsLeftsfMoney">
+									<div class="sfText">售价：</div><div class="sfLeftMoney">¥#nPrice1#</div>
+								</div>
+							</div>
+						</div>			
+					</div>
+				</li>
+			</div>
+			<div class="mallList clearfix">
+				<ul id="mallListID">
+					<div id="firstPage"></div>
+					<div id="otherPage"></div>
+				</ul>
+			</div>
+		</div>		
+	</div>
+	<!--筛选品牌弹出层背景-->
+	<div class="brandFilter">
+		<div class="brandName">
+			品牌
+		</div>
+		<div class="brandBox">	
+			<ul class="brandList clearfix" id="brandList">
+				
+			</ul>
+		</div>			
+		<div class="selectBtn">
+			<!-- <span class="btn resize" id="resize">重置</span> -->
+			<span class="comfirm" id="comfirm">确定</span>
+		</div>
+	</div>	
+	<div class="backGround" style="display: none;"></div>	
+ </body>
+ <script type="text/javascript" src="../common/js/includeCommon.js" level="1"></script>
+ <script type="text/javascript" src="goodsBrandList.js"></script>
+ <script type="text/javascript" src="../mallIndex/mallListAnimation.js"></script>
+</html>

@@ -36,7 +36,12 @@
 			"appIndex/product-detail-needtem.html",
 			"appMall/product-detail-needtem.html",
 			"appMall/productDetail.html",
-			"login/register.html"
+			"login/register.html",
+			"appAddress/addressList.html",
+			"myCenter/safetyCenter.html",
+			"appAddress/editAddress.html",
+			"myCenter/more.html",
+			"myCenter/feedback.html"
 		]
 	},
 	"mallCategory/category.html": {

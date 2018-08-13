@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0"/>
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="../common/css/mui.min.css">
+	<link rel="stylesheet" href="../common/css/public.css">
+	<link rel="stylesheet" href="css/addressList.css">
+	<title>管理收货地址</title>
+	<script src="../common/js/remScale.js"></script>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	    <h1 class="mui-title">收货地址</h1>
+	</header>
+	
+	<div class="mui-content">
+		<ul id="showArea">
+			<!-- 显示收货地址列表 -->
+		</ul>
+	</div>
+	<!-- 收货地址模板开始 -->
+	<ul id="defaultAdd" style="display: none;">
+		<li class="addressDetailInfo">
+			<div class="receiveInfo">
+				<div>
+					<lable class="fontInfo">收货人：</lable>
+					<span>#strConsigneeName#</span>
+				</div>
+				<div>
+					<lable class="fontInfo">电话：</lable>
+					<span>#strMobile#</span>
+				</div>
+				<div>
+					<lable class="fontInfo font_left">地址：</lable>
+					<div class="font_right">
+						<p>#strFullDistrictName#</p>
+					</div>
+				</div>
+			</div>
+			<div class="editInfo">
+				<span class="default1 defaultAddress#imgUrl#">默认地址</span>
+				<span class="delAddress">删除</span>
+				<span class="editAddress">编辑</span>						
+			</div>	
+			
+		</li>
+	</ul>
+	<!-- 收货地址模板结束 -->
+	<div class="ressSubmit" id="AddAddressButtonHA">增加收货地址</div>
+</body>
+<script type="text/javascript" src="../common/js/include.js" level="1"></script>
+<script type="text/javascript" src="addressList.js"></script>
+</html>

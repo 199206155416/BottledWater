@@ -1,15 +1,11 @@
 mui.init({
 	swipeBack: false
 });
-var parentWebView;
-var touxiangimg;
-var logoutBtn;
-var trueimg;
-var touxiangword;
+
 mui.plusReady(function() {
 	//注册列表的点击事件
 	addListevent();
-
+	
 	// parentWebView = plus.webview.currentWebview().parent();
 	// touxiangimg = document.getElementById('touxiangimg');
 	// logoutBtn = document.getElementById('logoutBtn');
@@ -54,23 +50,33 @@ mui.plusReady(function() {
 	// 	});
 	// }, false)
 })
-
+// //点击头像事件
+// function addHeadevent() {
+// 	//点击头像登录
+// 	touxiangimg.addEventListener('tap', function() {
+// 		if (!localStorage.getItem('user')) {
+// 			pushWebView({
+// 				webType: 'newWebview_First',
+// 				id: 'login/login.html',
+// 				href: 'login/login.html',
+// 				aniShow: getaniShow(),
+// 				title: "登录",
+// 				isBars: false,
+// 				barsIcon: '',
+// 				extendOptions: {}
+// 			})
+// 		}
+// 	}, false);
+// }
 
 //注册列表的点击事件
 function addListevent() {
-	$("#mineHandleList").on('click', 'li', function() {
+	$("#moreList").on('click', 'li', function() {
 		var id = $(this).attr("id");
 		
 		var aniShow = getaniShow();
-		//检测已经存在sessionkey否者运行下面的登陆代码
-		if (localStorage.getItem('mobile') && localStorage.getItem('id')) {} else {
-			id = "login/login.html";
-			aniShow = 'slide-in-bottom';
-		}
-		if (id == 'changeaddress') {
-			isBars = true;
-			barsIcon = 'mui-icon iconfont icon-tianjia';
-		}
+		console.log(id);
+
 		pushWebView({
 			webType: 'newWebview_First',
 			id: id,
@@ -79,20 +85,5 @@ function addListevent() {
 			extendOptions: {}
 		})
 	});
-
-	$("#messageBtn").on("click", function(){
-		//检测已经存在sessionkey否者运行下面的登陆代码
-		if (localStorage.getItem('mobile') && localStorage.getItem('id')) {} else {
-			id = "login/login.html";
-			aniShow = 'slide-in-bottom';
-		}
-		pushWebView({
-			webType: 'newWebview_First',
-			id: "myCenter/message.html",
-			href: "myCenter/message.html",
-			aniShow: aniShow,
-			extendOptions: {}
-		})
-	})
 }
 

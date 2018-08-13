@@ -1,19 +1,12 @@
-var account;
-var psd;
-var login;
-var register;
-var repsd;
-var loginWebview;
 
 mui.init({
 	swipeBack: true
 });
 
 mui.plusReady(function() {
-	// 登陆
-	login();
-	// 点击跳转注册页
-	goToRegister();
+
+	// 查询收货地址
+	queryAddressList();
 
 	// account = document.querySelector('input[type="text"]');
 	// psd = document.querySelector('input[type="password"]');
@@ -75,75 +68,32 @@ mui.plusReady(function() {
 });
 
 /**
- * 忘记密码
+ * 查询收货地址
+ * @author xuezhenxiang
  */
-function forgetPassword(){
-	$("#forgetPassword").on("click", function(){
-		pushWebView({
-			webType: 'newWebview_First',
-			id: 'login/forgetPassword.html',
-			href: 'login/forgetPassword.html',
-			aniShow: getaniShow(),
-			title: "注册",
-			isBars: false,
-			barsIcon: '',
-			extendOptions: {}
-		})
-	})
+function queryAddressList(){
+	for(var i = 0, len = 5; i < len; i++){
+		var addressTemplate = $("#defaultAdd").html();
+
+		var address = $(addressTemplate);
+
+		;(function(){
+			address.on("click", function(){
+				pushWebView({
+					webType: 'newWebview_First',
+					id: 'appAddress/editAddress.html',
+					href: 'appAddress/editAddress.html',
+					aniShow: getaniShow(),
+					title: "注册",
+					isBars: false,
+					barsIcon: '',
+					extendOptions: {}
+				})
+			})
+		})();
+
+		$("#showArea").append(address);
+	}
 };
 
-/**
- * 点击跳转注册页
- */
-function goToRegister(){
-	$("#registerBtn").on("click", function(){
-		pushWebView({
-			webType: 'newWebview_First',
-			id: 'login/register.html',
-			href: 'login/register.html',
-			aniShow: getaniShow(),
-			title: "注册",
-			isBars: false,
-			barsIcon: '',
-			extendOptions: {}
-		})
-	})
-};
-
-/**
- * 点击登陆
- */
-function login(){
-	$("#loginBtn").on("click", function(){
-		var strMobile = $("#mobile").val().trim();
-		var strPassword = $("#password").val().trim();
-
-		$.ajax({
-			url: prefix + "/user/login",
-			type: "POST",
-			dataType: "json",
-			data: {
-				mobile: strMobile,
-				password: strPassword
-			},
-			success: function(e){
-				ajaxLog(e);
-
-				if(e.resCode == 0){
-					var result = e.result;
-					console.log(JSON.stringify(e.result))
-					// 存储id
-					setStringValue("id", result.id);
-					// 存储电话
-					setStringValue("mobile", result.mobile);
-					// 存储姓名
-					setStringValue("roleNames", result.roleNames);
-					// 存储启用状态
-					setStringValue("loginFlag", result.loginFlag);
-
-				}
-			}
-		})
-	})
-};
-
+queryAddressList();

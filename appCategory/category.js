@@ -34,9 +34,9 @@ function addCategoryEvent() {
 	//监听事件中mui选择的时候最好不要有多个被选择的对象，也就是＃categoryMovers最好只表示一个节点。也就是最好用id
 	mui('#categoryMovers').on('tap', '.mui-table-view-cell a', function() {
 		var categoryA = this;
-		var id = 'mallCategory/category-detail-new-needtem.html';
+		var id = 'appCategory/category-detail-new-needtem.html';
 		var title = categoryA.innerText;
-		var href = 'mallCategory/category-detail-new-needtem.html';
+		var href = 'appCategory/category-detail-new-needtem.html';
 		var categoryID = categoryA.getAttribute('href');
 		//弹入分类商品列表
 		pushWebView({
