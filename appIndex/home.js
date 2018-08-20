@@ -54,10 +54,9 @@ function getGoodsList(){
 						var goods = $(goodsTemplate);
 						;(function(){
 							goods.on("tap", function(){
-								var item = this;
-								var itemID = this.getAttribute('id');
+								var goodsId = this.getAttribute('id');
 								var extendOptions = {
-									itemID: itemID
+									goodsId: goodsId
 								};
 								pushWebView({
 									webType: 'newWebview_First',

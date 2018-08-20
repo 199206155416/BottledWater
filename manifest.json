@@ -198,7 +198,8 @@
 					"mallIndex/home.html",
 					"mallTicket/ticket.html",
 					"appIndex/home.html",
-					"mallCategory/category.html"
+					"mallCategory/category.html",
+					"appCart/cart.html"
 				],
 				"refer": [
 					"myCenter/mine.html",
@@ -206,8 +207,7 @@
 					"mallCart/cart.html",
 					"myCenter/login.html",
 					"login/login.html",
-					"appMall/index.html",
-					"appCart/cart.html"
+					"appMall/index.html"
 				],
 				"priority": 0
 			},
@@ -233,7 +233,9 @@
 					"myCenter/safetyCenter.html",
 					"appAddress/editAddress.html",
 					"myCenter/more.html",
-					"myCenter/feedback.html"
+					"myCenter/feedback.html",
+					"appCategory/category.html",
+					"appMall/addOrder.html"
 				],
 				"priority": 0
 			},

@@ -1,5 +1,20 @@
-.mallDetallTop {
-	font-size: 0.3rem;
+body{
+	background: #f4f4f4;
+}
+.mui-bar {
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    left: 0;
+    height: .88rem;
+    padding-right: .2rem;
+    padding-left: .2rem;
+    border-bottom: 0;
+    background-color: transparent;
+    -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+    box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 .swiper-pages {
 	overflow-y: auto;
@@ -15,7 +30,7 @@
     margin: 0 auto;
 }
 .mallDetallTop .swiper-wrapper .active{
-	color: #fc761c;
+	color: #60a3fb;
 }
 .mallDetallTop .swiper-wrapper .active::after {
 	content: "";
@@ -47,9 +62,9 @@
 	margin: 0 auto;
 }
 .mallTapDetall .swiper-container {
-	padding-top: 0.5rem;
+	padding-top: .88rem;
 	background:#FFF;
-	height: 5rem;
+	height: 6.38rem;
 	padding-bottom: 0.5rem;
 	position: relative;
 }
@@ -101,14 +116,14 @@
 }
 .detailContent h3 {
 	font-size: 0.28rem;
-	color: #444444;
+	line-height: .34rem;
+	color: #555;
 	font-weight: 500;
-        width:calc(100% - 1.62rem);
-	padding: 0.22rem 0 0.15rem 0.28rem;
+	padding: 0.22rem .3rem 0.15rem .3rem;
 }
 .detailContent .sale{
 	float: left;
-	color: #FC761C;
+	color: #60a3fb;
 	font-weight: bold;
 	font-size: 0.26rem;
 	padding-left: 0.28rem;
@@ -123,7 +138,7 @@
 .detailContent .detailGoodsMoney {
 	display: block;
 	float: left;
-	color: #FC761C;
+	color: #ff2a2a;
 	font-weight: bold;
 	font-size: 0.32rem;
  	padding-left: 0.28rem;
@@ -143,30 +158,17 @@
 	font-weight: normal;
 	padding-left: .18rem;
 }
-.detailGoodsMoney .seckillMoney-label{
+.detailContent .sale-num{
 	float: left;
-	color: #FC761C;
-	font-weight: bold;
-	font-size: 0.26rem;
-	line-height: .36rem;
-}
-.detailGoodsMoney .seckillMoney-price{
-	float: left;
-    color: #FC761C;
-    font-weight: bold;
-    font-size: 0.32rem;
-    line-height: .34rem;
-}
-.detailGoodsMoney .seckillMoney-del{
 	font-size: .24rem;
+	line-height: .44rem;
 	color: #999;
-	padding-left: .1rem;
-	float: left;
-	line-height: .36rem;
+	padding-left: .3rem;
 }
+
 .detailContent .partner-rebate{
 	float: left;
-	border: 1px solid #fc761c;
+	border: 1px solid #60a3fb;
 	border-radius: .06rem;
 	font-size: .24rem;
 	line-height: .36rem;
@@ -177,7 +179,7 @@
 .detailContent .rebate-label{
 	float: left;
 	color: #fff;
-	background: #fc761c;
+	background: #60a3fb;
 	padding: 0 .1rem 0 .08rem;
 	height: .36rem;
 	/* position: relative; */
@@ -186,7 +188,7 @@
 .detailContent .rebate-price{
 	float: left;
 	padding: 0 .08rem 0 .22rem;
-	color: #fc761c;
+	color: #60a3fb;
 	position: relative;
 }
 .detailContent .rebate-price:before{
@@ -197,7 +199,7 @@
 	width: 0;
 	height: 0;
 	border: .17rem solid transparent;
-	border-left: .17rem solid #fc761c;
+	border-left: .17rem solid #60a3fb;
 }
 .detailContent span b{
 	font-weight: 550;
@@ -264,15 +266,26 @@
 	margin:0 0 0.06rem 0.1rem;
 }
 .detailClass {
-
-	margin-left:0.28rem;
 	height: 0.8rem;
 	line-height: 0.8rem;
 	position: relative;
 	background: #FFFFFF;
-	border-bottom:1px solid #f2f5f7;
-	border-top:1px solid #f2f5f7;
 	margin-bottom: 0.2rem;
+	padding: 0 .6rem 0 .3rem;
+	width: 7.5rem;
+	overflow: hidden;
+}
+.detailClass:after{
+	content: "";
+	position: absolute;
+	left: .3rem;
+	top: 0;
+	width: 100%;
+	height: 1px;
+	-webkit-transform: scaleY(.5);
+	transform: scaleY(.5);
+	background: #ccc;
+	z-index: 100;
 }
 .detailClass img {
 	width: 0.16rem;
@@ -293,12 +306,13 @@
 	line-height: 0.83rem;
 }
 #appendRove {
-	
-	    display: block;
-	    width: 5.5rem;
-	    float:left;
-	    overflow: hidden;
-	    height: 0.8rem;
+	font-size: .26rem;
+	color: #888;
+    display: block;
+    width: 5.5rem;
+    float:left;
+    overflow: hidden;
+    height: 0.8rem;
 }
 .detailClass span{
 	font-size: 0.26rem;
@@ -381,15 +395,15 @@
 	/* border-right: 1px solid #D9D9D9; */
 	background: #FFF;
 }
-.paramBottom ,.sold_out{
+.paramBottom{
+	position: fixed;
+	bottom: 0;
 	width: 7.5rem;
 	height: 0.88rem;
 	border-radius: 0;
-	position: fixed;
 	font-size:0.3rem;
-	z-index: 160;
-	bottom: 0;
-	background: #FC761c;
+	z-index: 100;
+	background: #fff;
 	line-height: 0.88rem;
 	text-align: center;
 	display: flex;
@@ -399,29 +413,16 @@
 	align-items: center;
 	-webkit-align-items: center;
 }
-.paramBottom1 {
-	width: 7.5rem;
-	height: 0.88rem;
-	border-radius: 0;
-	position: fixed;
-	font-size:0.3rem;
-	z-index: 160;
-	bottom: 0;
-	background: #FC761c;
-	line-height: 0.88rem;
-	text-align: center;
-	display: flex;
-	display: -webkit-flex;
-	justify-content:center;
-	-webkit-justify-content: center;
-	align-items: center;
-	-webkit-align-items: center;
-	color: #ffffff;
-}
-.sold_out{
-	background:#cccccc;
-	color: #666;
-	font-family:"PingFangSC  Medium";
+.paramBottom:after{
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 1px;
+	background: #ccc;
+	transform: scaleY(.5);
+	-webkit-transform: scaleY(.5);
 }
 .grayBotton {
 	background: #cccccc;
@@ -430,9 +431,10 @@
 .mallSelection {
 	width: 7.5rem;
 	background: #FFFFFF;
-	position: absolute;
+	position: fixed;
 	bottom: -8rem;
-	height:9rem;
+	height: 9.88rem;
+	padding-bottom: .88rem;
 	z-index: 160;
 }
 .popupThimg {
@@ -481,8 +483,8 @@
 }
 .seleHead .mallclose {
     position: absolute;
-    width: 0.3rem;
-    height: 0.3rem;
+    width: 0.7rem;
+    height: 0.7rem;
     right: -0.25rem;
     top: 0rem;
     padding: 0.2rem;
@@ -498,7 +500,7 @@
 	font-size: 0.34rem;
 	margin-bottom: 0.2rem;
 	font-weight:bold;
-	color: #fc761c;
+	color: #ff2a2a;
 	
 }
 .popupright .money span {
@@ -507,7 +509,7 @@
 .mallbackground {			
 	width: 100%;
 	height: 100%;
-	position: absolute;
+	position: fixed;
 	z-index: 152;
 	top: 0;
 	background: rgba(0,0,0,0.7);
@@ -597,11 +599,11 @@ margin-bottom: 0;
 }
 .optionSelect .class .row {
 	
-	color: #fc761c;
+	color: #60a3fb;
 
 	background:url("../img/pitchBottom.png")  no-repeat right bottom;
 	background-size:0.25rem 0.21rem; 
-	border: 1px solid #fc761c;
+	border: 1px solid #60a3fb;
 
 }
 
@@ -642,21 +644,19 @@ margin-bottom: 0;
 .stageClass .addNum {
 	width: 1.5rem;
 	height: 0.46rem;
-	display: inline-block;
+	
 	border:1px solid #cccccc;
 	line-height: 0.46rem;
 	overflow:hidden;
 	float:left;
 	border-radius: 0.1rem;
 	margin: 0rem 0.3rem 0 0;		
-	position: relative;			
-
-		
+	position: relative;	
+	display: flex;
+	display: -webkit-flex;		
 }
 .stageClass .addNum div{
 	text-align: center;
-
-
 }
 .stageClass .addNum .left{
 	width:0.5rem;
@@ -750,7 +750,7 @@ margin-bottom: 0;
 	word-break: break-all;
 }
 .recommendGoodsList .swiper-slide p {
-	color: #fc761c;
+	color: #60a3fb;
 	text-align: left;
 	margin-top: 0.06rem;
 	font-size: 0.22rem;
@@ -824,7 +824,7 @@ margin-bottom: 0;
 }
 .colorOrange {
 	
-	color: #fc761c;
+	color: #60a3fb;
 }
 .staMoneyId .paymentLeft .row {
 	
@@ -934,7 +934,7 @@ margin-bottom: 0;
 	margin-top: -0.01rem;
 }
 #saleCountDown {
-	color: #fc761c;
+	color: #60a3fb;
 	margin-left: 0.1rem;
 }
 #saleCountDown label:nth-of-type(1) {
@@ -990,6 +990,7 @@ margin-bottom: 0;
 }
 .mallDetailImgList {
 	position: relative;
+	background: #fff;
 }
 .mallDetailLeftLine {
 	position: absolute;
@@ -1077,11 +1078,11 @@ margin-bottom: 0;
 }
 .insurance_Width .insurance .row {
 	
-	color: #fc761c;
+	color: #60a3fb;
 
 	background:url("../img/pitchBottom.png")  no-repeat right bottom;
 	background-size:0.25rem 0.21rem; 
-	border: 1px solid #fc761c;
+	border: 1px solid #60a3fb;
 
 }
 
@@ -1152,4 +1153,38 @@ margin-bottom: 0;
 	line-height: .88rem;
 	color: #fff;
 	white-space: nowrap;
+}
+.shop-cart{
+	padding: 0 .5rem;
+	width: 1.58rem;
+	height: .69rem;
+	line-height: 0;
+}
+.add-cart{
+	flex: 1;
+	-webkit-flex: 1;
+	background: linear-gradient(to right, #75b0fd, #4e92ec);
+	background: -webkit-linear-gradient(to right, #75b0fd, #4e92ec);
+	font-size: .3rem;
+	color: #fff;
+}
+.buy-now{
+	flex: 1;
+	-webkit-flex: 1;
+	background: #4e80ea;
+	font-size: .3rem;
+	color: #fff;
+}
+.submit-btn{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: .88rem;
+	background: linear-gradient(to right, #75b0fd, #4e92ec);
+	background: -webkit-linear-gradient(to right, #75b0fd, #4e92ec);
+	font-size: .3rem;
+	line-height: .88rem;
+	color: #fff;
+	text-align: center;
 }

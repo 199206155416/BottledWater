@@ -1,6 +1,6 @@
 (function(own) {
 	// 请求前缀
-	own.prefix = 'http://47.93.61.246/api';
+	own.prefix = 'http://47.93.61.246/api/';
 
 	// 接口请求打印日志
 	own.ajaxLog = function(e){

@@ -16,15 +16,14 @@ mui.plusReady(function() {
 	// setRecommend();
 	//添加每个item点击的监听事件
 	mui('#recommend').on('tap', 'a', function() {
-		var item = this;
-		var itemID = this.getAttribute('href');
+		var goodsId = this.getAttribute('href');
 		var extendOptions = {
-			itemID: itemID
+			goodsId: goodsId
 		};
 		pushWebView({
 			webType: 'newWebview_First',
-			id: 'appIndex/product-detail-needtem.html',
-			href: 'appIndex/product-detail-needtem.html',
+			id: 'appIndex/productDetail.html',
+			href: 'appIndex/productDetail.html',
 			aniShow: getaniShow(),
 			title: "商品详情",
 			isBars: false,

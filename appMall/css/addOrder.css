@@ -1,0 +1,900 @@
+body {
+	background: #F4F4F4;
+
+}
+.mui-content{
+	padding-bottom: 1rem;
+}
+.mallSubtop {
+	background: #FFFFFF;
+	width: 7.5rem;
+	position: relative;
+	padding: 0.3rem 0;
+	margin-bottom: .2rem;
+}
+.addressLeft {			
+	width: 1.7rem;
+	text-align: center;
+	float: left;
+	padding: .1rem 0 0 .3rem;
+}
+.addressLeftContent{
+	font-size: .28rem;
+	line-height: .34rem;
+	color: #666;
+	text-align: left;
+	margin-bottom: .1rem;
+}
+.default-label{
+	width: 1.36rem;
+	height: .64rem;
+	font-size: .44rem;
+	line-height: .64rem;
+	color: #60a3fb;
+	border-radius: .1rem;
+	box-shadow: 0 0 1px 0 #60a3fb;
+	-webkit-box-shadow: 0 0 1px 0 #60a3fb;
+	transform: scale(.5);
+	-webkit-transform: scale(.5);
+	transform-origin: left top;
+	-webkit-transform-origin: left top;
+}
+.addressRight {	
+	width: 5.6rem;
+	float: left;
+	
+}
+.addressGoodsArrow {
+	position: absolute;
+	width: 0.16rem;
+	height: 0.3rem;
+	right: 0.3rem;
+	top: 50%;
+	margin-top: -0.15rem;
+	
+}
+.addressHr {
+	
+	width: 5.6rem;
+	padding-bottom:0.03rem;
+	font-size: 0.26rem;
+
+	
+}
+.addressH5Bot {
+	
+	padding-bottom:0.08rem;
+}
+.addressHr .addressName {
+	
+	width: 1.1rem;
+	color: #999999;
+	float: left;
+	
+}
+
+.addressHr .addressContent {
+	width: 4.5rem;
+	float: left;
+	color: #666666;
+}
+.addressWrie {
+	width: 7.5rem;
+	height: 0.13rem;
+	background:#FFFFFF;
+	position: relative;
+	margin-bottom: 0.2rem;
+}
+.addressWrie img {
+	width: 7.5rem;
+	position: absolute;
+	bottom: 0;
+	height: 0.13rem;
+}
+
+.addresszjfgx {
+	width: 7.5rem;
+	height: 0.2rem;
+	background: #F4F4F4;
+}
+.stageSubmitSlide {
+	
+	overflow:auto;
+	height:67%;
+	
+}
+
+.StageSlide {
+	
+	overflow:auto;
+	height:74%;
+	
+}
+
+.stageTop {
+	width: 7.5rem;
+
+	background: #FFFFFF;
+}
+.mallSubLeftBorder {
+	width: 7.2rem;
+	margin-left: 0.3rem;
+	
+	border-top: 1px solid #F2F5F7;
+}
+.paddtop3 {
+	padding-bottom: 0.15rem;
+}
+.lelineheight {
+	line-height: 0.5rem;
+}
+.paddTop2 {
+	
+	padding-bottom: 0.16rem;
+	border-bottom: 1px solid #F2F5F7;
+}
+.leftthum {		
+	width: 1.5rem;
+	height:1.5rem;
+	float: left;
+	text-align:center;
+	background: #FFFFFF;
+	line-height:1.46rem;
+	margin: 0.03rem 0.2rem 0.03rem 0;
+	border-radius: 0.1rem;
+}
+
+.leftthum img {
+	width: 1.3rem;
+	height: 1.3rem;
+
+}
+.mallSubLeftBorder1 {
+	background: #fafafa;
+	margin-bottom: 0.2rem;
+}		
+.rightContent {
+	font-size: 0.32rem;
+	width: 5rem;
+    float: left;
+}
+.rightContent .beforeTitle{
+    padding-top: 0.18rem;
+    font-size: 0.26rem;
+    color: #555555;
+}
+.rightContent .paddsTop {
+	
+	padding-top: 0.3rem;
+}
+.rightContent .ppadingTop {
+	
+	padding-top: 0.05rem;
+}
+.rightContent p {
+	color: #999999;
+	font-size: 0.24rem;
+	margin-top: 0.04rem;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+.rightContent p span {
+	padding-right: 0.2rem;
+}
+.rightContent .orderMoney {			
+
+	color: #222222;
+	padding-bottom: 0.08rem;
+}
+.rightContent .orderMoney span {
+	font-size: 0.32rem;
+}
+.rightContent .orderMoney span b{
+	font-weight: 100;
+	font-size: 0.3rem;
+	margin-right: 0.1rem;
+}
+.rightContent .orderMoney .ordernum {
+	font-size: 0.28rem;
+	color: #999999;
+}
+.rightContent .orderMoney .subOrderMoney {
+	
+	color: #fc761c;
+	font-weight:bold;
+	font-size: 0.28rem;
+	
+}
+.mallTops {
+	width: 7.5rem;
+	height: 0.2rem;
+	background: #FFFFFF;
+}
+.subOrderDetail {
+	width: 7.5rem;
+}
+.detailHr {
+	margin-top: 0.15rem;
+}
+
+.buyerMessageHr {
+	padding-top: 0.15rem;
+}
+.buyerMessageHr .detailName {
+	float: left;
+	color: #555;
+	font-size: 0.28rem;
+}
+.paddHintTop {	
+	margin-top: 0.01rem;
+}
+.detailtextHr {
+	color: #999999;
+	font-size: 0.24rem;
+	position: relative;
+}
+.detailHr .detailName {
+	float: left;
+	color: #999999;
+	font-size: 0.26rem;
+}
+.detailHr .detailContent {
+	float: right;
+	font-size: 0.28rem;
+	color: #fc761c;
+	
+	padding-right: 0.3rem;
+}
+.detailHr #strGoodsAcount,.detailHr #strPreferential {
+	color: #666666;
+}
+.detailHr .detailContent .subhint {
+	width: 1.38rem;
+	height: 0.39rem;
+}
+.wiethonth {	
+	font-weight: bold;
+}
+.textStrking {
+	
+		font-weight:550;
+	
+}
+.detailHr .colorGray {
+	color: #666666;
+	
+}
+
+.issueHint {
+
+	width: 4.68rem;
+	float: right;
+	margin:0.03rem 0.3rem 0 0;
+	font-size: 0.24rem;
+	height: 0.65rem;
+	line-height: 0.71rem;
+	text-align: center;
+	color: #e83140;	
+
+	background:url("../img/issueHint.png")  no-repeat;
+	background-size:4.66rem 0.6rem; 
+}
+.mjleave {
+	width: 7.2rem;
+	margin-left: 0.3rem;
+	border-bottom: 1px solid #f2f5f7;
+	height: 0.8rem;
+}
+.leaveTextArea {
+	width: 5.8rem;
+	color:#666666;
+	resize:none;
+	font-size: 0.24rem;
+	color: #999999;
+	height: 0.45rem!important;
+ 	overflow-y: auto!important;
+	padding-top: 0.01rem;
+	line-height: 0.35rem;
+	outline:none!important;
+}
+.leaveTextArea ::-webkit-scrollbar {display:none;}
+
+.heightText {
+	height: 0.8rem;
+	line-height: 0.8rem;
+	padding-top: 0;
+}
+.goddsStageXieyi {
+	height: 0.8rem;
+	line-height: 0.8rem;
+	margin: 0.2rem 0 0.6rem 0;
+	background: #FFFFFF;
+}
+.xieyPadding {
+	padding-left: 0.3rem;
+	color: #777777;
+	font-size: 0.26rem;
+}
+.goddsStageXieyi .xieyPadding img {
+	width: 0.3rem;
+	height: 0.3rem;
+	margin: 0 0 0.05rem 0;
+}
+
+.detailFootBottom {
+	position: fixed;
+	z-index: 12;
+	bottom: 0;
+	width: 7.5rem;
+	height: 0.88rem;
+	background: #FFFFFF;
+	line-height: 0.88rem;
+	font-size: 0.32rem;
+	overflow:hidden;
+}
+.detailFootBottom:after{
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 7.5rem;
+	height: 1px;
+	background: #ccc;
+	transform: scaleY(.5);
+	-webkit-transform: scaleY(.5);
+}
+.detailFootBottom .sfkMoney {
+	padding-left: 0.3rem;
+	color: #fc761c;
+	display:inline-block;
+	font-size: 0.28rem;
+}
+.detailFootBottom .sfkMoney span {
+	font-size: 0.3rem;
+
+}
+.detailFootBottom .sfkMoney .yjFh {
+	
+	font-size: 0.26rem;
+}
+.paysWidth {
+	float:left;
+	display:none;
+	
+}
+
+.detailFootBottom .sfkPstMoney {
+	padding-left: 0.3rem;
+	color: #fc761c;
+	display:block;
+	font-size: 0.28rem;
+	position: absolute;
+	top: -0.1rem;
+
+}
+
+.detailFootBottom .stageServer {
+	
+	position: absolute;
+	bottom: -0.2rem;
+	color: #999999;
+	font-size: 0.24rem;
+	padding-left: 1.4rem;
+
+	
+}
+.detailFootBottom .stageServer img {
+	
+	width: 0.28rem;
+	height: 0.28rem;
+	margin-bottom: 0.06rem;
+	margin-left: 0.05rem;
+	
+}
+.detailFootBottom .sfkPstMoney span {
+	font-size: 0.3rem;
+
+}
+.detailFootBottom .sfkPstMoney .yjFh {
+	
+	font-size: 0.26rem;
+}
+
+.detailFootBottom .mailDetailBotton {
+	width: 3rem;
+	height: 0.87rem;
+	text-align: center;
+	line-height: 0.87rem;
+	color: #FFFFFF;
+	background: #60a3fb;
+	float: right;
+	
+}
+
+.detailFootBottom .mallGraySubBotton {
+	
+	background: #cccccc;
+	
+}
+.detailFootBottom .mailDetailBotton:active {
+	background: #66aaff;
+	
+}
+.notAddress {
+	height: 0.8rem;
+	line-height: 0.8rem;
+	background: #FFFFFF;
+	position: relative;
+	margin: 0.2rem 0 0.2rem 0;
+	padding-left: 0.3rem;
+	color: #999999;
+	font-size: 0.28rem;
+}
+.notAddress .addressArrow {
+	width: 0.16rem;
+	height: 0.3rem;
+	position: absolute;
+	right: 0.3rem;
+	top: 50%;
+	margin-top: -0.15rem;
+}
+.bottomStBorder {
+	border-bottom: 1px solid #f2f5f7;
+	margin-top: 0rem;
+	height: 0.8rem;
+	line-height: 0.8rem;
+}
+.goodsDiscount {
+	width: 7.5rem;
+	height: 0.85rem;
+	line-height: 0.87rem;
+	color: #666666;
+	border-top:1px solid #F2F5F7;
+	position: relative;
+	font-size: 0.28rem;
+}
+.goodsDiscount .discountLeft {
+	padding-left:0.3rem;
+	float: left;
+}
+.goodsDiscount .discountLeft  .discountName {
+	float: left;
+	font-size: 0.26rem;
+	color: #999999;
+}
+.goodsDiscount .discountLeft span {
+	color: #FC761C;
+	display: block;
+	text-align:center;
+	line-height:normal;
+	padding:0 0.25rem 0 0.15rem;
+	margin-left:0.3rem;
+	float:left;
+	font-size:0.22rem;
+    height: 0.36rem;
+    line-height: 0.37rem;
+	position:relative;
+	margin-top: 0.25rem;
+	background: url("../img/arrow2.png") repeat-x left top;
+	background-size: 0.02rem 0.36rem;
+	
+}
+.goodsDiscount .discountLeft .leftImg {	
+	position: absolute;
+	left:-0.21rem;
+	top:0;
+	width: 0.21rem;
+	height: 0.36rem;
+	z-index: 1;
+	
+}
+.goodsDiscount .discountLeft .rightImg {	
+	position: absolute;
+	right:-0.02rem;
+	top:0;
+	width: 0.08rem;
+	height: 0.36rem;
+	z-index: 1;
+	
+}
+/*  上下透明，右边框为9px且在:before伪元素三角形的基础上，向右，下移动了1px 
+.goodsDiscount .discountLeft span:after {
+    content: '';
+    position: absolute;
+    top: -0.01rem;
+    left: -10px;
+    width: 0;
+    height: 0;
+    border-bottom: 0.19rem solid transparent;
+    border-right: 0.19rem solid #FFFFFF;
+    border-top: 0.19rem solid transparent; 
+} */
+
+/*    上下透明，右边框为10px
+.goodsDiscount .discountLeft span:before {
+    content: '';
+    position: absolute;
+    top: -0.03rem;
+    left: -11px;
+    width: 0;
+    height: 0;
+    border-right: 0.21rem solid #FC761C;
+    border-bottom: 0.21rem solid transparent;
+    border-top: 0.21rem solid transparent; 
+}
+   */
+.goodsDiscount .discountRight {
+	padding-right:0.66rem;
+	float: right;
+
+}
+.goodsDiscount .discountRight img {
+	position: absolute;
+	right: 0.3rem;
+	top:50%;
+	margin-top:-0.14rem;
+	width: 0.16rem;
+	height: 0.3rem;
+}
+
+.mjleave1 {
+	width: 7.2rem;
+	margin-left: 0.3rem;
+	border-top: 1px solid #f2f5f7;
+	position: relative;
+}
+
+.detailHr textarea {
+	height: auto;
+    resize: none;
+}
+.bottomColor {
+	height: 0.2rem;
+	background: #f4f4f4;
+}
+/* 选择配送时间区域 */
+.areaTitle {
+	height: 0.8rem;
+	border-bottom: 1px solid #f2f5f7;
+	font-size: 0.3rem;
+	color: #666666;
+	line-height: 0.8rem;
+	text-align: center;
+	position: relative;
+}
+.closeBtn {
+	width: 0.3rem;
+	height: 0.3rem;
+	position: absolute;
+	right: 30px;
+	top: 0.2rem;
+}
+.confirmBtn {
+	width: 6.9rem;
+	height: 0.7rem;
+	background: #fc761c;
+	text-align: center;
+	line-height: 0.7rem;
+	font-size: 0.3rem;
+	color: #ffffff;
+	position: absolute;
+	bottom: 0.3rem;
+	left: 0.3rem;
+	border-radius: 0.05rem;
+}
+.mallbackground {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 15;
+    top: 0;
+    background: rgba(0,0,0,0.5);
+}
+.deliveryArea {
+	width: 7.5rem;
+	background: #ffffff;
+	position: absolute;
+	bottom: 0rem;
+	height:5rem;
+	z-index: 20;
+}
+.selectTime {
+	height: 2.1rem;
+	overflow: hidden;
+	padding: 0 0.7rem;
+	margin: 0.7rem 0 0 0;
+	position: relative;
+}
+.timeBackground1 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 7.5rem;
+	height: 0.7rem;
+	background: rgba(255,255,255,0.5);
+}
+.timeBackground2 {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 7.5rem;
+	height: 0.7rem;
+	background: rgba(255,255,255,0.5);
+}
+.ui-alert,.receipt {
+	float: right;
+	margin-right: 0.66rem;
+	font-size: 0.28rem;
+	color: #666666;
+}
+.goodsArrow {
+	position: absolute;
+	width: 0.16rem;
+	height: 0.3rem;
+	right: 0.3rem;
+	top: 50%;
+	margin-top: -0.15rem;
+}
+.mui-poppicker .mui-poppicker-body {
+	border-top: 1px solid #f2f5f7;
+}
+.mui-picker-inner .mui-pciker-rule-ft {
+	border-top: none;
+	border-bottom: none;
+}
+.mui-picker-inner .mui-pciker-list li.highlight {
+	font-size: 0.3rem;
+	color: #666666;
+}
+
+
+.monthlyList {
+	width: 7.5rem;
+	position:absolute;
+	bottom:-3.84rem;
+	z-index:2;
+	background: #FFFFFF;
+	border-bottom: 1px solid #f2f5f7;
+}
+
+.monthlyList .listTitle {
+	width: 7.5rem;
+
+	height: 0.6rem;
+	position:relative;
+	position:relative;
+	line-height:0.6rem;
+	font-size: 0.28rem;
+	color: #666666;
+	margin: 0 auto;
+	
+}
+
+.mallbackground {			
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	background: rgba(0,0,0,0.7);
+}
+
+.monthlyList .listTitle ul{
+	
+	display: -webkit-flex;     
+    display: flex;		
+    /* for uc */
+    display: -webkit-box;  
+	display: -ms-flexbox;      /* TWEENER - IE 10 */
+	
+}
+.monthlyList .listTitle ul li {
+	 text-align:center;
+	-ms-flex: 1;              /* IE 10 */
+   -webkit-flex: 1;          
+    flex: 1;         
+    /* for uc */
+    -webkit-box-flex: 1;      
+    -moz-box-flex: 1;         
+    -ms-flex: 1;
+	width: 1.72rem;
+}
+
+.monthlyList .detailTitle {
+	
+	height: 0.8rem;
+	line-height: 0.8rem;
+	color: #666666;
+	font-size:0.3rem;
+	text-align:center;
+	position:relative;
+	border-bottom: 1px solid #f2f5f7;
+
+	
+}
+
+.monthlyList .wrie {
+	width: 6.9rem;
+	left:0;
+	right:0;
+	bottom: 0;
+	margin:0 auto;
+	position:absolute;
+	border-bottom: 1px solid #f2f5f7;
+	
+}
+.monthlyList .detailTitle .monthClose {
+	width:0.3rem;
+	height:0.3rem;
+	position: absolute;
+	right: 0.3rem;
+	top: 50%;
+	margin-top: -0.15rem;
+}
+.monthDetailList {
+	width: 7.5rem;
+	overflow:hidden;
+	padding:0.15rem 0 0.15rem 0;
+	font-size: 0.26rem;
+	color: #666666;
+	margin: 0 auto;
+	
+	
+}
+.monthDetailList li {
+	display: -webkit-flex;     
+    display: flex;		
+    /* for uc */
+    display: -webkit-box;  
+	display: -ms-flexbox;      /* TWEENER - IE 10 */
+	height: 0.6rem;
+	line-height:0.6rem;
+}
+.monthDetailList li span {
+	-ms-flex: 1;              /* IE 10 */
+   -webkit-flex: 1;          
+    flex: 1;         
+    /* for uc */
+    -webkit-box-flex: 1;      
+    -moz-box-flex: 1;         
+    -ms-flex: 1;
+    display: block;
+    text-align: center;
+    width: 1.72rem;
+}
+
+.InsuranceText {
+	font-size: 0.24rem;
+	color: #777777;
+	width: 6.9rem;
+	margin: 0 auto;
+	border-top: 1px solid #f2f5f7;
+	height:0.8rem;
+	line-height:0.8rem;
+}
+.InsuranceText .insurance_name {
+	float: left;
+	    margin-left: -0.08rem;
+	
+}
+
+.InsuranceText .insurance_Money {
+	float: right;
+}
+
+
+
+.InsuranceText .insurance_Money span {
+	font-size: 0.28rem;
+	color: #fc761c;
+}
+
+.last-item-no-border .mui-table-view-cell:last-child:after, .last-item-no-border .mui-table-view-cell:last-child:before {
+    height: 1px;
+}
+.mui-table-view-cell{
+	font-size: .28rem;
+	line-height: .4rem;
+	padding: .2rem .3rem;
+	color: #555;
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+}
+.pay-type-content,.discounts-content,.freight-charge{
+	font-size: .26rem;
+}
+.pay-type-content{
+	padding-right: .36rem;
+	background: url('../../common/image/tiaozhuan@2x.png') no-repeat right center/.16rem .3rem;
+}
+.discounts-content{
+	padding-right: .36rem;
+	background: url('../../common/image/tiaozhuan@2x.png') no-repeat right center/.16rem .3rem;
+	color: #ff2a2a;
+}
+/* 支付确认弹框 */
+.black-bg{
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 100;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+}
+.confirm-modal{
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	z-index: 110;
+	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	background: #fff;
+	width: 5.6rem;
+	border-radius: .12rem;
+}
+.confirm-title{
+	font-size: .32rem;
+	line-height: .4rem;
+	color: #666;
+	text-align: center;
+	padding: .3rem;
+}
+.confirm-content{
+	padding: .1rem .3rem;
+	position: relative;
+}
+.confirm-content:after{
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 1px;
+	background: #ccc;
+	transform: scaleY(.5);
+	-webkit-transform: scaleY(.5);
+}
+.confirm-content li{
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	font-size: .3rem;
+	line-height: .4rem;
+	color: #666;
+	margin-bottom: .3rem;
+}
+.confirm-footer{
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+	-webkit-align-items: center;
+	height: .88rem;
+}
+.confirm-footer p{
+	flex: 1;
+	-webkit-flex: 1;
+	font-size: .3rem;
+	line-height: .88rem;
+	color: #999;
+	text-align: center;
+	position: relative;
+}
+.confirm-footer p:after{
+	content: "";
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 1px;
+	height: 100%;
+	background: #ccc;
+	transform: scale(.5);
+	-webkit-transform: scale(.5);
+}
+.confirm-footer p:last-child:after{
+	width: 0;
+}

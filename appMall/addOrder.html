@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0"/>
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="../common/css/mui.min.css">
+	<link rel="stylesheet" href="../common/css/public.css">
+	<link rel="stylesheet" href="css/addOrder.css">
+	<script src="../common/js/remScale.js"></script>
+	<title>提交订单</title>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	    <h1 class="mui-title">提交订单</h1>
+	</header>
+
+	<div class="mui-content">
+		<div class="mallSubtop clearfix" id="toAddressListOrAdd">
+			<img class="addressGoodsArrow" src="../common/image/tiaozhuan@2x.png" />
+			<div class="addressLeft clearfix">
+				<div class="addressLeftContent" id="strConsigneeName">李书伟</div>
+				<div class="default-label">默认</div>
+			</div>
+			<div class="addressRight">
+				<div class="addressHr clearfix">
+					<div class="addressContent" id="strMobile">13126812312</div>
+				</div>
+				<div class="addressHr clearfix">
+					<div class="addressContent" id="strFullAdress">河北省石家庄市井陉县某村某县某镇某乡某村某街道</div>
+				</div>
+			</div>
+		</div>
+		 <!--
+	       	作者：zltwht@vip.qq.com
+	       	时间：2017-03-31
+	       	描述：没有添加收货地址
+	      -->
+		<div class="notAddress"  style="display: none;" id="noAddressSelected">
+			<img src="../common/image/tiaozhuan@2x.png" class="addressArrow" />
+			请增加收货地址		
+		</div>
+		
+		<!--
+	    	作者：zltwht@vip.qq.com
+	    	时间：2017-03-29
+	    	描述：中间分割线
+	    -->
+		<div class="mallTops"></div>
+		<div class="stageSubmitSlide">
+			<div class="stageTop clearfix" >	
+				<div class="mallSubLeftBorder1 clearfix">	
+					<ul>
+						<li class="mui-table-view-cell">
+							<div class="goods_wid clearfix">
+								<div class="leftthum">		
+									<img  id="strGoodsURL" id="strGoodsURL"/>			
+								</div>		
+								<div class="rightContent">			
+									<div class="beforeTitle" id="strGoodsTitle"></div>
+									<p id="specValue"></p>
+									<div class="orderMoney">
+										<span class="subOrderMoney" id="strAmountOne"></span>
+										<span class="ordernum" id="strGoodsAmount"></span>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="mui-table-view-cell">
+							<div class="goods_wid clearfix">
+								<div class="leftthum">		
+									<img  id="strGoodsURL" id="strGoodsURL"/>			
+								</div>		
+								<div class="rightContent">			
+									<div class="beforeTitle" id="strGoodsTitle"></div>
+									<p id="specValue"></p>
+									<div class="orderMoney">
+										<span class="subOrderMoney" id="strAmountOne"></span>
+										<span class="ordernum" id="strGoodsAmount"></span>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+					
+				</div>
+				
+				<ul class="last-item-no-border">
+			        <li class="mui-table-view-cell">
+		                <div class="own-list-label">支付方式</div>
+		                <div class="pay-type-content">账户余额</div>
+			        </li>
+			        <li class="mui-table-view-cell">
+		                <div class="own-list-label">优惠</div>
+		                <div class="discounts-content">-￥123.00</div>
+			        </li>
+			        <li class="mui-table-view-cell">
+		                <div class="own-list-label">运费</div>
+		                <div class="freight-charge">20.00</div>
+			        </li>
+			    </ul>
+			
+				<div class="mjleave">
+					<div class="buyerMessageHr clearfix">
+						<div class="detailName">备注：</div>	
+					 	<textarea class="leaveTextArea" onkeyup="MaxMe(this)" id="strBuyerMessage"  placeholder="请填写备注留言"  style="overflow: hidden"></textarea>
+					</div>		
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 底部确定按钮条 -->
+	<div class="detailFootBottom">
+		<div class="allSumPayID paysWidth clearfix">
+			<div class="sfkMoney">需支付：<span id="paymentAmount"></span></div>
+		</div>
+		<div class="mailDetailBotton" id="doPay">提交订单</div>
+	</div>
+	
+	<!-- 支付确认弹出框 -->
+	<div class="black-bg"></div>
+	<div class="confirm-modal">
+		<div class="confirm-title">立即支付</div>
+		<div class="confirm-content">
+			<ul>
+				<li>
+					<p>支付方式：</p>
+					<p>账户余额</p>
+				</li>
+				<li>
+					<p>支付金额：</p>
+					<p>￥3298.00</p>
+				</li>
+			</ul>
+		</div>
+		<div class="confirm-footer">
+			<p>取消</p>
+			<p>确认</p>
+		</div>
+	</div>
+	
+</body>
+<script type="text/javascript" src="../common/js/include.js" level="1"></script>
+<script type="text/javascript" src="addOrder.js"></script>
+</html>
