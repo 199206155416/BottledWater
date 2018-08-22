@@ -1,11 +1,12 @@
 mui.init({
 	swipeBack: false
 });
-
+var parentWebView;
+var touxiangimg;
+var logoutBtn;
+var trueimg;
+var touxiangword;
 mui.plusReady(function() {
-	// 注册事件
-	addListevent();
-
 	// parentWebView = plus.webview.currentWebview().parent();
 	// touxiangimg = document.getElementById('touxiangimg');
 	// logoutBtn = document.getElementById('logoutBtn');
@@ -17,7 +18,7 @@ mui.plusReady(function() {
 	// touxiangimg.style.display = 'inline'
 	// touxiangword.style.color = 'indianred'
 	// 	//注册列表的点击事件
-	
+	// addListevent();
 	// //点击头像事件
 	// addHeadevent();
 	// //接收登录成功事件
@@ -72,15 +73,24 @@ mui.plusReady(function() {
 
 //注册列表的点击事件
 function addListevent() {
-	$("#safetyCenterList").on('click', 'li', function() {
-		var id = $(this).attr("id");
+	$("#mineHandleList").on('click', 'li', function() {
+		var id = $(this).id;
 		
 		var aniShow = getaniShow();
-		
+		//检测已经存在sessionkey否者运行下面的登陆代码
+		if (localStorage.getItem('mobile') && localStorage.getItem('id')) {} else {
+			href = "login/login.html";
+			id = "login/login.html";
+			aniShow = 'slide-in-bottom';
+		}
+		if (id == 'changeaddress') {
+			isBars = true;
+			barsIcon = 'mui-icon iconfont icon-tianjia';
+		}
 		pushWebView({
 			webType: 'newWebview_First',
 			id: id,
-			href: id,
+			href: href,
 			aniShow: aniShow,
 			extendOptions: {}
 		})

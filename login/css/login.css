@@ -39,7 +39,9 @@
 .mui-btn-block {
     font-size: .3rem;
     line-height: 2.2em;
+    color: #fff;
     padding: .1rem 0;
     border-radius: .12rem;
     background: #60a3fb;
+    border: none;
 }

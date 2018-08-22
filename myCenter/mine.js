@@ -63,7 +63,7 @@ function addListevent() {
 		
 		var aniShow = getaniShow();
 		//检测已经存在sessionkey否者运行下面的登陆代码
-		if (localStorage.getItem('mobile') && localStorage.getItem('id')) {} else {
+		if (localStorage.getItem('userMobile') && localStorage.getItem('userId')) {} else {
 			id = "login/login.html";
 			aniShow = 'slide-in-bottom';
 		}
@@ -81,8 +81,9 @@ function addListevent() {
 	});
 
 	$("#messageBtn").on("click", function(){
+		var aniShow = getaniShow();
 		//检测已经存在sessionkey否者运行下面的登陆代码
-		if (localStorage.getItem('mobile') && localStorage.getItem('id')) {} else {
+		if (localStorage.getItem('userMobile') && localStorage.getItem('userId')) {} else {
 			id = "login/login.html";
 			aniShow = 'slide-in-bottom';
 		}

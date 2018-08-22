@@ -44,7 +44,11 @@
 			"myCenter/more.html",
 			"myCenter/feedback.html",
 			"appCategory/category.html",
-			"appMall/addOrder.html"
+			"appMall/addOrder.html",
+			"myCenter/couponList.html",
+			"myCenter/message.html",
+			"myCenter/myBucket.html",
+			"login/changePayPassword.html"
 		]
 	},
 	"mallCategory/category.html": {

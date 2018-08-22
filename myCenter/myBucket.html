@@ -4,33 +4,35 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0 , maximum-scale=1.0, user-scalable=0">
 	<meta name="format-detection" content="telephone=no">
-	<title>安全中心</title>
+	<title>我的水桶</title>
 	<link rel="stylesheet" href="../common/css/mui.min.css"/>
 	<link rel="stylesheet" href="../common/css/public.css">
-	<link rel="stylesheet" href="css/safetyCenter.css" />
+	<link rel="stylesheet" href="css/myBucket.css" />
 	<script src="../common/js/remScale.js"></script>
 </head>
 <body>
 	<header class="mui-bar mui-bar-nav">
 	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-	    <h1 class="mui-title">安全中心</h1>
+	    <h1 class="mui-title">我的水桶</h1>
 	</header>
 	<!-- container -->
 	<div class="mui-content">
-	    <ul class="mui-table-view" id="safetyCenterList">
-            <li class="mui-table-view-cell" id="login/changePayPassword.html">
-                <a class="mui-navigate-right">
-                   	修改支付密码
-                </a>
+	    <ul class="mui-table-view">
+            <li class="mui-table-view-cell">
+                <div>水桶个数：</div>
+                <div>4桶</div>
             </li>
             <li class="mui-table-view-cell">
-                <a class="mui-navigate-right">
-                    修改登陆密码
-                </a>
+                <div>可退金额：</div>
+                <div>￥45.00</div>
             </li>
         </ul>
 	</div>
+
+	<div class="mui-button-row" style="margin: 1rem .75rem 0 .75rem;padding: 0;">
+		<button id="loginBtn" type="button" class="mui-btn mui-btn-block own-btn">退桶</button>
+	</div>
 </body>
 <script src="../common/js/include.js" level="1"></script>
-<script src="safetyCenter.js"></script>
+<script src="myBucket.js"></script>
 </html>

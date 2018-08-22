@@ -31,15 +31,27 @@ body{
 
 
 /* 商品列表 */
+.activity-img{
+	padding: .2rem;
+	background: #fff;
+}
+.activity-img img{
+	width: 7.1rem;
+	height: 2.5rem;
+	border-radius: .12rem;
+}
 .goods-list{
 	display: flex;
 	display: -webkit-flex;
-	flex-wrap: wrap;
-	-webkit-flex-wrap: wrap;
+	flex-wrap: nowrap;
+	-webkit-flex-wrap: nowrap;
 	background: #fff;
 	position: relative;
+	padding: 0 .3rem;
+	overflow-x: scroll;
+	overflow-y: hidden;
 }
-.goods-list:before{
+/*.goods-list:before{
 	position: absolute;
 	bottom: 0;
     width: 100%;
@@ -56,15 +68,19 @@ body{
     content: '';
     background-color: #fff;
     z-index: 10;
-}
+}*/
+
 .goods-item{
-	width: 50%;
-	padding: .3rem;
+	width: 2rem;
+	box-sizing: content-box;
+	flex-shrink: 0;
+	-webkit-flex-shrink: 0;
+	padding: 0 .3rem .2rem 0;
 }
 .goods-item-wrap{
 	position: relative;
 }
-.goods-item-wrap:before{
+/*.goods-item-wrap:before{
 	position: absolute;
 	top: 0;
     bottom: 0;
@@ -86,4 +102,27 @@ body{
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: #ccc;
+}*/
+.goods-img{
+	padding-bottom: .2rem;
+}
+.goods-name{
+	font-size: .26rem;
+	line-height: .36rem;
+	color: #444;
+	height: .72rem;
+	overflow: hidden;
+	margin-bottom: .24rem;
+}
+.goods-slogn{
+	font-size: .26rem;
+	line-height: .36rem;
+	color: #666;
+	height: .36rem;
+	overflow: hidden;
+}
+.goods-price{
+	font-size: .26rem;
+	line-height: .36rem;
+	color: #ff2a2a;
 }

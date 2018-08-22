@@ -4,9 +4,10 @@ mui.init({
 });
 
 mui.plusReady(function() {
-
 	// 查询收货地址
 	queryAddressList();
+	// 绑定事件
+	bindEvent();
 
 	// account = document.querySelector('input[type="text"]');
 	// psd = document.querySelector('input[type="password"]');
@@ -68,32 +69,56 @@ mui.plusReady(function() {
 });
 
 /**
+ * 事件绑定
+ * @author xuezhenxiang
+ */
+function bindEvent(){
+	$("#addAddressButton").on("click", function(){
+		pushWebView({
+			webType: 'newWebview_First',
+			id: 'appAddress/editAddress.html',
+			href: 'appAddress/editAddress.html',
+			aniShow: getaniShow(),
+			title: "添加地址",
+			isBars: false,
+			barsIcon: '',
+			extendOptions: {}
+		})
+	});
+};
+
+/**
  * 查询收货地址
  * @author xuezhenxiang
  */
 function queryAddressList(){
-	for(var i = 0, len = 5; i < len; i++){
-		var addressTemplate = $("#defaultAdd").html();
+	var userId = localStorage.getItem("userId"); // 用户id
 
-		var address = $(addressTemplate);
+	$.ajax({
+		url: prefix + "/address/list?strUserId=" + userId,
+		type: 'GET',
+		dataType: "json",
+		success: function(res){
+			// 打印请求报错日志
+			ajaxLog(res);
 
-		;(function(){
-			address.on("click", function(){
-				pushWebView({
-					webType: 'newWebview_First',
-					id: 'appAddress/editAddress.html',
-					href: 'appAddress/editAddress.html',
-					aniShow: getaniShow(),
-					title: "注册",
-					isBars: false,
-					barsIcon: '',
-					extendOptions: {}
-				})
-			})
-		})();
+			if(res.resCode == 0){
+				var result = res.result;
 
-		$("#showArea").append(address);
-	}
+				for(var i = 0, len = result.length; i < len; i++){
+					var addressTemplate = $("#defaultAdd").html();
+
+					var address = $(addressTemplate);
+
+					;(function(){
+						address.on("click", function(){
+							
+						})
+					})();
+
+					$("#showArea").append(address);
+				}
+			}
+		}
+	});
 };
-
-queryAddressList();

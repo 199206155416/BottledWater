@@ -3,10 +3,10 @@
 	own.prefix = 'http://47.93.61.246/api/';
 
 	// 接口请求打印日志
-	own.ajaxLog = function(e){
-		console.log(e);
-		if(e.resCode != 0){
-			mui.toast(e.result);
+	own.ajaxLog = function(res){
+		console.log(JSON.stringify(res));
+		if(res.resCode != 0){
+			mui.toast(res.result);
 		}
 	};
 

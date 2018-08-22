@@ -1,11 +1,16 @@
+var cityPicker3 = null; // 三级联动选择器
+
 mui.init({
 	swipeBack: true
 });
 
 mui.plusReady(function() {
 
-	// 查询收货地址
-	// queryAddressList();
+	// 获取区数据
+	getLocations();
+
+	// 事件绑定
+	bindEvent();
 
 	// account = document.querySelector('input[type="text"]');
 	// psd = document.querySelector('input[type="password"]');
@@ -65,4 +70,72 @@ mui.plusReady(function() {
 	// 	})
 	// }, false);
 });
+
+function bindEvent(){
+
+	// 选择省市区
+	$("#showCityPicker3").on("click", function(){
+		cityPicker3.show(function(items) {
+			$("#strFullDistrictName").html(items[0].text + " " + items[1].text + " " + items[2].text);
+			//返回 false 可以阻止选择框的关闭
+			//return false;
+		});
+	});
+
+	// 提交地址表单
+	$("#btSave").on("click", function(){
+		var dataObj = {};
+		dataObj.strUserId = localStorage.getItem("strUserId"); // 用户id
+		dataObj.strReceiptUserName = $("#strReceiptUserName").val().trim() || ""; // 收货人姓名
+		dataObj.strReceiptMobile = $("#strReceiptMobile").val().trim() || ""; // 收货人电话
+		dataObj.strLocation = $("#strFullDistrictName").html().trim() || ""; // 所在区
+		dataObj.isDefault = $("#defaultAddress").is(":checked") ? 1 : 0; // 是否默认地址，0：不是，1：是
+		dataObj.strDetailaddress = $("#strDetailaddress").val().trim() || ""; // 详细地址
+		dataObj.strTag = $(".address-label:checked").val().trim() || ""; // 地址标签
+
+		$.ajax({
+			url: prefix + "/address/save",
+			type: 'POST',
+			data: dataObj,
+			dataType: "json",
+			success: function(res){
+				// 打印请求报错日志
+				ajaxLog(res);
+
+				if(res.resCode == 0){
+					mui.toast("地址添加成功");
+					var result = res.result;
+					
+				}
+			}
+		});
+	});
+};
+
+/**
+ * 获取区数据
+ * @author 薛振翔
+ */
+function getLocations(){
+	// $.ajax({
+	// 	url: prefix + "/sys/getLocations",
+	// 	type: 'GET',
+	// 	dataType: "json",
+	// 	success: function(res){
+	// 		// 打印请求报错日志
+	// 		ajaxLog(res);
+
+	// 		if(res.resCode == 0){
+	// 			var result = res.result;
+
+				
+	// 		}
+	// 	}
+	// });
+
+	cityPicker3 = new mui.PopPicker({
+		layer: 3
+	});
+	cityPicker3.setData(cityData3);
+};
 

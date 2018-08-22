@@ -1,0 +1,39 @@
+.mui-content{
+	background: url("../image/account@2x.png") no-repeat left top/ 100% auto;
+	height: 5.14rem;
+	display: flex;
+	display: -webkit-flex;
+	flex-direction: column;
+	-webkit-flex-direction: column;
+	align-items: center;
+	-webkit-align-items: center;
+	justify-content: center;
+	-webkit-justify-content: center;
+	position: relative;
+}
+.back{
+	position: absolute;
+	left: .3rem;
+	top: .3rem;
+	width: .16rem;
+	height: .3rem;
+}
+.account-charge-label{
+	font-size: .32rem;
+	line-height: .44rem;
+	color: #fff;
+	margin-bottom: .2rem;
+}
+.account-charge-price{
+	font-size: .9rem;
+	line-height: 1rem;
+	color: #fff;
+}
+.mui-btn-block{
+	font-size: .32rem;
+	line-height: .44rem;
+	color: #60a3fb;
+	border: 1px solid #60a3fb;
+	border-radius: 1rem;
+	padding: .22rem 0;
+}

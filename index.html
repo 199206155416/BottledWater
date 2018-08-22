@@ -3,14 +3,32 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-   	<title>E3-demo</title>
+   	<title>智慧订水</title>
    	<link rel="stylesheet" type="text/css" href="common/css/mui.min.css"/>
    	<link rel="stylesheet" type="text/css" href="common/css/public.css"/>
    	<link rel="stylesheet" type="text/css" href="common/css/iconfont.css"/>
    	<style type="text/css">
-		.own-active .own-icon,
-		.own-active .own-tab-label {
+	   	.mui-tab-label{
+	   		font-size: .22rem;
+	   	}
+	   	.own-icon{
+	   		margin: .1rem auto 0 auto;
+	   	}
+		.own-active .mui-tab-label {
 			color: #60a3fb;
+		}
+
+		.mui-tab-item .active-icon{
+			display: none;
+		}
+		.mui-tab-item .icon-img{
+			display: block;
+		}
+		.mui-tab-item.mui-active .active-icon{
+			display: block;
+		}
+		.mui-tab-item.mui-active .icon-img{
+			display: none;
 		}
    	</style>
    	<script type="text/javascript" src="./common/js/remScale.js"></script>
@@ -18,23 +36,31 @@
 <body>
 	<nav class="mui-bar mui-bar-tab">
 		<a class="mui-tab-item mui-active" href="appIndex/home.html">
-			<span class="mui-icon iconfont icon-home"></span>
+			<span class="own-icon">
+				<img class="icon-img" src="./common/image/shouye@2x.png" alt="">
+				<img class="active-icon" src="./common/image/shouyexuanzhong@2x.png" alt="">
+			</span>
 			<span class="mui-tab-label">首页</span>
 		</a>
 		<a class="mui-tab-item" href="appMall/index.html">
-			<span class="mui-icon iconfont icon-fenlei"></span>
+			<span class="own-icon">
+				<img class="icon-img" src="./common/image/shangcheng@2x.png" alt="">
+				<img class="active-icon" src="./common/image/shangcheng01@2x.png" alt="">
+			</span>
 			<span class="mui-tab-label">商城</span>
 		</a>
-		<a class="mui-tab-item" href="mallTicket/ticket.html">
-			<span class="mui-icon iconfont icon-xinyuandan"></span>
-			<span class="mui-tab-label">扫一扫</span>
-		</a>
 		<a class="mui-tab-item" href="appCart/cart.html">
-			<span class="mui-icon iconfont icon-cart"></span>
+			<span class="own-icon">
+				<img class="icon-img" src="./common/image/gouwuche@2x.png" alt="">
+				<img class="active-icon" src="./common/image/gouwuche01@2x.png" alt="">
+			</span>
 			<span class="mui-tab-label">购物车</span>
 		</a>
 		<a class="mui-tab-item" href="myCenter/mine.html">
-			<span class="mui-icon iconfont icon-wode"></span>
+			<span class="own-icon">
+				<img class="icon-img" src="./common/image/wode@2x.png" alt="">
+				<img class="active-icon" src="./common/image/wode01@2x.png" alt="">
+			</span>
 			<span class="mui-tab-label">我的</span>
 		</a>
 	</nav>
@@ -54,7 +80,6 @@
 		var barItemArray = [
 			'appIndex/home.html',
 			'appMall/index.html',
-			'mallTicket/ticket.html',
 			'appCart/cart.html',
 			'myCenter/mine.html'
 		];
@@ -63,7 +88,8 @@
 			// navTitle = document.querySelector('.mui-title');
 			mainWebview = plus.webview.currentWebview();
 			
-			plus.navigator.setStatusBarBackground( "#41cea9" );
+			// 设置状态栏颜色
+			plus.navigator.setStatusBarBackground( "#333" );
 			
 			//设置只支持竖屏幕显示
 			plus.screen.lockOrientation("portrait-primary");
@@ -119,7 +145,7 @@
 			mui('.mui-bar-tab').on('tap','.mui-tab-item',function(){
 				var baritem = this;
 				var baritemurl = baritem.getAttribute('href'); 
-//				indexof()如果为false返回－1所以前面加上~
+				// indexof()如果为false返回－1所以前面加上~
 				if (!~curBarItemWebview.getURL().indexOf(baritemurl)) {
 					for (var i = 0; i < barItemArray.length; i++) {
 						if (barItemArray[i] == baritemurl) {
@@ -163,8 +189,6 @@
 				});
 			}
 		}
-		
-		
 	</script>
 </body>
 </html>

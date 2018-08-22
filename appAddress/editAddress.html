@@ -5,10 +5,7 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0"/>
 	<meta name="format-detection" content="telephone=no">
 	<link rel="stylesheet" href="../common/css/mui.min.css">
-	<!--App自定义的css-->
-	<link href="../mallIndex/css/muiPicker/mui.picker.css" rel="stylesheet" />
-	<link href="../mallIndex/css/muiPicker/mui.poppicker.css" rel="stylesheet" />
- 	<link rel="stylesheet" type="text/css" href="../common/css/app_popup.css"/>
+	<link rel="stylesheet" href="../common/css/mui.picker.min.css">
 	<link rel="stylesheet" href="../common/css/public.css">
 	<link rel="stylesheet" href="css/editAddress.css">
 	<script src="../common/js/remScale.js"></script>
@@ -25,7 +22,7 @@
 				<div class="liPaddingLeft">
 					<div class="messageName pubHeight lineCenter">收货人姓名：</div>
 					<div class="addRessInput pubHeight lineCenter">
-						<input type="text"  id="strConsigneeName" maxlength="10"  />
+						<input type="text"  id="strReceiptUserName" maxlength="10"  />
 					</div>
 				</div>
 			</li>
@@ -33,7 +30,7 @@
 				<div class="liPaddingLeft">
 					<div class="messageName pubHeight lineCenter">手机号码：</div>
 					<div class="addRessInput pubHeight lineCenter">
-						<input type="tel" id="strMobile" maxlength="11" />
+						<input type="tel" id="strReceiptMobile" maxlength="11" />
 					</div>
 				</div>
 			</li>
@@ -47,21 +44,46 @@
 					</div>
 				</div>
 			</li>
-			<!-- <li id='showUserPicker'>		
-				<div class="liPaddingLeft">
-					<div class="choose">请选择</div>
-					<div class="messageName pubHeight lineCenter">街道地址：</div>
-					<div class="textCentet clearfix">
-						<div class="paddingText clearfix" id="strFullStreetName" strRoadCode="">
-						</div>
-					</div>
-				</div>
-			</li> -->			
 			<li class="textEralHeight">		
 				<div class="liPaddingLeft">
 					<div class="messageName textEralHeight areaPaddingtop">详细地址：</div>
 					<div class="addRessInput textEralHeight lineCenter">
-						<textarea rows="" id="strAdress"   maxlength="100"  cols=""></textarea>						
+						<textarea rows="" id="strDetailaddress" maxlength="100" cols=""></textarea>
+					</div>					
+				</div>
+			</li>
+			<li>		
+				<div class="liPaddingLeft">
+					<div class="messageName pubHeight lineCenter" style="float: none;">标签：</div>
+					<div class="label-list clearfix">
+						<div>
+							<input type="radio" name="addressLabel" id="homeAddress" class="address-label" checked="" value="家" />
+							<label for="homeAddress">家</label>
+						</div>
+						<div>
+							<input type="radio" name="addressLabel" id="companyAddress" class="address-label" value="公司"/>
+							<label for="companyAddress">公司</label>
+						</div>
+						<div>
+							<input type="radio" name="addressLabel" id="schoolAddress" class="address-label" value="学校"/>
+							<label for="schoolAddress">学校</label>
+						</div>
+						
+						<!-- <div class="input-address-label">
+							<input type="text" placeholder="请输入标签名称">
+						</div> -->
+					</div>
+				</div>
+			</li>
+
+			<li>		
+				<div class="liPaddingLeft ">
+					<div class="messageName areaPaddingtop">设置默认：</div>
+					<div class="switch-default">
+						<input type="checkbox" id="defaultAddress" checked="">
+						<label for="defaultAddress">
+							<span></span>
+						</label>
 					</div>					
 				</div>
 			</li>
@@ -69,12 +91,8 @@
 	</div>
 	<div class="ressSubmit" id="btSave">确认</div>
 </body>
-<script type="text/javascript" src="../common/js/includeCommon.js" level="1"></script>	
-<script src="../mallIndex/js/muiPicker/addressArea.js"></script>
-<script type="text/javascript" src="../common/js/commonJS/dafy_popup.js"></script>	
-<script src="../mallIndex/js/muiPicker/mui.js"></script>
-<script src="../mallIndex/js/muiPicker/mui.picker.all.js"></script>
-<script src="../mallIndex/js/muiPicker/mui.poppicker.js"></script>
-<script type="text/javascript" src="addressEdit.js"></script>
-<script type="text/javascript" src="streetCommon.js"></script>
+<script type="text/javascript" src="../common/js/include.js" level="1"></script>	
+<script type="text/javascript" src="../common/js/city.data-3.js" level="1"></script>
+<script src="../common/js/mui.picker.min.js"></script>
+<script type="text/javascript" src="editAddress.js"></script>
 </html>

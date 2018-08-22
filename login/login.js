@@ -131,15 +131,14 @@ function login(){
 
 				if(e.resCode == 0){
 					var result = e.result;
-					console.log(JSON.stringify(e.result))
-					// 存储id
-					setStringValue("id", result.id);
+					// 存储用户id
+					setStringValue("userId", result.id);
 					// 存储电话
-					setStringValue("mobile", result.mobile);
+					setStringValue("userMobile", result.mobile);
 					// 存储姓名
-					setStringValue("roleNames", result.roleNames);
+					setStringValue("userRoleNames", result.roleNames);
 					// 存储启用状态
-					setStringValue("loginFlag", result.loginFlag);
+					setStringValue("userLoginFlag", result.loginFlag);
 
 				}
 			}
