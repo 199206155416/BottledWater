@@ -20,6 +20,9 @@
 		<ul id="showArea">
 			<!-- 显示收货地址列表 -->
 		</ul>
+		<div class="blank-page" id="blankPage" style="display: none;">
+			<img src="../common/image/blank.png" alt="">
+		</div>
 	</div>
 	<!-- 收货地址模板开始 -->
 	<ul id="defaultAdd" style="display: none;">
@@ -27,25 +30,25 @@
 			<div class="receiveInfo">
 				<div>
 					<lable class="fontInfo">收货人：</lable>
-					<span>#strConsigneeName#</span>
+					<span>#strReceiptUserName#</span>
 				</div>
 				<div>
 					<lable class="fontInfo">电话：</lable>
-					<span>#strMobile#</span>
+					<span>#strReceiptMobile#</span>
 				</div>
 				<div>
 					<lable class="fontInfo font_left">地址：</lable>
 					<div class="font_right">
-						<p>#strFullDistrictName#</p>
+						<p>#strLocation##strDetailaddress#</p>
 					</div>
 				</div>
 			</div>
 			<div class="editInfo">
-				<span class="default1 defaultAddress#imgUrl#">默认地址</span>
+				<span class="default1 #isDefault#">默认地址</span>
 				<span class="delAddress">删除</span>
-				<span class="editAddress">编辑</span>						
+				<span class="editAddress">编辑</span>	
 			</div>	
-			
+			<div class="address-label">#strTag#</div>
 		</li>
 	</ul>
 	<!-- 收货地址模板结束 -->

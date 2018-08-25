@@ -1,10 +1,20 @@
+var currentWebview; // 当前页面
 var cityPicker3 = null; // 三级联动选择器
+var id = null; // 地址id(id不为0时编辑地址否则添加新地址)
 
 mui.init({
 	swipeBack: true
 });
 
 mui.plusReady(function() {
+	currentWebview = plus.webview.currentWebview();
+
+	addressId = currentWebview.addressId;
+	console.log(addressId);
+	// 如果id存在查询地址信息
+	if(addressId){
+		getAddressById();
+	}
 
 	// 获取区数据
 	getLocations();
@@ -85,13 +95,15 @@ function bindEvent(){
 	// 提交地址表单
 	$("#btSave").on("click", function(){
 		var dataObj = {};
-		dataObj.strUserId = localStorage.getItem("strUserId"); // 用户id
+		dataObj.strUserId = localStorage.getItem("userId"); // 用户id
 		dataObj.strReceiptUserName = $("#strReceiptUserName").val().trim() || ""; // 收货人姓名
 		dataObj.strReceiptMobile = $("#strReceiptMobile").val().trim() || ""; // 收货人电话
 		dataObj.strLocation = $("#strFullDistrictName").html().trim() || ""; // 所在区
 		dataObj.isDefault = $("#defaultAddress").is(":checked") ? 1 : 0; // 是否默认地址，0：不是，1：是
 		dataObj.strDetailaddress = $("#strDetailaddress").val().trim() || ""; // 详细地址
 		dataObj.strTag = $(".address-label:checked").val().trim() || ""; // 地址标签
+
+		console.log("strUserId", dataObj.strUserId)
 
 		$.ajax({
 			url: prefix + "/address/save",
@@ -139,3 +151,10 @@ function getLocations(){
 	cityPicker3.setData(cityData3);
 };
 
+/**
+ * 获取地址详情
+ * @author xuezhenxiang
+ */
+function getAddressById(){
+
+};

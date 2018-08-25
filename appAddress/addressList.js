@@ -9,6 +9,7 @@ mui.plusReady(function() {
 	// 绑定事件
 	bindEvent();
 
+
 	// account = document.querySelector('input[type="text"]');
 	// psd = document.querySelector('input[type="password"]');
 	// login = document.getElementById('loginBtn');
@@ -105,18 +106,114 @@ function queryAddressList(){
 			if(res.resCode == 0){
 				var result = res.result;
 
+				if(result.length == 0){
+					$("#blankPage").show();
+					return;
+				}
+				$("#blankPage").hide();
+
 				for(var i = 0, len = result.length; i < len; i++){
+					var id = result[i].id; // 地址id
+					var strReceiptUserName = result[i].strReceiptUserName; // 收货人姓名
+					var strReceiptMobile = result[i].strReceiptMobile; // 收货人电话
+					var strLocation = result[i].strLocation; // 收货人省市区
+					var strDetailaddress = result[i].strDetailaddress; // 收货人详细地址
+					var strTag = result[i].strTag; // 收货人地址标签
+					var isDefault = result[i].isDefault; // 是否默认地址，0：不是，1：是
 					var addressTemplate = $("#defaultAdd").html();
+
+					addressTemplate = addressTemplate.replace("#strReceiptUserName#", strReceiptUserName);
+					addressTemplate = addressTemplate.replace("#strReceiptMobile#", strReceiptMobile);
+					addressTemplate = addressTemplate.replace("#strLocation#", strLocation);
+					addressTemplate = addressTemplate.replace("#strDetailaddress#", strDetailaddress);
+					addressTemplate = addressTemplate.replace("#strTag#", strTag);
+					addressTemplate = addressTemplate.replace("#isDefault#", isDefault == 1 ? "defaultAddress" : "");
 
 					var address = $(addressTemplate);
 
-					;(function(){
-						address.on("click", function(){
-							
-						})
-					})();
+					;(function(id, address, isDefault){
+						// 删除地址
+						address.find(".delAddress").on("click", function(){
+							var that = address;
+							var btnArray = ['否', '是'];
+							mui.confirm('您确定要删除当前地址吗？', '', btnArray, function(e) {
+								if (e.index == 1) {
+									deleteAddress(that, id);
+								}
+							}, "div")
+						});
+
+						// 编辑地址
+						address.find(".editAddress").on("click", function(){
+							pushWebView({
+								webType: 'newWebview_First',
+								id: 'appAddress/editAddress.html',
+								href: 'appAddress/editAddress.html',
+								aniShow: getaniShow(),
+								title: "添加地址",
+								isBars: false,
+								barsIcon: '',
+								extendOptions: {
+									addressId: id
+								}
+							})
+						});
+
+						// 设置默认
+						address.find(".default1").on("click", function(){
+							if(isDefault == 1) return;
+							var userId = localStorage.getItem("userId"); // 用户id
+							var that = this;
+							$.ajax({
+								url: prefix + "/address/setDefault",
+								type: 'POST',
+								data: {
+									id: id,
+									strUserId: userId
+								},
+								dataType: "json",
+								success: function(res){
+									if(res.resCode == 0){
+										$(that)
+											.addClass("defaultAddress")
+											.parents(".addressDetailInfo")
+											.siblings()
+											.find(".default1")
+											.removeClass("defaultAddress");
+									}
+								}
+							});
+						});
+					})(id, address);
 
 					$("#showArea").append(address);
+				}
+			}
+		}
+	});
+};
+
+/**
+ * 删除地址
+ * @author xuezhenxiang
+ */
+function deleteAddress(that, id){
+	if(!id) return;
+
+	$.ajax({
+		url: prefix + "/address/delete",
+		type: 'POST',
+		data: {
+			id: id
+		},
+		dataType: "json",
+		success: function(res){
+			if(res.resCode == 0){
+				mui.toast(res.result);
+				that.remove();
+
+				if($("#showArea li").length == 0){
+					$("#blankPage").show();
 				}
 			}
 		}
