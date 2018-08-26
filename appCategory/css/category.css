@@ -1,3 +1,13 @@
+
+.mui-fullscreen{
+	position: fixed;
+}
+.mui-col-xs-4{
+	width: 2rem;
+}
+.mui-col-xs-8{
+	width: 5.5rem;
+}
 .mui-col-xs-4,
 .mui-col-xs-8 {
 	height: 100%;
@@ -16,10 +26,6 @@
 	vertical-align: middle;
 }
 
-.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
-	background-color: #F9F9F9;
-	color: #41cea9;
-}
 
 .mui-table-view-cell {
 	padding: 8px;
@@ -32,11 +38,95 @@
 	height: 0px;
 }
 
-.mui-segmented-control.mui-segmented-control-inverted.mui-segmented-control-vertical .mui-control-item,
-.mui-segmented-control.mui-segmented-control-inverted.mui-segmented-control-vertical .mui-control-item.mui-active {
+.mui-segmented-control.mui-segmented-control-inverted.mui-segmented-control-vertical .mui-control-item{
 	border-bottom: none;
+	font-size: .3rem;
+	line-height: 1rem;
+	color: #999;
+	position: relative;
 }
 
 .mui-control-content {
 	font-size: 0.9em;
+}
+
+/* left */
+.mui-control-item:after{
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 1px;
+	transform: scaleY(.5);
+	-webkit-transform: scaleY(.5);	
+	background: #ccc;
+}
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+	border-bottom: none !important;
+	background-color: #F9F9F9;
+	color: #60a3fb;
+}
+
+
+/* 二级分类 */
+.advertiseImg {
+	width: 5.2rem;
+	margin: .2rem .2rem 0 .1rem;
+}
+.advertiseImg img {
+	width: 5.2rem;
+	height: 2rem;
+	border-radius: .1rem;
+}
+.brandTitle,.categoryTitle {
+	height: .68rem;
+	line-height: .68rem;
+	font-size: .28rem;
+	color: #444444;
+	padding-left: .2rem;
+}
+.brandList {
+	width: 5.2rem;
+	margin: 0 .2rem 0 .1rem;
+	border-radius: 0.1rem;
+	background: #ffffff;
+	padding: .2rem 0 .12rem 0;
+}
+.categoryListID {
+	width: 5.2rem;
+	margin: 0 .2rem 0 .1rem;
+	border-radius: 0.1rem;
+	background: #ffffff;
+	padding-bottom: .12rem;
+}
+.brandList li {
+    width: 1.71rem;
+    height: 1.54rem;
+    position: relative;
+    float: left;
+}
+.brandImg,.categoryImg {
+    text-align: center;
+}
+.brandImg img {
+    width: 1.53rem;
+    height: 0.8rem;
+    margin: 0 auto 0.02rem;
+}
+.categoryImg img {
+	width: 1.4rem;
+	height: 1.4rem;
+	margin: .3rem auto .12rem;
+}
+.brandSubTitle, .categorySubTitle {
+    text-align: center;
+    font-size: 0.24rem;
+    color: #666666;0
+}
+.categoryListID li {
+    width: 1.71rem;
+    height: 2.34rem;
+    position: relative;
+    float: left;
 }

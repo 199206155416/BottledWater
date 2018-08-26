@@ -14,6 +14,8 @@ body{
 	height: .1rem;
 	background: #a1c7f8;
 	border-radius: .02rem;
+	box-shadow: 0 0 1px rgba(255,255,255,.1);
+	-webkit-box-shadow: 0 0 1px rgba(255,255,255,.1);
 }
 .mui-slider-indicator .mui-active.mui-indicator {
     background: #60a3fb;
@@ -111,6 +113,12 @@ body{
 }
 .goods-img{
 	padding: 0 .3rem .3rem .3rem;
+	height: 2.7rem;
+	width: 3rem;
+}
+.goods-img img{
+	width: 100%;
+	height: 100%;
 }
 .goods-name{
 	font-size: .26rem;

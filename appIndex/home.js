@@ -132,7 +132,7 @@ function getGoodsList(){
 
 						var goods = $(goodsTemplate);
 						;(function(){
-							goods.on("tap", function(){
+							goods.on("click", function(){
 								var goodsId = this.getAttribute('id');
 								var extendOptions = {
 									goodsId: goodsId

@@ -1,82 +1,138 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>E3</title>
-    <link rel="stylesheet" type="text/css" href="../common/css/mui.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../common/css/iconfont.css"/>
-    <link rel="stylesheet" type="text/css" href="../common/css/public.css"/>
-   	<link rel="stylesheet" href="./css/cart.css" />
-   	<script src="../common/js/remScale.js"></script>
-</head>
-<body>
 
-	<div class="mui-content">
-		<div class="need-login" style="text-align: center; margin-top: 50px;display: none;">
-			<span style="color: gray; font-size: 0.9em;">你还没有登录</span>
-			<br />
-			<button type="button" class="mui-btn own-btn-green" style="margin-top: 10px; padding: 5px 20px;">请登录</button>
-		</div>
-		<div >
-		<div class="login">
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell mui-transitioning">
-					<div class="mui-slider-right mui-disabled">
-						<a class="mui-btn mui-btn-red" style="transform: translate(0px, 0px);">删除</a>
-					</div>
-					<div class="mui-slider-handle" style="transform: translate(0px, 0px);">
-						<div class="goods-wrap">
-							<div class="is-checked-goods">
-								<img src="./image/ic_yuanquan_nor@2x.png" alt="">
-								<img src="./image/ic_yuanquan_press@2x.png" style="display: none;" alt="">
-							</div>
-							<div class="goods-img"><img src="../appMall/image/2.jpg" alt=""></div>
-							<div class="goods-info">
-								<p class="goods-name">农夫山泉 桶装水 饮用天然水 （2桶起订）</p>
-								<p class="goods-slogn">农夫山泉 桶装水 饮用天然水 （2桶起订）</p>
-								<p class="goods-price">￥4900.00</p>
-							</div>
-						</div>
-						<div class="count-wrap">
-							<div class="minus">-</div>
-							<div class="count">1</div>
-							<div class="add">+</div>
-						</div>
-					</div>
-				</li>
-				<li class="mui-table-view-cell mui-transitioning">
-					<div class="mui-slider-right mui-disabled">
-						<a class="mui-btn mui-btn-red" style="transform: translate(0px, 0px);">删除</a>
-					</div>
-					<div class="mui-slider-handle" style="transform: translate(0px, 0px);">
-						<div class="goods-wrap">
-							<div class="is-checked-goods">
-								<img src="./image/ic_yuanquan_nor@2x.png" alt="">
-								<img src="./image/ic_yuanquan_press@2x.png" style="display: none;" alt="">
-							</div>
-							<div class="goods-img"><img src="../appMall/image/2.jpg" alt=""></div>
-							<div class="goods-info">
-								<p class="goods-name">农夫山泉 桶装水 饮用天然水 （2桶起订）</p>
-								<p class="goods-slogn">农夫山泉 桶装水 饮用天然水 （2桶起订）</p>
-								<p class="goods-price">￥4900.00</p>
-							</div>
-						</div>
-						<div class="count-wrap">
-							<div class="minus">-</div>
-							<div class="count">1</div>
-							<div class="add">+</div>
-						</div>
-					</div>
-				</li>
-			</ul>
-		</div>
-		<div class="downDiv">
-			
-		</div>
-	</div>
-	
-	<script src="../common/js/include.js" charset="UTF-8" level="1"></script>
-	<script src="cart.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0" />
+    <meta name="format-detection" content="telephone=no">
+    <link type="text/css" href="../common/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../common/css/public.css">
+    <link rel="stylesheet" href="css/cart.css?v=20180510">
+    <script src="../common/js/remScale.js"></script>
+    <title>购物车</title>
+</head>
+
+<body>
+	<header class="mui-bar mui-bar-nav">
+	    <h1 class="mui-title">购物车</h1>
+	    <a class="mui-action-back mui-icon mui-icon-right-nav mui-pull-right" style="font-size: .28rem; line-height: .88rem; padding: 0 10px;">编辑</a>
+	</header>
+    
+    <div id="tempmb" style="display: none">
+        <li class="mui-table-view-cell mui_list mui-transitioning" lGoodsId="#lGoodsId#" lGoodsSKUId="#lGoodsSKUId#" lId="#lId#" id="shoppingList_#lGoodsIdLid#">
+            <div onclick="deleteitem(this,event)" class="mui-slider-right mui-disabled">
+                <a class="mui-btn mui-btn-red">删除</a>
+            </div>
+            <div class="shopListCont mui-slider-handle mui-table">
+                <div class="pitchImgleft">
+                    <img class="shopChecked" src="#pitchImg#" ntype="#ntype#" />
+                </div>
+                <div class="goodsImgleft">
+                    <img class="thumbImg" src="#thumbnailImg#" />
+                    <div class="lootAll">已抢光</div>
+                </div>
+                <div class="goodsContainer">
+                    <div class="goodsExplain">
+                        #strGoodsTitle#
+                    </div>
+                    <div class="goodsSKUName">
+                        <img src="http://img.dafy.com/mall/mallIndex/img/20180511/shopDown.png" class="skuRightImg" />
+                        <span class="goodsSpanSkuName">#strSKUItemValues#</span>
+                    </div>
+                    <div class="goodsSKUnPrice" price="#nPriceMinute#">￥#nPrice#</div>
+                    <div class="goodsNum">
+                        <div class="left">-</div>
+                        <div class="contentNum" goodsCount="#goodsLicount#" maxCount="#nMaxBuyCount#">#nCount#</div>
+                        <div class="right">+</div>
+                        <div class="insut">库存不足</div>
+                    </div>
+                    <div class="solded">已下架</div>
+                </div>
+                <div class="spxContainer" id="spx#lMainGoodsSKUId#" style="display: none">
+                </div>
+            </div>
+        </li>
+    </div>
+
+    <div id="spxGoodsTemp" style="display: none">
+        <div class="spxtitle" sPrice="#sPrice#" spxGoodsID="#lGoodsSPXSKUId#" lInsuranceCartId="#lInsuranceCartId#">
+            #spxstrGoodsTitle#
+        </div>
+        <div class="spxfmoney">￥#spxnPrice#</div>
+    </div>
+
+    <div id="appreItemTemplate" style="display: none;">
+        <span class="server_Grep" val="3" choose="1" stage="0" servecharge="0">#strScreenSkuName# |&nbsp¥ #nScreenPrice#</span>
+    </div>
+
+    <div id="shopPingNullTemp" style="display: none">
+        <div class="empty">
+            <img class="empty_img" src="http://img.dafy.com/mall/mallIndex/img/20180511/empty_img.png" />
+            <p>购物车空空如也...</p>
+            <div class="empty_con">
+                <div id="mallGoToIndex">返回首页</div>
+                <div id="mallGoToCollect">查看收藏</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="container">
+        <div class="shopList">
+            <ul id="shopList">
+            	<li class="mui-table-view-cell mui_list mui-transitioning" lGoodsId="#lGoodsId#" lGoodsSKUId="#lGoodsSKUId#" lId="#lId#" id="shoppingList_#lGoodsIdLid#">
+            <div onclick="deleteitem(this,event)" class="mui-slider-right mui-disabled">
+                <a class="mui-btn mui-btn-red">删除</a>
+            </div>
+            <div class="shopListCont mui-slider-handle mui-table">
+                <div class="pitchImgleft">
+                    <img class="shopChecked" src="#pitchImg#" ntype="#ntype#" />
+                </div>
+                <div class="goodsImgleft">
+                    <img class="thumbImg" src="#thumbnailImg#" />
+                    <div class="lootAll">已抢光</div>
+                </div>
+                <div class="goodsContainer">
+                    <div class="goodsExplain">
+                        #strGoodsTitle#
+                    </div>
+                    <div class="goodsSKUName">
+                        <img src="http://img.dafy.com/mall/mallIndex/img/20180511/shopDown.png" class="skuRightImg" />
+                        <span class="goodsSpanSkuName">#strSKUItemValues#</span>
+                    </div>
+                    <div class="goodsSKUnPrice" price="#nPriceMinute#">￥#nPrice#</div>
+                    <div class="goodsNum">
+                        <div class="left">-</div>
+                        <div class="contentNum" goodsCount="#goodsLicount#" maxCount="#nMaxBuyCount#">#nCount#</div>
+                        <div class="right">+</div>
+                        <div class="insut">库存不足</div>
+                    </div>
+                    <div class="solded">已下架</div>
+                </div>
+                <div class="spxContainer" id="spx#lMainGoodsSKUId#" style="display: none">
+                </div>
+            </div>
+        </li>
+            </ul>
+        </div>
+    </div>
+    <div class="shopBottomFixd">
+    	<div class="shop-bottom-wrap">
+    		<div class="pitchBottomImgleft">
+	            全选
+	        </div>
+	        <div class="pitchBottomPrice">
+	            <span class="priceName">合计:</span><span class="priceMoney"></span>
+	        </div>
+	        <div class="subGottom">
+	            <span id="toPayMent">结算(<span id="shopNumId">1</span>)</span>
+	            <span id="toPayDele" style="display: none">删除</span>
+	        </div>
+    	</div>
+        
+    </div>
+    <div class="bg_lay"></div>
+    <div class="bg_img"><img src="http://img.dafy.com/mall/mallIndex/img/20180517/load.png" /></div>
 </body>
+<script type="text/javascript" src="../common/js/include.js" level="1"></script>
+<script type="text/javascript" src="/cart.js"></script>
 </html>

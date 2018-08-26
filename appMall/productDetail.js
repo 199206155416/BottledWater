@@ -1,7 +1,10 @@
+var mallGoods = null;
+var attrMap = null;
 var currentWebview; // 当前子页面
 var paredntWebview; // 父页面
 var goodsId; // 商品id
 var buyNowFlag = 0; // buyNowFlag == 0 点击sku选择弹层确定按钮立即购买, buyNowFlag == 1 加入购物车
+
 
 mui.init({
 	swipeBack: false
@@ -42,11 +45,21 @@ function getGoodsDetail(){
 		url: prefix + "/goods/detail/" + goodsId,
 		type: "GET",
 		dataType: "json",
-		success: function(e){
-			ajaxLog(e);
-			if(e.resCode == 0){
-				var goods = e.result.mallGoods;
-				var attrMap = e.result.attrMap;
+		success: function(res){
+			ajaxLog(res);
+			if(res.resCode == 0){
+				var result = res.result;
+
+				mallGoods = {
+					strSkuName: result.mallGoods.strDefaultSkuName,
+					strIntroduce: result.mallGoods.strIntroduce,
+					nSkuPrice: result.mallGoods.defaultSkuPrice,
+					strGoodsImg: result.mallGoods.strDetailMainImg,
+					strDetailIcon: result.mallGoods.strDetailIcon,
+					nSaleNum: result.mallGoods.defaultSkuSaleNum
+				};
+
+				attrMap = result.attrMap;
 				setHtml();
 			}
 		}
@@ -56,24 +69,34 @@ function getGoodsDetail(){
 function setHtml() {
 	// 第一步设置第一个图片滑动
 	setSldiderHtml();
-	// //第二步设置商品名字价钱等
-	// setproductMessage();
-	// //设置颜色选择
-	// setChooseColor();
-	// //设置评价
-	// setevalute();
-	// //设置店铺
-	// setStore();
-	// //设置相试宝贝
-	// setGoodsLike();
+	// 第二步设置商品名字价钱等
+	setproductMessage();
+	// 设置sku选择
+	setChooseSku();
+	
 };
 
 /**
  * 设置图片轮播
  * @author xuezhenxiang
  */
-function setSldiderHtml(){
-
+function setSldiderHtml(focusImgs){
+	var focusImgs = mallGoods; // 图片
+	var focusImgHtml = "";
+	for(var i = 0; i < focusImgs.length; i++){
+		focusImgHtml += "<div class='swiper-slide'><img src="+ focusImgs +" class='slide_img'/></div>";
+	}		
+	$("#slide_a").html(focusImgHtml);
+	// 轮播图数字
+	//Swiper  轮播插件
+	window.swiper = new Swiper('#banner-swiper',{
+		pagination : '.swiper-pagination',
+		paginationClickable :true,
+		autoplayDisableOnInteraction:false,
+		loop : false,
+		initialSlide :0,
+		resistanceRatio : 0
+	});
 };
 
 /**
@@ -110,7 +133,7 @@ function bindEvent(){
 	$("#shopCart").on("click", function(){
 		pushWebView({
 			webType: 'newWebview_First',
-			id: 'appCart/cart.html',
+			id: 'appCart/cart.html-1',
 			href: 'appCart/cart.html',
 			aniShow: getaniShow(),
 			title: "购物车",
@@ -122,6 +145,21 @@ function bindEvent(){
 
 	// 提交按钮绑定事件
 	$("#submitBtn").on("click", function(){
+		var strUserId = localStorage.getItem('userId'); // 用户id
+		//检测已经存在sessionkey否者运行下面的登陆代码
+		if (localStorage.getItem('userMobile') && strUserId) {} else {
+			id = "login/login.html";
+			aniShow = 'slide-in-bottom';
+				pushWebView({
+				webType: 'newWebview_First',
+				id: id,
+				href: id,
+				aniShow: aniShow,
+				extendOptions: {}
+			});
+			return false;
+		}
+
 		if(buyNowFlag == 0){
 			pushWebView({
 				webType: 'newWebview_First',
@@ -134,9 +172,53 @@ function bindEvent(){
 				extendOptions: {}
 			});
 		}else if(buyNowFlag == 1){
+			$.ajax({
+				url: prefix + "/shoppingcard/save",
+				type: "POST",
+				data: {
 
+				},
+				dataType: "json",
+				success: function(res){
+					ajaxLog(res);
+					if(res.resCode == 0){
+						mui.toast(res.result);
+						$("#mallSelection").animate({bottom: "-8rem"}, 300, 'ease-in-out', function(){
+							$("#mallbackground").hide();
+							$("#mallSelection").hide();
+						});
+					}
+				}
+			})
 		}
 		
 	});
 
+};
+
+/**
+ * 第二步设置商品名字价钱等
+ * @author xuezhenxiang
+ */
+function setproductMessage(){
+	var strGoodsName = mallGoods.strSkuName;
+	var strIntroduce = mallGoods.strIntroduce;
+	var nSkuPrice = mallGoods.nSkuPrice;
+	var strDetailIcon = mallGoods.strDetailIcon;
+	var nSaleNum = mallGoods.nSaleNum;
+
+	$("#strDetailName, #strDetailName1").html(strGoodsName); // 商品名称
+	$("#strNotice").html(strIntroduce); // 商品描述
+	$("#nPrice, #nPrice1").html("<span>￥</span>" + nSkuPrice); // 商品价格
+	$("#saleNum").html("已售 " + nSaleNum); // 商品已售
+	$("#appendRove").html("浆果红，4G+64G，移动联通电信"); // 当前商品sku信息
+	$("#mallDetail").html("<img src='' />"); // 商品规格图片
+};
+
+/**
+ * 设置sku选择
+ * @author xuezhenxiang
+ */ 
+function setChooseSku(){
+	
 };

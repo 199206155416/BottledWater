@@ -1,11 +1,634 @@
-.goods-wrap{
+body {
+ 	background: #FFFFFF;
+}
+.shopList {
+	width: 7.5rem;	
+}
+#shopList {
+	padding-bottom: 0.7rem;
+}
+#container {
+	padding-bottom: 0.9rem;
+	position: absolute;
+	width: 7.5rem;
+	/* height: 94%; */
+	top: .88rem;
+	overflow-y: scroll;
+	overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+.pitchImgleft {
+	width: 0.64rem;
+	height:0.64rem;
+	float: left;
+	margin-top: 10%;
+	position: relative;
+	text-align: right;
+}
+.pitchImgleft img {
+	width: 0.34rem;
+	height: 0.34rem;
+}
+.goodsImgleft {
+	width: 2rem;
+	float: left;
+	position: relative;
+}
+.goodsImgleft img {
+	width: 1.7rem;
+	height:1.7rem;
+	margin:0 0.2rem 0 0.1rem;
+}
+.lootAll{
+	    width: 1rem;
+    height: 1rem;
+    background: rgba(0,0,0,0.5);
+    text-align: center;
+    line-height: 1rem;
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    margin-left: 0.45rem;
+    border-radius: 50%;
+    margin-top: -0.5rem;
+    color: #FFFFFF;
+    display: none;
+    font-size: 0.24rem;
+    z-index:8;
+}
+.goodsContainer {
+	 width: 4.4rem;
+	 float: left;
+}
+
+.shopListCont {
+	/* width: 6.9rem; */
+	margin: 0 auto;
+	overflow: hidden;
+	margin-top:0.3rem;
+	border-bottom: 1px solid #ECF1F2;
+	padding-bottom: 0.3rem;
+}
+.goodsContainer .goodsExplain {
+	color: #555555;
+	font-size: 0.26rem;	
+	margin-bottom: 0.2rem;	
+}
+.goodsContainer .goodsSKUName {
+	color: #999999;
+	position:relative;
+	font-size: 0.26rem;
+	width: 4.6rem;
+	/* padding: 0.02rem 0 0.05rem 0.05rem; */
+	height: 0.4rem;
+	line-height: 0.4rem;
+}
+.paseEditBack .goodsSpanSkuName {
+padding-left:0.1rem;
+}
+.goodsSKUnPrice {
+	color: #60a3fb;
+	width: 2.5rem;
+	float: left;
+	margin-top:0.4rem; 
+}
+/*已下架  */
+.shop_out{
+	color:#cccccc;
+}
+
+.shop_out .goodsExplain{
+	color: #cccccc;
+}
+.shop_out .goodsSKUName{
+	color: #cccccc;
+}
+.shop_out .goodsSKUnPrice{
+	color: #cccccc;
+}
+.goodsSKUnPrice {
+	font-size: 0.28rem;
+}
+.goodsSKUnPrice span {
+	color: #666666;
+}
+.goodsNum {
+	width: auto;
+    height: 0.46rem;
+    display: inline-block;
+    border: 1px solid #cccccc;
+    line-height: 0.46rem;
+    /* overflow: hidden; */
+    float: right;
+    border-radius: 0.04rem;
+    margin: 0.35rem 0rem 0 0;
+        position: relative;
+        margin-right: -0.16rem;
+}
+.goodsNum .left {
+	float: left;
+	text-align:center;
+	width: 0.44rem;
+	height: 0.44rem;
+	border-right: 1px solid #cccccc;
+	line-height: 0.4rem;
+    color: #777;
+    font-size: 0.36rem;
+}
+.goodsNum .contentNum {
+	float: left;
+	text-align:center;
+	width: 0.6rem;
+	height: 0.44rem;
+	line-height: 0.43rem;
+}
+.goodsNum .right {
+	float: left;
+	text-align:center;
+	width: 0.44rem;
+	height: 0.44rem;
+	border-left: 1px solid #cccccc;
+	line-height: 0.4rem;
+    color: #777;
+    font-size: 0.36rem;
+}
+.insut{
+	 width: 1.5rem;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    font-size: 0.24rem;
+    color: #ff3b30;
+    position: absolute;
+    top: -0.4rem;
+    text-align: center;
+    display:none;
+}
+ .solded{
+	 width: 1.5rem;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    font-size: 0.24rem;
+    color: #666;
+    text-align: right;
+     float: right;
+  margin-right: -0.15rem;
+    padding-top: 0.3rem;
+    display:none;
+}
+.sold_color{
+	color: #ccc!important;
+}
+
+.empty{
+	margin-top:1.4rem;
+}
+.empty .empty_img{
+	width:1.94rem;
+	height:1.94rem;
+    display: block;
+    margin: 0 auto;
+}
+.empty p{
+	text-align: center;
+    font-size: 0.3rem;
+    color: #999999;
+    margin-top: 0.4rem;
+}
+.empty .empty_con{
+	
+	width:4.5rem;
+	margin:0 auto;
+	margin-top:1.75rem;
+}
+.empty .empty_con div{
+	display: inline-block;
+    height: 0.6rem;
+    width: 1.8rem;
+    line-height: 0.58rem;
+    font-size: 0.28rem;
+    color: #999999;
+    border: 1px solid#d9d9d9;
+    text-align: center;
+    border-radius: 0.15rem;    
+}
+.empty #mallGoToCollect{
+	margin-left:0.8rem;
+}
+
+.shopBottomFixd {
+ 	position: fixed;
+ 	width: 7.5rem;
+ 	height: 0.88rem;
+ 	bottom: 0;
+ 	background:#FeFeFe;
+ 	z-index: 999;
+}
+.shopBottomFixd:after{
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 7.5rem;
+	height: 1px;
+	background: #ccc;
+	transform: scaleY(.5);
+	-webkit-transform: scaleY(.5);
+}
+.shop-bottom-wrap{
 	display: flex;
 	display: -webkit-flex;
+	align-items: center;
+	-webkit-align-items: center;
+}
+/* 结算按钮 */
+.subGottom {
+	width: 2rem;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    font-size: 0.3rem;
+    color: #FFFFFF;
+    background: #60a3fb;
+}
+.subGottom span {
+	display: block;
+}
+#shopNumId {
+	display: inline-block;	
+}
+.pitchBottomImgleft {
+    color: #999999;
+    font-size: 0.3rem;
+    height: 0.9rem;
+	line-height:0.9rem;
+    padding-left: .7rem;
+    background: url("../../appAddress/image/ic_yuanquan_nor@2x.png") no-repeat .3rem center/.3rem;
+}
+.pitchBottomImgleft.on{
+	background: url("../../appAddress/image/ic_yuanquan_press@2x.png") no-repeat .3rem center/.3rem;
+}
+
+.pitchBottomPrice {
+	flex: 1;
+	-webkit-flex: 1;
+	font-size:0.3rem;
+	height: 0.9rem;
+	line-height:0.9rem;
+	padding-left: .3rem;
+}
+.pitchBottomPrice .priceName {
+	color: #666666;
+}
+.pitchBottomPrice .priceMoney {	
+	color: #60a3fb;		
+}
+.mui-table-view-cell:after {
+	
+	background-color: #FFFFFF;
+}
+.mui-table-view-cell {
+	padding: 0px 0px;
+}
+.mallSelection {
+	width: 7.5rem;
+	background: #FFFFFF;
+	position: absolute;
+	bottom: -8rem;
+	height:9rem;
+	z-index: 9999;
+	padding-bottom: 0.4rem;
+}
+.optionSelect {
+	padding: 0.14rem 0 0.8rem 0.32rem;
+	height: 7rem;
+	overflow: auto;
+	width: 7.18rem;
+	max-height: 7rem;
+
+	
+}
+.optionSelect .class {
+	font-size: 0.32rem;
+	color: #222222;
+}
+.optionSelect .whatSat {
+	position: absolute;
+	right: 0.3rem;
+	top: 60%;
+	font-size: 0.26rem;
+	color: #666666;
+}
+.optionSelect .whatSat img {
+	width: 0.28rem;
+    height: 0.28rem;
+    margin: 0 0 0.05rem 0.1rem;
+}
+.optionSelect .class h3 {
+    font-weight: 100;
+    font-size: 0.28rem;
+    color: #555555;
+    line-height: 0.63rem;
+}
+.optionSelect .class .row {
+    color: #60a3fb;
+    background: url(http://img.dafy.com/mall/mallIndex/img/20180108/pitchBottom.png) no-repeat right bottom;
+    background-size: 0.25rem 0.21rem;
+    border: 1px solid #60a3fb;
+    position: relative;
+}
+.optionSelect .class span {
+    display: inline-block;
+    border: 1px solid #cccccc;
+    border-radius: 0.08rem;
+    margin-right: 0.16rem;
+    height: 0.46rem;
+    font-size: 0.24rem;
+    line-height: 0.47rem;
+    padding: 0rem 0.23rem 0rem 0.23rem;
+    margin-bottom: 0.05rem;
+    color: #999999;
+    position: relative;
+}
+.optionSelect .class .grayRow {
+	background: #CCCCCC;
+}
+.mallbackground {			
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 152;
+	top: 0;
+	display:none;
+	background: rgba(0,0,0,0.7);
+}
+.paseEditBack  {
+	background: #F4F4F4;
+}
+.goodsSKUName .skuRightImg {
+	width: 0.4rem;
+	height: 0.38rem;
+	position: absolute;
+	right: 0.1rem;
+	top:0.01rem;
+	display: none;
+}
+.shopBotton {
+	width: 7.5rem;
+	height: 0.9rem;
+	background: #60a3fb;
+	position: fixed;
+	bottom: 0;
+	text-align: center;
+	line-height: 0.9rem;
+	color: #FFFFFF;
+	z-index: 200;
+	font-size: 0.3rem;
+}
+.seleHead {
+	width:6.9rem;
+	margin:0 auto;
+	border-bottom: 1px solid #f2f5f7;
+	height:1.9rem;
+	position: relative;
+	
+}
+.seleHead .mallclose {
+    position: absolute;
+    width: 0.3rem;
+    height: 0.3rem;
+    right: -0.25rem;
+    top: 0rem;
+    padding: 0.2rem;
+}
+.popupThimg {
+	
+	width: 2rem;
+	height: 2rem;
+	text-align: center;
+	line-height: 2rem;
+	float: left;
+	position:absolute;
+	background:#FFFFFF;
+	top:-0.5rem;
+	border-radius: 0.2rem;
+	border: 1px solid #f2f5f7;
+	
+}
+.popupThimg img {
+	width: 1.8rem;
+	height: 1.8rem;
+}
+.detailLootAll {
+	width: 1rem;
+	height: 1rem;
+	background: rgba(0,0,0,0.5);
+	text-align: center;
+	line-height: 1rem;
+	position: absolute;
+	top:50%;
+	z-index:1;
+	right:0;
+	left:0;
+	margin:0 auto;
+	border-radius: 50%;
+	margin-top: -0.5rem;
+	color: #FFFFFF;
+	display:none;
+	font-size: 0.24rem;
+	
+}
+.popupright {
+	
+	width: 5rem;
+	float: right;
 
 }
-.is-checked-goods{
-
-	width: .3rem;
-	flex-shrink: 0;
-	-webkit-flex-shrink: 0;
+.popupright .paddLeft {
+	
+	padding:0.2rem 0.4rem 0 0.3rem;
 }
+.popupright .paddLeft p{
+	font-size:0.28rem;
+	color:#555555;
+	margin-bottom: 0.2rem;
+	word-break: break-all;
+}
+.seleHead {
+	width:6.9rem;
+	margin:0 auto;
+	border-bottom: 1px solid #f2f5f7;
+	height:1.9rem;
+	position: relative;
+	
+}
+.seleHead .mallclose {
+    position: absolute;
+    width: 0.3rem;
+    height: 0.3rem;
+    right: -0.25rem;
+    top: 0rem;
+    padding: 0.2rem;
+}
+.popupright .surplus {
+	
+	color: #999999;			
+	font-size: 0.28rem;
+	
+}
+.popupright .money {
+	
+	font-size: 0.34rem;
+	margin-bottom: 0.2rem;
+	font-weight:bold;
+	color: #60a3fb;
+	
+}
+.popupright .money span {
+	font-size: 0.26rem;
+}
+.spxContainer {
+	float: right;
+	width: 4.55rem;
+	border-top: 1px solid #EFF6F8;
+	margin-top:0.3rem;
+}
+.spxContainer .spxtitle {
+	font-size: 0.24rem;
+	color: #666666;
+	padding-top: 0.18rem;
+    padding-bottom: 0.08rem;
+}
+.spxContainer .spxfmoney {
+	
+	font-size: 0.28rem;
+	color: #60a3fb;
+	line-height: 0.3rem;
+}
+
+.insurance_Width {
+    width: calc(100% - 0.3rem);
+    border-top: 1px solid #f2f5f7;
+    padding-bottom: 0.2rem;
+    margin-top: 0.2rem;
+}
+.insurance {
+    font-size: 0.32rem;
+    color: #222222;
+}
+.insurance_Width .insurance .goodsInsurance {
+    font-size: 0.28rem;
+    color: #555555;
+    line-height: 0.7rem;
+    height: 0.7rem;
+    overflow: hidden;
+    margin-top: 0.04rem;
+}
+.insurance_Width .insurance .goodsInsurance .leftServerName {
+    float: left;
+}
+.insurance_Width .insurance .goodsInsurance .rightServerReferral {
+    float: right;
+}
+.insurance_Width .insurance .goodsInsurance .rightServerReferral img {
+    width: 0.28rem;
+    height: 0.28rem;
+    margin: 0 0 0.04rem 0.1rem;
+}
+.insurance_Width .insurance .row {
+    color: #60a3fb;
+    background: url(http://img.dafy.com/mall/mallIndex/img/20180108/pitchBottom.png) no-repeat right bottom;
+    background-size: 0.25rem 0.21rem;
+    border: 1px solid #60a3fb;
+}
+.insurance_Width .insurance span {
+    display: inline-block;
+    border: 1px solid #cccccc;
+    border-radius: 0.08rem;
+    margin-right: 0.16rem;
+    height: 0.46rem;
+    font-size: 0.24rem;
+    line-height: 0.47rem;
+    padding: 0rem 0.24rem 0rem 0.24rem;
+    margin-bottom: 0.05rem;
+    color: #999999;
+    position: relative;
+}
+.shopNull {
+	height:0.88rem;
+	line-height:0.88rem;
+	background: rgba(252,118,31,0.6);
+	padding-left:0.3rem;
+	font-size: 0.24rem;
+    color: #ffffff;
+}
+.shop_login{
+	width:1rem;
+	height:0.4rem;
+    line-height: 0.4rem;
+    float: right;
+    background: #fff;
+    border-radius: 0.08rem;
+    margin-top: 0.22rem;
+    margin-right: 0.3rem;
+    text-align: center;
+    display: block;
+    color: #60a3fb;
+   font-size: 0.28rem;
+}
+.mallCountTop span{
+	padding-left:0.3rem;
+}
+#shopEdit {
+	display: none;
+}
+.gray{
+	-webkit-filter: grayscale(100%);
+-moz-filter: grayscale(100%);
+-ms-filter: grayscale(100%);
+-o-filter: grayscale(100%);
+filter: grayscale(100%);
+filter: gray;
+}
+.addColorGray {
+	color: #cccccc !important;
+}
+.bg_lay{
+	background: #fff;
+    top: 0%;
+    left: 0%;
+    display: none;
+    height: 100%;
+    width:100%;
+    z-index: 999998;
+    opacity: 0;
+    position: fixed;
+}
+.bg_img{
+	top: calc(50% - 0.5rem);
+    left: calc(50% - 0.5rem);
+    display: none;
+    line-height: 50px;
+    border-radius: 10px;
+    height: 50px;
+    z-index: 999999;
+    position: fixed;
+}
+.bg_img img {
+    width:1rem;
+    height:1rem;
+}
+.bg_img img{
+	animation:500ms linear infinite bg_turn;
+}
+#shopNum {
+	position: relative;
+}
+
+@keyframes bg_turn{
+	from{transform:rotate(0deg)}
+	to{transform:rotate(360deg)}
+		
+		}

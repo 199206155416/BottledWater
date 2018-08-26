@@ -67,6 +67,7 @@
 			aniShow: options.aniShow,
 			title: options.title,
 			isBars: options.isBars,
+			createNew: options.createNew,
 			barsIcon: options.barsIcon,
 			extendOptions: options.extendOptions
 		});

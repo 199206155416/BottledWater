@@ -67,10 +67,6 @@ function addListevent() {
 			id = "login/login.html";
 			aniShow = 'slide-in-bottom';
 		}
-		if (id == 'changeaddress') {
-			isBars = true;
-			barsIcon = 'mui-icon iconfont icon-tianjia';
-		}
 		pushWebView({
 			webType: 'newWebview_First',
 			id: id,

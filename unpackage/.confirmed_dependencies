@@ -48,7 +48,9 @@
 			"myCenter/couponList.html",
 			"myCenter/message.html",
 			"myCenter/myBucket.html",
-			"login/changePayPassword.html"
+			"login/changePayPassword.html",
+			"appCart/cart.html",
+			"login/changePassword.html"
 		]
 	},
 	"mallCategory/category.html": {

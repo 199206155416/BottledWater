@@ -20,109 +20,62 @@
 <div class="mui-content">
 
 	<!-- 频道列表 -->
-	<ul class="channel-list">
-		<li class="channel-item">
+	<ul class="channel-list" id="channelList">
+		<li class="channel-item" id="">
 			<img class="channel-item-logo" src="./image/haiwaidaigou.png" />
 			<p class="channel-item-label">海外代购</p>
 		</li>
-		<li class="channel-item">
+		<li class="channel-item" id="">
 			<img class="channel-item-logo" src="./image/lvyou.png" />
 			<p class="channel-item-label">旅游</p>
 		</li>
-		<li class="channel-item">
+		<li class="channel-item" id="">
 			<img class="channel-item-logo" src="./image/pingbandiannao.png" />
 			<p class="channel-item-label">平板电脑</p>
 		</li>
-		<li class="channel-item">
+		<li class="channel-item" id="">
 			<img class="channel-item-logo" src="./image/shenghuochaoshi.png" />
 			<p class="channel-item-label">生活超市</p>
 		</li>
-		<li class="channel-item">
+		<li class="channel-item" id="">
 			<img class="channel-item-logo" src="./image/shoujipeijian.png" />
 			<p class="channel-item-label">手机配件</p>
 		</li>
-		<li class="channel-item">
+		<li class="channel-item" id="">
 			<img class="channel-item-logo" src="./image/shoujishuma.png" />
 			<p class="channel-item-label">手机数码</p>
 		</li>
-		<li class="channel-item">
+		<li class="channel-item" id="">
 			<img class="channel-item-logo" src="./image/shuiguoshucai.png" />
 			<p class="channel-item-label">水果蔬菜</p>
 		</li>
-		<li class="channel-item">
+		<li class="channel-item" id="all">
 			<img class="channel-item-logo" src="./image/category.png" />
 			<p class="channel-item-label">更多</p>
 		</li>
 	</ul>
 
 	<!-- 商品列表 -->
-	<div id="goodsList">
+	<div id="goodsList"></div>
+
+	<!-- 商品列表模板 -->
+	<div id="goodsListTemplate" style="display: none;">
 		<div>
-			<div class="activity-img"><img src="./image/1.jpg" /></div>
-			<ul class="goods-list">
-				<li class="goods-item">
-					<div class="goods-item-wrap">
-						<div class="goods-img"><img src="./image/2.jpg" /></div>
-						<div class="goods-name">农夫山泉 桶装水 饮用天然水 （2桶起订）</div>
-						<div class="goods-slogn">规格：19L</div>
-						<div class="goods-price">￥28.00</div>
-					</div>
-				</li>
-				<li class="goods-item">
-					<div class="goods-item-wrap">
-						<div class="goods-img"><img src="./image/2.jpg" /></div>
-						<div class="goods-name">农夫山泉 桶装水 饮用天然水 （2桶起订）</div>
-						<div class="goods-slogn">规格：19L</div>
-						<div class="goods-price">￥28.00</div>
-					</div>
-				</li>
-				<li class="goods-item">
-					<div class="goods-item-wrap">
-						<div class="goods-img"><img src="./image/2.jpg" /></div>
-						<div class="goods-name">农夫山泉 桶装水 饮用天然水 （2桶起订）</div>
-						<div class="goods-slogn">规格：19L</div>
-						<div class="goods-price">￥28.00</div>
-					</div>
-				</li>
-				<li class="goods-item">
-					<div class="goods-item-wrap">
-						<div class="goods-img"><img src="./image/2.jpg" /></div>
-						<div class="goods-name">农夫山泉 桶装水 饮用天然水 （2桶起订）</div>
-						<div class="goods-slogn">规格：19L</div>
-						<div class="goods-price">￥28.00</div>
-					</div>
-				</li>
-			</ul>
+			<div class="activity-img"><img src="#activityImg#" /></div>
+			<ul class="goods-list"></ul>
 		</div>
-		<div>
-			<img src="./image/1.jpg" />
-			<ul class="goods-list">
-				<li class="goods-item">
-					<div class="goods-item-wrap">
-						<div class="goods-img"><img src="./image/2.jpg" /></div>
-						<div class="goods-name">农夫山泉 桶装水 饮用天然水 （2桶起订）</div>
-						<div class="goods-slogn">规格：19L</div>
-						<div class="goods-price">￥28.00</div>
-					</div>
-				</li>
-				<li class="goods-item">
-					<div class="goods-item-wrap">
-						<div class="goods-img"><img src="./image/2.jpg" /></div>
-						<div class="goods-name">农夫山泉 桶装水 饮用天然水 （2桶起订）</div>
-						<div class="goods-slogn">规格：19L</div>
-						<div class="goods-price">￥28.00</div>
-					</div>
-				</li>
-				<li class="goods-item">
-					<div class="goods-item-wrap">
-						<div class="goods-img"><img src="./image/2.jpg" /></div>
-						<div class="goods-name">农夫山泉 桶装水 饮用天然水 （2桶起订）</div>
-						<div class="goods-slogn">规格：19L</div>
-						<div class="goods-price">￥28.00</div>
-					</div>
-				</li>
-			</ul>
-		</div>
+	</div>
+
+	<!-- 商品模板 -->
+	<div id="goodsTemplate" style="display: none;">
+		<li class="goods-item" id="#id#">
+			<div class="goods-item-wrap">
+				<div class="goods-img"><img src="#strMainImg#" /></div>
+				<div class="goods-name">#strGoodsName#</div>
+				<div class="goods-slogn">#goodsSlogn#</div>
+				<div class="goods-price">售价： ￥#defaultSkuPrice#</div>
+			</div>
+		</li>
 	</div>
 </div>
 </body>

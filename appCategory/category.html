@@ -5,26 +5,80 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 	<title>商品分类</title>
 	<link rel="stylesheet" type="text/css" href="../common/css/mui.min.css" />
-	<link rel="stylesheet" type="text/css" href="../common/css/iconfont.css" />
-	<link rel="stylesheet" type="text/css" href="../common/css/own.css" />
+	<link rel="stylesheet" type="text/css" href="../common/css/public.css" />
 	<link rel="stylesheet" href="./css/category.css" />
+	<script src="../common/js/remScale.js"></script>
 </head>
 
-<body>
+<body style="background: #F9F9F9;">
+	<header class="mui-bar mui-bar-nav">
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	    <h1 class="mui-title">商品分类</h1>
+	</header>
 	<div class="mui-content mui-row mui-fullscreen">
 		<div class="mui-col-xs-4" style="background: white;">
 			<div id="categoryStair" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical">
+				
+			</div>
+			<!-- 一级分类模板 -->
+			<div id="categoryStairTemplate" style="display: none;">
+				<a class="mui-control-item" href="javascript:;">#firstCategoryName#</a>
 			</div>
 		</div>
-		<div id="categoryMovers" class="mui-col-xs-8" style="background: #F9F9F9;">
-			<div id="category3387" class="mui-control-content mui-active">
 
+		<!-- 右侧分类列表 -->
+		<div id="categoryMovers" class="mui-col-xs-8">
+			<div>
+			    <div class="advertiseImg" style="display: none;">
+			        <img src="" id="advertiseImg">
+			    </div>
+			    <div class="hotBrand" id="hotBrand" style="display: none;">
+			        <div class="brandMsg">
+			            <div class="brandTitle">
+			                热门品牌
+			            </div>
+			            <ul id="brandList" class="brandList clearfix">
+			                
+			            </ul>
+
+			            <!-- 热门品牌模板 -->
+			            <ul id="brandListTemplate" style="display: none;">
+			                <li>
+			                    <div class="brandImg">
+			                        <img src="#strBrandImg#">
+			                    </div>
+			                    <div class="brandSubTitle">#strBrandName#</div>
+			                </li>
+			            </ul>
+			        </div>
+			    </div>
+			    <!-- 二级分类列表 -->
+			    <div class="" id="secondCategoryList">
+					
+			    </div>
+			    <!-- 二级分类模板 -->
+		        <div id="secondCategoryTemplate" style="display: none;">
+		            <div class="classifyList">
+		                <div class="categoryTitle">#secondCategoryName#</div>
+		                <ul class="categoryListID clearfix">
+		                    
+		                </ul>
+		            </div>
+		        </div>
+
+		        <!-- 三级分类模板 -->
+		        <ul id="thirdCategoryTemplate" style="display: none;">
+                    <li>
+                        <div class="categoryImg">
+                            <img src="#thirdCategoryImg#">
+                        </div>
+                        <div class="categorySubTitle">#thirdCategoryName#</div>
+                    </li>
+                </ul>
 			</div>
 		</div>
 	</div>
-
-	<script type="text/javascript" src="../common/js/mui.min.js"></script>
-	<script type="text/javascript" src="../common/js/own.js"></script>
-	<script type="text/javascript" src="category.js"></script>
+<script type="text/javascript" src="../common/js/include.js" level="1"></script>
+<script type="text/javascript" src="category.js"></script>
 </body>
 </html>

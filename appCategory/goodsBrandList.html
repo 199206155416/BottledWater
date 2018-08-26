@@ -4,65 +4,63 @@
    	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0"/>
 	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="../common/css/mui.min.css">
 	<link rel="stylesheet" href="../common/css/public.css">
 	<link rel="stylesheet" href="css/goodsBrandList.css">	
 	<script src="../common/js/remScale.js"></script>
-	<title>达飞商城</title>
+	<title>智慧订水</title>
 </head>
 <body>
-    <div class="mallHeaderHeight">
-		<div class="mallFixedTop">
-			<div class="mallDetallTop clearfix" style='box-shadow: none; -webkit-box-shadow: none;'>		
-				<img src="../mallIndex/img/top/mallback.png" onclick="back();" />
-				<span class="mallTopTitle" id="mallUp"></span>								
-			</div>
-		</div>
-	</div>	
-	<div class="rankArea">
-		<ul class="clearfix" id="sort">
-			<li class="synthesizeSort selected" id="synthesizeSort" sortType="1">
-				综合
-				<!-- <span class="synthesize"><img src="../img/goods/orangeDown.png" class="synImg"/></span> -->
-			</li>
-			<li id="saleNum" sortType="20">
-				销量				
-			</li>
-			<li id="costNum" sortType="21">
-				价格
+	<header class="header">
+	    <img src="../common/image/back@2x.png" alt="" class="back mui-action-back">
+	    <h1 class="title" id="mallUp"></h1>
+	    <ul class="tab-list">
+	    	<li class="synthesizeSort active" id="synthesizeSort" sortType="1">综合</li>
+			<li id="saleNum" sortType="20">销量</li>
+			<li id="costNum" sortType="21">价格
 				<span id="" class="priceSort">
-					<img src="img/grayUp.png" class="priceImg topImg"/>
-					<img src="img/grayDown.png" class="priceImg bottomImg"/>
+					<img src="image/gray.png" class="priceImg topImg"/>
+					<img src="image/gray.png" class="priceImg bottomImg"/>
 				</span>
 			</li>
-			<li id="filtrate" class="filtrate">
-				筛选
-				<img src="img/filter.png" class="filterImg"/>
+			<li id="filtrate" class="filtrate">筛选<!-- <img src="img/filter.png" class="filterImg"/> --></li>
+	    </ul>
+	</header>
+
+	<div class="mui-content">
+		<!-- 商品列表模板 -->
+		<div id="mallListTemp" style="display: none">
+			<li>				
+				<div class="widthpad">
+					<div class="cutLimg">		
+					    <div class="lootAll">已抢光</div>
+						<img src="#strLogoURL#" data-original="#strLogoURL#"/>
+					</div>			
+					<div class="rightMallcontent clearfix">
+						<div class="hrTitle">#strTitle#</div>
+						<div class="mallActivity">#strNotice#</div>
+						
+						<!-- 全额使用 -->
+						<div id="quane" class="quane">
+							<div class="goodsLeftsfMoney">
+								<div class="sfText">售价：</div><div class="sfLeftMoney">¥#nPrice1#</div>
+							</div>
+						</div>
+					</div>			
+				</div>
 			</li>
-		</ul>
-	</div>
-	<div>
-		<div class="goodsRoll" id="goodsRoll">
-			<!-- 商品列表模板 -->
-			<div id="mallListTemp" style="display: none">
+		</div>
+		<div class="mallList clearfix">
+			<ul id="mallListID">
 				<li>				
 					<div class="widthpad">
 						<div class="cutLimg">		
 						    <div class="lootAll">已抢光</div>
-							<div class="mallMark">#nLablead#</div>
 							<img src="#strLogoURL#" data-original="#strLogoURL#"/>
 						</div>			
 						<div class="rightMallcontent clearfix">
 							<div class="hrTitle">#strTitle#</div>
 							<div class="mallActivity">#strNotice#</div>
-							<!-- 分期使用 -->
-							<div id="fenqi" class="fenqi">
-								<div class="goodsMoney">
-									<div class="goodsRightfMoney"><span class="syGoodsText"><!-- 售价： --></span><span class="yjGoodsfh">¥</span>#nPrice#</div>
-								</div>
-								<div class="mallListBotton ">
-									<span>月供：</span><span class="ygMoney">¥#nForTheMonth#</span><span class='qiFont'>起</span><span class="ygMoney" style="display: none">&nbsp;X&nbsp;#nTermForHomePage#<span>期</span></span>
-								</div>
-							</div>
 							<!-- 全额使用 -->
 							<div id="quane" class="quane">
 								<div class="goodsLeftsfMoney">
@@ -72,15 +70,9 @@
 						</div>			
 					</div>
 				</li>
-			</div>
-			<div class="mallList clearfix">
-				<ul id="mallListID">
-					<div id="firstPage"></div>
-					<div id="otherPage"></div>
-				</ul>
-			</div>
-		</div>		
-	</div>
+			</ul>
+		</div>
+	</div>		
 	<!--筛选品牌弹出层背景-->
 	<div class="brandFilter">
 		<div class="brandName">
@@ -98,7 +90,6 @@
 	</div>	
 	<div class="backGround" style="display: none;"></div>	
  </body>
- <script type="text/javascript" src="../common/js/includeCommon.js" level="1"></script>
+ <script type="text/javascript" src="../common/js/include.js" level="1"></script>
  <script type="text/javascript" src="goodsBrandList.js"></script>
- <script type="text/javascript" src="../mallIndex/mallListAnimation.js"></script>
 </html>
