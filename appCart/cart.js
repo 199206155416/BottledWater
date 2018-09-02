@@ -68,6 +68,15 @@ mui.plusReady(function(){
 	// 	cartSupplierItem = [];
 	// },false)
 
+	//接收添加购物车事件事件
+	window.addEventListener('addCart', function() {
+		console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzz")
+
+		// 先清空列表
+		$("#shopList").html("");
+		getCartList();
+	}, false);
+
 	// 获取购物车列表
 	getCartList();
 
@@ -110,7 +119,7 @@ function bindEvent(){
 					"strGoodsImg": list[i].strSpuImg,
 					"strIntroduce": list[i].strIntroduce,
 					"strSkuName": list[i].mallGoodsSku.strSkuName,
-					"nCount": list[i].nCount
+					"nCount": list[i].skuCount
 				})
 			}
 		}
@@ -222,8 +231,11 @@ function getCartList(){
 					$("#shopPingNullTemp").show();
 					$("#container").hide();
 					$("#shopBottomFixd").hide();
-
 					return false;
+				}else{
+					$("#shopPingNullTemp").hide();
+					$("#container").show();
+					$("#shopBottomFixd").show();
 				}
 
 				cartObj.list = result;

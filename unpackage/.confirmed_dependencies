@@ -51,6 +51,10 @@
 			"login/changePayPassword.html",
 			"appCart/cart.html",
 			"login/changePassword.html"
+		],
+		"resources": [
+			"common/css/own.css",
+			"common/js/own.js"
 		]
 	},
 	"mallCategory/category.html": {
@@ -67,6 +71,19 @@
 		"resources": [
 			"appMall/css/productDetail.css",
 			"common/css/swiper.min.css"
+		]
+	},
+	"login/login.html": {
+		"resources": [
+			"login/login.js",
+			"common/js/jquery.min.js",
+			"login/css/login.css",
+			"common/js/engine.js"
+		]
+	},
+	"appIndex/home.html": {
+		"resources": [
+			"appIndex/image/1.jpg"
 		]
 	}
 }

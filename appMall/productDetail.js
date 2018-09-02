@@ -210,6 +210,12 @@ function bindEvent(){
 							$("#mallbackground").hide();
 							$("#mallSelection").hide();
 						});
+
+						mui.each(plus.webview.all(), function(index, item) {
+							console.log(item.id)
+						})
+						var cartwebview = plus.webview.getWebviewById('appCart/cart.html');
+						mui.fire(cartwebview, 'addCart', {});
 					}
 				}
 			})

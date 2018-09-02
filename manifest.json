@@ -212,7 +212,10 @@
 				"priority": 0
 			},
 			"template.html": {
-				"resources": [],
+				"resources": [
+					"common/css/own.css",
+					"common/js/own.js"
+				],
 				"refer": [
 					"template-main-third.html",
 					"template-main-second.html",
@@ -266,6 +269,23 @@
 				],
 				"refer": [],
 				"priority": 0
+			},
+			"login/login.html": {
+				"resources": [
+					"login/login.js",
+					"common/js/jquery.min.js",
+					"login/css/login.css",
+					"common/js/engine.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"appIndex/home.html": {
+				"resources": [
+					"appIndex/image/1.jpg"
+				],
+				"refer": [],
+				"priority": 0
 			}
 		},
 		"idle": {
@@ -303,7 +323,6 @@
 				"img/category.png",
 				"/common/js/city.data-3.js",
 				"img/detail/9.jpg",
-				"common/css/own.css",
 				"img/2.jpg",
 				"img/1.jpg",
 				"myCenter/feedback-needtem.html",
