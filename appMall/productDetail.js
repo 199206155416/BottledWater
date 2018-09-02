@@ -51,6 +51,7 @@ function getGoodsDetail(){
 				var result = res.result;
 
 				mallGoods = {
+					strSkuId: result.mallGoods.strDefaultSkuId,
 					strSkuName: result.mallGoods.strDefaultSkuName,
 					strIntroduce: result.mallGoods.strIntroduce,
 					nSkuPrice: result.mallGoods.defaultSkuPrice,
@@ -124,7 +125,7 @@ function bindEvent(){
 	});
 	// 关闭sku选择弹层
 	$("#closeBtn, #mallbackground").on("click", function(){
-		$("#mallSelection").animate({bottom: "-8rem"}, 300, 'ease-in-out', function(){
+		$("#mallSelection").animate({bottom: "-8rem"}, 300, function(){
 			$("#mallbackground").hide();
 			$("#mallSelection").hide();
 		});
@@ -139,13 +140,17 @@ function bindEvent(){
 			title: "购物车",
 			isBars: false,
 			barsIcon: '',
-			extendOptions: {}
+			extendOptions: {
+				hasBack: 1
+			}
 		});
 	});
 
 	// 提交按钮绑定事件
 	$("#submitBtn").on("click", function(){
 		var strUserId = localStorage.getItem('userId'); // 用户id
+		var nCount = $("#num_id").html();
+		
 		//检测已经存在sessionkey否者运行下面的登陆代码
 		if (localStorage.getItem('userMobile') && strUserId) {} else {
 			id = "login/login.html";
@@ -169,21 +174,39 @@ function bindEvent(){
 				title: "提交订单",
 				isBars: false,
 				barsIcon: '',
-				extendOptions: {}
+				extendOptions: {
+					goodsList: [
+						{
+							"mallGoodsSku.id": mallGoods.strSkuId,
+							"goodsFactPrice": mallGoods.nSkuPrice,
+							"strGoodsImg": mallGoods.strGoodsImg,
+							"strIntroduce": mallGoods.strIntroduce,
+							"strSkuName": mallGoods.strSkuName,
+							"nCount": nCount
+						}
+					]
+				}
 			});
 		}else if(buyNowFlag == 1){
+			var formData = new FormData();
+			
+			formData.append("strUserId", strUserId);
+			formData.append("strSpuId", goodsId);
+			formData.append("skuCount", nCount);
+			formData.append("mallGoodsSku.id", mallGoods.strSkuId);
+
 			$.ajax({
 				url: prefix + "/shoppingcard/save",
 				type: "POST",
-				data: {
-
-				},
+				data: formData,
+				contentType: false,
+			 	processData: false,  
 				dataType: "json",
 				success: function(res){
 					ajaxLog(res);
 					if(res.resCode == 0){
 						mui.toast(res.result);
-						$("#mallSelection").animate({bottom: "-8rem"}, 300, 'ease-in-out', function(){
+						$("#mallSelection").animate({bottom: "-8rem"}, 300, function(){
 							$("#mallbackground").hide();
 							$("#mallSelection").hide();
 						});
@@ -191,7 +214,72 @@ function bindEvent(){
 				}
 			})
 		}
-		
+	});
+
+	// 切换sku
+	$("#mallSku").on("click", "span", function(){
+		var flag = $(this).hasClass("row");
+		var name = $(this).attr("name");
+
+		if(!flag){
+			$(this).addClass("row").siblings().removeClass("row");
+
+			var formData = new FormData();
+			
+			formData.append("mallGoods.id", goodsId);
+
+
+			$("#mallSku .row").each(function(i, v){
+				var strAttrName = $(v).attr('name');
+				var strSttrValue = $(v).html();
+
+				formData.append("mallSkuAttrList["+i+"].strAttrName", strAttrName);
+				formData.append("mallSkuAttrList["+i+"].strSttrValue", strSttrValue);
+			});
+			
+			$.ajax({
+				url: prefix + "/goods/skuDetailByAttr",
+				type: "POST",
+				data: formData,
+				contentType: false,
+			 	processData: false,  
+				dataType: "json",
+				success: function(res){
+					ajaxLog(res);
+					if(res.resCode == 0){
+
+						var result = res.result;
+
+						mallGoods = {
+							strSkuId: result.id,
+							strSkuName: result.mallGoods.strSkuName,
+							strIntroduce: result.mallGoods.strIntroduce,
+							nSkuPrice: result.mallGoods.skuPrice,
+							strGoodsImg: result.mallGoods.strDetailMainImg,
+							strDetailIcon: result.mallGoods.strDetailIcon,
+							nSaleNum: result.mallGoods.saleNum
+						};
+
+						// 第二步设置商品名字价钱等
+						setproductMessage();
+					}
+				}
+			})
+		}
+	});
+
+	// 选择购买数量
+	$("#count").on("click", "div", function(){
+		var count = $("#num_id").html();
+		if($(this).hasClass("left")){
+			count--;
+			if(count <= 1){
+				count = 1;
+			}
+		}else if($(this).hasClass("right")){
+			count++;
+		}
+		$("#num_id").html(count);
 	});
 
 };
@@ -220,5 +308,17 @@ function setproductMessage(){
  * @author xuezhenxiang
  */ 
 function setChooseSku(){
-	
+	var strHtml = ""
+	for(var i in attrMap){
+		strHtml += "<div class='class'><h3>"+ i +"</h3>";
+		for(var ii = 0,ll = attrMap[i].length; ii < ll; ii++){
+			if(ii == 0){
+				strHtml += "<span class='row' name="+ i +">"+ attrMap[i] +"</span>";
+			}else{
+				strHtml += "<span name="+ i +">"+ attrMap[i] +"</span>";
+			}
+		}
+		strHtml += "</div>";
+	}
+	$("#mallSku").html(strHtml);
 };

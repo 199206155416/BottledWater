@@ -242,3 +242,8 @@ input[type=color], input[type=date], input[type=datetime-local], input[type=date
     line-height: .24rem;
     color: #666;
 }
+
+/* 解决滚动问题 */
+html,body{
+    height: auto;
+}

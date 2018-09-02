@@ -57,5 +57,16 @@
 		"refer": [
 			"index.html"
 		]
+	},
+	"appCart/cart.html": {
+		"resources": [
+			"common/css/mui.min.css"
+		]
+	},
+	"appMall/productDetail.html": {
+		"resources": [
+			"appMall/css/productDetail.css",
+			"common/css/swiper.min.css"
+		]
 	}
 }

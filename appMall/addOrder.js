@@ -1,7 +1,6 @@
 var currentWebview; // 当前子页面
 var paredntWebview; // 父页面
-var goodsId; // 商品id
-var buyNowFlag = 0; // buyNowFlag == 0 点击sku选择弹层确定按钮立即购买, buyNowFlag == 1 加入购物车
+var goodsList; // 待结算商品列表
 
 mui.init({
 	swipeBack: false
@@ -17,8 +16,8 @@ mui.plusReady(function() {
 		goodsId = null;
 	}, false);
 
-	goodsId = currentWebview.goodsId;
-	
+	goodsList = currentWebview.goodsList;
+
 	//如果要获取当前页面的数据
 	mui.fire(paredntWebview,'getExtendOptions',{});
 	//监听返回获取到options数据
@@ -26,16 +25,17 @@ mui.plusReady(function() {
 		console.log(JSON.stringify(e.detail.extendOptions))
 	},false);
 
+	setHtml();
 
 	// 绑定事件
 	bindEvent();
 });
 
 function setHtml() {
-	// 第一步设置第一个图片滑动
-	setSldiderHtml();
-	// //第二步设置商品名字价钱等
-	// setproductMessage();
+	// 第一步查询默认地址
+	queryDefaultAddress();
+	//第二步设置商品
+	setProduct();
 	// //设置颜色选择
 	// setChooseColor();
 	// //设置评价
@@ -50,8 +50,34 @@ function setHtml() {
  * 设置图片轮播
  * @author xuezhenxiang
  */
-function setSldiderHtml(){
+function queryDefaultAddress(){
+	
+};
 
+/**
+ * 设置商品
+ * @author xuezhenxiang
+ */
+function setProduct(){
+	for(var i = 0, len = goodsList.length; i < len; i++){
+		var strGoodsImg = goodsList[i]["strGoodsImg"];
+		var strSkuName = goodsList[i]["strSkuName"];
+		var strIntroduce = goodsList[i]["strIntroduce"];
+		var goodsFactPrice = goodsList[i]["goodsFactPrice"];
+		var nCount = goodsList[i]["nCount"];
+
+		var goodsTemplate = $("#goodsTemplate").html();
+
+		goodsTemplate = goodsTemplate.replace("#strGoodsImg#", strGoodsImg);
+		goodsTemplate = goodsTemplate.replace("#strSkuName#", strSkuName);
+		goodsTemplate = goodsTemplate.replace("#strIntroduce#", strIntroduce);
+		goodsTemplate = goodsTemplate.replace("#goodsFactPrice#", goodsFactPrice);
+		goodsTemplate = goodsTemplate.replace("#nCount#", nCount);
+
+		var goodsDom = $(goodsTemplate);
+
+		$("#goodsList").append(goodsDom);
+	}
 };
 
 /**

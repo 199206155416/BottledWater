@@ -50,40 +50,29 @@
 		<div class="mallTops"></div>
 		<div class="stageSubmitSlide">
 			<div class="stageTop clearfix" >	
-				<div class="mallSubLeftBorder1 clearfix">	
-					<ul>
+				<div class="mallSubLeftBorder1 clearfix">
+					<!-- 商品列表 -->
+					<ul id="goodsList">
+						
+					</ul>
+					<!-- 商品列表模板 -->
+					<ul id="goodsTemplate" style="display: none;">
 						<li class="mui-table-view-cell">
 							<div class="goods_wid clearfix">
 								<div class="leftthum">		
-									<img  id="strGoodsURL" id="strGoodsURL"/>			
+									<img src="#strGoodsImg#"/>			
 								</div>		
 								<div class="rightContent">			
-									<div class="beforeTitle" id="strGoodsTitle"></div>
-									<p id="specValue"></p>
+									<div class="beforeTitle">#strSkuName#</div>
+									<p>#strIntroduce#</p>
 									<div class="orderMoney">
-										<span class="subOrderMoney" id="strAmountOne"></span>
-										<span class="ordernum" id="strGoodsAmount"></span>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="mui-table-view-cell">
-							<div class="goods_wid clearfix">
-								<div class="leftthum">		
-									<img  id="strGoodsURL" id="strGoodsURL"/>			
-								</div>		
-								<div class="rightContent">			
-									<div class="beforeTitle" id="strGoodsTitle"></div>
-									<p id="specValue"></p>
-									<div class="orderMoney">
-										<span class="subOrderMoney" id="strAmountOne"></span>
-										<span class="ordernum" id="strGoodsAmount"></span>
+										<span class="subOrderMoney">#goodsFactPrice#</span>
+										<span class="ordernum">#nCount#</span>
 									</div>
 								</div>
 							</div>
 						</li>
 					</ul>
-					
 				</div>
 				
 				<ul class="last-item-no-border">
@@ -104,7 +93,7 @@
 				<div class="mjleave">
 					<div class="buyerMessageHr clearfix">
 						<div class="detailName">备注：</div>	
-					 	<textarea class="leaveTextArea" onkeyup="MaxMe(this)" id="strBuyerMessage"  placeholder="请填写备注留言"  style="overflow: hidden"></textarea>
+					 	<textarea class="leaveTextArea" maxlength="100" id="strBuyerMessage"  placeholder="请填写备注留言"  style="overflow: hidden"></textarea>
 					</div>		
 				</div>
 			</div>

@@ -14,125 +14,75 @@
 
 <body>
 	<header class="mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="display: none;"></a>
 	    <h1 class="mui-title">购物车</h1>
-	    <a class="mui-action-back mui-icon mui-icon-right-nav mui-pull-right" style="font-size: .28rem; line-height: .88rem; padding: 0 10px;">编辑</a>
+	    <a class="mui-icon mui-icon-right-nav mui-pull-right" style="font-size: .28rem; line-height: .88rem; padding: 0 10px;" id="edit">编辑</a>
 	</header>
     
-    <div id="tempmb" style="display: none">
-        <li class="mui-table-view-cell mui_list mui-transitioning" lGoodsId="#lGoodsId#" lGoodsSKUId="#lGoodsSKUId#" lId="#lId#" id="shoppingList_#lGoodsIdLid#">
+    <div id="goodsTemplate" style="display: none">
+        <li class="mui-table-view-cell mui_list mui-transitioning" lGoodsSKUId="#lGoodsSKUId#" lId="#lId#" id="shoppingList_#lGoodsIdLid#">
             <div onclick="deleteitem(this,event)" class="mui-slider-right mui-disabled">
                 <a class="mui-btn mui-btn-red">删除</a>
             </div>
             <div class="shopListCont mui-slider-handle mui-table">
-                <div class="pitchImgleft">
-                    <img class="shopChecked" src="#pitchImg#" ntype="#ntype#" />
+                <div class="pitchImgleft" curindex="#curIndex#">
+                    <img src="../appAddress/image/ic_yuanquan_nor@2x.png" />
                 </div>
                 <div class="goodsImgleft">
-                    <img class="thumbImg" src="#thumbnailImg#" />
+                    <img class="thumbImg" src="#strSpuImg#" />
                     <div class="lootAll">已抢光</div>
                 </div>
                 <div class="goodsContainer">
-                    <div class="goodsExplain">
-                        #strGoodsTitle#
-                    </div>
+                    <div class="goodsExplain">#strSkuName#</div>
                     <div class="goodsSKUName">
-                        <img src="http://img.dafy.com/mall/mallIndex/img/20180511/shopDown.png" class="skuRightImg" />
                         <span class="goodsSpanSkuName">#strSKUItemValues#</span>
                     </div>
-                    <div class="goodsSKUnPrice" price="#nPriceMinute#">￥#nPrice#</div>
+                    <div class="goodsSKUnPrice">￥#skuPrice#</div>
                     <div class="goodsNum">
                         <div class="left">-</div>
-                        <div class="contentNum" goodsCount="#goodsLicount#" maxCount="#nMaxBuyCount#">#nCount#</div>
+                        <div class="contentNum" maxCount="#skuStock#">#skuCount#</div>
                         <div class="right">+</div>
                         <div class="insut">库存不足</div>
                     </div>
                     <div class="solded">已下架</div>
                 </div>
-                <div class="spxContainer" id="spx#lMainGoodsSKUId#" style="display: none">
-                </div>
             </div>
         </li>
     </div>
 
-    <div id="spxGoodsTemp" style="display: none">
-        <div class="spxtitle" sPrice="#sPrice#" spxGoodsID="#lGoodsSPXSKUId#" lInsuranceCartId="#lInsuranceCartId#">
-            #spxstrGoodsTitle#
-        </div>
-        <div class="spxfmoney">￥#spxnPrice#</div>
-    </div>
-
-    <div id="appreItemTemplate" style="display: none;">
-        <span class="server_Grep" val="3" choose="1" stage="0" servecharge="0">#strScreenSkuName# |&nbsp¥ #nScreenPrice#</span>
-    </div>
-
     <div id="shopPingNullTemp" style="display: none">
         <div class="empty">
-            <img class="empty_img" src="http://img.dafy.com/mall/mallIndex/img/20180511/empty_img.png" />
+            <img class="empty_img" src="../common/image/blank.png" />
             <p>购物车空空如也...</p>
-            <div class="empty_con">
-                <div id="mallGoToIndex">返回首页</div>
-                <div id="mallGoToCollect">查看收藏</div>
-            </div>
         </div>
     </div>
 
     <div id="container">
         <div class="shopList">
             <ul id="shopList">
-            	<li class="mui-table-view-cell mui_list mui-transitioning" lGoodsId="#lGoodsId#" lGoodsSKUId="#lGoodsSKUId#" lId="#lId#" id="shoppingList_#lGoodsIdLid#">
-            <div onclick="deleteitem(this,event)" class="mui-slider-right mui-disabled">
-                <a class="mui-btn mui-btn-red">删除</a>
-            </div>
-            <div class="shopListCont mui-slider-handle mui-table">
-                <div class="pitchImgleft">
-                    <img class="shopChecked" src="#pitchImg#" ntype="#ntype#" />
-                </div>
-                <div class="goodsImgleft">
-                    <img class="thumbImg" src="#thumbnailImg#" />
-                    <div class="lootAll">已抢光</div>
-                </div>
-                <div class="goodsContainer">
-                    <div class="goodsExplain">
-                        #strGoodsTitle#
-                    </div>
-                    <div class="goodsSKUName">
-                        <img src="http://img.dafy.com/mall/mallIndex/img/20180511/shopDown.png" class="skuRightImg" />
-                        <span class="goodsSpanSkuName">#strSKUItemValues#</span>
-                    </div>
-                    <div class="goodsSKUnPrice" price="#nPriceMinute#">￥#nPrice#</div>
-                    <div class="goodsNum">
-                        <div class="left">-</div>
-                        <div class="contentNum" goodsCount="#goodsLicount#" maxCount="#nMaxBuyCount#">#nCount#</div>
-                        <div class="right">+</div>
-                        <div class="insut">库存不足</div>
-                    </div>
-                    <div class="solded">已下架</div>
-                </div>
-                <div class="spxContainer" id="spx#lMainGoodsSKUId#" style="display: none">
-                </div>
-            </div>
-        </li>
+            	
             </ul>
         </div>
     </div>
-    <div class="shopBottomFixd">
+    <div class="shopBottomFixd" id="shopBottomFixd">
     	<div class="shop-bottom-wrap">
-    		<div class="pitchBottomImgleft">
+    		<div class="pitchBottomImgleft" id="checkAll" type="0">
 	            全选
 	        </div>
 	        <div class="pitchBottomPrice">
-	            <span class="priceName">合计:</span><span class="priceMoney"></span>
+                <div id="totalPrice">
+                    <span class="priceName">合计:</span><span class="priceMoney" id="priceMoney"></span>
+                </div>
 	        </div>
 	        <div class="subGottom">
-	            <span id="toPayMent">结算(<span id="shopNumId">1</span>)</span>
+	            <span id="toPayMent">结算<span id="shopNumId"></span></span>
 	            <span id="toPayDele" style="display: none">删除</span>
 	        </div>
     	</div>
-        
     </div>
     <div class="bg_lay"></div>
     <div class="bg_img"><img src="http://img.dafy.com/mall/mallIndex/img/20180517/load.png" /></div>
 </body>
 <script type="text/javascript" src="../common/js/include.js" level="1"></script>
-<script type="text/javascript" src="/cart.js"></script>
+<script type="text/javascript" src="cart.js"></script>
 </html>

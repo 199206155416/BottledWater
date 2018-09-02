@@ -824,6 +824,7 @@ body {
 	width: 100%;
 	height: 100%;
 	background: rgba(0,0,0,.5);
+	display: none;
 }
 .confirm-modal{
 	position: fixed;
@@ -835,6 +836,7 @@ body {
 	background: #fff;
 	width: 5.6rem;
 	border-radius: .12rem;
+	display: none;
 }
 .confirm-title{
 	font-size: .32rem;

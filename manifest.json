@@ -251,6 +251,21 @@
 					"index.html"
 				],
 				"priority": 0
+			},
+			"appCart/cart.html": {
+				"resources": [
+					"common/css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"appMall/productDetail.html": {
+				"resources": [
+					"appMall/css/productDetail.css",
+					"common/css/swiper.min.css"
+				],
+				"refer": [],
+				"priority": 0
 			}
 		},
 		"idle": {
@@ -291,7 +306,6 @@
 				"common/css/own.css",
 				"img/2.jpg",
 				"img/1.jpg",
-				"common/css/mui.min.css",
 				"myCenter/feedback-needtem.html",
 				"img/3.jpg"
 			]

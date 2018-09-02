@@ -8,7 +8,7 @@ _main.prefix = "";		//前缀  /  ../    ../../   ../../../
 _main.level = 0;        //层级 0= /  1= ../  2= ../../  3= ../../../
 _main.jsURLArr = [
     'common/js/mui.min.js',
-    'common/js/zepto.min.js',
+    'common/js/jquery.min.js',
     'common/js/engine.js'
 ];
 
