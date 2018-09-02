@@ -6,202 +6,159 @@ var pageSize = 20; // 每页记录数，20
 var mallCategory0Id = null; // 一级类目id（非必传）
 var mallCategory2Id = null; // 三级类目id（非必传）
 var mallBrandId = null; // 品牌id（非必传）
-var orderByField = null; // 排序字段，销量传：default_sku_sale_num，价格传：defaultSkuPrice,传-1：综合排序
-var orderByType = null; // 排序方式，递增：asc,递减：desc，传-1：综合排序
+var orderByField = "-1"; // 排序字段，销量传：default_sku_sale_num，价格传：defaultSkuPrice,传-1：综合排序
+var orderByType = "-1"; // 排序方式，递增：asc,递减：desc，传-1：综合排序
 
 mui.init({
-	swipeBack: false
-})
+	swipeBack: false,
+	// pullRefresh: {
+	//     container: ".mui-content",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+	//     down : {
+	// 		style: 'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+	// 		// color:' #2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+	// 		// height: '50px',//可选,默认50px.下拉刷新控件的高度,
+	// 		// range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+	// 		// offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
+	// 		// auto: true,//可选,默认false.首次加载自动上拉刷新一次
+	// 		callback: function(){} //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+	//     }
+ //  	}
+});
 
 mui.plusReady(function() {
 	
-	setSubWebviewBounce('none');
+	// setSubWebviewBounce('none');
 	currentWebview = plus.webview.currentWebview();
-	parentWebView = plus.webview.currentWebview().parent();
+	// parentWebView = plus.webview.currentWebview().parent();
 
 
 	mallCategory0Id = currentWebview.firstCategoryId; // 一级类目id（非必传）
 	mallCategory2Id = currentWebview.thirdCategoryId; // 三级类目id（非必传）
 	mallBrandId = currentWebview.brandId; // 品牌id（非必传）
 
+	$("#mallUp").html(currentWebview.title);
 
 	// 获取所有分类
 	getGoodsList();
 
-	// //添加点击第一级和第二级的监听事件
-	// addCategoryEvent();
+	//添加监听事件
+	bindEvent();
 
 	// //初始化第一级数据并且设置html
 	// initFirstCategoryData();
 
 	// //初始化第二级数据并且设置html
 	// initSecondCategoryData(0);
-})
+});
 
-// //添加点击第一级和第二级的监听事件
-// function addCategoryEvent() {
-// 	//为第一级分类监听点击事件
-// 	mui('#categoryStair').on('tap', '.mui-control-item', function() {
-// 		var item = this;
-// 		get_sub_categoryByParentID(item.getAttribute('href').substring(9));
-// 	});
-// 	//监听第二级分类的点击事件
-// 	//监听事件中mui选择的时候最好不要有多个被选择的对象，也就是＃categoryMovers最好只表示一个节点。也就是最好用id
-// 	mui('#categoryMovers').on('tap', '.mui-table-view-cell a', function() {
-// 		var categoryA = this;
-// 		var id = 'appCategory/category-detail-new-needtem.html';
-// 		var title = categoryA.innerText;
-// 		var href = 'appCategory/category-detail-new-needtem.html';
-// 		var categoryID = categoryA.getAttribute('href');
-// 		//弹入分类商品列表
-// 		pushWebView({
-// 			webType: 'newWebview_First',
-// 			id: id,
-// 			href: href,
-// 			aniShow: getaniShow(),
-// 			title: title,
-// 			isBars: false,
-// 			barsIcon: '',
-// 			extendOptions: {categoryID:categoryID}
-// 		})
-// 	});
-// }
-// //初始化第一级数据并且设置html
-// function initFirstCategoryData() {
-// 	for (var i = 0; i < 10; i++) {
-// 		var item = {};
-// 		item.id = i;
-// 		item.name = '分类' + i;
-// 		item.imageurl = '../img/category.png';
-// 		categoryStair[i] = item;
-// 		var html = '<a class="mui-control-item" href="#category' + categoryStair[i].id + '">' + categoryStair[i].name + '</a>';
-// 		categoryHtml.push(html);
-// 	}
-// 	//设置categorystairhtml的innerhtml
-// 	categoryStairHtml.innerHTML = categoryHtml.join('');
-// 	//设置初始化第一个的mui-active
-// 	document.querySelector('.mui-control-item').classList.add('mui-active');
-// 	//重置categoryHtml数组
-// 	categoryHtml = [];
-// }
-// //初始化第二级数据并且设置html
-// function initSecondCategoryData(parentId) {
-// 	var categorysub = {};
-// 	categorysub.parentID = parentId;
-// 	categorysubarray = [];
-// 	for (var i = 0; i < 20; i++) {
-// 		var subitem = {};
-// 		subitem.categoryID = i;
-// 		subitem.productName = parentId +'子分类' + i;
-// 		categorysubarray[i] = subitem;
-// 	}
-// 	categorysub.categorysubarray = categorysubarray;
-// 	//如果已经存在这个id的信息就不在加入
-// 	var item = get_categoryMoversStateByID(parentId);
-// 	if (item && item.categorysubarray.length > 0) {
-// 		return;
-// 	}
-// 	categoryMovers.push(categorysub);
-// 	createSubCategoryHtml(categorysub);
-// 	setCurSubCategory();
-// }
-// //创建二级分类的html
-// function createSubCategoryHtml(categorysub) {
-// 	var html = '<div id="category' + categorysub.parentID + '" class="mui-control-content"><ul class="mui-table-view">';
-// 	mui.each(categorysub.categorysubarray, function(index, item) {
-// 		html = html + '<li class="mui-table-view-cell"><a href ="' + item.categoryID + '">' + item.productName + '</a></li>';
-// 	});
-// 	html = html + '</ul></div>';
-	
-// 	categoryHtml.push(html);
-// 	categoryMoversHtml.innerHTML = categoryHtml.join('');
-// }
-// //通过parentID获取下面的二级分类
-// function get_sub_categoryByParentID(parentID) {
-// 	//只有当categoryMovers这个数组中存在这个id并且这个id下面的分类数量大于0才不需要再次请求
-// 	var item = get_categoryMoversStateByID(parentID);
-// 	if (item && item.categorysubarray.length > 0) {
-// 		return;
-// 	}
-	
-// 	initSecondCategoryData(parentID);
-// }
-// //在完成创建二级分裂之后设置当前选中的subcategory
-// function setCurSubCategory() {
-// 	var stairslist = document.querySelectorAll('.mui-control-item');
-// 	var moversList = document.querySelectorAll('.mui-control-content');
-// 	var curItem;
-// 	for (var i = 0; i < stairslist.length; i++) {
-// 		if (stairslist[i].classList.contains('mui-active')) {
-// 			curItem = stairslist[i];
-// 			break;
-// 		}
-// 	}
-// 	var curstairsID = curItem.getAttribute('href').substring(9);
-// 	var showItem = null;
-// 	for (var i = 0; i < moversList.length; i++) {
-// 		if (moversList[i].id.substring(8) == curstairsID) {
-// 			showItem = moversList[i];
-// 			break;
-// 		}
-// 	}
-// 	//如果现在没有content来显示 则马上请求 这个数据
-// 	if (showItem) {
-// 		showItem.classList.add('mui-active');
-// 	} else {
-// 		get_sub_categoryByParentID(curstairsID);
-// 	}
-// }
+/**
+ * 绑定事件
+ * @author xuezhenxiang
+ */ 
+function bindEvent(){
 
-// function get_categoryMoversStateByID(parentID) {
-// 	for (var i = 0; i < categoryMovers.length; i++) {
-// 		if (categoryMovers[i].parentID == parentID) {
-// 			return categoryMovers[i];
-// 		}
-// 	}
-// 	return null;
-// };
+	// 筛选数据
+	$("#sort").on("click", "li", function(){
+		var sortType = $(this).attr("sortType") || "";
+		var flag = $(this).hasClass("active"); // 当前是否选中
+		var lId = $(this).attr("id");
+
+		if(flag && lId != "costNum"){
+			return false;
+		}
+
+		if(lId == "costNum"){
+			if(sortType == 3){
+				$(this).attr("sortType", 4);
+				$(".topImg").attr("src","image/gray.png");
+				$(".bottomImg").attr("src", "image/color.png");
+			}else{
+				$(this).attr("sortType", 3);
+				$(".topImg").attr("src", "image/color.png");
+				$(".bottomImg").attr("src", "image/gray.png");
+			}
+		}else{
+			$(this).attr("sortType", 3);
+			$(".topImg").attr("src", "image/gray.png");
+			$(".bottomImg").attr("src", "image/gray.png");
+		}
+
+		$(this).addClass("active").siblings().removeClass("active");
+		
+		
+		$("#scroll").animate({scrollTop: 0},10);	
+		$("#mallListID").html("");
+		pageNo = 1;
+		loadFlag == 1;
+		getGoodsList();
+	});	
+};
 
 /**
  * 获取所有商品
  * @author xuezhenxiang
  */
 function getGoodsList(){
+	var formData = new FormData();
+	mui.toast(pageNo);
+	formData.append("pageNo", pageNo);
+	formData.append("pageSize", pageSize);
+	if(mallCategory0Id){
+		formData.append("mallCategory0Id", mallCategory0Id);
+	}
+
+	if(mallCategory2Id){
+		formData.append("mallCategory2Id", mallCategory2Id);
+	}
+
+	if(mallBrandId){
+		formData.append("mallBrandId", mallBrandId);
+	}
+	
+	formData.append("orderByField", orderByField);
+	formData.append("orderByType", orderByType);
+
 	$.ajax({
 		url: prefix + "/goods/searchGoods",
 		type: 'POST',
-		data: {
-			pageNo: pageNo,
-			pageSize: pageSize,
-			mallCategory0Id: mallCategory0Id,
-			mallCategory2Id: mallCategory2Id,
-			mallBrandId: mallBrandId,
-			orderByField: orderByField,
-			orderByType: orderByType
-		},
+		data: formData,
+		contentType: false,
+	 	processData: false,  
 		dataType: "json",
 		success: function(res){
 			// 打印请求报错日志
 			ajaxLog(res);
 
 			if(res.resCode == 0){
-				pageNo++;
-				
+				var nCount = res.result.count;
 				var goodsList = res.result.list;
+
+				if(nCount == 0){
+					$("#shopPingNullTemp").show();
+					return false;
+				}else{
+					$("#shopPingNullTemp").hide();
+				}
+
+				if(goodsList.length == 0){
+					return false;
+				}
 
 				for (var i = 0; i < goodsList.length; i++) {
 					var goodsId = goodsList[i].id; // 商品id
 					var strGoodsName = goodsList[i].strGoodsName; // 商品名称
+					var strIntroduce = goodsList[i].strIntroduce; // 商品名称
 					var strMainImg = goodsList[i].strMainImg; // 商品图片
 					var allStock = goodsList[i].allStock; // 商品库存
 					var skuPrice = goodsList[i].defaultSkuPrice; // 商品库存
-					var mallListTemp = $("#mallListTemp").html();
+					var goodsTemp = $("#goodsTemp").html();
 
-					mallListTemp = mallListTemp.replace("#strLogoURL#", strLogoURL);
-					mallListTemp = mallListTemp.replace("#strTitle#", strTitle);
-					mallListTemp = mallListTemp.replace("#skuPrice#", skuPrice);
+					goodsTemp = goodsTemp.replace("#strMainImg#", strMainImg);
+					goodsTemp = goodsTemp.replace("#strGoodsName#", strGoodsName);
+					goodsTemp = goodsTemp.replace("#strIntroduce#", strIntroduce);
+					goodsTemp = goodsTemp.replace("#skuPrice#", skuPrice);
 
-					var mallListDom = $(mallListTemp);
+					var mallListDom = $(goodsTemp);
 
 					;(function(mallListDom, goodsId){
 						// 点击一级分类
@@ -221,18 +178,32 @@ function getGoodsList(){
 							});
 						});
 
-
-
 					})(mallListDom, goodsId);
 
-					$("#categoryStair").append(categoryStairDom);
+					$("#mallListID").append(mallListDom);
 				}
-				
-				//设置初始化第一个的mui-active
-				$('.mui-control-item').eq(0).trigger("click");
-				
+
+				pageNo++;
+				loadFlag = 1;
 			}
 		}
 	});
 };
 
+/**
+ * 屏幕滚动后加载列表
+ */
+var loadFlag = 1;
+$(window).scroll(function(){
+    var scrollTop = $(window).scrollTop();	// 滚动高度		    
+    var scrollHeight = $(document).height(); // 文档高度
+	var windowHeight = $(window).height(); // 文档窗口高度
+	
+	if (scrollTop + windowHeight >= scrollHeight - 300) {
+		if(loadFlag == 1){
+			loadFlag = 0;
+			getGoodsList();
+		}
+	}
+
+});

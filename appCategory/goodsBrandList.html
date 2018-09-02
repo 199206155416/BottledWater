@@ -14,10 +14,10 @@
 	<header class="header">
 	    <img src="../common/image/back@2x.png" alt="" class="back mui-action-back">
 	    <h1 class="title" id="mallUp"></h1>
-	    <ul class="tab-list">
-	    	<li class="synthesizeSort active" id="synthesizeSort" sortType="1">综合</li>
-			<li id="saleNum" sortType="20">销量</li>
-			<li id="costNum" sortType="21">价格
+	    <ul class="tab-list" id="sort">
+	    	<li class="synthesizeSort active" id="synthesizeSort" sortType="-1">综合</li>
+			<li id="saleNum" sortType="default_sku_sale_num">销量</li>
+			<li id="costNum" sortType="defaultSkuPrice">价格
 				<span id="" class="priceSort">
 					<img src="image/gray.png" class="priceImg topImg"/>
 					<img src="image/gray.png" class="priceImg bottomImg"/>
@@ -29,21 +29,19 @@
 
 	<div class="mui-content">
 		<!-- 商品列表模板 -->
-		<div id="mallListTemp" style="display: none">
+		<div id="goodsTemp" style="display: none">
 			<li>				
 				<div class="widthpad">
 					<div class="cutLimg">		
 					    <div class="lootAll">已抢光</div>
-						<img src="#strLogoURL#"/>
+						<img src="#strMainImg#"/>
 					</div>			
 					<div class="rightMallcontent clearfix">
-						<div class="hrTitle">#strTitle#</div>
-						<div class="mallActivity">#strNotice#</div>
-						
-						<!-- 全额使用 -->
+						<div class="hrTitle">#strGoodsName#</div>
+						<div class="mallActivity">#strIntroduce#</div>
 						<div id="quane" class="quane">
 							<div class="goodsLeftsfMoney">
-								<div class="sfText">售价：</div><div class="sfLeftMoney">¥#nPrice1#</div>
+								<div class="sfText">售价：</div><div class="sfLeftMoney">¥#skuPrice#</div>
 							</div>
 						</div>
 					</div>			
@@ -56,7 +54,18 @@
 				
 			</ul>
 		</div>
+
+		<!-- 查询无结果 -->
+		<div id="shopPingNullTemp" style="display: none">
+	        <div class="empty">
+	            <img class="empty_img" src="../common/image/blank.png" />
+	            <p>没有数据...</p>
+	        </div>
+	    </div>
 	</div>		
+
+	
+
 	<!--筛选品牌弹出层背景-->
 	<div class="brandFilter">
 		<div class="brandName">

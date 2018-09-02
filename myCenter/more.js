@@ -75,7 +75,6 @@ function addListevent() {
 		var id = $(this).attr("id");
 		
 		var aniShow = getaniShow();
-		console.log(id);
 
 		pushWebView({
 			webType: 'newWebview_First',

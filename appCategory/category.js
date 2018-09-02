@@ -225,13 +225,25 @@ function renderChildCategory(brands, secondCategoryList){
 			brandListTemplate = brandListTemplate.replace("#strBrandImg#", strBrandImg);
 
 			var brandDom = $(brandListTemplate);
-			;(function(brandDom){
-
-			})(brandDom);
+			;(function(brandDom, strBrandName){
+				brandDom.on("click", function(){
+					pushWebView({
+						webType: 'newWebview_First',
+						id: 'appCategory/goodsBrandList.html',
+						href: 'appCategory/goodsBrandList.html',
+						aniShow: getaniShow(),
+						title: strBrandName,
+						isBars: false,
+						barsIcon: '',
+						extendOptions: {
+							title: strBrandName,
+						}
+					});
+				})
+			})(brandDom, strBrandName);
 
 			$("#brandList").append(brandDom);
 		}
-
 
 		$("#hotBrand").show();
 	}
@@ -259,9 +271,22 @@ function renderChildCategory(brands, secondCategoryList){
 				thirdCategoryTemplate = thirdCategoryTemplate.replace("#thirdCategoryName#", thirdCategoryName);
 
 				var thirdCategoryDom = $(thirdCategoryTemplate);
-				;(function(thirdCategoryDom){
-
-				})(thirdCategoryDom);
+				;(function(thirdCategoryDom, thirdCategoryName){
+					thirdCategoryDom.on("click", function(){
+						pushWebView({
+							webType: 'newWebview_First',
+							id: 'appCategory/goodsBrandList.html',
+							href: 'appCategory/goodsBrandList.html',
+							aniShow: getaniShow(),
+							title: thirdCategoryName,
+							isBars: false,
+							barsIcon: '',
+							extendOptions: {
+								title: thirdCategoryName,
+							}
+						});
+					});
+				})(thirdCategoryDom, thirdCategoryName);
 
 				secondCategoryDom.find(".categoryListID").append(thirdCategoryDom);
 			}

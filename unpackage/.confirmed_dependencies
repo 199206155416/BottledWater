@@ -50,7 +50,8 @@
 			"myCenter/myBucket.html",
 			"login/changePayPassword.html",
 			"appCart/cart.html",
-			"login/changePassword.html"
+			"login/changePassword.html",
+			"appCategory/goodsBrandList.html"
 		],
 		"resources": [
 			"common/css/own.css",

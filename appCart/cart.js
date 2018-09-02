@@ -70,8 +70,6 @@ mui.plusReady(function(){
 
 	//接收添加购物车事件事件
 	window.addEventListener('addCart', function() {
-		console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzz")
-
 		// 先清空列表
 		$("#shopList").html("");
 		getCartList();
