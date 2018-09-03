@@ -115,7 +115,7 @@ function bindEvent(){
 					"mallGoodsSku.id": list[i].mallGoodsSku.id,
 					"goodsFactPrice": list[i].mallGoodsSku.skuPrice,
 					"strGoodsImg": list[i].strSpuImg,
-					"strIntroduce": list[i].strIntroduce,
+					"strSku": list[i].strIntroduce,
 					"strSkuName": list[i].mallGoodsSku.strSkuName,
 					"nCount": list[i].skuCount
 				})

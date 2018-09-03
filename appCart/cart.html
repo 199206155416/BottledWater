@@ -18,8 +18,23 @@
 	    <h1 class="mui-title">购物车</h1>
 	    <a class="mui-icon mui-icon-right-nav mui-pull-right" style="font-size: .28rem; line-height: .88rem; padding: 0 10px;" id="edit">编辑</a>
 	</header>
-    
-    <div id="goodsTemplate" style="display: none">
+
+    <div id="shopPingNullTemp" style="display: none">
+        <div class="empty">
+            <img class="empty_img" src="../common/image/blank.png" />
+            <p>购物车空空如也...</p>
+        </div>
+    </div>
+
+    <div id="container">
+        <div class="shopList">
+            <ul id="shopList">
+            	
+            </ul>
+        </div>
+    </div>
+
+    <div id="goodsTemplate" style="display: none;">
         <li class="mui-table-view-cell mui_list mui-transitioning" lGoodsSKUId="#lGoodsSKUId#" lId="#lId#" id="shoppingList_#lGoodsIdLid#">
             <div onclick="deleteitem(this,event)" class="mui-slider-right mui-disabled">
                 <a class="mui-btn mui-btn-red">删除</a>
@@ -48,21 +63,6 @@
                 </div>
             </div>
         </li>
-    </div>
-
-    <div id="shopPingNullTemp" style="display: none">
-        <div class="empty">
-            <img class="empty_img" src="../common/image/blank.png" />
-            <p>购物车空空如也...</p>
-        </div>
-    </div>
-
-    <div id="container">
-        <div class="shopList">
-            <ul id="shopList">
-            	
-            </ul>
-        </div>
     </div>
     <div class="shopBottomFixd" id="shopBottomFixd">
     	<div class="shop-bottom-wrap">

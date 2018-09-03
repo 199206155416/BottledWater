@@ -245,7 +245,9 @@
 					"login/changePayPassword.html",
 					"appCart/cart.html",
 					"login/changePassword.html",
-					"appCategory/goodsBrandList.html"
+					"appCategory/goodsBrandList.html",
+					"myCenter/about.html",
+					"myCenter/agreement.html"
 				],
 				"priority": 0
 			},

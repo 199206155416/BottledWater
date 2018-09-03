@@ -120,11 +120,16 @@ function getGoodsList(){
 				var result = e.result;
 
 				for(var i = 0, len = result.length; i < len; i++){
-					var activityImg = "./image/1.jpg";
+					var activityImg = result[i].mallCategory.strImg;
 					var mallGoodsList = result[i].mallGoodsList;
 					var htmlTemplate = $("#goodsListTemplate").html();
 
-					htmlTemplate = htmlTemplate.replace("#activityImg#", activityImg);
+					if(activityImg){
+						htmlTemplate = htmlTemplate.replace("#activityImg#", "<img src='"+ activityImg +"' />");
+					}else{
+						htmlTemplate = htmlTemplate.replace("#activityImg#", "");
+					}
+					
 
 					var goodslist = $(htmlTemplate);
 
@@ -138,8 +143,8 @@ function getGoodsList(){
 						var goodsTemplate = $("#goodsTemplate").html();
 						goodsTemplate = goodsTemplate.replace("#id#", id);
 						goodsTemplate = goodsTemplate.replace("#strMainImg#", strMainImg);
-						goodsTemplate = goodsTemplate.replace("#strGoodsName#", strGoodsName);
-						goodsTemplate = goodsTemplate.replace("#goodsSlogn#", goodsSlogn);
+						goodsTemplate = goodsTemplate.replace("#strGoodsName#", commonNameSubstr(strGoodsName, 34));
+						goodsTemplate = goodsTemplate.replace("#goodsSlogn#", commonNameSubstr(goodsSlogn, 28));
 						goodsTemplate = goodsTemplate.replace("#defaultSkuPrice#", defaultSkuPrice);
 
 						var goods = $(goodsTemplate);

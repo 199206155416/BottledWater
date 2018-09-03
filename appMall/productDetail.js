@@ -1,5 +1,7 @@
 var mallGoods = null;
 var attrMap = null;
+var slideImgList = null;
+var currentSku = ""; // 已选择sku
 var currentWebview; // 当前子页面
 var paredntWebview; // 父页面
 var goodsId; // 商品id
@@ -53,14 +55,22 @@ function getGoodsDetail(){
 				mallGoods = {
 					strSkuId: result.mallGoods.strDefaultSkuId,
 					strSkuName: result.mallGoods.strDefaultSkuName,
+					remarks: result.mallGoods.remarks,
 					strIntroduce: result.mallGoods.strIntroduce,
 					nSkuPrice: result.mallGoods.defaultSkuPrice,
-					strGoodsImg: result.mallGoods.strDetailMainImg,
 					strDetailIcon: result.mallGoods.strDetailIcon,
 					nSaleNum: result.mallGoods.defaultSkuSaleNum
 				};
 
+				
+
+				slideImgList = result.mallGoods.strDetailMainImg.split("|");
+
 				attrMap = result.attrMap;
+
+				for(var i in attrMap){
+					currentSku += attrMap[i][0] + " ";
+				}
 				setHtml();
 			}
 		}
@@ -82,7 +92,7 @@ function setHtml() {
  * @author xuezhenxiang
  */
 function setSldiderHtml(focusImgs){
-	var focusImgs = mallGoods; // 图片
+	var focusImgs = slideImgList; // 图片
 	var focusImgHtml = "";
 	for(var i = 0; i < focusImgs.length; i++){
 		focusImgHtml += "<div class='swiper-slide'><img src="+ focusImgs +" class='slide_img'/></div>";
@@ -94,10 +104,50 @@ function setSldiderHtml(focusImgs){
 		pagination : '.swiper-pagination',
 		paginationClickable :true,
 		autoplayDisableOnInteraction:false,
-		loop : false,
 		initialSlide :0,
 		resistanceRatio : 0
 	});
+};
+
+/**
+ * 第二步设置商品名字价钱等
+ * @author xuezhenxiang
+ */
+function setproductMessage(){
+	var strGoodsName = mallGoods.strSkuName;
+	var strIntroduce = mallGoods.strIntroduce;
+	var remarks = mallGoods.remarks;
+	var nSkuPrice = mallGoods.nSkuPrice;
+	var strDetailIcon = mallGoods.strDetailIcon;
+	var nSaleNum = mallGoods.nSaleNum;
+
+	$("#strDetailName, #strDetailName1").html(strGoodsName); // 商品名称
+	$("#strNotice").html(remarks); // 商品描述
+	$("#nPrice, #nPrice1").html("<span>￥</span>" + nSkuPrice); // 商品价格
+	$("#saleNum").html("已售 " + nSaleNum); // 商品已售
+	$("#appendRove").html(currentSku); // 当前商品sku信息
+	$("#selectIMG").attr("src", strDetailIcon);
+	$("#mallDetail").html(strIntroduce); // 商品规格图片
+};
+
+/**
+ * 设置sku选择
+ * @author xuezhenxiang
+ */ 
+function setChooseSku(){
+	var strHtml = ""
+	for(var i in attrMap){
+		strHtml += "<div class='class'><h3>"+ i +"</h3>";
+		for(var ii = 0,ll = attrMap[i].length; ii < ll; ii++){
+			if(ii == 0){
+				strHtml += "<span class='row' name="+ i +">"+ attrMap[i] +"</span>";
+			}else{
+				strHtml += "<span name="+ i +">"+ attrMap[i] +"</span>";
+			}
+		}
+		strHtml += "</div>";
+	}
+	$("#mallSku").html(strHtml);
 };
 
 /**
@@ -179,8 +229,8 @@ function bindEvent(){
 						{
 							"mallGoodsSku.id": mallGoods.strSkuId,
 							"goodsFactPrice": mallGoods.nSkuPrice,
-							"strGoodsImg": mallGoods.strGoodsImg,
-							"strIntroduce": mallGoods.strIntroduce,
+							"strGoodsImg": mallGoods.strDetailIcon,
+							"strSku": currentSku,
 							"strSkuName": mallGoods.strSkuName,
 							"nCount": nCount
 						}
@@ -226,6 +276,7 @@ function bindEvent(){
 	$("#mallSku").on("click", "span", function(){
 		var flag = $(this).hasClass("row");
 		var name = $(this).attr("name");
+		currentSku = "";
 
 		if(!flag){
 			$(this).addClass("row").siblings().removeClass("row");
@@ -241,6 +292,8 @@ function bindEvent(){
 
 				formData.append("mallSkuAttrList["+i+"].strAttrName", strAttrName);
 				formData.append("mallSkuAttrList["+i+"].strSttrValue", strSttrValue);
+
+				currentSku += strSttrValue + " ";
 			});
 			
 			$.ajax({
@@ -290,41 +343,3 @@ function bindEvent(){
 
 };
 
-/**
- * 第二步设置商品名字价钱等
- * @author xuezhenxiang
- */
-function setproductMessage(){
-	var strGoodsName = mallGoods.strSkuName;
-	var strIntroduce = mallGoods.strIntroduce;
-	var nSkuPrice = mallGoods.nSkuPrice;
-	var strDetailIcon = mallGoods.strDetailIcon;
-	var nSaleNum = mallGoods.nSaleNum;
-
-	$("#strDetailName, #strDetailName1").html(strGoodsName); // 商品名称
-	$("#strNotice").html(strIntroduce); // 商品描述
-	$("#nPrice, #nPrice1").html("<span>￥</span>" + nSkuPrice); // 商品价格
-	$("#saleNum").html("已售 " + nSaleNum); // 商品已售
-	$("#appendRove").html("浆果红，4G+64G，移动联通电信"); // 当前商品sku信息
-	$("#mallDetail").html("<img src='' />"); // 商品规格图片
-};
-
-/**
- * 设置sku选择
- * @author xuezhenxiang
- */ 
-function setChooseSku(){
-	var strHtml = ""
-	for(var i in attrMap){
-		strHtml += "<div class='class'><h3>"+ i +"</h3>";
-		for(var ii = 0,ll = attrMap[i].length; ii < ll; ii++){
-			if(ii == 0){
-				strHtml += "<span class='row' name="+ i +">"+ attrMap[i] +"</span>";
-			}else{
-				strHtml += "<span name="+ i +">"+ attrMap[i] +"</span>";
-			}
-		}
-		strHtml += "</div>";
-	}
-	$("#mallSku").html(strHtml);
-};

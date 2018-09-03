@@ -98,20 +98,16 @@ body{
 	height: 100%;
 }
 .detailContent {
-
 	width: 7.5rem;
 	background: #FFFFFF;
 	padding-bottom: 0.22rem;
 	text-align: justify;
-        position: relative;
-
+    position: relative;
 }
 .detailContent p{
-	
 	color: #999999;
 	font-size:0.24rem;
-        width: calc(100% - 1.62rem);
-	padding:0 0 0.3rem 0.28rem;
+	padding:0 .3rem 0.3rem 0.3rem;
 	
 }
 .detailContent h3 {
@@ -119,7 +115,7 @@ body{
 	line-height: .34rem;
 	color: #555;
 	font-weight: 500;
-	padding: 0.22rem .3rem 0.15rem .3rem;
+	padding: 0.2rem .3rem 0.15rem .3rem;
 }
 .detailContent .sale{
 	float: left;

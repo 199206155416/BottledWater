@@ -75,19 +75,23 @@ body {
 .goodsContainer .goodsExplain {
 	color: #555555;
 	font-size: 0.26rem;	
+	line-height: .34rem;
+	height: .38rem;
+	overflow: hidden;
 	margin-bottom: 0.2rem;	
 }
 .goodsContainer .goodsSKUName {
 	color: #999999;
-	position:relative;
-	font-size: 0.26rem;
+	position: relative;
+	font-size: 0.24rem;
+	line-height: 0.4rem;
 	width: 4.6rem;
 	/* padding: 0.02rem 0 0.05rem 0.05rem; */
 	height: 0.4rem;
-	line-height: 0.4rem;
+	
 }
 .paseEditBack .goodsSpanSkuName {
-padding-left:0.1rem;
+	padding-left:0.1rem;
 }
 .goodsSKUnPrice {
 	color: #60a3fb;
@@ -115,48 +119,72 @@ padding-left:0.1rem;
 .goodsSKUnPrice span {
 	color: #666666;
 }
+.shopListCont{
+	position: relative;
+}
 .goodsNum {
-	width: auto;
-    height: 0.46rem;
-    display: inline-block;
+	position: absolute;
+	right: .3rem;
+	bottom: .3rem;
+	width: 1.48rem;
+    height: 0.44rem;
     border: 1px solid #cccccc;
-    line-height: 0.46rem;
-    /* overflow: hidden; */
-    float: right;
     border-radius: 0.04rem;
-    margin: 0.35rem 0rem 0 0;
-        position: relative;
-        margin-right: -0.16rem;
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    -webkit-align-items: center;
+    box-sizing: content-box;
+
 }
 .goodsNum .left {
-	float: left;
-	text-align:center;
+	flex-shrink: 0;
+	-webkit-flex-shrink: 0;
 	width: 0.44rem;
-	height: 0.44rem;
-	border-right: 1px solid #cccccc;
-	line-height: 0.4rem;
+	text-align:center;
+	line-height: 0rem;
     color: #777;
     font-size: 0.36rem;
 }
+.goodsNum .left:after{
+	content: "";
+	position: absolute;
+	left: .44rem;
+	top: 0;
+	width: 1px;
+	height: .44rem;
+	background: #ccc;
+}
 .goodsNum .contentNum {
-	float: left;
+	flex: 1;
+	-webkit-flex: 1;
+	flex-shrink: 0;
+	-webkit-flex-shrink: 0;
 	text-align:center;
-	width: 0.6rem;
-	height: 0.44rem;
-	line-height: 0.43rem;
+	font-size: .28rem;
+	line-height: .44rem;
+	color: #666;
+}
+.goodsNum .right:after{
+	content: "";
+	position: absolute;
+	right: .44rem;
+	top: 0;
+	width: 1px;
+	height: .44rem;
+	background: #ccc;
 }
 .goodsNum .right {
-	float: left;
-	text-align:center;
+	flex-shrink: 0;
+	-webkit-flex-shrink: 0;
 	width: 0.44rem;
-	height: 0.44rem;
-	border-left: 1px solid #cccccc;
-	line-height: 0.4rem;
+	line-height: 0rem;
+	text-align:center;
     color: #777;
     font-size: 0.36rem;
 }
 .insut{
-	 width: 1.5rem;
+	width: 1.5rem;
     height: 0.4rem;
     line-height: 0.4rem;
     font-size: 0.24rem;
