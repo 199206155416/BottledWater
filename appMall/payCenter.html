@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0"/>
+	<meta name="format-detection" content="telephone=no">
+	<link type="text/css" rel="stylesheet"  href="../common/css/mui.min.css">
+	<link type="text/css" rel="stylesheet"  href="../common/css/swiper.min.css">
+	<link rel="stylesheet" href="../common/css/public.css">
+	<link rel="stylesheet" href="css/payCenter.css">	
+	<script src="../common/js/remScale.js"></script>
+	<title>支付中心</title>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	    <h1 class="mui-title">支付方式</h1>
+	</header>
+    
+    <div class="mui-content">
+    	<div class="need-pay">
+    		<p class="need-pay-label">需要支付：</p>
+    		<p class="need-pay-price">￥40.00</p>
+    	</div>
+
+    	<div class="pay-type-list-title">
+    		<span>支付方式</span>
+    	</div>
+    	<ul class="table-view">
+		    <li class="table-view-cell media">
+	            <img class="pull-left" src="./image/account.png">
+	            <div class="media-body">
+	            	<p class="media-title">账户余额：￥123</p>
+	            </div>
+	            <div class="charge">充值</div>
+		    </li>
+		    <li class="table-view-cell media">
+	            <img class="media-object pull-left" src="./image/alipay.png">
+	            <div class="media-body">
+	            	<p class="media-title">支付宝</p>
+	                <p class='ellipsis'>支付宝安全支付</p>
+	            </div>
+		    </li>
+		    <li class="table-view-cell media">
+	            <img class="media-object pull-left" style="height: .38rem;" src="./image/wechat.png">
+	            <div class="media-body">
+	            	<p class="media-title">微信支付</p>
+	                <p class='ellipsis'>微信安全支付</p>
+	            </div>
+		    </li>
+		    <li class="table-view-cell media">
+	            <img class="media-object pull-left" style="width: .46rem;height: .34rem" src="./image/card.png">
+	            <div class="media-body">
+	            	<p class="media-title">货到付款/线下水票</p>
+	                <p class='ellipsis'>快速付款，操作简单</p>
+	            </div>
+		    </li>
+		</ul>
+    </div>
+		
+	<script type="text/javascript" src="../common/js/include.js" level="1"></script>
+	<script type="text/javascript" src="../common/js/swiper.min.js"></script>
+	<script type="text/javascript" src="payCenter.js"></script>
+</body>
+</html>

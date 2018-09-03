@@ -1,0 +1,87 @@
+body{
+	background: #f4f4f4;
+}
+
+.need-pay{
+	background: #fff;
+	height: .88rem;
+	margin-bottom: .2rem;
+	padding: 0 .3rem;
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	align-items: center;
+	-webkit-align-items: center;
+}
+.need-pay-label{
+	font-size: .28rem;
+	line-height: .36rem;
+	color: #666;
+}
+.need-pay-price{
+	font-size: .32rem;
+	line-height: .36rem;
+	color: #ff2a2a;
+}
+
+.pay-type-list-title{
+	font-size: .28rem;
+	line-height: .7rem;
+	color: #666;
+	padding-left: .3rem;
+}
+.table-view{
+	background: #fff;
+
+}
+.table-view-cell{
+	height: 1.2rem;
+	position: relative;
+	display: flex;
+	display: -webkit-flex;
+	padding: 0 .3rem;
+	align-items: center;
+	-webkit-align-items: center;
+}
+.table-view-cell:after{
+	content: "";
+	position: absolute;
+	left: .3rem;
+	bottom: 0;
+	width: 100%;
+	height: 1px;
+	background: #ccc;
+	transform: scaleY(.5);
+	-webkit-transform: scaleY(.5);
+}
+.table-view-cell .pull-left{
+	width: .44rem;
+	height: .44rem;
+}
+.media-body{
+	padding-left: .2rem;
+}
+.media-title{
+	font-size: .28rem;
+	line-height: .38rem;
+	color: #555;
+}
+.ellipsis{
+	font-size: .24rem;
+	line-height: .38rem;
+	color: #999;
+}
+.charge{
+	position: absolute;
+	right: .3rem;
+	top: .3rem;
+	width: 1rem;
+	height: .6rem;
+	box-shadow: 0 0 0 1px #60a3fb;
+	font-size: .28rem;
+	line-height: .6rem;
+	color: #60a3fb;
+	text-align: center;
+	border-radius: .08rem;
+}
