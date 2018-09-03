@@ -184,8 +184,11 @@ function bindEvent(){
 							"strSkuName": mallGoods.strSkuName,
 							"nCount": nCount
 						}
-					]
+					],
+				buyType:0
+					
 				}
+
 			});
 		}else if(buyNowFlag == 1){
 			var formData = new FormData();
