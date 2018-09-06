@@ -346,7 +346,7 @@ body {
 }
 .detailFootBottom .sfkMoney {
 	padding-left: 0.3rem;
-	color: #fc761c;
+	color: #555;
 	display:inline-block;
 	font-size: 0.28rem;
 }
@@ -360,13 +360,11 @@ body {
 }
 .paysWidth {
 	float:left;
-	display:none;
-	
 }
 
 .detailFootBottom .sfkPstMoney {
 	padding-left: 0.3rem;
-	color: #fc761c;
+	color: #555;
 	display:block;
 	font-size: 0.28rem;
 	position: absolute;
@@ -869,6 +867,12 @@ body {
 	line-height: .4rem;
 	color: #666;
 	margin-bottom: .3rem;
+}
+.confirm-content li p{
+	
+	font-size: .3rem;
+	line-height: .4rem;
+	color: #666;
 }
 .confirm-footer{
 	display: flex;
