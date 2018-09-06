@@ -134,11 +134,11 @@ function getGoodsList(){
 					var goodslist = $(htmlTemplate);
 
 					for(var i1 = 0, len1 = mallGoodsList.length; i1 < len1; i1++){
-						var id = mallGoodsList[i].id;
-						var strGoodsName = mallGoodsList[i].strGoodsName;
-						var strMainImg = mallGoodsList[i].strMainImg;
-						var goodsSlogn = mallGoodsList[i].goodsSlogn || "张三李四";
-						var defaultSkuPrice = mallGoodsList[i].defaultSkuPrice;
+						var id = mallGoodsList[i1].id;
+						var strGoodsName = mallGoodsList[i1].strGoodsName;
+						var strMainImg = mallGoodsList[i1].strMainImg;
+						var goodsSlogn = mallGoodsList[i1].goodsSlogn || "张三李四";
+						var defaultSkuPrice = mallGoodsList[i1].defaultSkuPrice;
 
 						var goodsTemplate = $("#goodsTemplate").html();
 						goodsTemplate = goodsTemplate.replace("#id#", id);
