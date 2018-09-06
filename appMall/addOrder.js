@@ -124,6 +124,7 @@ function setProduct(){
 	for(var i = 0, len = goodsList.length; i < len; i++){
 		var strGoodsImg = goodsList[i]["strMainImg"];
 		var strSkuName = goodsList[i]["strSkuName"];
+		var strSku = goodsList[i]["strSku"];
 		var remarks = goodsList[i]["remarks"];
 		var goodsFactPrice = goodsList[i]["skuPrice"];
 		var nCount = goodsList[i]["count"];
@@ -132,6 +133,7 @@ function setProduct(){
 
 		goodsTemplate = goodsTemplate.replace("#strGoodsImg#", strGoodsImg);
 		goodsTemplate = goodsTemplate.replace("#strSkuName#", strSkuName);
+		goodsTemplate = goodsTemplate.replace("#strSku#", strSku);
 		goodsTemplate = goodsTemplate.replace("#remarks#", remarks);
 		goodsTemplate = goodsTemplate.replace("#goodsFactPrice#", goodsFactPrice);
 		goodsTemplate = goodsTemplate.replace("#nCount#", nCount);

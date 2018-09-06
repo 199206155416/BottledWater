@@ -145,6 +145,25 @@
 			mui('.mui-bar-tab').on('tap','.mui-tab-item',function(){
 				var baritem = this;
 				var baritemurl = baritem.getAttribute('href'); 
+
+				if(baritemurl == "appCart/cart.html" || baritemurl == "myCenter/mine.html"){
+					//检测已经存在sessionkey否者运行下面的登陆代码
+					if (localStorage.getItem('userMobile') && localStorage.getItem('userId')) {} else {
+						id = "login/login.html";
+						aniShow = 'slide-in-bottom';
+
+						pushWebView({
+							webType: 'newWebview_First',
+							id: id,
+							href: id,
+							aniShow: aniShow,
+							extendOptions: {}
+						});
+
+						return false;
+					}
+				}
+
 				// indexof()如果为false返回－1所以前面加上~
 				if (!~curBarItemWebview.getURL().indexOf(baritemurl)) {
 					for (var i = 0; i < barItemArray.length; i++) {

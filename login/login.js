@@ -89,8 +89,7 @@ function login(){
 					// 存储启用状态
 					setStringValue("userLoginFlag", result.loginFlag);
 
-					mui.back();
-					mui.toast('登录成功');
+					
 
 					//添加事件接收close事件，并且要判断是否已经登录成功，然后页面close，因为login页面是预先加载的页面
 					//在这里向需要的页面发送消息事件通知已经登录做响应的处理
@@ -106,6 +105,9 @@ function login(){
 						mui.fire(xinyuandanwebview, 'loginSuccess', {});
 						loginWebview.close();
 					}, false);
+
+					mui.back();
+					mui.toast('登录成功');
 
 				}
 			}

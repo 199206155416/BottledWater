@@ -1,0 +1,62 @@
+body{
+	background: #f4f4f4;
+}
+.pay-result-card{
+	padding: .9rem 0 .8rem 0;
+	background: #fff;
+	position: relative;
+}
+.pay-result-card:after{
+	content: "";
+	position: absolute;
+	left: .3rem;
+	right: .3rem;
+	bottom: 0;
+	height: 1px;
+	background: #ccc;
+	transform: scaleY(.5);
+	-webkit-transform: scaleY(.5);
+}
+.pay-result-card img{
+	display: block;
+	margin: 0 auto .3rem auto;
+	width: 1.6rem;
+}
+.order-price{
+	font-size: .4rem;
+	line-height: .5rem;
+	color: #60a3fb;
+	text-align: center;
+}
+.pay-state-introduce{
+	font-size: .28rem;
+	line-height: .34rem;
+	color: #666;
+	text-align: center;
+}
+
+.order-infos {
+	padding: .2rem 0;
+	background: #fff;
+}
+.order-infos li{
+	background: #fff;
+	padding: 0 .3rem;
+	height: .8rem;
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	align-items: center;
+	-webkit-align-items: center;
+}
+.bar-label{
+	font-size: .28rem;
+	line-height: .34rem;
+	color: #555;
+}
+.bar-content{
+	font-size: .28rem;
+	line-height: .34rem;
+	color: #666;
+}

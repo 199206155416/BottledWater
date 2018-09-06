@@ -115,7 +115,7 @@ function bindEvent(){
 					"mallGoodsSku.id": list[i].mallGoodsSku.id,
 					"goodsFactPrice": list[i].mallGoodsSku.skuPrice,
 					"strGoodsImg": list[i].strSpuImg,
-					"strIntroduce": list[i].strIntroduce,
+					"strSku": list[i].strIntroduce,
 					"strSkuName": list[i].mallGoodsSku.strSkuName,
 					"nCount": list[i].skuCount
 				})
@@ -341,22 +341,20 @@ function deleteCartList(goodsList){
 			if(res.resCode == 0){
 				var list = cartObj.list;
 				var result = [];
+				var tempObj = {};
+
 				for(var i = 0, len = goodsList.length; i < len; i++){
 					var delId = goodsList[i].id;
-					var isExist = false;
 					$("#shopList li[lid="+ delId +"]").remove();
-
 					for(var j = 0, jLen = list.length; j < jLen; j++){
 					 	var allId = list[j].id;
-				        
-				        if(delId == delId){
-				            isExist = true;
-            				break;
-				        }
+					 	if(allId != delId){
+					 		tempObj[allId] = list[j];
+					 	}
 					}
-					if(!isExist){
-				        result.push(obj);
-				    }
+				}
+				for(var i in tempObj){
+					result.push(tempObj[i]);
 				}
 				mui.toast("删除成功");
 				cartObj.list = result;
