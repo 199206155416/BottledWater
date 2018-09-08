@@ -16,6 +16,8 @@ mui.plusReady(function() {
 	login();
 	// 点击跳转注册页
 	goToRegister();
+	// 点击忘记密码页
+	// forgetPassword();
 	
 	// //检测本地的登录过的账号。
 	// if (localStorage.getItem('account')) {
@@ -30,10 +32,10 @@ function forgetPassword(){
 	$("#forgetPassword").on("click", function(){
 		pushWebView({
 			webType: 'newWebview_First',
-			id: 'login/forgetPassword.html',
-			href: 'login/forgetPassword.html',
+			id: 'login/changePassword.html',
+			href: 'login/changePassword.html',
 			aniShow: getaniShow(),
-			title: "注册",
+			title: "忘记密码",
 			isBars: false,
 			barsIcon: '',
 			extendOptions: {}
@@ -99,10 +101,10 @@ function login(){
 						})
 						var cartwebview = plus.webview.getWebviewById('appCart/cart.html');
 						var minewebview = plus.webview.getWebviewById('myCenter/mine.html');
-						var xinyuandanwebview = plus.webview.getWebviewById('mallTicket/ticket.html');
+						
 						mui.fire(cartwebview, 'loginSuccess', {});
 						mui.fire(minewebview, 'loginSuccess', {});
-						mui.fire(xinyuandanwebview, 'loginSuccess', {});
+
 						loginWebview.close();
 					}, false);
 
