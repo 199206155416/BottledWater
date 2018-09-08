@@ -58,12 +58,14 @@ body{
 .user_name{
 	font-size: .28rem;
 	line-height: .4rem;
+	height: .4rem;
 	color: #fff;
 	text-align: center;
 }
 .user_phone{
 	font-size: .24rem;
 	line-height: .4rem;
+	height: .4rem;
 	color: #fff;
 	text-align: center;
 	margin-bottom: .2rem;
