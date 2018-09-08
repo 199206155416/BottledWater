@@ -1,5 +1,5 @@
 var currentWebview;
-var type = -1; // -1 == 全部， -2 == 待付款， -3 == 待发货， -4 == 待收货， -5 == 已完成, 默认为-1
+var type = 0; // -1 == 全部， -2 == 待付款， -3 == 待发货， -4 == 待收货， -5 == 已完成, 默认为-1
 var pageNo = 1;
 var pageSize = 20; 
 var loadFlag = 1; // 上拉加载标志
@@ -23,15 +23,11 @@ mui.init({
 mui.plusReady(function() {
 	currentWebview = plus.webview.currentWebview();
 	
-	type = currentWebview.type ? currentWebview.type : -1;
-	
-	renderTab(type);
-
 	// 获取订单列表
 	getOrderList();
 	
 	// 绑定事件
-	bindEvent();
+	bindEvnet();
 });
 
 function bindEvent(){
@@ -49,27 +45,6 @@ function bindEvent(){
 		}
 
 	});
-	
-	// 点击切换tab
-	$("#myTapWidth").on("click", "li", function(){
-		type = $(this).attr("type");
-		
-		$(this).addClass("row").siblings().removeClass("row");
-		
-		$("#goodsList").html("");
-		loadFlag = 1;
-		
-		getOrderList();
-		
-	});
-};
-
-/**
- * 渲染tab
- * @author xuezhenxiang
- * */
-function renderTab(type){
-	$("#myTapWidth li[type="+ type +"]").addClass("row").siblings().removeClass("row");
 };
 
 /**
@@ -123,7 +98,7 @@ function getOrderList(){
 
 					var orderList = $(htmlTemplate);
 					
-					;(function(orderList, lOrderId){
+					;(function(orderList){
 						orderList.on("click", function(){
 							pushWebView({
 								webType: 'newWebview_First',
@@ -133,12 +108,10 @@ function getOrderList(){
 								title: "订单详情",
 								isBars: false,
 								barsIcon: '',
-								extendOptions: {
-									strOrderId: lOrderId
-								}
+								extendOptions: extendOptions
 							});
 						});
-					})(orderList, lOrderId);
+					})(orderList);
 
 					for(var i1 = 0, len1 = mallGoodsList.length; i1 < len1; i1++){
 						var id = mallGoodsList[i1].id;

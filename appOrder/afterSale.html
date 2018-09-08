@@ -6,26 +6,28 @@
 	<meta name="format-detection" content="telephone=no">
 	<link rel="stylesheet" href="../common/css/mui.min.css">
 	<link rel="stylesheet" href="../common/css/public.css">
-	<link rel="stylesheet" href="css/orderList.css">
+	<link rel="stylesheet" href="css/afterSale.css">
 	<script src="../common/js/remScale.js"></script>
-	<title>我的订单</title>
+	<title>退款/售后</title>
 </head>
 <body>
 	<header class="mui-bar mui-bar-nav">
 	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-	    <h1 class="mui-title">我的订单</h1>
+	    <h1 class="mui-title">退款/售后</h1>
 	</header>
 	
-	<div class="completeOrderTap">
-		<ul id="myTapWidth">
-			<li type="-1" class="row">全部</li>
-			<li type="-2">待付款</li>
-			<li type="-3">待发货</li>
-			<li type="-4">待收货</li>
-			<li type="-5">已完成</li>
-		</ul>		
+	<div class="mui-content">
+		<!-- 订单列表 -->
+	    <ul id="orderListID">	
+			
+		</ul>	
+		<!-- 列表没有数据 -->
+		<div class="empty" id="orderNullTemp" style="display: none">
+			<img class="empty_img" src="../common/image/blank.png" />
+		</div>
 	</div>
 	
+	<!-- 订单列表模板 -->
 	<div id="orderListTemp" style="display: none">	
 		<li id="#lOrderId#" class="comOrderList">
 			 <div class="onclickBind">
@@ -60,18 +62,10 @@
 				<div class="payment">立即付款</div>
 				<div class="cancel">取消订单</div>
 			</div>
-			<!--<div class="logistics" style="display: none;">
-				<span class="refund" style="display: none;">查看退款</span>
-				<span class="wuliu" style="display: none;">查看物流</span>
-			</div>
-			<div id="downCount_#Did#" class="downCountClass">
-				<p>
-				请在<span id="payment_#PId#">45分23秒</span>内完成支付，超时订单自动关闭
-				</p>
-			</div>-->
 		</li>
 	</div>
 	
+	<!-- 商品模板 -->
 	<div id="goodsTemplate" style="display: none;">
 		<div class="comOrderGoods clearfix">
 			<div class="goods_img">
@@ -90,15 +84,7 @@
 		</div>
 	</div>
 	
-	<div class="completeOrderList">		
-		<ul id="orderListID">	
-			
-		</ul>	
-	</div>	
-	<div class="empty" id="orderNullTemp" style="display: none">
-		<img class="empty_img" src="../common/image/blank.png" />
-	</div>
 <script src="../common/js/include.js" level="1"></script>
-<script src="orderList.js"></script>
+<script src="afterSale.js"></script>
 </body>
 </html>
