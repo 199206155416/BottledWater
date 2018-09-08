@@ -113,7 +113,7 @@ function bindEvent(){
 					"mallGoodsSku.id": list[i].mallGoodsSku.id,
 					"goodsFactPrice": list[i].mallGoodsSku.skuPrice,
 					"strGoodsImg": list[i].strSpuImg,
-					"strSku": list[i].strIntroduce,
+					"strSku": list[i].mallGoodsSku.remarks,
 					"strSkuName": list[i].mallGoodsSku.strSkuName,
 					"nCount": list[i].skuCount
 				})
@@ -240,11 +240,13 @@ function getCartList(){
 					var strSpuId = result[i].strSpuId;
 					var strSpuImg = result[i].strSpuImg;
 					var skuCount = result[i].skuCount;
+					
 					var mallGoodsSku = {
 						id: result[i].mallGoodsSku.id,
 						strSkuName: result[i].mallGoodsSku.strSkuName,
 						skuStock: result[i].mallGoodsSku.skuStock,
 						skuPrice: result[i].mallGoodsSku.skuPrice,
+						remarks: result[i].mallGoodsSku.remarks,
 					};
 
 					var goodsTemplate = $("#goodsTemplate").html();
@@ -256,6 +258,8 @@ function getCartList(){
 					goodsTemplate = goodsTemplate.replace("#skuStock#", mallGoodsSku.skuStock);
 					goodsTemplate = goodsTemplate.replace("#skuCount#", skuCount);
 					goodsTemplate = goodsTemplate.replace("#curIndex#", i);
+					goodsTemplate = goodsTemplate.replace("#strSKUItemValues#", mallGoodsSku.remarks);
+					
 
 					cartObj.list[i].isCheck = 0;
 
