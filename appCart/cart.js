@@ -53,20 +53,18 @@ mui.plusReady(function(){
 	// 	}
 	// },false);
 	
-	// //特殊：添加事件接收登录页面成功后发来的消息
-	// window.addEventListener('loginSuccess',function(){
-	// 	//页面成功后，要隐藏登录模块，然后去加载数据返回
-	// 	needlogin.style.display = 'none';
-	// 	initCartData();
-	// },false);
+	//特殊：添加事件接收登录页面成功后发来的消息
+	window.addEventListener('loginSuccess',function(){
+		// 先清空列表
+		$("#shopList").html("");
+		getCartList();
+	},false);
 	
-	// //退出登录
-	// window.addEventListener('logout',function(){
-	// 	needlogin.style.display = 'block';
-	// 	var loginDiv =  document.querySelector('.login');
-	// 	loginDiv.innerHTML = '';
-	// 	cartSupplierItem = [];
-	// },false)
+ 	//退出登录
+ 	window.addEventListener('logout',function(){
+		// 先清空列表
+		$("#shopList").html("");
+ 	},false)
 
 	//接收添加购物车事件事件
 	window.addEventListener('addCart', function() {
