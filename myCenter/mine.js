@@ -113,19 +113,71 @@ function addListevent() {
 	
 	// 去订单页
 	$("#openOrder").on("click", '.item', function(){
+		var type = $(this).attr("type"); 
 		var aniShow = getaniShow();
 		//检测已经存在sessionkey否者运行下面的登陆代码
 		if (localStorage.getItem('userMobile') && localStorage.getItem('userId')) {} else {
 			id = "login/login.html";
 			aniShow = 'slide-in-bottom';
+			
+			pushWebView({
+				webType: 'newWebview_First',
+				id: id,
+				href: id,
+				aniShow: aniShow,
+				extendOptions: {}
+			})
+			return false;
 		}
+		
+		if(type == 5){
+			pushWebView({
+				webType: 'newWebview_First',
+				id: "appOrder/afterSale.html",
+				href: "appOrder/afterSale.html",
+				aniShow: aniShow,
+				extendOptions: {}
+			});
+			return false;
+		}
+		
 		pushWebView({
 			webType: 'newWebview_First',
-			id: "myCenter/message.html",
-			href: "myCenter/message.html",
+			id: "appOrder/orderList.html",
+			href: "appOrder/orderList.html",
 			aniShow: aniShow,
-			extendOptions: {}
-		})
+			extendOptions: {
+				type: type
+			}
+		});
+	});
+	// 全部订单
+	$("#myOrder").on("click", function(){
+		var aniShow = getaniShow();
+		//检测已经存在sessionkey否者运行下面的登陆代码
+		if (localStorage.getItem('userMobile') && localStorage.getItem('userId')) {} else {
+			id = "login/login.html";
+			aniShow = 'slide-in-bottom';
+			
+			pushWebView({
+				webType: 'newWebview_First',
+				id: id,
+				href: id,
+				aniShow: aniShow,
+				extendOptions: {}
+			})
+			return false;
+		}
+		
+		pushWebView({
+			webType: 'newWebview_First',
+			id: "appOrder/orderList.html",
+			href: "appOrder/orderList.html",
+			aniShow: aniShow,
+			extendOptions: {
+				type: -1
+			}
+		});
 	});
 };
 
