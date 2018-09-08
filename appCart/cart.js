@@ -355,11 +355,22 @@ function deleteCartList(goodsList){
 					 	}
 					}
 				}
-				for(var i in tempObj){
-					result.push(tempObj[i]);
+				
+				
+				for (var i = goodsList.length - 1; i >= 0; i--) {
+				    var delId = goodsList[i].id;
+				    $("#shopList li[lid="+ delId +"]").remove();
+				    for (var j = list.length - 1; j >= 0; j--) {
+				        var allId = list[j].id;
+				        if (allId != delId) {
+				            goodsList.splice(i, 1);
+				            list.splice(j, 1);
+				            break;
+				        }
+				    }
 				}
 				mui.toast("删除成功");
-				cartObj.list = result;
+				cartObj.list = list;
 				calculatePrice()
 			}
 		}
