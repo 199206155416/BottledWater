@@ -929,4 +929,5 @@ body {
 }
 .mui-popup-button:first-child{
 	border-right: 1px solid #f2f5f7;
+	color: #666 !important;
 }
