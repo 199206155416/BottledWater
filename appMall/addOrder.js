@@ -23,6 +23,7 @@ mui.plusReady(function() {
 	}, false);
 
 	goodsList = currentWebview.goodsList;
+	
 	buyType=currentWebview.buyType;
 
 	//如果要获取当前页面的数据
@@ -122,21 +123,20 @@ function queryDefaultAddress(){
  */
 function setProduct(){
 	for(var i = 0, len = goodsList.length; i < len; i++){
-		var strGoodsImg = goodsList[i]["strMainImg"];
 		var strSkuName = goodsList[i]["strSkuName"];
-		var strSku = goodsList[i]["strSku"];
+		var strGoodsImg = goodsList[i]["strMainImg"];
 		var remarks = goodsList[i]["remarks"];
-		var goodsFactPrice = goodsList[i]["skuPrice"];
-		var nCount = goodsList[i]["count"];
+		var goodsFactPrice = goodsList[i]["goodsFactPrice"];
+		var skuPrice = goodsList[i]["skuPrice"];
+		var count = goodsList[i]["count"];
 
 		var goodsTemplate = $("#goodsTemplate").html();
 
 		goodsTemplate = goodsTemplate.replace("#strGoodsImg#", strGoodsImg);
 		goodsTemplate = goodsTemplate.replace("#strSkuName#", strSkuName);
-		goodsTemplate = goodsTemplate.replace("#strSku#", strSku);
 		goodsTemplate = goodsTemplate.replace("#remarks#", remarks);
-		goodsTemplate = goodsTemplate.replace("#goodsFactPrice#", goodsFactPrice);
-		goodsTemplate = goodsTemplate.replace("#nCount#", nCount);
+		goodsTemplate = goodsTemplate.replace("#skuPrice#", skuPrice);
+		goodsTemplate = goodsTemplate.replace("#nCount#", count);
 
 		var goodsDom = $(goodsTemplate);
 		$("#goodsList").append(goodsDom);
@@ -157,7 +157,7 @@ function bindEvent(){
 	}else if(payType==2){
 		strPayText="账户余额";
 	}
-	var showCon="支付方式："+strPayText+"\n"+"支付金额："+factPrice;
+	var showCon="<div class='confirm-item'><p>支付方式：</p><p>"+strPayText+"</p></div><div class='confirm-item'><p>支付金额：</p><p>"+factPrice+"</p></div>";
 	//$("#payDailog").show();
 	$("#doPay").on("click", function(){
 		var btnArray = ['取消', '确认'];
