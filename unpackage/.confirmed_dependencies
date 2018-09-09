@@ -53,7 +53,8 @@
 			"login/changePassword.html",
 			"appCategory/goodsBrandList.html",
 			"myCenter/about.html",
-			"myCenter/agreement.html"
+			"myCenter/agreement.html",
+			"appOrder/orderList.html"
 		],
 		"resources": [
 			"common/css/own.css",

@@ -109,6 +109,21 @@ body {
 .goods_wid {
 	background: #fafafa;
 	padding: 0.05rem 0.3rem 0.05rem;
+	position: relative;
+}
+.goods_wid:before{
+	content: "";
+	position: absolute;
+	left: .3rem;
+	bottom: 0;
+	width: 100%;
+	height: 1px;
+	background: #ccc;
+	transform: scaleY(.5);
+	-webkit-transform: scaleY(.5);
+}
+.goods_wid:last-child:before{
+	height: 0;
 }
 .goodsDetailInfo {
 	padding: 0.2rem 0 0.19rem 0;
@@ -1099,4 +1114,113 @@ body {
 .rightContent .orderMoney .ordernum {
     font-size: 0.28rem;
     color: #999999;
+}
+/*==============================================================*/
+.order-state{
+	height: 1.3rem;
+	display: flex;
+	display: -webkit-flex;
+	justify-content: center;
+	-webkit-justify-content: center;
+	align-items: center;
+	-webkit-align-items: center;
+	margin-bottom: .2rem;
+	background: #fff;
+}
+.order-state p{
+	font-size: .28rem;
+	line-height: .36rem;
+	color: #60a3fb
+}
+.mallSubtop {
+	background: #FFFFFF;
+	width: 7.5rem;
+	position: relative;
+	padding: 0.3rem 0;
+	margin-bottom: .2rem;
+}
+.addressLeft {			
+	width: 1.7rem;
+	text-align: center;
+	float: left;
+	padding: .1rem 0 0 .3rem;
+}
+.addressLeftContent{
+	font-size: .28rem;
+	line-height: .34rem;
+	color: #666;
+	text-align: left;
+	margin-bottom: .1rem;
+}
+.default-label{
+	width: 1.36rem;
+	height: .64rem;
+	font-size: .44rem;
+	line-height: .64rem;
+	color: #60a3fb;
+	border-radius: .1rem;
+	box-shadow: 0 0 1px 0 #60a3fb;
+	-webkit-box-shadow: 0 0 1px 0 #60a3fb;
+	transform: scale(.5);
+	-webkit-transform: scale(.5);
+	transform-origin: left top;
+	-webkit-transform-origin: left top;
+}
+.addressRight {	
+	width: 5.6rem;
+	float: left;
+	
+}
+.addressGoodsArrow {
+	position: absolute;
+	width: 0.16rem;
+	height: 0.3rem;
+	right: 0.3rem;
+	top: 50%;
+	margin-top: -0.15rem;
+	
+}
+.addressHr {
+	
+	width: 5.6rem;
+	padding-bottom:0.03rem;
+	font-size: 0.26rem;
+
+	
+}
+.addressH5Bot {
+	
+	padding-bottom:0.08rem;
+}
+.addressHr .addressName {
+	
+	width: 1.1rem;
+	color: #999999;
+	float: left;
+	
+}
+
+.addressHr .addressContent {
+	width: 4.5rem;
+	float: left;
+	color: #666666;
+}
+.addressWrie {
+	width: 7.5rem;
+	height: 0.13rem;
+	background:#FFFFFF;
+	position: relative;
+	margin-bottom: 0.2rem;
+}
+.addressWrie img {
+	width: 7.5rem;
+	position: absolute;
+	bottom: 0;
+	height: 0.13rem;
+}
+
+.addresszjfgx {
+	width: 7.5rem;
+	height: 0.2rem;
+	background: #F4F4F4;
 }
