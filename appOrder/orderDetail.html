@@ -20,30 +20,47 @@
 	</header>
 	
 	<div class="mui-content">
+	    <!--<div class="orderCountdown">
+			<p id="strOrderWfStatus1"><img src="http://img.dafy.com/mall/mallOrder/img/20180108/dengdaifukuan@2x.png" /> 等待买家付款</p>
+			<div id="strOrderText">请在<span id="orderDetailSttime"></span>内完成支付，超时订单自动关闭</div>
+		</div>-->
 		<div class="byStages clearfix">
-			<div class="order-state">
-				<img src="" alt="" />
-				<p>已完成</p>
+			<div class="logState">
+				<div class="stateDetail">
+					<img src="http://img.dafy.com/mall/mallOrder/img/20180108/yuanquanduigoudingdan@2x.png" />
+					<span id="strOrderStatus">
+					</span>
+				</div>
+				<div class="newState" id="newState" style="display:none">
+					<img src="http://img.dafy.com/mall/mallOrder/img/20180108/dingdandizhi@2x.png" class="stateIcon" />
+					<div class="routeRemark" id="strRouteRemark">
+					</div>
+					<div class="routeAcceptTime" id="strRouteAcceptTime">
+					</div>
+					<img src="http://img.dafy.com/mall/mallOrder/img/20180108/ic_xiaodeback_nor@2x.png" class="stateR" />
+				</div>
 			</div>
 			<div class="goodsBillDetal">
-				<div class="mallSubtop clearfix">
-
-					<div class="addressLeft clearfix">
-						<div class="addressLeftContent" id="strConsigneeName">利殊为</div>
-						<div class="default-label" id="strIsDefault">默认</div>
+				<div class="receiveInfo">
+					<img src="http://img.dafy.com/mall/mallOrder/img/20180108/defaultAddressImg.png" />
+					<div>
+						<lable class="fontInfo">收货人：</lable>
+						<span id="strConsigneeName"></span>
 					</div>
-					<div class="addressRight">
-						<div class="addressHr clearfix">
-							<div class="addressContent" id="strMobile">13126812315</div>
-						</div>
-						<div class="addressHr clearfix">
-							<div class="addressContent" id="strFullAdress">重卡静安四季的客户</div>
+					<div>
+						<lable class="fontInfo">电话：</lable>
+						<span id="strMobile"></span>
+					</div>
+					<div>
+						<lable class="fontInfo font_left">地址：</lable>
+						<div class="font_right">
+							<p id="strAddress"></p>
 						</div>
 					</div>
 				</div>
 				<div class="goodsDetailInfo">
 					<div id='comOrderGoods' class="comOrderGoods1 clearfix">
-						<!--<div class="goods_wid clearfix" id="goods_wid">
+						<div class="goods_wid clearfix" id="goods_wid">
 							<div class="leftthum goods_img">
 								<img id="strGoodsURL" src="http://img.dafy.com/mall/mallOrder/img/20180108/laimgload.png" />
 							</div>
@@ -55,22 +72,6 @@
 									<span class="ordernum" id="strGoodsAmount"></span>
 								</div>
 							</div>
-						</div>-->
-					</div>
-					
-					<div id='OrderGoodsTemplate' style="display: none">
-						<div class="goods_wid clearfix" id="goods_wid">
-							<div class="leftthum goods_img">
-								<img id="strGoodsURL" src="#strGoodsImg#" />
-							</div>
-							<div class="rightContent">
-								<div class="beforeTitle" id="strGoodsTitle">#strGoodsTitle#</div>
-								<p id="specValue">#strGoodsSku#</p>
-								<div class="orderMoney">
-									<span class="subOrderMoney" id="strAmountOne">#strGoodsPrice#</span>
-									<span class="ordernum" id="strGoodsAmount">#nCount#</span>
-								</div>
-							</div>
 						</div>
 					</div>
 					
@@ -80,6 +81,7 @@
 					</div>
 					<div class="goodsPaidInfo">
 						<div class="goodsPaidInfo1">
+							
 							<div class="goodsPaidSub1">
 								<label>总价：</label>
 								<span class="font_color1 fontBold" id="nAmount1"></span>
@@ -92,23 +94,19 @@
 					</div>
 					<div class="orderDetailInfo">
 						<div class="orderPublich1">
+							<label>订单状态：</label>
+							<span id="orderstate"></span>
+						</div>
+						<div class="orderPublich1">
 							<label>订单编号：</label>
 							<span id="orderNum"></span>
 						</div>
 						<div class="orderPublich1">
 							<label>下单时间：</label>
-							<span id="orderNum"></span>
-						</div>
-						<div class="orderPublich1">
-							<label>支付时间：</label>
-							<span id="orderNum"></span>
-						</div>
-						<div class="orderPublich1">
-							<label>发货时间：</label>
-							<span id="orderstate"></span>
+							<span id="createTime"></span>
 						</div>
 						<div id="PaymentTime" class="orderPublich1">
-							<label>成交时间：</label>
+							<label>支付时间：</label>
 							<span id="dtPayTime"></span>
 						</div>
 					</div>

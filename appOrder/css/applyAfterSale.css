@@ -1,36 +1,34 @@
 body {
-	background: #f4f4f4;
-}
-
-.order-item{
-	background: #fff;
-	margin-bottom: .2rem;
-}
-.order-item-head{
-	height: .74rem;
-	padding: 0 .3rem;
-	display: flex;
-	display: -webkit-flex;
-	align-items: center;
-	-webkit-align-items: center;
+	background: #F4F4F4;
 	position: relative;
 }
-.order-item-head:after{
-	content: "";
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	height: 1px;
-	background: #ccc;
-	transform: scaleY(.5);
-	-webkit-transform: scaleY(.5);
+
+.mui-content{
+	padding-bottom: .9rem;
 }
-.order-item-body{
-	padding: .2rem 0 0 0;
+
+.order-state{
+	background: #fff;
+	padding: .4rem;
+	margin-bottom: .2rem;
 }
+.order-state-title{
+	font-size: .3rem;
+	line-height: .44rem;
+	color: #60a3fb;
+	text-align: center;
+}
+.order-state-introduce{
+	font-size: .24rem;
+	line-height: .44rem;
+	color: #999;
+	text-align: center;
+}
+
+/* 商品列表 */
 .goods-list{
-	background: #fafafa;
+	padding: .2rem 0 0 0;
+	background: #fff;
 }
 .goods-item{
 	display: flex;
@@ -40,6 +38,7 @@ body {
 	position: relative;
 	padding: 0 .3rem;
 	height: 1.7rem;
+	background: #fafafa;
 }
 .goods-item:after{
 	content: "";
@@ -99,23 +98,45 @@ body {
 	font-size: .24rem;
 	color: #666;
 }
-.order-item-foot{
-	height: .8rem;
+
+/* 退款售后信息 */
+.after-sale-infos{
+	background: #fff;
+	position: relative;
+	padding: .1rem 0;
+}
+
+.after-sale-infos li{
 	display: flex;
 	display: -webkit-flex;
-	justify-content: flex-end;
-	-webkit-justify-content: flex-end;
+	padding: 0 .3rem;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	height: .8rem;
 	align-items: center;
 	-webkit-align-items: center;
-	padding: 0 .3rem;
+	background: url("../../common/image/tiaozhuan@2x.png") no-repeat 7.04rem center/ .16rem .3rem;
+	position: relative;
+
 }
-.go-to-detail{
-	width: 1.5rem;
-	height: .5rem;
-	border: 1px solid #999;
-	border-radius: .1rem;
-	font-size: .28rem;
-	line-height: .5rem;
-	color: #999;
-	text-align: center;
+.after-sale-infos li:after{
+	content: "";
+	position: absolute;
+	left: .3rem;
+	bottom: 0;
+	width: 7.5rem;
+	height: 1px;
+	background: #ccc;
+	transform: scaleY(.5);
+	-webkit-transform: scaleY(.5);
 }
+.after-sale-infos li:last-child:after{
+	height: 0;
+}
+.after-sale-info-label{
+	font-size: .3rem;
+	line-height: .36rem;
+	color: #555;
+}
+
+
