@@ -434,5 +434,6 @@ body {
 }
 .checkBill .payment:active {
 	background: rgba(226,89,23,1);
-		
+
+	padding-left: .3rem;
 }
