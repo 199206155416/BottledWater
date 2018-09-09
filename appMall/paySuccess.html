@@ -20,18 +20,18 @@
     <div class="mui-content">
     	<div class="pay-result-card">
     		<img src="./image/success.png" alt="">
-    		<p class="order-price"><span style="font-size: .28rem;">￥</span>90.00</p>
-    		<p class="pay-state-introduce">恭喜您支付成功</p>
+    		<p class="order-price"><span style="font-size: .28rem;">￥</span><span id="factPrice"></span></p>
+    		<p class="pay-state-introduce" id="stateName"></p>
     	</div>
 
     	<ul class="order-infos">
     		<li>
     			<div class="bar-label">订单编号：</div>
-    			<div class="bar-content">2019090908</div>
+    			<div class="bar-content" id="strOrderNum"></div>
     		</li>
     		<li>
     			<div class="bar-label">支付时间</div>
-    			<div class="bar-content">2018-01-02 12:00:00</div>
+    			<div class="bar-content" id="dtPayTime"></div>
     		</li>
     	</ul>
     </div>

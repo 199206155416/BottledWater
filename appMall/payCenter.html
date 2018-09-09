@@ -20,35 +20,35 @@
     <div class="mui-content">
     	<div class="need-pay">
     		<p class="need-pay-label">需要支付：</p>
-    		<p class="need-pay-price">￥40.00</p>
+    		<p class="need-pay-price" id="factPrice"></p>
     	</div>
 
     	<div class="pay-type-list-title">
     		<span>支付方式</span>
     	</div>
     	<ul class="table-view">
-		    <li class="table-view-cell media">
+		    <li class="table-view-cell media" id="2">
 	            <img class="pull-left" src="./image/account.png">
 	            <div class="media-body">
-	            	<p class="media-title">账户余额：￥123</p>
+	            	<p class="media-title">账户余额：￥<span id="accountBalance"></span></p>
 	            </div>
 	            <div class="charge">充值</div>
 		    </li>
-		    <li class="table-view-cell media">
+		    <li class="table-view-cell media" id="0">
 	            <img class="media-object pull-left" src="./image/alipay.png">
 	            <div class="media-body">
 	            	<p class="media-title">支付宝</p>
 	                <p class='ellipsis'>支付宝安全支付</p>
 	            </div>
 		    </li>
-		    <li class="table-view-cell media">
+		    <li class="table-view-cell media" id="1">
 	            <img class="media-object pull-left" style="height: .38rem;" src="./image/wechat.png">
 	            <div class="media-body">
 	            	<p class="media-title">微信支付</p>
 	                <p class='ellipsis'>微信安全支付</p>
 	            </div>
 		    </li>
-		    <li class="table-view-cell media">
+		    <li class="table-view-cell media" id="3">
 	            <img class="media-object pull-left" style="width: .46rem;height: .34rem" src="./image/card.png">
 	            <div class="media-body">
 	            	<p class="media-title">货到付款/线下水票</p>

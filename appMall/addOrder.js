@@ -6,8 +6,14 @@ var buyType;//购买类型
 var userId;
 var totalPrice=0;//订单总价
 var factPrice=100;//订单实际提交价
-var payType=1;//支付方式
+var payType;//支付方式，2：账户余额，0：支付宝，1：微信
+var strPayText;
 var channel;//框架支付方式
+var payChannels;
+var strOrderId;//定的ID
+var bucketNum=0;
+var bucketMoney=0.0;
+var ticketTotalCount=0;
 mui.init({
 	swipeBack: false
 });
@@ -37,13 +43,6 @@ mui.plusReady(function() {
 
 	// 绑定事件
 	bindEvent();
-	plus.payment.getChannels(function(channels){
-	 	//console.log("channels:"+JSON.stringify(channels));
-        channel=channels[payType];
-        console.log(JSON.stringify(channel));
-    },function(e){
-        alert("获取支付通道失败："+e.message);
-    });
 });
 
 function getPayDetail(){
@@ -72,11 +71,43 @@ function getPayDetail(){
 					receiptAddress=result["defaultAddress"];
 		            factPrice=result["factPrice"];
 		            totalPrice=result["totalPrice"];
+		            payType=result["payType"];
+		            console.log("支付渠道："+payType);
                     $("#paymentAmount").html(factPrice);
 					setHtml();
+					initPayChannel();
+					initPayText(payType);
+					var strTip=result["strTip"];
+					if(strTip){
+					    mui.alert(strTip, '桶押金提示', function(e) {
+				        },"div");
+					}
+					bucketNum=result["bucketNum"];
+					bucketMoney=result["bucketMoney"];
+					if(bucketNum){
+						$("#bucketNum").show();
+						$("#bucketNumText").html(bucketNum+"/50元 ");
+					}
+					ticketTotalCount=result["useTickecTotalCount"];
+					if(ticketTotalCount){
+						$("#eleUseTickecTotalCount").show();
+						$("#useTickecTotalCount").html(ticketTotalCount+"张");
+					}
 				}
 			}
 	});
+}
+/**
+ * 初始化支付渠道
+ * @param {Object} payType
+ */
+function initPayChannel(){
+	plus.payment.getChannels(function(channels){
+			payChannels=channels;
+	    },function(e){
+	        alert("获取支付通道失败："+e.message);
+	    });
+	
 }
 
 function setHtml() {
@@ -126,7 +157,7 @@ function setProduct(){
 		var strSkuName = goodsList[i]["strSkuName"];
 		var strSku = goodsList[i]["strSku"];
 		var remarks = goodsList[i]["remarks"];
-		var goodsFactPrice = goodsList[i]["skuPrice"];
+		var skuPrice = goodsList[i]["skuPrice"];
 		var nCount = goodsList[i]["count"];
 
 		var goodsTemplate = $("#goodsTemplate").html();
@@ -135,7 +166,7 @@ function setProduct(){
 		goodsTemplate = goodsTemplate.replace("#strSkuName#", strSkuName);
 		goodsTemplate = goodsTemplate.replace("#strSku#", strSku);
 		goodsTemplate = goodsTemplate.replace("#remarks#", remarks);
-		goodsTemplate = goodsTemplate.replace("#goodsFactPrice#", goodsFactPrice);
+		goodsTemplate = goodsTemplate.replace("#skuPrice#", skuPrice);
 		goodsTemplate = goodsTemplate.replace("#nCount#", nCount);
 
 		var goodsDom = $(goodsTemplate);
@@ -144,22 +175,58 @@ function setProduct(){
 }
 
 /**
+ * 初始化支付名称
+ * @param {Object} payType
+ */
+function initPayText(payType){
+		var strPayTypeText="";
+		switch(payType){
+			case 0:
+			  channel=payChannels[payType];
+			  strPayText="支付宝";
+			break;
+			case 1:
+			  channel=payChannels[payType];
+			  strPayText="微信";
+			break;
+			case 2:
+			 strPayText="账户余额";
+			break;
+			case 3:
+			strPayText="货到付款/线下水票";
+			break;
+		}
+		$("#elePayTypeText").html(strPayText);
+}
+/**
  * 事件绑定
  * @author xuezhenxiang
  */
 function bindEvent(){
-	// 点击确定按钮
-	var strPayText="";//支付方式
-	if(payType==0){
-		strPayText="支付宝";
-	}else if(payType==1){
-		strPayText="微信";
-	}else if(payType==2){
-		strPayText="账户余额";
-	}
-	var showCon="支付方式："+strPayText+"\n"+"支付金额："+factPrice;
+  window.addEventListener('choosePayType',function(event){
+  	    var data=event.detail;
+  	    console.log(JSON.stringify(data)+"aaaaaa");
+  	    payType=parseInt(data["payType"]);
+		initPayText(payType);
+	},false);
+	//选择支付方式
+	$("#elePayType").on("click", function(){
+		pushWebView({
+			webType: 'newWebview_First',
+			id: 'appMall/payCenter.html-1',
+			href: 'appMall/payCenter.html',
+			aniShow: getaniShow(),
+			title: "支付方式",
+			isBars: false, 
+			barsIcon: '',
+			extendOptions: {
+				factPrice: factPrice
+			}
+		});
+	});
 	//$("#payDailog").show();
 	$("#doPay").on("click", function(){
+		var showCon="支付方式："+strPayText+"\n"+"支付金额："+factPrice;
 		var btnArray = ['取消', '确认'];
         mui.confirm(showCon, '立即支付', btnArray, function(e) {
             if (e.index == 1) {
@@ -179,6 +246,19 @@ function doAddOrder(){
 		formData.append("factPrice", factPrice);
 		formData.append("totalPrice", totalPrice);
 		formData.append("strPayType", payType);
+		var strBuyerMessage=$("#strBuyerMessage").val();//商品备注
+		if(!strBuyerMessage){
+			strBuyerMessage="";
+		}
+		formData.append("remarks", strBuyerMessage);
+		formData.append("bucketNum", bucketNum);
+		formData.append("bucketMoney", bucketMoney);
+		if(ticketTotalCount){
+			formData.append("ticketTotalCount", ticketTotalCount);
+		}
+		if(strOrderId){
+			formData.append("id", strOrderId);
+		}
 		for(var i=0;i<goodsList.length;i++){
 			var itemGoods=goodsList[i];
 			var strSkuId=itemGoods["strSkuId"];
@@ -204,9 +284,12 @@ function doAddOrder(){
 				var result=res.result;
 				if(res.resCode == 0){
 					console.log(result);
-					doPay(result.strPayInfo);
+					strOrderId=result.strOrderId;
+					var strPayInfo=result.strPayInfo;
+					doPay(strPayInfo);
 				}else{
-					  mui.alert(result, '提示', btnArray, function(e) {
+					 strOrderId=res.strOrderId;
+					  mui.alert(result, '提示', function(e) {
 			        },"div")
 				}
 			}
@@ -224,14 +307,11 @@ function doPay(payInfo){
 		var prepayid=payInfo["prepayid"];
 		var timestamp=payInfo["timestamp"];
 		var sign=payInfo["sign"];
-		var a={"appid":appid,"noncestr":noncestr,"package":package,"partnerid":partnerid,"prepayid":prepayid,"timestamp":timestamp,"sign":sign};
-		console.log("a:"+a);
-		var stra=JSON.stringify(a);
-		console.log("stra:"+stra);
-		alert(stra);
+		var payInfoNew={"appid":appid,"noncestr":noncestr,"package":package,"partnerid":partnerid,"prepayid":prepayid,"timestamp":timestamp,"sign":sign};
+		var stra=JSON.stringify(payInfoNew);
 		plus.payment.request(channel,stra,function(result){
                     plus.nativeUI.alert("支付成功！",function(){
-                        console.log("跳支付页面");
+                        openPaySuccess(strOrderId);
                     });
                 },function(error){
                     plus.nativeUI.alert("支付失败：" + JSON.stringify(error));
@@ -239,12 +319,27 @@ function doPay(payInfo){
 	}else if(payType==0){
 		plus.payment.request(channel,payInfo,function(result){
                     plus.nativeUI.alert("支付成功！",function(){
-                        console.log("跳支付页面");
+                        openPaySuccess(strOrderId);
                     });
                 },function(error){
                     plus.nativeUI.alert("支付失败：" + JSON.stringify(error));
                 });
 	}else if(payType==2){//余额
-		
+		openPaySuccess(strOrderId);
 	}
+}
+
+function openPaySuccess(strOrderId){
+	pushWebView({
+			webType: 'newWebview_First',
+			id: 'appMall/paySuccess.html-1',
+			href: 'appMall/paySuccess.html',
+			aniShow: getaniShow(),
+			title: "支付结果",
+			isBars: false, 
+			barsIcon: '',
+			extendOptions: {
+				strOrderId: strOrderId
+			}
+		});
 }
