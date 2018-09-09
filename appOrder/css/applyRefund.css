@@ -180,3 +180,8 @@ body {
 	padding: 0 .3rem;
 	background: url(../../common/image/tiaozhuan@2x.png) no-repeat right center/ .16rem .3rem;
 }
+.refund-reason-content{
+	flex: 1;
+	-webkit-flex: 1;
+	padding-left: .2rem;
+}

@@ -6,6 +6,7 @@
 	<meta name="format-detection" content="telephone=no">
 	<link rel="stylesheet" href="../common/css/mui.min.css">
 	<link rel="stylesheet" href="../common/css/public.css">
+	<link rel="stylesheet" href="../common/css/mui.picker.min.css">
 	<link rel="stylesheet" href="css/applyRefund.css">
 	<script src="../common/js/remScale.js"></script>
 	<title>申请退款</title>
@@ -44,8 +45,8 @@
 		<ul class="after-sale-infos">
 			<li>
 				<p class="after-sale-info-label">退款原因：</p>
-				<p></p>
-				<p class="refund-reason">请选择</p>
+				<p class="refund-reason-content" id="refundReason"></p>
+				<p class="refund-reason" id="selectReason">请选择</p>
 			</li>
 			<li>
 				<p class="after-sale-info-label">退款金额：</p>
@@ -73,6 +74,7 @@
 		<div class="apply-btn">提交</div>
 	</div>
 <script src="../common/js/include.js" level="1"></script>
+<script src="../common/js/mui.picker.min.js"></script>
 <script src="applyRefund.js"></script>
 </body>
 </html>

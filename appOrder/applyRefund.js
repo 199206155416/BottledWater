@@ -28,6 +28,8 @@ mui.plusReady(function() {
 	
 	// 绑定事件
 	bindEvnet();
+
+	
 });
 
 function bindEvent(){
@@ -45,6 +47,28 @@ function bindEvent(){
 		}
 
 	});
+
+	// 选择原因
+	$("#selectReason").on("click", function(){
+		// 初始化mui选择器
+		initSelect();
+	});
+};
+
+/**
+ * 初始化mui选择器
+ */
+function initSelect(){
+	var picker = new mui.PopPicker();
+ 	picker.setData([
+ 		{value:'选错商品了', text:'选错商品了'},
+	]);
+ 	picker.show(function (selectItems) {
+	    // console.log(selectItems[0].text);//智子
+	    // console.log(selectItems[0].value);//zz 
+
+	    $("#refundReason").html(selectItems[0].text);
+  	})
 };
 
 /**
