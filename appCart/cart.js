@@ -53,20 +53,18 @@ mui.plusReady(function(){
 	// 	}
 	// },false);
 	
-	// //特殊：添加事件接收登录页面成功后发来的消息
-	// window.addEventListener('loginSuccess',function(){
-	// 	//页面成功后，要隐藏登录模块，然后去加载数据返回
-	// 	needlogin.style.display = 'none';
-	// 	initCartData();
-	// },false);
+	//特殊：添加事件接收登录页面成功后发来的消息
+	window.addEventListener('loginSuccess',function(){
+		// 先清空列表
+		$("#shopList").html("");
+		getCartList();
+	},false);
 	
-	// //退出登录
-	// window.addEventListener('logout',function(){
-	// 	needlogin.style.display = 'block';
-	// 	var loginDiv =  document.querySelector('.login');
-	// 	loginDiv.innerHTML = '';
-	// 	cartSupplierItem = [];
-	// },false)
+ 	//退出登录
+ 	window.addEventListener('logout',function(){
+		// 先清空列表
+		$("#shopList").html("");
+ 	},false)
 
 	//接收添加购物车事件事件
 	window.addEventListener('addCart', function() {
@@ -115,7 +113,7 @@ function bindEvent(){
 					"mallGoodsSku.id": list[i].mallGoodsSku.id,
 					"goodsFactPrice": list[i].mallGoodsSku.skuPrice,
 					"strGoodsImg": list[i].strSpuImg,
-					"strSku": list[i].strIntroduce,
+					"strSku": list[i].mallGoodsSku.remarks,
 					"strSkuName": list[i].mallGoodsSku.strSkuName,
 					"nCount": list[i].skuCount
 				})
@@ -242,11 +240,13 @@ function getCartList(){
 					var strSpuId = result[i].strSpuId;
 					var strSpuImg = result[i].strSpuImg;
 					var skuCount = result[i].skuCount;
+					
 					var mallGoodsSku = {
 						id: result[i].mallGoodsSku.id,
 						strSkuName: result[i].mallGoodsSku.strSkuName,
 						skuStock: result[i].mallGoodsSku.skuStock,
 						skuPrice: result[i].mallGoodsSku.skuPrice,
+						remarks: result[i].mallGoodsSku.remarks,
 					};
 
 					var goodsTemplate = $("#goodsTemplate").html();
@@ -258,6 +258,8 @@ function getCartList(){
 					goodsTemplate = goodsTemplate.replace("#skuStock#", mallGoodsSku.skuStock);
 					goodsTemplate = goodsTemplate.replace("#skuCount#", skuCount);
 					goodsTemplate = goodsTemplate.replace("#curIndex#", i);
+					goodsTemplate = goodsTemplate.replace("#strSKUItemValues#", mallGoodsSku.remarks);
+					
 
 					cartObj.list[i].isCheck = 0;
 
@@ -353,11 +355,22 @@ function deleteCartList(goodsList){
 					 	}
 					}
 				}
-				for(var i in tempObj){
-					result.push(tempObj[i]);
+				
+				
+				for (var i = goodsList.length - 1; i >= 0; i--) {
+				    var delId = goodsList[i].id;
+				    $("#shopList li[lid="+ delId +"]").remove();
+				    for (var j = list.length - 1; j >= 0; j--) {
+				        var allId = list[j].id;
+				        if (allId != delId) {
+				            goodsList.splice(i, 1);
+				            list.splice(j, 1);
+				            break;
+				        }
+				    }
 				}
 				mui.toast("删除成功");
-				cartObj.list = result;
+				cartObj.list = list;
 				calculatePrice()
 			}
 		}

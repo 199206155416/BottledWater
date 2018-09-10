@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="../common/css/mui.min.css">
+	<link rel="stylesheet" href="../common/css/public.css">
+	<link rel="stylesheet" href="css/orderDetail.css">
+	<script src="../common/js/remScale.js"></script>
+	<title>订单详情</title>
+</head>
+
+<body>
+
+	<header class="mui-bar mui-bar-nav">
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	    <h1 class="mui-title">订单详情</h1>
+	</header>
+	
+	<div class="mui-content">
+	    <!--<div class="orderCountdown">
+			<p id="strOrderWfStatus1"><img src="http://img.dafy.com/mall/mallOrder/img/20180108/dengdaifukuan@2x.png" /> 等待买家付款</p>
+			<div id="strOrderText">请在<span id="orderDetailSttime"></span>内完成支付，超时订单自动关闭</div>
+		</div>-->
+		<div class="byStages clearfix">
+			<div class="logState">
+				<div class="stateDetail">
+					<img src="http://img.dafy.com/mall/mallOrder/img/20180108/yuanquanduigoudingdan@2x.png" />
+					<span id="strOrderStatus">
+					</span>
+				</div>
+				<div class="newState" id="newState" style="display:none">
+					<img src="http://img.dafy.com/mall/mallOrder/img/20180108/dingdandizhi@2x.png" class="stateIcon" />
+					<div class="routeRemark" id="strRouteRemark">
+					</div>
+					<div class="routeAcceptTime" id="strRouteAcceptTime">
+					</div>
+					<img src="http://img.dafy.com/mall/mallOrder/img/20180108/ic_xiaodeback_nor@2x.png" class="stateR" />
+				</div>
+			</div>
+			<div class="goodsBillDetal">
+				<div class="receiveInfo">
+					<img src="http://img.dafy.com/mall/mallOrder/img/20180108/defaultAddressImg.png" />
+					<div>
+						<lable class="fontInfo">收货人：</lable>
+						<span id="strConsigneeName"></span>
+					</div>
+					<div>
+						<lable class="fontInfo">电话：</lable>
+						<span id="strMobile"></span>
+					</div>
+					<div>
+						<lable class="fontInfo font_left">地址：</lable>
+						<div class="font_right">
+							<p id="strAddress"></p>
+						</div>
+					</div>
+				</div>
+				<div class="goodsDetailInfo">
+					<div id='comOrderGoods' class="comOrderGoods1 clearfix">
+						<div class="goods_wid clearfix" id="goods_wid">
+							<div class="leftthum goods_img">
+								<img id="strGoodsURL" src="http://img.dafy.com/mall/mallOrder/img/20180108/laimgload.png" />
+							</div>
+							<div class="rightContent">
+								<div class="beforeTitle" id="strGoodsTitle"></div>
+								<p id="specValue"></p>
+								<div class="orderMoney">
+									<span class="subOrderMoney" id="strAmountOne"></span>
+									<span class="ordernum" id="strGoodsAmount"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="orderReceipt">
+						<ul id="orderReceipt">
+						</ul>
+					</div>
+					<div class="goodsPaidInfo">
+						<div class="goodsPaidInfo1">
+							
+							<div class="goodsPaidSub1">
+								<label>总价：</label>
+								<span class="font_color1 fontBold" id="nAmount1"></span>
+							</div>
+						</div>
+					</div>
+					<div class="buyerMsg">
+						<span>买家留言：</span>
+						<span class="font_color2" id="strBuyerMessage"></span>
+					</div>
+					<div class="orderDetailInfo">
+						<div class="orderPublich1">
+							<label>订单状态：</label>
+							<span id="orderstate"></span>
+						</div>
+						<div class="orderPublich1">
+							<label>订单编号：</label>
+							<span id="orderNum"></span>
+						</div>
+						<div class="orderPublich1">
+							<label>下单时间：</label>
+							<span id="createTime"></span>
+						</div>
+						<div id="PaymentTime" class="orderPublich1">
+							<label>支付时间：</label>
+							<span id="dtPayTime"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="mallbackground" style="display: none;"></div>
+	<div id="orderHandle" class="orderHandle">
+		<div class="orderPrice">
+			<span>实付款：</span>
+			<span class="font_color1" id="sjPrice"></span>
+		</div>
+		<p class="confirmToReceipt">确认收货</p>
+		<p class="toPay grayBottomBackground">去支付</p>
+		<p class="cancel">取消订单</p>
+	</div>
+	<div id="orderHandle1" class="orderHandle1" style='display: none;'>
+		<p class="handle-repay grayBottomBackground" id='rePay' style='display: none;'>再次购买</p>
+		<p class="handle-repay1" id='gotoRePay' style='display: none;'>再次支付</p>
+		<p class="handle-del" id='delOrder' style='display: none;'>删除订单</p>
+	</div>
+	
+	
+	<div id='delModal' class='del-modal' style='display: none;'>
+		<div class='modal-container'>
+			<div class='modal-header'>
+				<h2>确定删除订单？</h2>
+				<p>删除后订单无法恢复</p>
+			</div>
+			<div class='modal-footer'>
+				<button class='cancle'>取消</button>
+				<button class='sure'>确定</button>
+			</div>
+		</div>
+	</div>
+	<div id="popupHomeBack" class="popupHomeBack" style="display: none;"></div>
+	<div class="abolish_order" id="cancleOrdertext" style="display: none;">
+		<div class="abolish_top">取消订单 <img src="http://img.dafy.com/mall/mallOrder/img/20180420/chahao_20180427104045.png" class="abolish_close" id="multi_close" alt=""></div>
+		<div class="abolish_con">
+			<p>取消订单原因（必选）:</p>
+			<div id="cancleContent">
+				<div class="default1 defaultAddress selected">购买错误(商品颜色,型号等选错)</div>
+				<div class="default1 defaultAddress">分期数选错</div>
+				<div class="default1 defaultAddress">重复下单/误下单</div>
+				<div class="default1 defaultAddress">其他渠道价格更低</div>
+				<div class="default1 defaultAddress">不想买了/其它原因</div>
+			</div>
+		</div>
+		<p class="abolish_tit">订单取消将无法恢复</p>
+		<div class="abolish_ensure">确定</div>
+	</div>
+	<script src="../common/js/include.js" level="1"></script>
+	<script src="orderDetail.js"></script>
+</body>
+
+</html>

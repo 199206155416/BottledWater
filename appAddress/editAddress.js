@@ -10,7 +10,6 @@ mui.plusReady(function() {
 	currentWebview = plus.webview.currentWebview();
 
 	addressId = currentWebview.addressId;
-	console.log(addressId);
 	// 如果id存在查询地址信息
 	if(addressId){
 		getAddressById();
@@ -156,5 +155,5 @@ function getLocations(){
  * @author xuezhenxiang
  */
 function getAddressById(){
-
+	
 };

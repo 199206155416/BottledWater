@@ -22,6 +22,17 @@ body {
 	font-size: 0.28rem;
 	background: #FFFFFF;	
 }
+.completeOrderTap::before{
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 1px;
+	transform: scaleY(.5);
+	-webkit-transform: scaleY(.5);
+	background: rgba(0,0,0,.2);
+}
 .completeOrderTap::after{
 	content: "";
 	position: absolute;
@@ -68,15 +79,7 @@ body {
 	margin-left: -0.6rem;
 }
 .completeOrderList {
-
-	overflow-y: scroll;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-    position: absolute;
-    top: 1.68rem;
-    bottom: 0;
-    left: 0;
-    right: 0;
+	padding-top: 1.68rem;
 }
 .completeOrderList ul {
 	padding-bottom: 0.1px;
@@ -356,4 +359,42 @@ body {
 	color: #666666;
 	bottom: 0.12rem;
 	margin: 0 auto;
+}
+.empty{
+	margin-top: 3rem;
+}
+.empty .empty_img{
+	width:2.2rem;
+	height: 2.2rem;
+    display: block;
+    margin: 0 auto;
+}
+.empty p{
+	text-align: center;
+    font-size: 0.3rem;
+    color: #999999;
+    margin-top: 0.4rem;
+}
+.empty .empty_con{
+	
+	width:4.5rem;
+	margin:0 auto;
+	margin-top:1.75rem;
+}
+.total-price{
+	height: .8rem;
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+	-webkit-align-items: center;
+	padding-left: .3rem;
+}
+.total-price p{
+	font-size: .28rem;
+	line-height: .36rem;
+	color: #777;
+}
+.total-price .total-price-money{
+	font-size: .32rem;
+	color: #ff2a2a;
 }

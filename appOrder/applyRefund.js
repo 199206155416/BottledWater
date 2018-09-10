@@ -1,37 +1,35 @@
 var currentWebview;
-var type = -1; // -1 == 全部， -2 == 待付款， -3 == 待发货， -4 == 待收货， -5 == 已完成, 默认为-1
+var type = 0; // -1 == 全部， -2 == 待付款， -3 == 待发货， -4 == 待收货， -5 == 已完成, 默认为-1
 var pageNo = 1;
 var pageSize = 20; 
 var loadFlag = 1; // 上拉加载标志
 
 mui.init({
 	swipeBack: false,
-	pullRefresh: {
-	    container: ".mui-content",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-	    down : {
-			style: 'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
-			color:' #2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
-			height: '50px',//可选,默认50px.下拉刷新控件的高度,
-			range: '100px', //可选 默认100px,控件可下拉拖拽的范围
-			offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
-			auto: true,//可选,默认false.首次加载自动上拉刷新一次
-			callback: function(){} //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-	    }
-  	}
+	// pullRefresh: {
+	//     container: ".mui-content",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+	//     down : {
+	// 		style: 'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+	// 		color:' #2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+	// 		height: '50px',//可选,默认50px.下拉刷新控件的高度,
+	// 		range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+	// 		offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
+	// 		auto: true,//可选,默认false.首次加载自动上拉刷新一次
+	// 		callback: function(){} //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+	//     }
+ //  	}
 });
 
 mui.plusReady(function() {
 	currentWebview = plus.webview.currentWebview();
 	
-	type = currentWebview.type ? currentWebview.type : -1;
-	
-	renderTab(type);
-
 	// 获取订单列表
 	getOrderList();
 	
 	// 绑定事件
-	bindEvent();
+	bindEvnet();
+
+	
 });
 
 function bindEvent(){
@@ -49,27 +47,28 @@ function bindEvent(){
 		}
 
 	});
-	
-	// 点击切换tab
-	$("#myTapWidth").on("click", "li", function(){
-		type = $(this).attr("type");
-		
-		$(this).addClass("row").siblings().removeClass("row");
-		
-		$("#goodsList").html("");
-		loadFlag = 1;
-		
-		getOrderList();
-		
+
+	// 选择原因
+	$("#selectReason").on("click", function(){
+		// 初始化mui选择器
+		initSelect();
 	});
 };
 
 /**
- * 渲染tab
- * @author xuezhenxiang
- * */
-function renderTab(type){
-	$("#myTapWidth li[type="+ type +"]").addClass("row").siblings().removeClass("row");
+ * 初始化mui选择器
+ */
+function initSelect(){
+	var picker = new mui.PopPicker();
+ 	picker.setData([
+ 		{value:'选错商品了', text:'选错商品了'},
+	]);
+ 	picker.show(function (selectItems) {
+	    // console.log(selectItems[0].text);//智子
+	    // console.log(selectItems[0].value);//zz 
+
+	    $("#refundReason").html(selectItems[0].text);
+  	})
 };
 
 /**
@@ -123,7 +122,7 @@ function getOrderList(){
 
 					var orderList = $(htmlTemplate);
 					
-					;(function(orderList, lOrderId){
+					;(function(orderList){
 						orderList.on("click", function(){
 							pushWebView({
 								webType: 'newWebview_First',
@@ -133,12 +132,10 @@ function getOrderList(){
 								title: "订单详情",
 								isBars: false,
 								barsIcon: '',
-								extendOptions: {
-									strOrderId: lOrderId
-								}
+								extendOptions: extendOptions
 							});
 						});
-					})(orderList, lOrderId);
+					})(orderList);
 
 					for(var i1 = 0, len1 = mallGoodsList.length; i1 < len1; i1++){
 						var id = mallGoodsList[i1].id;

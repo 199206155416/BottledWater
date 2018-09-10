@@ -235,7 +235,7 @@ function bindEvent(){
 							"nCount": nCount
 						}
 					],
-				buyType:0
+					buyType:0
 					
 				}
 

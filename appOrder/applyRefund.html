@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0"/>
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="../common/css/mui.min.css">
+	<link rel="stylesheet" href="../common/css/public.css">
+	<link rel="stylesheet" href="../common/css/mui.picker.min.css">
+	<link rel="stylesheet" href="css/applyRefund.css">
+	<script src="../common/js/remScale.js"></script>
+	<title>申请退款</title>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	    <h1 class="mui-title">申请退款</h1>
+	</header>
+	
+	<div class="mui-content">
+		
+		<!-- 商品列表 -->
+		<div class="goods-list">
+			
+			<div class="goods-item">
+				<div class="goods-item-img"><img src="" alt=""></div>
+				<div class="goods-info">
+					<p class="goods-title">苹果手机iphone7 Plus 4G手机...</p>
+					<p class="goods-sku">亮黑色 256G 移动联通电信</p>
+					<p class="goods-price">￥4000<span class="goods-count">X1</span></p>
+				</div>
+			</div>
+		
+			<div class="goods-item">
+				<div class="goods-item-img"><img src="" alt=""></div>
+				<div class="goods-info">
+					<p class="goods-title">苹果手机iphone7 Plus 4G手机...</p>
+					<p class="goods-sku">亮黑色 256G 移动联通电信</p>
+					<p class="goods-price">￥4000<span class="goods-count">X1</span></p>
+				</div>
+			</div>
+			
+		</div>
+
+		<ul class="after-sale-infos">
+			<li>
+				<p class="after-sale-info-label">退款原因：</p>
+				<p class="refund-reason-content" id="refundReason"></p>
+				<p class="refund-reason" id="selectReason">请选择</p>
+			</li>
+			<li>
+				<p class="after-sale-info-label">退款金额：</p>
+				<p class="after-sale-info-price">￥4000.00</p>
+			</li>
+			<li>
+				<p class="after-sale-info-label">退款说明：</p>
+				<div class="refund-introduce">
+					<textarea placeholder="选填" maxlength="100"></textarea>
+				</div>
+			</li>
+		</ul>
+
+		<!-- 上传凭证 -->
+		<div class="proof">
+			<div class="proof-title">上传凭证：</div>
+			<div class="proof-img">
+				<img src="./image/paizhao@2x.png" alt="">
+			</div>
+		</div>
+	</div>
+
+	<!-- 按钮 -->
+	<div class="footer-bar">
+		<div class="apply-btn">提交</div>
+	</div>
+<script src="../common/js/include.js" level="1"></script>
+<script src="../common/js/mui.picker.min.js"></script>
+<script src="applyRefund.js"></script>
+</body>
+</html>

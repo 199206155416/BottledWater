@@ -18,91 +18,82 @@
 	
 	<div class="completeOrderTap">
 		<ul id="myTapWidth">
-			<li ntype="0" class="row">全部</li>
-			<li ntype="1">待付款</li>
-			<li ntype="2">待发货</li>
-			<li ntype="3">待收货</li>
-			<li ntype="4">已完成</li>
-			<li ntype="5" id="historyTabID" class="paddingRight" style="display: none;">历史订单</li>
+			<li type="-1" class="row">全部</li>
+			<li type="-2">待付款</li>
+			<li type="-3">待发货</li>
+			<li type="-4">待收货</li>
+			<li type="-5">已完成</li>
 		</ul>		
 	</div>
 	
 	<div id="orderListTemp" style="display: none">	
-		<li id="orderList_#lId#" class="comOrderList">
+		<li id="#lOrderId#" class="comOrderList">
 			 <div class="onclickBind">
 				<div class="comOrderWidth clearfix">
 					<div class="comOrderNumber">
 						<span>订单编号：</span><span class="strFlagNumber">#strOrderNum#</span>				
 					</div>
 			 		<div class="comOrderState">
-						<span>订单状态：</span><span class="strFlagstage">#strState#</span>							
+						<span>订单状态：</span><span class="strFlagstage">#strStateName#</span>							
 					</div>
 			 	</div>
 				<p class="null"></p>
-				<div class="comOrderGoods clearfix">
-					<div class="goods_img">
-						<img src="#strGoodsLogoURL#"/>
-					</div>
-					<div class="orderGoodsInfo">
-						<div class="goodsTitle">
-							#strGoodsTitle#
+				<div class="goodsList">
+					<!--<div class="comOrderGoods clearfix">
+						<div class="goods_img">
+							<img src="#strGoodsLogoURL#"/>
 						</div>
-						<p class="goodsInfos">#strGoodsSKUDetail#</p>
-						<div class="orderMoney">
-							<span class="goodsPrice">￥#nProuctAmount#</span>
-							<span class="goodsNum">X#nGoodsAmount#</span>
+						<div class="orderGoodsInfo">
+							<div class="goodsTitle">
+								#strGoodsTitle#
+							</div>
+							<p class="goodsInfos">#strGoodsSKUDetail#</p>
+							<div class="orderMoney">
+								<span class="goodsPrice">￥#nProuctAmount#</span>
+								<span class="goodsNum">X#nGoodsAmount#</span>
+							</div>
 						</div>
-					</div>
+					</div>-->
 				</div>
-				<div class="goods_broken clearfix" style="display:none;">
-					<div class="order_GoodsInfo">
-						<div class="goods_broken_top">
-							  <div class="goods_broken_tit">【意外保护】#strBreakScreenTitle#</div>
-					          <div class="goods_broken_state"></div>
-				        </div>
-						<div class="order_money">
-							<span class="goods_price">￥#nBreakScreenPrice#</span>
-							<span class="goods_num">X#nBreakScreenCount#</span>
-						</div>
-					</div>
-				</div>
-				<div class="goodsPayMoney">
-					<div class="fontSet">
-						<p class="goodsFirstPay">
-							<span>首付：</span><span>￥#nFirstPrice#</span>
-						</p>
-						<p class="goodsPayment">
-							<span>每期还款：</span><span>￥#nTermPrice#</span>
-							<span>(共#nTermCount#期)</span>
-						</p>
-					</div>						
-					<div class="goodsTitleMoney">
-						<span>总价：</span><span class="goodsMoneyNum">￥#nAmount1#</span>
-					</div>
-				</div>				 
-		 
+		 	</div>
+		 	<div class="total-price">
+		 		<p>总价：</p>
+		 		<p class="total-price-money">￥#totalPrice#</p>
 		 	</div>
 			<div class="checkBill" style="display: none">
 				<div class="payment">立即付款</div>
 				<div class="cancel">取消订单</div>
-
-			</div>
-			<div class="logistics" style="display: none;">
-				<span class="refund" style="display: none;">查看退款</span>
-				<span class="wuliu" style="display: none;">查看物流</span>
-			</div>
-			<div id="downCount_#Did#" class="downCountClass">
-				<p>
-				请在<span id="payment_#PId#">45分23秒</span>内完成支付，超时订单自动关闭
-				</p>
 			</div>
 		</li>
 	</div>
 	
+	<!-- 商品模板 -->
+	<div id="goodsTemplate" style="display: none;">
+		<div class="comOrderGoods clearfix">
+			<div class="goods_img">
+				<img src="#strGoodsImg#"/>
+			</div>
+			<div class="orderGoodsInfo">
+				<div class="goodsTitle">
+					#strGoodsTitle#
+				</div>
+				<p class="goodsInfos">#strGoodsSKUDetail#</p>
+				<div class="orderMoney">
+					<span class="goodsPrice">￥#nProuctAmount#</span>
+					<span class="goodsNum">X#nGoodsAmount#</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<div class="completeOrderList">		
-		<ul id="orderListID">		
-		</ul>		
+		<ul id="orderListID">	
+			
+		</ul>	
 	</div>	
+	<div class="empty" id="orderNullTemp" style="display: none">
+		<img class="empty_img" src="../common/image/blank.png" />
+	</div>
 <script src="../common/js/include.js" level="1"></script>
 <script src="orderList.js"></script>
 </body>

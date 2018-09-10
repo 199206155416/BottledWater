@@ -53,8 +53,18 @@ mui.plusReady(function() {
 	// 		}
 	// 	});
 	// }, false)
+	
+	renderHtml();
 })
 
+// 渲染页面
+function renderHtml(){
+	var userRoleNames = localStorage.getItem("userRoleNames");
+	var userMobile = localStorage.getItem("userMobile");
+	
+	$("#userName").html(userRoleNames);
+	$("#userPhone").html(userMobile);
+};
 
 //注册列表的点击事件
 function addListevent() {
@@ -82,6 +92,15 @@ function addListevent() {
 		if (localStorage.getItem('userMobile') && localStorage.getItem('userId')) {} else {
 			id = "login/login.html";
 			aniShow = 'slide-in-bottom';
+			
+			pushWebView({
+				webType: 'newWebview_First',
+				id: id,
+				href: id,
+				aniShow: aniShow,
+				extendOptions: {}
+			})
+			return false;
 		}
 		pushWebView({
 			webType: 'newWebview_First',
@@ -90,6 +109,75 @@ function addListevent() {
 			aniShow: aniShow,
 			extendOptions: {}
 		})
-	})
-}
+	});
+	
+	// 去订单页
+	$("#openOrder").on("click", '.item', function(){
+		var type = $(this).attr("type"); 
+		var aniShow = getaniShow();
+		//检测已经存在sessionkey否者运行下面的登陆代码
+		if (localStorage.getItem('userMobile') && localStorage.getItem('userId')) {} else {
+			id = "login/login.html";
+			aniShow = 'slide-in-bottom';
+			
+			pushWebView({
+				webType: 'newWebview_First',
+				id: id,
+				href: id,
+				aniShow: aniShow,
+				extendOptions: {}
+			})
+			return false;
+		}
+		
+		if(type == 5){
+			pushWebView({
+				webType: 'newWebview_First',
+				id: "appOrder/afterSale.html",
+				href: "appOrder/afterSale.html",
+				aniShow: aniShow,
+				extendOptions: {}
+			});
+			return false;
+		}
+		
+		pushWebView({
+			webType: 'newWebview_First',
+			id: "appOrder/orderList.html",
+			href: "appOrder/orderList.html",
+			aniShow: aniShow,
+			extendOptions: {
+				type: type
+			}
+		});
+	});
+	// 全部订单
+	$("#myOrder").on("click", function(){
+		var aniShow = getaniShow();
+		//检测已经存在sessionkey否者运行下面的登陆代码
+		if (localStorage.getItem('userMobile') && localStorage.getItem('userId')) {} else {
+			id = "login/login.html";
+			aniShow = 'slide-in-bottom';
+			
+			pushWebView({
+				webType: 'newWebview_First',
+				id: id,
+				href: id,
+				aniShow: aniShow,
+				extendOptions: {}
+			})
+			return false;
+		}
+		
+		pushWebView({
+			webType: 'newWebview_First',
+			id: "appOrder/orderList.html",
+			href: "appOrder/orderList.html",
+			aniShow: aniShow,
+			extendOptions: {
+				type: -1
+			}
+		});
+	});
+};
 
