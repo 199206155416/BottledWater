@@ -1,24 +1,15 @@
 {
 	"index.html": {
+		"resources": [
+			"appIndex/home.html"
+		],
 		"refer": [
-			"mallCategory/category.html",
-			"mallTicket/ticket.html",
-			"mallIndex/home.html",
+			"appCart/cart.html",
 			"myCenter/mine.html",
-			"template.html",
-			"mallCart/cart.html",
-			"myCenter/login.html",
-			"appIndex/home.html",
 			"login/login.html",
 			"appMall/index.html",
-			"appCart/cart.html"
-		],
-		"resources": [
-			"mallIndex/home.html",
-			"mallTicket/ticket.html",
 			"appIndex/home.html",
-			"mallCategory/category.html",
-			"appCart/cart.html"
+			"template.html"
 		]
 	},
 	"template.html": {
@@ -26,68 +17,19 @@
 			"template-main-third.html",
 			"template-main-second.html",
 			"template-main-first.html",
-			"mallIndex/product-detail-needtem.html",
-			"mallCategory/category-detail-new-needtem.html",
-			"myCenter/login.html",
-			"myCenter/register-needtem.html",
-			"myCenter/forget-psd-needtem.html",
-			"myCenter/address-needtem.html",
-			"myCenter/change-address-needtem.html",
-			"myCenter/change-email-needtem.html",
-			"appIndex/product-detail-needtem.html",
-			"appMall/product-detail-needtem.html",
 			"appMall/productDetail.html",
-			"login/register.html",
-			"appAddress/addressList.html",
-			"myCenter/safetyCenter.html",
-			"appAddress/editAddress.html",
-			"myCenter/more.html",
-			"myCenter/feedback.html",
-			"appCategory/category.html",
 			"appMall/addOrder.html",
-			"myCenter/couponList.html",
-			"myCenter/message.html",
-			"myCenter/myBucket.html",
+			"appMall/paySuccess.html",
+			"appCategory/category.html",
+			"myCenter/safetyCenter.html",
 			"login/changePayPassword.html",
-			"appCart/cart.html",
-			"login/changePassword.html",
-			"appCategory/goodsBrandList.html",
-			"myCenter/about.html",
+			"appAddress/addressList.html",
+			"myCenter/more.html",
+			"myCenter/myBucket.html",
 			"myCenter/agreement.html",
-			"appOrder/orderList.html"
-		],
-		"resources": [
-			"common/css/own.css",
-			"common/js/own.js"
-		]
-	},
-	"mallCategory/category.html": {
-		"refer": [
-			"index.html"
-		]
-	},
-	"appCart/cart.html": {
-		"resources": [
-			"common/css/mui.min.css"
-		]
-	},
-	"appMall/productDetail.html": {
-		"resources": [
-			"appMall/css/productDetail.css",
-			"common/css/swiper.min.css"
-		]
-	},
-	"login/login.html": {
-		"resources": [
-			"login/login.js",
-			"common/js/jquery.min.js",
-			"login/css/login.css",
-			"common/js/engine.js"
-		]
-	},
-	"appIndex/home.html": {
-		"resources": [
-			"appIndex/image/1.jpg"
+			"myCenter/feedback.html",
+			"myCenter/about.html",
+			"appMall/payCenter.html"
 		]
 	}
 }
