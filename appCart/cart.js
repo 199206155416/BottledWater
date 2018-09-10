@@ -134,7 +134,8 @@ function bindEvent(){
 			isBars: false,
 			barsIcon: '',
 			extendOptions: {
-				goodsList: goodsList
+				goodsList: goodsList,
+				buyType:1
 			}
 		});
 	});
@@ -208,7 +209,7 @@ function getCartList(){
 			
 	formData.append("strUserId", strUserId);
 	formData.append("pageNo", 1);
-	formData.append("pageSize", 20);
+	formData.append("pageSize", 50);
 
 	$.ajax({
 		url: prefix + "/shoppingcard/list",
@@ -219,7 +220,7 @@ function getCartList(){
 		dataType: "json",
 		success: function(res){
 			// 打印请求报错日志
-			ajaxLog(res);
+			ajaxLog("购物车"+res);
 			if(res.resCode == 0){
 				var result = res.result;
 
@@ -248,7 +249,7 @@ function getCartList(){
 						skuPrice: result[i].mallGoodsSku.skuPrice,
 						remarks: result[i].mallGoodsSku.remarks,
 					};
-
+                    console.log(JSON.stringify(mallGoodsSku));
 					var goodsTemplate = $("#goodsTemplate").html();
 
 					goodsTemplate = goodsTemplate.replace("#lId#", lId);

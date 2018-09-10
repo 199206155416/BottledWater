@@ -1,1 +1,35 @@
-null
+{
+	"index.html": {
+		"resources": [
+			"appIndex/home.html"
+		],
+		"refer": [
+			"appCart/cart.html",
+			"myCenter/mine.html",
+			"login/login.html",
+			"appMall/index.html",
+			"appIndex/home.html",
+			"template.html"
+		]
+	},
+	"template.html": {
+		"refer": [
+			"template-main-third.html",
+			"template-main-second.html",
+			"template-main-first.html",
+			"appMall/productDetail.html",
+			"appMall/addOrder.html",
+			"appMall/paySuccess.html",
+			"appCategory/category.html",
+			"myCenter/safetyCenter.html",
+			"login/changePayPassword.html",
+			"appAddress/addressList.html",
+			"myCenter/more.html",
+			"myCenter/myBucket.html",
+			"myCenter/agreement.html",
+			"myCenter/feedback.html",
+			"myCenter/about.html",
+			"appMall/payCenter.html"
+		]
+	}
+}
