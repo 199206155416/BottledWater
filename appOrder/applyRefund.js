@@ -1,8 +1,4 @@
 var currentWebview;
-var type = 0; // -1 == 全部， -2 == 待付款， -3 == 待发货， -4 == 待收货， -5 == 已完成, 默认为-1
-var pageNo = 1;
-var pageSize = 20; 
-var loadFlag = 1; // 上拉加载标志
 
 mui.init({
 	swipeBack: false,
@@ -28,23 +24,13 @@ mui.plusReady(function() {
 	
 	// 绑定事件
 	bindEvnet();
-
-	
 });
 
 function bindEvent(){
-	// 屏幕滚动后加载列表
-	$(window).scroll(function(){
-		var scrollTop = $(window).scrollTop();	// 滚动高度		    
-		var scrollHeight = $(document).height(); // 文档高度
-		var windowHeight = $(window).height(); // 文档窗口高度
-			
-		if (scrollTop + windowHeight >= scrollHeight - 300) {
-			if(loadFlag == 1){
-				loadFlag == 0;
-				getOrderList();
-			}
-		}
+	// 提交表单
+	$("#applyBtn").on("click", function(){
+		var strUserId = localStorage.getItem("userId");
+		
 
 	});
 
@@ -70,114 +56,3 @@ function initSelect(){
 	    $("#refundReason").html(selectItems[0].text);
   	})
 };
-
-/**
- * 获取订单列表
- * @author xuezhenxiang
- */
-function getOrderList(){
-	var userId = localStorage.getItem(userId);
-	var formData = new FormData();
-	
-	formData.append("strBuyerId", userId);
-	formData.append("pageNo", pageNo);
-	formData.append("pageSize", pageSize);
-	formData.append("state", type);
-	
-	$.ajax({
-		url: prefix + "/order/list",
-		type: 'POST',
-		data: formData,
-		contentType: false,
-	 	processData: false,  
-		dataType: "json",
-		success: function(res){
-			// 打印请求报错日志
-			ajaxLog(res);
-
-			if(res.resCode == 0){
-				var list = res.result.list; // 列表数据
-				var count = res.result.count; // 数据总量
-				
-				if(count == 0){
-					$("#orderNullTemp").show();
-					return false;
-				}else{
-					$("#orderNullTemp").hide();
-				}
-				
-				if(list.length <= 0){
-					return false;
-				}
-
-				for(var i = 0, len = list.length; i < len; i++){
-					var lOrderId = list[i].id; // 订单id
-					var strOrderNum = list[i].strOrderNum; // 订单编号
-					var strStateName = list[i].strStateName; // 订单状态
-					var orderListTemp = $("#orderListTemp").html();
-
-					orderListTemp = orderListTemp.replace("#lOrderId#", lOrderId);
-					orderListTemp = orderListTemp.replace("#strOrderNum#", strOrderNum);
-					orderListTemp = orderListTemp.replace("#strStateName#", strStateName);
-
-					var orderList = $(htmlTemplate);
-					
-					;(function(orderList){
-						orderList.on("click", function(){
-							pushWebView({
-								webType: 'newWebview_First',
-								id: 'appOrder/orderDetail.html',
-								href: 'appOrder/orderDetail.html',
-								aniShow: getaniShow(),
-								title: "订单详情",
-								isBars: false,
-								barsIcon: '',
-								extendOptions: extendOptions
-							});
-						});
-					})(orderList);
-
-					for(var i1 = 0, len1 = mallGoodsList.length; i1 < len1; i1++){
-						var id = mallGoodsList[i1].id;
-						var strGoodsName = mallGoodsList[i1].strGoodsName;
-						var strGoodsImg = mallGoodsList[i1].strGoodsImg;
-						var goodsSlogn = mallGoodsList[i1].goodsSlogn || "张三李四";
-						var defaultSkuPrice = mallGoodsList[i1].defaultSkuPrice;
-
-						var goodsTemplate = $("#goodsTemplate").html();
-						goodsTemplate = goodsTemplate.replace("#strGoodsImg#", strGoodsImg);
-						goodsTemplate = goodsTemplate.replace("#strGoodsName#", commonNameSubstr(strGoodsName, 34));
-						goodsTemplate = goodsTemplate.replace("#goodsSlogn#", commonNameSubstr(goodsSlogn, 28));
-						goodsTemplate = goodsTemplate.replace("#defaultSkuPrice#", defaultSkuPrice);
-
-						var goods = $(goodsTemplate);
-						;(function(){
-//							goods.on("click", function(){
-//								var goodsId = this.getAttribute('id');
-//								var extendOptions = {
-//									goodsId: goodsId
-//								};
-//								pushWebView({
-//									webType: 'newWebview_First',
-//									id: 'appMall/productDetail.html',
-//									href: 'appMall/productDetail.html',
-//									aniShow: getaniShow(),
-//									title: "商品详情",
-//									isBars: false,
-//									barsIcon: '',
-//									extendOptions: extendOptions
-//								});
-//							})
-						})();
-						orderList.find(".goodsList").append(goods);
-					}
-					
-					$("#orderListID").append(orderList);
-					pageNo++;
-					loadFlag = 1;
-				}
-			}
-		}
-	})
-};
-
