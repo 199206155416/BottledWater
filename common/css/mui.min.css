@@ -833,8 +833,8 @@ p {
 
 .mui-spinner {
 	display: inline-block;
-	width: 24px;
-	height: 24px;
+	width: 20px;
+	height: 20px;
 	-webkit-transform-origin: 50%;
 	transform-origin: 50%;
 	-webkit-animation: spinner-spin 1s step-end infinite;
@@ -3902,7 +3902,7 @@ body>.mui-progressbar {
 }
 
 .mui-pull {
-	font-weight: 700;
+	/*font-weight: 700;*/
 	position: absolute;
 	right: 0;
 	bottom: 10px;
@@ -4421,7 +4421,7 @@ body>.mui-progressbar {
 }
 
 .mui-icon-pulldown:before {
-	content: '\e588'
+	content: '\e584'
 }
 
 .mui-fullscreen {
