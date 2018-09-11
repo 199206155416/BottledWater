@@ -1,9 +1,18 @@
-
+var openType;//打开类型
+var currentWebview; // 当前子页面
+var addOrderWebView;
+var addressList;
+var defaultAddressIndex;//默认地址索引
 mui.init({
 	swipeBack: true
 });
 
 mui.plusReady(function() {
+	currentWebview = plus.webview.currentWebview();
+	openType=currentWebview.openType;
+	if(openType==0){
+		addOrderWebView=plus.webview.getWebviewById("appMall/addOrder.html");
+	}
 	// 查询收货地址
 	queryAddressList();
 	// 绑定事件
@@ -86,7 +95,24 @@ function bindEvent(){
 			extendOptions: {}
 		})
 	});
-};
+	
+   window.addEventListener('addressEvent',function(e){
+			console.log(JSON.stringify(e.detail));
+			var receiptAddress=e.detail;
+			var dataType=receiptAddress["dataType"];
+			var index=0;
+			if(dataType==0){//添加地址
+				 addressList.unshift(receiptAddress);
+				 handelAddress(receiptAddress,0,"add");
+			}else if(dataType==1){//编辑地址
+				index=receiptAddress.editDataIndex;
+				addressList[index]=receiptAddress;
+				$("#showArea>li").eq(index).remove();
+				handelAddress(receiptAddress,index,"editAdd");
+			}
+			
+	},false);
+}
 
 /**
  * 查询收货地址
@@ -111,26 +137,47 @@ function queryAddressList(){
 					return;
 				}
 				$("#blankPage").hide();
-
+				addressList=result;
 				for(var i = 0, len = result.length; i < len; i++){
-					var id = result[i].id; // 地址id
-					var strReceiptUserName = result[i].strReceiptUserName; // 收货人姓名
-					var strReceiptMobile = result[i].strReceiptMobile; // 收货人电话
-					var strLocation = result[i].strLocation; // 收货人省市区
-					var strDetailaddress = result[i].strDetailaddress; // 收货人详细地址
-					var strTag = result[i].strTag; // 收货人地址标签
-					var isDefault = result[i].isDefault; // 是否默认地址，0：不是，1：是
-					var addressTemplate = $("#defaultAdd").html();
+				    handelAddress(result[i],i,"init");
+				}
+			}
+			if(openType==0){//说明是从提交订单页面进入的绑定选择事件
+				$(".receiveInfo").each(function(i,ele){//单击选择
+					$(ele).data("index",i);
+					$(ele).click(function(){
+						var index=$(this).data("index");
+						var chooseAddress=addressList[index];
+						mui.fire(addOrderWebView,"chooseAddressEvent",chooseAddress);
+					    mui.back();
+					});
+				});
+			}
+		}
+	});
+}
 
+	function handelAddress(addressData,i,flag){
+		          var id = addressData.id; // 地址id
+		          var strReceiptUserName = addressData.strReceiptUserName; // 收货人姓名
+					var strReceiptMobile = addressData.strReceiptMobile; // 收货人电话
+					var strLocation = addressData.strLocation; // 收货人省市区
+					var strDetailaddress = addressData.strDetailaddress; // 收货人详细地址
+					var strTag = addressData.strTag; // 收货人地址标签
+					var isDefault = addressData.isDefault; // 是否默认地址，0：不是，1：是
+					var addressTemplate = $("#defaultAdd").html();
+					if(isDefault==1){
+						defaultAddressIndex=i;
+					}
 					addressTemplate = addressTemplate.replace("#strReceiptUserName#", strReceiptUserName);
 					addressTemplate = addressTemplate.replace("#strReceiptMobile#", strReceiptMobile);
 					addressTemplate = addressTemplate.replace("#strLocation#", strLocation);
 					addressTemplate = addressTemplate.replace("#strDetailaddress#", strDetailaddress);
 					addressTemplate = addressTemplate.replace("#strTag#", strTag);
 					addressTemplate = addressTemplate.replace("#isDefault#", isDefault == 1 ? "defaultAddress" : "");
-
 					var address = $(addressTemplate);
-
+					address.find(".default1").data("i",i);
+					address.find(".editAddress").data("i",i);
 					;(function(id, address, isDefault){
 						// 删除地址
 						address.find(".delAddress").on("click", function(){
@@ -145,20 +192,21 @@ function queryAddressList(){
 
 						// 编辑地址
 						address.find(".editAddress").on("click", function(){
+							var index=$(this).data("i");
+							var optionsData=addressList[index];
+							optionsData["index"]=index;
+							optionsData["addressId"]=optionsData["id"];
 							pushWebView({
 								webType: 'newWebview_First',
 								id: 'appAddress/editAddress.html',
 								href: 'appAddress/editAddress.html',
 								aniShow: getaniShow(),
-								title: "添加地址",
+								title: "编辑地址",
 								isBars: false,
 								barsIcon: '',
-								extendOptions: {
-									addressId: id
-								}
-							})
+								extendOptions: optionsData
+							});
 						});
-
 						// 设置默认
 						address.find(".default1").on("click", function(){
 							if(isDefault == 1) return;
@@ -180,18 +228,44 @@ function queryAddressList(){
 											.siblings()
 											.find(".default1")
 											.removeClass("defaultAddress");
+										  var index=$(that).data("i");
+										  addressList[defaultAddressIndex]["isDefault"]=0;
+										  defaultAddressIndex=index;
+										   addressList[defaultAddressIndex]["isDefault"]=1;
 									}
 								}
 							});
-						});
+						})
+						
 					})(id, address);
-
-					$("#showArea").append(address);
-				}
-			}
-		}
-	});
-};
+					var isBindEvent=false;
+					if("init"==flag){
+						$("#showArea").append(address);
+					}else if("add"==flag){
+						$("#showArea").prepend(address);
+						isBindEvent=true;
+					}else if("editAdd"==flag){
+						i=i-1;
+						if(i<0){
+							$("#showArea").prepend(address);
+						}else{
+							$("#showArea>li").eq(i).after(address);
+						}
+						isBindEvent=true;
+						i=i+1;
+					}
+					if(isBindEvent){
+						$("#showArea>li").eq(i).data("index",i);
+						$("#showArea>li").eq(i).click(function(){
+							var index=$(this).data("index");
+							var chooseAddress=addressList[index];
+							mui.fire(addOrderWebView,"chooseAddressEvent",chooseAddress);
+						    mui.back();
+						});
+					}
+					
+					
+	}
 
 /**
  * 删除地址

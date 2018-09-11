@@ -7,7 +7,7 @@ var paredntWebview; // 父页面
 var goodsId; // 商品id
 var buyNowFlag = 0; // buyNowFlag == 0 点击sku选择弹层确定按钮立即购买, buyNowFlag == 1 加入购物车
 var accountBalance;
-
+var addOrderWebView;
 mui.init({
 	swipeBack: false
 });
@@ -15,6 +15,7 @@ mui.init({
 
 mui.plusReady(function() {
 	currentWebview = plus.webview.currentWebview();
+	addOrderWebView=plus.webview.getWebviewById("appMall/addOrder.html");
 	paredntWebview = currentWebview.parent();
 	detailcontent = document.getElementById('detailcontent');
 	//监听页面隐藏的隐藏的时候清空数据信息
@@ -41,7 +42,6 @@ function bindEvent(){
 				alert("账户余额不足,请选择其他付款方式或充值");
 				return false;
 			}
-			var addOrderWebView=plus.webview.getWebviewById("appMall/addOrder.html");
 			mui.fire(addOrderWebView,"choosePayType",{"payType":id});
 			mui.back();
 		});

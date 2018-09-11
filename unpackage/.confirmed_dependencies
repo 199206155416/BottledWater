@@ -29,7 +29,8 @@
 			"myCenter/agreement.html",
 			"myCenter/feedback.html",
 			"myCenter/about.html",
-			"appMall/payCenter.html"
+			"appMall/payCenter.html",
+			"appAddress/editAddress.html"
 		]
 	}
 }

@@ -77,12 +77,16 @@ function addListevent() {
 			id = "login/login.html";
 			aniShow = 'slide-in-bottom';
 		}
+		var optionsData={};
+		if("appAddress/addressList.html"==id){
+			optionsData={openType:1};
+		}
 		pushWebView({
 			webType: 'newWebview_First',
 			id: id,
 			href: id,
 			aniShow: aniShow,
-			extendOptions: {}
+			extendOptions: optionsData
 		})
 	});
 

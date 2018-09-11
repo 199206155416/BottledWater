@@ -38,13 +38,26 @@ mui.plusReady(function() {
 	window.addEventListener('postExtendOptions',function(e){
 		console.log(JSON.stringify(e.detail.extendOptions))
 	},false);
-
- 	userId= localStorage.getItem("userId"); // 用户id
+	userId= localStorage.getItem("userId"); // 用户id
 	getPayDetail();
 
 	// 绑定事件
 	bindEvent();
 });
+
+/**
+ * 打开收货地址
+ */
+function openAddress(){
+	pushWebView({
+			webType: 'newWebview_First',
+			id: "appAddress/addressList.html_1",
+			href: "appAddress/addressList.html",
+			aniShow: getaniShow(),
+			title: "收货地址",
+			extendOptions: {openType:0}
+	});
+}
 
 function getPayDetail(){
 	var formData = new FormData();
@@ -205,9 +218,13 @@ function initPayText(payType){
 function bindEvent(){
   window.addEventListener('choosePayType',function(event){
   	    var data=event.detail;
-  	    console.log(JSON.stringify(data)+"aaaaaa");
   	    payType=parseInt(data["payType"]);
 		initPayText(payType);
+	},false);
+	window.addEventListener('chooseAddressEvent',function(e){
+			console.log(JSON.stringify(e.detail));
+			receiptAddress=e.detail;
+			queryDefaultAddress();
 	},false);
 	//选择支付方式
 	$("#elePayType").on("click", function(){

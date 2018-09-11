@@ -1,18 +1,21 @@
 var currentWebview; // 当前页面
 var cityPicker3 = null; // 三级联动选择器
 var id = null; // 地址id(id不为0时编辑地址否则添加新地址)
-
+var addressId;
+var editDataIndex;
+var addreddListWebView;
 mui.init({
 	swipeBack: true
 });
 
 mui.plusReady(function() {
 	currentWebview = plus.webview.currentWebview();
-
+	addressListWebView=plus.webview.getWebviewById("appAddress/addressList.html_1");
 	addressId = currentWebview.addressId;
 	// 如果id存在查询地址信息
 	if(addressId){
-		getAddressById();
+		getAddress();
+		editDataIndex=currentWebview.index;
 	}
 
 	// 获取区数据
@@ -101,8 +104,13 @@ function bindEvent(){
 		dataObj.isDefault = $("#defaultAddress").is(":checked") ? 1 : 0; // 是否默认地址，0：不是，1：是
 		dataObj.strDetailaddress = $("#strDetailaddress").val().trim() || ""; // 详细地址
 		dataObj.strTag = $(".address-label:checked").val().trim() || ""; // 地址标签
-
-		console.log("strUserId", dataObj.strUserId)
+		if(dataObj.strTag==""){
+			dataObj.strTag=$("#strTag").val();
+		}
+		if(addressId){
+			dataObj.id=addressId;
+		}
+		console.log("strUserId", dataObj.strUserId);
 
 		$.ajax({
 			url: prefix + "/address/save",
@@ -114,9 +122,18 @@ function bindEvent(){
 				ajaxLog(res);
 
 				if(res.resCode == 0){
-					mui.toast("地址添加成功");
 					var result = res.result;
-					
+					if(addressId){
+						mui.toast("地址编辑成功");
+						dataObj["editDataIndex"]=editDataIndex;
+						dataObj["dataType"]=1;
+					}else{
+						mui.toast("地址添加成功");
+						dataObj["id"]=result;
+						dataObj["dataType"]=0;
+					}
+					mui.fire(addressListWebView,"addressEvent",dataObj);
+					mui.back();
 				}
 			}
 		});
@@ -154,6 +171,28 @@ function getLocations(){
  * 获取地址详情
  * @author xuezhenxiang
  */
-function getAddressById(){
-	
-};
+function getAddress(){
+	var strReceiptUserName = currentWebview.strReceiptUserName;
+	var strReceiptMobile = currentWebview.strReceiptMobile;
+	var strLocation = currentWebview.strLocation;
+	var strDetailaddress = currentWebview.strDetailaddress;
+	var isDefault = currentWebview.isDefault;
+	var strTag = currentWebview.strTag;
+	$("#strReceiptUserName").val(strReceiptUserName);
+	$("#strReceiptMobile").val(strReceiptMobile);
+	$("#strFullDistrictName").html(strLocation);
+	$("#strDetailaddress").val(strDetailaddress);
+	if(1==isDefault){
+		$("#defaultAddress").attr("checked",true);
+	}
+	if("学校"==strTag){
+		$("#homeAddress").removeAttr("checked");
+		$("#schoolAddress").attr("checked",true);
+	}else if("公司"==strTag){
+		$("#homeAddress").removeAttr("checked");
+		$("#companyAddress").attr("checked",true);
+	}else if("家"!=strTag){
+		$("#homeAddress").removeAttr("checked");
+		$("#strTag").val(strTag);
+	}
+}
