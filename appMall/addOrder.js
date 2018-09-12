@@ -14,6 +14,7 @@ var strOrderId;//定的ID
 var bucketNum=0;
 var bucketMoney=0.0;
 var ticketTotalCount=0;
+var isSubmit=false;
 mui.init({
 	swipeBack: false
 });
@@ -254,6 +255,11 @@ function bindEvent(){
 }
 
 function doAddOrder(){
+		if(isSubmit){
+			 mui.alert("支付中", '提示', function(e) {
+			        },"div");
+			 return false;
+		}
 		var formData = new FormData();
 		formData.append("buyerId", userId);
 		formData.append("buyType", buyType);//购买类型分为：购物车结算和非购物车结算
@@ -289,6 +295,7 @@ function doAddOrder(){
 			formData.append("mallOrderDetailList["+i+"].goodsTotalPrice", goodsTotalPrice);
 			formData.append("mallOrderDetailList["+i+"].waterTicketsNum", useTickecCount);
 		}
+		isSubmit=true;
 		$.ajax({
 		url: prefix + "/order/save",
 		type: "POST",
@@ -307,7 +314,8 @@ function doAddOrder(){
 				}else{
 					 strOrderId=res.strOrderId;
 					  mui.alert(result, '提示', function(e) {
-			        },"div")
+			        },"div");
+			        isSubmit=false;
 				}
 			}
 		});
@@ -344,6 +352,7 @@ function doPay(payInfo){
 	}else if(payType==2){//余额
 		openPaySuccess(strOrderId);
 	}
+    isSubmit=false;
 }
 
 function openPaySuccess(strOrderId){
