@@ -32,7 +32,9 @@
 			"appMall/payCenter.html",
 			"appAddress/editAddress.html",
 			"appOrder/orderList.html",
-			"myCenter/rechargeRecord.html"
+			"myCenter/rechargeRecord.html",
+			"myCenter/couponList.html",
+			"myCenter/conshow.html"
 		]
 	}
 }
