@@ -25,4 +25,15 @@ mui.plusReady(function(){
 		//上报服务器e3-server
 		mui.back();
 	}, false)
+
+	// 绑定事件
+	bindEvent();
 });
+
+function bindEvent(){
+	// 充值
+	$("#charge").on("click", function(){
+
+	});
+};
+
