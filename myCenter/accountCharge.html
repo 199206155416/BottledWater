@@ -13,13 +13,17 @@
 	<div class="mui-content">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left back" style="color: #fff;"></a>
 		<p class="account-charge-label">账户余额（元）</p>
-		<p class="account-charge-price">6000.00</p>
+		<p class="account-charge-price" id="accountBalance">0</p> 
+		<input  type="radio"/>
 	</div>
 
 	<div class="mui-button-row" style="margin: 1.5rem 1.25rem 0 1.25rem;padding: 0;">
-		<button type="button" class="mui-btn mui-btn-block">充值</button>
+		<button type="button" class="mui-btn mui-btn-block" id="chargeBtn">充值</button>
+		
 	</div>
-
+	<div class="mui-button-row" style="padding: 0;" onclick="openChargeLog()">
+			充值记录
+	</div>
 	<script src="../common/js/include.js" charset="UTF-8" level="1"></script>
 	<script src="accountCharge.js" charset="UTF-8"></script>
 </body>
