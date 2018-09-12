@@ -262,7 +262,8 @@
 					"myCenter/agreement.html",
 					"appMall/payCenter.html",
 					"appMall/paySuccess.html",
-					"appOrder/orderList.html"
+					"appOrder/orderList.html",
+					"myCenter/rechargeRecord.html"
 				],
 				"priority": 0
 			},

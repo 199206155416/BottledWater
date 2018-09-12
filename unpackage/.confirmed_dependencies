@@ -30,7 +30,9 @@
 			"myCenter/feedback.html",
 			"myCenter/about.html",
 			"appMall/payCenter.html",
-			"appAddress/editAddress.html"
+			"appAddress/editAddress.html",
+			"appOrder/orderList.html",
+			"myCenter/rechargeRecord.html"
 		]
 	}
 }

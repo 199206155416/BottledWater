@@ -15,15 +15,15 @@
 	<div class="mui-content">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left back" style="color: #fff;"></a>
 		<p class="account-charge-label">账户余额（元）</p>
-		<p class="account-charge-price">6000.00</p>
+		<p class="account-charge-price" id="accountBalance">0</p> 
+		<input  type="radio"/>
 	</div>
-
 	<div class="mui-button-row" style="margin: 1.5rem 1.25rem 0 1.25rem;padding: 0;">
-		<button type="button" class="mui-btn mui-btn-block" id="charge">充值</button>
-		<a href="javascript:;" class="charge-record">充值记录</a>
+		<button type="button" class="mui-btn mui-btn-block" id="chargeBtn">充值</button>
+		<a href="javascript:;" class="charge-record" onclick="openChargeLog()">充值记录</a>
 	</div>
 
-	<div class="model">
+	<div class="model" style="display:none;" id="dialog">
 		<div class="dialog">
 			<div class="dialog-head">
 				<h2>充值</h2>
@@ -32,28 +32,27 @@
 				<div>
 					<div class="mui-input-row mui-checkbox mui-left">
 						<label>微信支付</label>
-						<input name="checkbox1" value="wechat" type="checkbox">
+						<input name="checkbox1" value="1" type="checkbox">
 					</div>
 					<div class="mui-input-row mui-checkbox mui-left">
 						<label>支付宝支付</label>
-						<input name="checkbox1" value="alipay" type="checkbox">
+						<input name="checkbox1" value="0" type="checkbox">
 					</div>
 					
 				</div>
 				<div class="mui-input-group">
 					<div class="mui-input-row">
 						<label style="font-size: .28rem;">金额：</label>
-						<input type="text" class="mui-input-clear" style="font-size:.28rem;line-height: 40px;" placeholder="请输入用户名">
+						<input type="text" name="accountMoney" class="mui-input-clear" style="font-size:.28rem;line-height: 40px;" placeholder="请输入金额">
 					</div>
 				</div>
 			</div>
 			<div class="dialog-foot">
-				<div class="btn">取消</div>
-				<div class="btn">确定</div>
+				<div class="btn" onclick="hideDialog()">取消</div>
+				<div class="btn" onclick="doCharge()">确定</div>
 			</div>
 		</div>
 	</div>
-
 	<script src="../common/js/include.js" charset="UTF-8" level="1"></script>
 	<script src="accountCharge.js" charset="UTF-8"></script>
 </body>

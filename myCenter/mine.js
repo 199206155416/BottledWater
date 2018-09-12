@@ -6,6 +6,7 @@ var touxiangimg;
 var logoutBtn;
 var trueimg;
 var touxiangword;
+var accountBalance;
 mui.plusReady(function() {
 	//注册列表的点击事件
 	addListevent();
@@ -55,7 +56,28 @@ mui.plusReady(function() {
 	// }, false)
 	
 	renderHtml();
-})
+	getBalace();
+});
+
+//获取账户余额
+function getBalace(){
+	var userId= localStorage.getItem("userId"); // 用户id
+	$.ajax({
+		url: prefix + "/account/getBalace/"+userId,
+		type: "GET",
+		dataType: "json",
+		success: function(res){
+			ajaxLog(res);
+			if(res.resCode == 0){
+				var result = res.result;
+				accountBalance=result;
+				$("#lAccountBalance").html(result);
+			}else{
+				alert(result);
+			}
+		}
+	})
+}
 
 // 渲染页面
 function renderHtml(){
@@ -80,6 +102,8 @@ function addListevent() {
 		var optionsData={};
 		if("appAddress/addressList.html"==id){
 			optionsData={openType:1};
+		}else if(id=="mycenter/accountCharge.html"){
+			optionsData={accountBalance:accountBalance};
 		}
 		pushWebView({
 			webType: 'newWebview_First',
@@ -93,7 +117,9 @@ function addListevent() {
 	$("#messageBtn").on("click", function(){
 		var aniShow = getaniShow();
 		//检测已经存在sessionkey否者运行下面的登陆代码
-		if (localStorage.getItem('userMobile') && localStorage.getItem('userId')) {} else {
+		if (localStorage.getItem('userMobile') && localStorage.getItem('userId')) {
+			
+		}else {
 			id = "login/login.html";
 			aniShow = 'slide-in-bottom';
 			
@@ -123,7 +149,6 @@ function addListevent() {
 		if (localStorage.getItem('userMobile') && localStorage.getItem('userId')) {} else {
 			id = "login/login.html";
 			aniShow = 'slide-in-bottom';
-			
 			pushWebView({
 				webType: 'newWebview_First',
 				id: id,
