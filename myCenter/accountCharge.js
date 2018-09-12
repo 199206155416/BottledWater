@@ -4,6 +4,7 @@ mui.init({
 var currentWebview;
 var payType;
 var channel;
+var isSubmit=false;
 mui.plusReady(function(){
 	currentWebview = plus.webview.currentWebview();
     var accountBalance = currentWebview.accountBalance;
@@ -61,7 +62,11 @@ function initPayText(){
  * 进行充值
  */
 function doCharge(){
-	$("#dialog").show();
+	if(isSubmit){
+		mui.alert("支付中", '提示', function(e) {
+			        },"div");
+		return false;
+	}
 	payType=$("input[name='checkbox1']:checked").val();
 	if(payType==undefined){
 		mui.alert("选择支付方式", '提示', function(e) {
@@ -80,6 +85,7 @@ function doCharge(){
 	dataFormData.append("user.id",strUserId);
 	dataFormData.append("rechargeMoney",accountMoney);
 	dataFormData.append("strPayType",payType);
+	isSubmit=true;
 	$.ajax({
 			url: prefix + "/account/save",
 			type: 'POST',
@@ -98,6 +104,7 @@ function doCharge(){
 				}else{
 					 mui.alert(result, '提示', function(e) {
 			        },"div");
+			        isSubmit=false;
 				}
 			}
 		});
@@ -117,17 +124,21 @@ function doPay(payInfo){
 		plus.payment.request(channel,stra,function(result){
                     plus.nativeUI.alert("支付成功！",function(){
                         hideDialog();
+                        isSubmit=false;
                     });
                 },function(error){
                     plus.nativeUI.alert("支付失败：" + JSON.stringify(error));
+                    isSubmit=false;
                 });
 	}else if(payType==0){
 		plus.payment.request(channel,payInfo,function(result){
                     plus.nativeUI.alert("支付成功！",function(){
                     	hideDialog();
+                    	isSubmit=false;
                     });
                 },function(error){
                     plus.nativeUI.alert("支付失败：" + JSON.stringify(error));
+                    isSubmit=false;
                 });
 	}
 }
