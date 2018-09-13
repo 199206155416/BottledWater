@@ -34,11 +34,29 @@ function bindEent(){
  * @param {Object} num
  */
 function doRetreatBucket(num){
-	alert(num);
+	  var userId= localStorage.getItem("userId"); // 用户id
+	  var strMobile=localStorage.getItem("userMobile");
+	  var sendData={strUserId:userId,strMobile:strMobile,bucketCount:num};
+		$.ajax({
+		url: prefix + "/refund/refundBucket",
+		type: 'POST',
+		data:sendData,
+		dataType: "json",
+		success: function(res){
+			// 打印请求报错日志
+			ajaxLog(res);
+			if(res.resCode == 0){
+				var data=res.result;
+				mui.alert(data, '提示', function(e) {
+			        },"div");
+			   getBucketInfo();
+			}
+		}
+	});
 }
 
 function getBucketInfo(){
-	var userId= localStorage.getItem("userId"); // 用户id
+	    var userId= localStorage.getItem("userId"); // 用户id
 		$.ajax({
 		url: prefix + "/user/getUserbucketNum/"+userId,
 		type: 'GET',
