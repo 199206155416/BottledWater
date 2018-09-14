@@ -34,7 +34,8 @@
 			"appOrder/orderList.html",
 			"myCenter/rechargeRecord.html",
 			"myCenter/couponList.html",
-			"myCenter/conshow.html"
+			"myCenter/conshow.html",
+			"appOrder/orderDetail.html"
 		]
 	}
 }
