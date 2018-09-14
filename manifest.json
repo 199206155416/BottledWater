@@ -264,8 +264,7 @@
 					"appMall/paySuccess.html",
 					"appOrder/orderList.html",
 					"myCenter/rechargeRecord.html",
-					"myCenter/conshow.html",
-					"appOrder/orderDetail.html"
+					"myCenter/conshow.html"
 				],
 				"priority": 0
 			},
