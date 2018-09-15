@@ -146,7 +146,7 @@ function getGoodsList(){
 						var id = mallGoodsList[i1].id;
 						var strGoodsName = mallGoodsList[i1].strGoodsName;
 						var strMainImg = mallGoodsList[i1].strMainImg;
-						var goodsSlogn = mallGoodsList[i1].goodsSlogn || "张三李四";
+						var goodsSlogn = mallGoodsList[i1].remarks || "";
 						var defaultSkuPrice = mallGoodsList[i1].defaultSkuPrice;
 
 						var goodsTemplate = $("#goodsTemplate").html();

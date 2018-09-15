@@ -106,6 +106,10 @@ body{
 }*/
 .goods-img{
 	padding-bottom: .2rem;
+
+}
+.goods-img img{
+	height: 2rem;
 }
 .goods-name{
 	font-size: .26rem;
