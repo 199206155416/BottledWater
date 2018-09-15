@@ -1,0 +1,150 @@
+body{
+	background: #f4f4f4;
+}
+.header{
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 7.5rem;
+	z-index: 10;
+	border-bottom: 0;
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, .2);
+    box-shadow: 0 0 1px rgba(0, 0, 0, .2);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.use-introduce{
+	position: absolute;
+	right: .3rem;
+	top: .29rem;
+	font-size: .28rem;
+	line-height: .3rem;
+	color: #999;
+	z-index: 10;
+}
+.header .back{
+	position: absolute;
+	left: .2rem;
+	top: .2rem;
+	width: .16rem;
+	height: .3rem;
+	z-index: 10;
+}
+.header .title{
+	font-size: .3rem;
+	line-height: .88rem;
+	color: #666;
+	text-align: center;
+	position: relative;
+	font-weight: normal;
+}
+.header .title:after{
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 1px;
+	transform: scaleY(.5);
+	-webkit-transform: scaleY(.5);
+	background: #ccc;
+}
+.tab-list{
+	display: flex;
+	display: -webkit-flex;
+	height: .88rem;
+}
+.tab-list li{
+	flex: 1;
+	-webkit-flex: 1;
+	font-size: .28rem;
+	line-height: .88rem;
+	color: #666;
+	text-align: center;
+	position: relative;
+}
+.tab-list li:after{
+	content: "";
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 1px;
+	height: 100%;
+	background: #ccc;
+	transform: scale(.5);
+	-webkit-transform: scale(.5);
+}
+.tab-list li:last-child:after{
+	width: 0;
+}
+.tab-list li.active{
+	color: #60a3fb;
+}
+.tab-list li.active:before{
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: .05rem;
+	left: 0;
+	bottom: 0;
+	background: #60a3fb;
+	transform: scale(.5);
+	-webkit-transform: scale(.5);
+	transform-origin: center bottom;
+	-webkit-transform-origin: center bottom;
+}
+
+/* 列表内容 */
+.mui-content{
+	padding-top: 1.76rem;
+}
+.coupon-list{
+	padding: .3rem;
+}
+.coupon-item-body,.coupon-item-footer{
+	background: #fff;
+	border-radius: .12rem;
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+	-webkit-align-items: center;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	padding: 0 .3rem;
+}
+.coupon-item-body{
+	height: 1.42rem
+}
+.coupon-item-footer{
+	height: .6rem;
+}
+.coupon-name{
+	font-size: .28rem;
+	line-height: .4rem;
+	color: #666;
+	margin-bottom: .2rem;
+}
+.coupon-time{
+	font-size: .24rem;
+	line-height: .32rem;
+	color: #999;
+}
+.coupon-price{
+	font-size: .4rem;
+	line-height: .44rem;
+	color: #60a3fb;
+	margin-bottom: .2rem;
+	text-align: right;
+}
+.coupon-comment{
+	font-size: .24rem;
+	line-height: .32rem;
+	color: #999;
+	text-align: right;
+}
+.coupon-introduce{
+	font-size: .24rem;
+	line-height: .32rem;
+	color: #999;
+}
