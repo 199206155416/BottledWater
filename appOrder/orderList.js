@@ -3,8 +3,10 @@ var type = -1; // -1 == 全部， -2 == 待付款， -3 == 待发货， -4 == �
 var pageNo = 1;
 var pageSize = 20; 
 var loadFlag = 1; // 上拉加载标志
-
-mui.init({
+var payChannels;
+var payType;
+var channel;
+	mui.init({
 	swipeBack: false,
 	pullRefresh: {
 	    container: ".mui-content",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
@@ -20,6 +22,7 @@ mui.init({
   	}
 });
 
+
 mui.plusReady(function() {
 	currentWebview = plus.webview.currentWebview();
 	
@@ -29,9 +32,11 @@ mui.plusReady(function() {
 
 	// 获取订单列表
 	getOrderList();
+	initPayChannel();
 	
 	// 绑定事件
 	bindEvent();
+
 });
 
 function bindEvent(){
@@ -53,16 +58,26 @@ function bindEvent(){
 	// 点击切换tab
 	$("#myTapWidth").on("click", "li", function(){
 		type = $(this).attr("type");
-		
 		$(this).addClass("row").siblings().removeClass("row");
-		
-		$("#goodsList").html("");
 		loadFlag = 1;
 		
 		getOrderList();
 		
 	});
-};
+}
+
+/**
+ * 初始化支付渠道
+ * @param {Object} payType
+ */
+function initPayChannel(){
+	plus.payment.getChannels(function(channels){
+			payChannels=channels;
+	    },function(e){
+	        alert("获取支付通道失败："+e.message);
+	    });
+	
+}
 
 /**
  * 渲染tab
@@ -77,10 +92,9 @@ function renderTab(type){
  * @author xuezhenxiang
  */
 function getOrderList(){
-	var userId = localStorage.getItem(userId);
+	var userId = localStorage.getItem("userId");
 	var formData = new FormData();
-	
-	formData.append("strBuyerId", userId);
+	formData.append("strBuyerId",userId);
 	formData.append("pageNo", pageNo);
 	formData.append("pageSize", pageSize);
 	formData.append("state", type);
@@ -95,7 +109,7 @@ function getOrderList(){
 		success: function(res){
 			// 打印请求报错日志
 			ajaxLog(res);
-
+			$("#orderListID").html("");
 			if(res.resCode == 0){
 				var list = res.result.list; // 列表数据
 				var count = res.result.count; // 数据总量
@@ -112,19 +126,24 @@ function getOrderList(){
 				}
 
 				for(var i = 0, len = list.length; i < len; i++){
+					var order = list[i];
 					var lOrderId = list[i].id; // 订单id
 					var strOrderNum = list[i].strOrderNum; // 订单编号
 					var strStateName = list[i].strStateName; // 订单状态
+					var factPrice=list[i].factPrice;
 					var orderListTemp = $("#orderListTemp").html();
 
 					orderListTemp = orderListTemp.replace("#lOrderId#", lOrderId);
 					orderListTemp = orderListTemp.replace("#strOrderNum#", strOrderNum);
 					orderListTemp = orderListTemp.replace("#strStateName#", strStateName);
-
-					var orderList = $(htmlTemplate);
-					
-					;(function(orderList, lOrderId){
-						orderList.on("click", function(){
+					orderListTemp = orderListTemp.replace("#factPrice#", factPrice);
+					if(strStateName=="待付款"){
+						orderListTemp = orderListTemp.replace("none", "block");
+					}
+					var orderList = $(orderListTemp);
+					var mallOrderDetailList=list[i].mallOrderDetailList
+					;(function(orderList, lOrderId,order){
+						orderList.find(".goodsList").on("click", function(){
 							pushWebView({
 								webType: 'newWebview_First',
 								id: 'appOrder/orderDetail.html',
@@ -138,21 +157,38 @@ function getOrderList(){
 								}
 							});
 						});
-					})(orderList, lOrderId);
+						orderList.find(".payment").click(function(){
+							    var strPayType=order.strPayType;
+							    nowPay(lOrderId,strPayType);
+							    return false;
+						});
+						
+						orderList.find(".cancel").click(function(){
+									var btnArray = ['取消', '确认'];
+							        mui.confirm("确认取消订单吗?", '取消订单', btnArray, function(e) {
+							            if (e.index == 1) {
+							                cancelOrder(lOrderId);
+							            }
+							        },"div");
+							     return false;   
+						});
+					})(orderList, lOrderId,order);
 
-					for(var i1 = 0, len1 = mallGoodsList.length; i1 < len1; i1++){
-						var id = mallGoodsList[i1].id;
-						var strGoodsName = mallGoodsList[i1].strGoodsName;
-						var strGoodsImg = mallGoodsList[i1].strGoodsImg;
-						var goodsSlogn = mallGoodsList[i1].goodsSlogn || "张三李四";
-						var defaultSkuPrice = mallGoodsList[i1].defaultSkuPrice;
-
+					for(var i1 = 0, len1 = mallOrderDetailList.length; i1 < len1; i1++){
+						var item=mallOrderDetailList[i1];
+						var id = item.id;
+						var strGoodsName = item.strSkuName;
+						var strGoodsImg = item.strGoodsImg;
+						var strGoodsSKUDetail = item.remarks;
+						var skuPrice = item.skuPrice;
+						var count = item.count;
 						var goodsTemplate = $("#goodsTemplate").html();
 						goodsTemplate = goodsTemplate.replace("#strGoodsImg#", strGoodsImg);
-						goodsTemplate = goodsTemplate.replace("#strGoodsName#", commonNameSubstr(strGoodsName, 34));
-						goodsTemplate = goodsTemplate.replace("#goodsSlogn#", commonNameSubstr(goodsSlogn, 28));
-						goodsTemplate = goodsTemplate.replace("#defaultSkuPrice#", defaultSkuPrice);
-
+						goodsTemplate = goodsTemplate.replace("#strGoodsTitle#", commonNameSubstr(strGoodsName, 34));
+						goodsTemplate = goodsTemplate.replace("#strGoodsSKUDetail#", commonNameSubstr(strGoodsSKUDetail, 28));
+						goodsTemplate = goodsTemplate.replace("#skuPrice#", skuPrice);
+						goodsTemplate = goodsTemplate.replace("#count#", count);
+						
 						var goods = $(goodsTemplate);
 						;(function(){
 //							goods.on("click", function(){
@@ -182,5 +218,96 @@ function getOrderList(){
 			}
 		}
 	})
-};
+}
+/**
+ * 取消订单
+ * @param {Object} strOrderId
+ */
+function cancelOrder(strOrderId){
+		$.ajax({
+		url: prefix + "/order/cancelOrder",
+		type: "POST",
+		data: {"strOrderId":strOrderId}, 
+		dataType: "json",
+		success: function(res){
+				ajaxLog(res);
+				var result=res.result;
+				if(res.resCode == 0){
+					mui.toast("取消成功");
+					getOrderList();
+				}else{
+				   mui.alert(result, '提示', function(e) {
+			        },"div");
+				}
+			}
+		});
+}
+
+/**
+ * 立即支付
+ * @param {Object} strOrderId
+ * @param {Object} strPayType
+ * @param {Object} factPrice
+ */
+function nowPay(strOrderId,strPayType){
+	payType=parseInt(strPayType);
+	if("0"==strPayType||"1"==strPayType){
+		channel=payChannels[payType];
+	}
+	$.ajax({
+		url: prefix + "/pay/againPay",
+		type: "POST",
+		data: {"strOrderId":strOrderId,"strPayType":strPayType,"strOrderType":"0"}, 
+		dataType: "json",
+		success: function(res){
+				ajaxLog(res);
+				var result=res.result;
+				if(res.resCode == 0){
+					doPay(result);
+				}else{
+				   mui.alert(result, '提示', function(e) {
+			        },"div");
+				}
+			}
+		});
+}
+
+function doPay(payInfo){
+	console.log("payInfo:"+payInfo);
+	if(payType==1){//微信
+		var appid=payInfo["appid"];
+		var noncestr=payInfo["noncestr"];
+		var package=payInfo["package"];
+		var partnerid=payInfo["partnerid"];
+		var prepayid=payInfo["prepayid"];
+		var timestamp=payInfo["timestamp"];
+		var sign=payInfo["sign"];
+		var payInfoNew={"appid":appid,"noncestr":noncestr,"package":package,"partnerid":partnerid,"prepayid":prepayid,"timestamp":timestamp,"sign":sign};
+		var stra=JSON.stringify(payInfoNew);
+		plus.payment.request(channel,stra,function(result){
+                    plus.nativeUI.alert("支付成功！",function(){
+                       getOrderList();
+                    });
+                },function(error){
+                    plus.nativeUI.alert("支付失败：" + JSON.stringify(error));
+                });
+	}else if(payType==0){
+		plus.payment.request(channel,payInfo,function(result){
+                    plus.nativeUI.alert("支付成功！",function(){
+                        getOrderList();
+                    });
+                },function(error){
+                    plus.nativeUI.alert("支付失败：" + JSON.stringify(error));
+                });
+	}else if(payType==2){//余额
+		 plus.nativeUI.alert("支付成功！",function(){
+                      getOrderList();
+          });
+
+		
+	}
+}
+
+
+
 

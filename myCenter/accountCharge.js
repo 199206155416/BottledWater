@@ -5,6 +5,7 @@ var currentWebview;
 var payType;
 var channel;
 var isSubmit=false;
+var payChannels;
 mui.plusReady(function(){
 	currentWebview = plus.webview.currentWebview();
     var accountBalance = currentWebview.accountBalance;
@@ -44,21 +45,6 @@ function initPayChannel(){
 }
 
 /**
- * 初始化支付名称
- * @param {Object} payType
- */
-function initPayText(){
-		switch(payType){
-			case 0:
-			  channel=payChannels[payType];
-			break;
-			case 1:
-			  channel=payChannels[payType];
-			break;
-		}
-}
-
-/**
  * 进行充值
  */
 function doCharge(){
@@ -73,7 +59,7 @@ function doCharge(){
 			        },"div");
 	      return false;
 	}
-	initPayText();
+	channel=payChannels[payType];
 	var accountMoney=$("input[name='accountMoney']").val();
 	if(isNaN(accountMoney)){
 		  mui.alert("只能输入数字", '提示', function(e) {
@@ -131,6 +117,7 @@ function doPay(payInfo){
                     isSubmit=false;
                 });
 	}else if(payType==0){
+		console.log(JSON.stringify(channel));
 		plus.payment.request(channel,payInfo,function(result){
                     plus.nativeUI.alert("支付成功！",function(){
                     	hideDialog();
