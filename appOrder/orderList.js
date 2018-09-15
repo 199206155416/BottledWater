@@ -191,30 +191,15 @@ function getOrderList(){
 						
 						var goods = $(goodsTemplate);
 						;(function(){
-//							goods.on("click", function(){
-//								var goodsId = this.getAttribute('id');
-//								var extendOptions = {
-//									goodsId: goodsId
-//								};
-//								pushWebView({
-//									webType: 'newWebview_First',
-//									id: 'appMall/productDetail.html',
-//									href: 'appMall/productDetail.html',
-//									aniShow: getaniShow(),
-//									title: "商品详情",
-//									isBars: false,
-//									barsIcon: '',
-//									extendOptions: extendOptions
-//								});
-//							})
+
 						})();
 						orderList.find(".goodsList").append(goods);
 					}
-					
 					$("#orderListID").append(orderList);
-					pageNo++;
-					loadFlag = 1;
 				}
+				
+				pageNo++;
+				loadFlag = 1;
 			}
 		}
 	})
@@ -612,6 +597,7 @@ function PullRefresh(id, callback) {
 //下拉刷新调用
 PullRefresh('scroll', function(){
 	pageNo = 1;
+	loadFlag = 1;
 	$("#orderListID").html("");
 	// 获取数据
 	getOrderList();
