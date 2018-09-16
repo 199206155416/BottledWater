@@ -1,5 +1,5 @@
 var currentWebview;
-var strOrderId; // 订单id
+var order; // 退款订单
 
 mui.init({
 	swipeBack: false
@@ -8,81 +8,64 @@ mui.init({
 mui.plusReady(function() {
 	currentWebview = plus.webview.currentWebview();
 	
-	strOrderId = currentWebview.strOrderId;
+	order = currentWebview.order;
 
 	// 获取订单列表
 	getOrderDetail();
 	
 	// 绑定事件
-	bindEvnet();
+	bindEvent();
 });
 
 function bindEvent(){
+	$(".after-sale-infos>li").each(function(i,ele){
+		$(ele).data("i",i);
+		$(ele).click(function(){
+			var index=$(this).data("i");
+			var id = $(this).attr("id");
+			var aniShow = getaniShow();
+			//检测已经存在sessionkey否者运行下面的登陆代码
+			if (localStorage.getItem('userMobile') && localStorage.getItem('userId')) {} else {
+				id = "login/login.html";
+				aniShow = 'slide-in-bottom';
+			}
+			var optionsData={"index":index,"order":order};
+			pushWebView({
+				webType: 'newWebview_First',
+				id: id,
+				href: id,
+				aniShow: aniShow,
+				extendOptions: optionsData
+			});
+		});
+	});
 	
-	
-};
+}
 
 /**
  * 获取订单列表
  * @author xuezhenxiang
  */
 function getOrderDetail(){
-	$.ajax({
-		url: prefix + "/order/detail/" + strOrderId,
-		type: 'GET',
-		dataType: "json",
-		success: function(res){
-			// 打印请求报错日志
-			ajaxLog(res);
-
-			if(res.resCode == 0){
-				var result = res.result; // 数据
-				
-				var strReceiptUserName = result.strReceiptUserName; // 收货人姓名
-				var strReceiptMobile = result.strReceiptMobile; // 收货人电话
-				var strLocation = result.strLocation; // 省市区
-				var strDetailAddress = result.strDetailAddress; // 详细地址
-				var totalPrice = result.totalPrice; // 总价
-				var factPrice = result.factPrice; // 实付价格
-				var dtPayTime = result.dtPayTime; // 支付时间
-				var bucketNum = result.bucketNum; // 桶数量
-				var bucketMoney = result.bucketMoney; // 桶价格
-				var mallOrderDetailList = result.mallOrderDetailList; // 商品列表
-
+				var mallOrderDetailList = order.mallOrderDetailList; // 商品列表
 				for(var i = 0, len = mallOrderDetailList.length; i < len; i++){
-					var lGoodsId = mallOrderDetailList[i].id; // 商品id
+					var remarks = mallOrderDetailList[i].remarks;
 					var strSkuName = mallOrderDetailList[i].strSkuName; // 商品名称
 					var skuPrice = mallOrderDetailList[i].skuPrice; // 商品价格
 					var strGoodsImg = mallOrderDetailList[i].strGoodsImg; // 商品图片
 					var count = mallOrderDetailList[i].count; // 商品数量
-					
-					var orderListTemp = $("#orderListTemp").html();
-
-					orderListTemp = orderListTemp.replace("#lOrderId#", lOrderId);
-					orderListTemp = orderListTemp.replace("#strOrderNum#", strOrderNum);
-					orderListTemp = orderListTemp.replace("#strStateName#", strStateName);
-
-					var orderList = $(htmlTemplate);
-					
-					;(function(orderList){
-						orderList.on("click", function(){
-							pushWebView({
-								webType: 'newWebview_First',
-								id: 'appOrder/orderDetail.html',
-								href: 'appOrder/orderDetail.html',
-								aniShow: getaniShow(),
-								title: "订单详情",
-								isBars: false,
-								barsIcon: '',
-								extendOptions: extendOptions
-							});
-						});
-					})(orderList);
+					var orderListTemp ='<div class="goods-item">'+
+									'<div class="goods-item-img"><img src="'+strGoodsImg+'" alt=""></div>'+
+									'<div class="goods-info">'+
+										'<p class="goods-title">'+strSkuName+'</p>'+
+										'<p class="goods-sku">'+remarks+'</p>'+
+										'<p class="goods-price">￥'+skuPrice+'<span class="goods-count">X'+count+'</span></p>'+
+									'</div>'+
+								'</div>';
+					$(".goods-list").append(orderListTemp);
 
 					
 				}
-			}
-		}
-	})
-};
+	
+}
 

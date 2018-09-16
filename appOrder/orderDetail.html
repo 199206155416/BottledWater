@@ -60,19 +60,7 @@
 				</div>
 				<div class="goodsDetailInfo">
 					<div id='comOrderGoods' class="comOrderGoods1 clearfix">
-						<div class="goods_wid clearfix" id="goods_wid">
-							<div class="leftthum goods_img">
-								<img id="strGoodsURL" src="http://img.dafy.com/mall/mallOrder/img/20180108/laimgload.png" />
-							</div>
-							<div class="rightContent">
-								<div class="beforeTitle" id="strGoodsTitle"></div>
-								<p id="specValue"></p>
-								<div class="orderMoney">
-									<span class="subOrderMoney" id="strAmountOne"></span>
-									<span class="ordernum" id="strGoodsAmount"></span>
-								</div>
-							</div>
-						</div>
+						
 					</div>
 					
 					<div class="orderReceipt">
@@ -85,6 +73,18 @@
 							<div class="goodsPaidSub1">
 								<label>总价：</label>
 								<span class="font_color1 fontBold" id="nAmount1"></span>
+							</div>
+						</div>
+						<div class="goodsPaidInfo1" id="bucketMoneyDiv" style="display: none;">
+							<div class="goodsPaidSub1">
+								<label>桶押金：</label>
+								<span class="font_color1 fontBold" id="bucketMoney"></span>
+							</div>
+						</div>
+						<div class="goodsPaidInfo1" id="ticketTotalCountDiv" style="display: none;">
+							<div class="goodsPaidSub1">
+								<label>水票：</label>
+								<span class="font_color1 fontBold" id="ticketTotalCount"></span>
 							</div>
 						</div>
 					</div>
@@ -116,14 +116,13 @@
 	</div>
 
 	<div class="mallbackground" style="display: none;"></div>
-	<div id="orderHandle" class="orderHandle">
+	<div id="orderHandle" class="orderHandle" style="display:block;">
 		<div class="orderPrice">
 			<span>实付款：</span>
-			<span class="font_color1" id="sjPrice"></span>
+			<span class="font_color1" id="factPrice"></span>
 		</div>
-		<p class="confirmToReceipt">确认收货</p>
-		<p class="toPay grayBottomBackground">去支付</p>
-		<p class="cancel">取消订单</p>
+		<p class="confirmToReceipt" onclick="doConfirmOrder()">确认收货</p>
+		<p class="cancel" style="display:none;" id="cancleOrderBtn" onclick="doCancelOrder()">取消订单</p>
 	</div>
 	<div id="orderHandle1" class="orderHandle1" style='display: none;'>
 		<p class="handle-repay grayBottomBackground" id='rePay' style='display: none;'>再次购买</p>

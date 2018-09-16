@@ -3,9 +3,8 @@ var type = 0; // -1 == 全部， -2 == 待付款， -3 == 待发货， -4 == 待
 var pageNo = 1;
 var pageSize = 20; 
 var loadFlag = 1; // 上拉加载标志
-
 mui.init({
-	swipeBack: false,
+	swipeBack: false
 	// pullRefresh: {
 	//     container: ".mui-content",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
 	//     down : {
@@ -23,11 +22,11 @@ mui.init({
 mui.plusReady(function() {
 	currentWebview = plus.webview.currentWebview();
 	
-	// 获取订单列表
-	getOrderList();
+	//获取退款列表
+	getRefundLogList();
 	
 	// 绑定事件
-	bindEvnet();
+	bindEvent();
 });
 
 function bindEvent(){
@@ -48,20 +47,17 @@ function bindEvent(){
 };
 
 /**
- * 获取订单列表
+ * 获取退款列表
  * @author xuezhenxiang
  */
-function getOrderList(){
+function getRefundLogList(){
 	var userId = localStorage.getItem(userId);
 	var formData = new FormData();
-	
 	formData.append("strBuyerId", userId);
 	formData.append("pageNo", pageNo);
 	formData.append("pageSize", pageSize);
-	formData.append("state", type);
-	
 	$.ajax({
-		url: prefix + "/order/list",
+		url: prefix + "/refund/list",
 		type: 'POST',
 		data: formData,
 		contentType: false,
@@ -83,69 +79,53 @@ function getOrderList(){
 				}
 				
 				if(list.length <= 0){
-					return false;
-				}
+					return false;				}
 
 				for(var i = 0, len = list.length; i < len; i++){
-					var lOrderId = list[i].id; // 订单id
-					var strOrderNum = list[i].strOrderNum; // 订单编号
-					var strStateName = list[i].strStateName; // 订单状态
+					var item=list[i];
+					var strStateName=item.strStateName
+					var id=item.id;//退款ID
+					var order=item.mallOrder;
+					var lOrderId = order.id; // 订单id
 					var orderListTemp = $("#orderListTemp").html();
-
-					orderListTemp = orderListTemp.replace("#lOrderId#", lOrderId);
-					orderListTemp = orderListTemp.replace("#strOrderNum#", strOrderNum);
-					orderListTemp = orderListTemp.replace("#strStateName#", strStateName);
-
-					var orderList = $(htmlTemplate);
+					orderListTemp = orderListTemp.replace("#refundStateName#", strStateName);
+					var orderList = $(orderListTemp);
 					
-					;(function(orderList){
-						orderList.on("click", function(){
+					;(function(orderList,item){
+						orderList.find(".go-to-detail").on("click", function(){
 							pushWebView({
 								webType: 'newWebview_First',
-								id: 'appOrder/orderDetail.html',
-								href: 'appOrder/orderDetail.html',
+								id: 'appOrder/afterSaleDetail.html',
+								href: 'appOrder/afterSaleDetail.html',
 								aniShow: getaniShow(),
-								title: "订单详情",
+								title: "退款详情",
 								isBars: false,
 								barsIcon: '',
-								extendOptions: extendOptions
+								extendOptions: {
+									strOrderId: lOrderId
+								}
 							});
+							
 						});
-					})(orderList);
-
-					for(var i1 = 0, len1 = mallGoodsList.length; i1 < len1; i1++){
-						var id = mallGoodsList[i1].id;
-						var strGoodsName = mallGoodsList[i1].strGoodsName;
-						var strGoodsImg = mallGoodsList[i1].strGoodsImg;
-						var goodsSlogn = mallGoodsList[i1].goodsSlogn || "张三李四";
-						var defaultSkuPrice = mallGoodsList[i1].defaultSkuPrice;
-
+					})(orderList,item);
+				   var mallOrderDetailList=order.mallOrderDetailList;
+					for(var i1 = 0, len1 = mallOrderDetailList.length; i1 < len1; i1++){
+						var itemGoods=mallOrderDetailList[i1];
+						var id = itemGoods.id;
+						var strGoodsName = itemGoods.strSkuName;
+						var strGoodsImg = itemGoods.strGoodsImg;
+						var strGoodsSKUDetail = itemGoods.remarks;
+						var skuPrice = itemGoods.skuPrice;
+						var count = itemGoods.count;
 						var goodsTemplate = $("#goodsTemplate").html();
 						goodsTemplate = goodsTemplate.replace("#strGoodsImg#", strGoodsImg);
-						goodsTemplate = goodsTemplate.replace("#strGoodsName#", commonNameSubstr(strGoodsName, 34));
-						goodsTemplate = goodsTemplate.replace("#goodsSlogn#", commonNameSubstr(goodsSlogn, 28));
-						goodsTemplate = goodsTemplate.replace("#defaultSkuPrice#", defaultSkuPrice);
-
+						goodsTemplate = goodsTemplate.replace("#strGoodsTitle#", commonNameSubstr(strGoodsName, 34));
+						goodsTemplate = goodsTemplate.replace("#strGoodsSKUDetail#", commonNameSubstr(strGoodsSKUDetail, 28));
+						goodsTemplate = goodsTemplate.replace("#skuPrice#", skuPrice);
+						goodsTemplate = goodsTemplate.replace("#count#", count);
+						
 						var goods = $(goodsTemplate);
-						;(function(){
-//							goods.on("click", function(){
-//								var goodsId = this.getAttribute('id');
-//								var extendOptions = {
-//									goodsId: goodsId
-//								};
-//								pushWebView({
-//									webType: 'newWebview_First',
-//									id: 'appMall/productDetail.html',
-//									href: 'appMall/productDetail.html',
-//									aniShow: getaniShow(),
-//									title: "商品详情",
-//									isBars: false,
-//									barsIcon: '',
-//									extendOptions: extendOptions
-//								});
-//							})
-						})();
-						orderList.find(".goodsList").append(goods);
+						orderList.find(".goods-list").append(goods);
 					}
 					
 					$("#orderListID").append(orderList);
