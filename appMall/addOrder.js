@@ -250,7 +250,7 @@ function bindEvent(){
             if (e.index == 1) {
                 doAddOrder();
             }
-        },"div")
+        },"div");
 	});
 }
 

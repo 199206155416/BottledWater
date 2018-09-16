@@ -159,7 +159,7 @@ function addListevent() {
 			return false;
 		}
 		
-		if(type == 5){
+		if(type == -6){
 			pushWebView({
 				webType: 'newWebview_First',
 				id: "appOrder/afterSale.html",

@@ -14,13 +14,13 @@ mui.plusReady(function() {
 	getOrderDetail();
 	
 	// 绑定事件
-	bindEvnet();
+	bindEvent();
 });
 
 function bindEvent(){
 	
 	
-};
+}
 
 /**
  * 获取订单列表
@@ -39,50 +39,137 @@ function getOrderDetail(){
 				var result = res.result; // 数据
 				
 				var strReceiptUserName = result.strReceiptUserName; // 收货人姓名
+				$("#strConsigneeName").html(strReceiptUserName);
 				var strReceiptMobile = result.strReceiptMobile; // 收货人电话
+				$("#strMobile").html(strReceiptMobile);
 				var strLocation = result.strLocation; // 省市区
 				var strDetailAddress = result.strDetailAddress; // 详细地址
+				$("#strAddress").html(strDetailAddress);
 				var totalPrice = result.totalPrice; // 总价
+				$("#nAmount1").html(totalPrice);
 				var factPrice = result.factPrice; // 实付价格
+				$("#factPrice").html(factPrice);
 				var dtPayTime = result.dtPayTime; // 支付时间
 				var bucketNum = result.bucketNum; // 桶数量
 				var bucketMoney = result.bucketMoney; // 桶价格
+				if(bucketMoney&&bucketMoney!=0){
+					$("#bucketMoneyDiv").show();
+					$("#bucketMoney").html(bucketMoney);
+				}
+				var ticketTotalCount=result.ticketTotalCount;
+				if(ticketTotalCount&&ticketTotalCount!=0){
+					$("#ticketTotalCountDiv").show();
+					$("#ticketTotalCount").html(ticketTotalCount);
+				}
+				var remarks=result.remarks;
+				$("#strBuyerMessage").html(remarks);
+				var strStateName=result.strStateName;
+				if("待付款"==strStateName){
+					$("#cancleOrderBtn").show();
+				}
+				
+				if("待付款"==strStateName){
+					$("#cancleOrderBtn").show();
+				}
+				if("已收货"!=strStateName&&"退款成功"!=strStateName){
+					$(".confirmToReceipt").show();
+				}
+				$("#orderstate").html(strStateName);
+				var strOrderNum=result.strOrderNum;
+				$("#orderNum").html(strOrderNum);
+				var createDate=result.createDate;
+				$("#createTime").html(createDate);
+				var dtPayTime=result.dtPayTime;
+				$("#dtPayTime").html(dtPayTime);
+				
 				var mallOrderDetailList = result.mallOrderDetailList; // 商品列表
-
 				for(var i = 0, len = mallOrderDetailList.length; i < len; i++){
 					var lGoodsId = mallOrderDetailList[i].id; // 商品id
 					var strSkuName = mallOrderDetailList[i].strSkuName; // 商品名称
 					var skuPrice = mallOrderDetailList[i].skuPrice; // 商品价格
 					var strGoodsImg = mallOrderDetailList[i].strGoodsImg; // 商品图片
 					var count = mallOrderDetailList[i].count; // 商品数量
-					
-					var orderListTemp = $("#orderListTemp").html();
-
-					orderListTemp = orderListTemp.replace("#lOrderId#", lOrderId);
-					orderListTemp = orderListTemp.replace("#strOrderNum#", strOrderNum);
-					orderListTemp = orderListTemp.replace("#strStateName#", strStateName);
-
-					var orderList = $(htmlTemplate);
-					
-					;(function(orderList){
-						orderList.on("click", function(){
-							pushWebView({
-								webType: 'newWebview_First',
-								id: 'appOrder/orderDetail.html',
-								href: 'appOrder/orderDetail.html',
-								aniShow: getaniShow(),
-								title: "订单详情",
-								isBars: false,
-								barsIcon: '',
-								extendOptions: extendOptions
-							});
-						});
-					})(orderList);
-
+					var orderListTemp ='<div class="goods_wid clearfix" id="goods_wid">'+
+							'<div class="leftthum goods_img">'+
+								'<img id="strGoodsURL" src="'+strGoodsImg+'" />'+
+							'</div>'+
+							'<div class="rightContent">'+
+								'<div class="beforeTitle" id="strGoodsTitle">'+strSkuName+'</div>'+
+								'<p id="specValue"></p>'+
+								'<div class="orderMoney">'+
+									'<span class="subOrderMoney" id="strAmountOne">￥'+skuPrice+'</span>'+
+									'<span class="ordernum" id="strGoodsAmount">X'+count+'</span>'+
+								'</div>'+
+							'</div>'+
+						'</div>';
+					$("#comOrderGoods").append(orderListTemp);
 					
 				}
 			}
 		}
 	})
-};
+}
+
+function doConfirmOrder(){
+	var btnArray = ['否', '是'];
+        mui.confirm("是否收到货?", '是否到货', btnArray, function(e) {
+            if (e.index == 1) {
+                confirmOrder();
+            }
+        },"div");
+}
+
+function confirmOrder(){
+	    var userId= localStorage.getItem("userId"); // 用户id
+		$.ajax({
+		url: prefix + "/order/confirmOrder",
+		type: "POST",
+		data: {"strOrderId":strOrderId,"finishOperationUser":userId}, 
+		dataType: "json",
+		success: function(res){
+				ajaxLog(res);
+				var result=res.result;
+				if(res.resCode == 0){
+					mui.toast("确认收货成功");
+					$("#orderstate").html("已收货");
+					$(".confirmToReceipt").hide();
+				}else{
+				   mui.alert(result, '提示', function(e) {
+			        },"div");
+				}
+			}
+		});
+}
+
+
+
+
+function doCancelOrder(){
+	var btnArray = ['取消', '确认'];
+        mui.confirm("确认删除此订单?", '取消订单', btnArray, function(e) {
+            if (e.index == 1) {
+                cancelOrder();
+            }
+        },"div");
+}
+
+function cancelOrder(){
+		$.ajax({
+		url: prefix + "/order/cancelOrder",
+		type: "POST",
+		data: {"strOrderId":strOrderId}, 
+		dataType: "json",
+		success: function(res){
+				ajaxLog(res);
+				var result=res.result;
+				if(res.resCode == 0){
+					mui.toast("取消成功");
+					mui.back();
+				}else{
+				   mui.alert(result, '提示', function(e) {
+			        },"div");
+				}
+			}
+		});
+}
 
