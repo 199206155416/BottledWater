@@ -1,4 +1,4 @@
-var currentWebview;
+ var currentWebview;
 var type = -1; // -1 == 全部， -2 == 待付款， -3 == 待发货， -4 == 待收货， -5 == 已完成, 默认为-1
 var pageNo = 1;
 var pageSize = 20; 
@@ -137,9 +137,7 @@ function getOrderList(){
 					orderListTemp = orderListTemp.replace("#strOrderNum#", strOrderNum);
 					orderListTemp = orderListTemp.replace("#strStateName#", strStateName);
 					orderListTemp = orderListTemp.replace("#factPrice#", factPrice);
-					if(strStateName=="待付款"){
-						orderListTemp = orderListTemp.replace("none", "block");
-					}
+					
 					var orderList = $(orderListTemp);
 					var mallOrderDetailList=list[i].mallOrderDetailList
 					;(function(orderList, lOrderId,order){
@@ -163,14 +161,17 @@ function getOrderList(){
 							    return false;
 						});
 						
+						orderList.find(".applySale").click(function(){
+									openRefund(order);
+						});
+						
 						orderList.find(".cancel").click(function(){
 									var btnArray = ['取消', '确认'];
-							        mui.confirm("确认取消订单吗?", '取消订单', btnArray, function(e) {
+							        mui.confirm("确认删除此订单?", '取消订单', btnArray, function(e) {
 							            if (e.index == 1) {
 							                cancelOrder(lOrderId);
 							            }
 							        },"div");
-							     return false;   
 						});
 					})(orderList, lOrderId,order);
 
@@ -196,6 +197,14 @@ function getOrderList(){
 						orderList.find(".goodsList").append(goods);
 					}
 					$("#orderListID").append(orderList);
+					if(strStateName=="待付款"){
+						$("#orderListID li").last().find(".checkBill>div").eq(0).show();
+						$("#orderListID li").last().find(".checkBill>div").eq(1).show();
+					}else if(strStateName=="待发货"&&factPrice!=0){
+						$("#orderListID li").last().find(".checkBill>div").eq(2).show();
+					}
+					pageNo++;
+					loadFlag = 1;
 				}
 				
 				pageNo++;
@@ -204,6 +213,22 @@ function getOrderList(){
 		}
 	})
 }
+
+function openRefund(order){
+		pushWebView({
+			webType: 'newWebview_First',
+			id: 'appOrder/applyAfterSale.html-1',
+			href: 'appOrder/applyAfterSale.html',
+			aniShow: getaniShow(),
+			title: "退款/售后",
+			isBars: false, 
+			barsIcon: '',
+			extendOptions: {
+				order: order
+			}
+		});
+}
+
 /**
  * 取消订单
  * @param {Object} strOrderId
