@@ -38,7 +38,9 @@
 			"appOrder/orderDetail.html",
 			"appOrder/applyAfterSale.html",
 			"appOrder/afterSale.html",
-			"appOrder/applyRefund.html"
+			"appOrder/applyRefund.html",
+			"myCenter/myTicket.html",
+			"appOrder/afterSaleDetail.html"
 		]
 	}
 }

@@ -19,31 +19,38 @@
 	<div class="mui-content">
 		<!-- 订单列表 -->
 	    <ul id="orderListID">	
-			<li class="order-item">
-				<div class="order-item-head">
-					<p>仅退款·退款关闭</p>
-				</div>
-				<div class="order-item-body">
-					<div class="goods-list">
-						<div class="goods-item">
-							<div class="goods-item-img"><img src="" alt=""></div>
-							<div class="goods-info">
-								<p class="goods-title">苹果手机iphone7 Plus 4G手机...</p>
-								<p class="goods-sku">亮黑色 256G 移动联通电信</p>
-								<p class="goods-price">￥4000<span class="goods-count">X1</span></p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="order-item-foot">
-					<div class="go-to-detail">查看详情</div>
-				</div>
-			</li>
+			
 		</ul>	
 		<!-- 列表没有数据 -->
 		<div class="empty" id="orderNullTemp" style="display: none">
 			<img class="empty_img" src="../common/image/blank.png" />
 		</div>
+	</div>
+	<div id="orderListTemp" style="display: none;">
+		<li class="order-item">
+				<div class="order-item-head">
+					<p>#refundStateName#</p>
+				</div>
+				<div class="order-item-body">
+					<div class="goods-list">
+						
+					</div>
+				</div>
+				<div class="order-item-foot">
+					<div class="go-to-detail">查看详情</div>
+				</div>
+		</li>
+	</div>
+	<div id="goodsTemplate" style="display: none;">
+		<div class="goods-item">
+							<div class="goods-item-img"><img src="#strGoodsImg#" alt=""></div>
+							<div class="goods-info">
+								<p class="goods-title">#strGoodsTitle#</p>
+								<p class="goods-sku">#strGoodsSKUDetail#</p>
+								<p class="goods-price">￥#skuPrice#<span class="goods-count">X#count#</span></p>
+							</div>
+						</div>
+		
 	</div>
 <script src="../common/js/include.js" level="1"></script>
 <script src="afterSale.js"></script>

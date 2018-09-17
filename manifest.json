@@ -268,7 +268,9 @@
 					"appOrder/applyAfterSale.html",
 					"appOrder/orderDetail.html",
 					"appOrder/afterSale.html",
-					"appOrder/applyRefund.html"
+					"appOrder/applyRefund.html",
+					"myCenter/myTicket.html",
+					"appOrder/afterSaleDetail.html"
 				],
 				"priority": 0
 			},
