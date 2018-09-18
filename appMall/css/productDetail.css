@@ -594,13 +594,9 @@ margin-bottom: 0;
 	height: 0.47rem;
 }
 .optionSelect .class .row {
-	
-	color: #60a3fb;
-
-	background:url("../img/pitchBottom.png")  no-repeat right bottom;
-	background-size:0.25rem 0.21rem; 
+	color: #fff;
+	background: #60A3FB;
 	border: 1px solid #60a3fb;
-
 }
 
 .optionSelect .class .serverRow:before {
