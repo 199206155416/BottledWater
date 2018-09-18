@@ -1,4 +1,4 @@
- var currentWebview;
+var currentWebview;
 var type = -1; // -1 == 全部， -2 == 待付款， -3 == 待发货， -4 == 待收货， -5 == 已完成, 默认为-1
 var pageNo = 1;
 var pageSize = 20; 
@@ -6,7 +6,9 @@ var loadFlag = 1; // 上拉加载标志
 var payChannels;
 var payType;
 var channel;
-	mui.init({
+var _LoadNumber = { a: false };
+
+mui.init({
 	swipeBack: false,
 	pullRefresh: {
 	    container: ".mui-content",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
@@ -41,14 +43,14 @@ mui.plusReady(function() {
 
 function bindEvent(){
 	// 屏幕滚动后加载列表
-	$(window).scroll(function(){
-		var scrollTop = $(window).scrollTop();	// 滚动高度		    
-		var scrollHeight = $(document).height(); // 文档高度
+	$("#scroll").scroll(function(){
+		var scrollTop = $(this).scrollTop();	// 滚动高度		    
+		var scrollHeight = $(this).height(); // 文档高度
 		var windowHeight = $(window).height(); // 文档窗口高度
 			
 		if (scrollTop + windowHeight >= scrollHeight - 300) {
 			if(loadFlag == 1){
-				loadFlag == 0;
+				loadFlag = 0;
 				getOrderList();
 			}
 		}
@@ -59,8 +61,11 @@ function bindEvent(){
 	$("#myTapWidth").on("click", "li", function(){
 		type = $(this).attr("type");
 		$(this).addClass("row").siblings().removeClass("row");
-		loadFlag = 1;
 		
+		pageNo = 1;
+		loadFlag = 1;
+		$("#orderListID").html("");
+		// 获取数据
 		getOrderList();
 		
 	});
@@ -92,6 +97,8 @@ function renderTab(type){
  * @author xuezhenxiang
  */
 function getOrderList(){
+	
+	console.log(pageNo);
 	var userId = localStorage.getItem("userId");
 	var formData = new FormData();
 	formData.append("strBuyerId",userId);
@@ -107,21 +114,24 @@ function getOrderList(){
 	 	processData: false,  
 		dataType: "json",
 		success: function(res){
+			_LoadNumber.a = true;
 			// 打印请求报错日志
 			ajaxLog(res);
-			$("#orderListID").html("");
+
 			if(res.resCode == 0){
 				var list = res.result.list; // 列表数据
 				var count = res.result.count; // 数据总量
 				
 				if(count == 0){
 					$("#orderNullTemp").show();
-					return false;
+					// return false;
 				}else{
 					$("#orderNullTemp").hide();
 				}
 				
+				$("#load").show();
 				if(list.length <= 0){
+					$("#load").hide();
 					return false;
 				}
 
@@ -203,8 +213,7 @@ function getOrderList(){
 					}else if(strStateName=="待发货"&&factPrice!=0){
 						$("#orderListID li").last().find(".checkBill>div").eq(2).show();
 					}
-					pageNo++;
-					loadFlag = 1;
+
 				}
 				
 				pageNo++;
@@ -500,7 +509,7 @@ function PullRefresh(id, callback) {
 			event.preventDefault();
 			startClientY = clientY;
 			topState = 3;
-			//console.log('到顶了', event)
+			console.log('到顶了', event)
 			return;
 		}
 		if (topState == 3) {
@@ -559,17 +568,17 @@ function PullRefresh(id, callback) {
 			document.getElementById('top2').style.display = 'block';
 			document.getElementById('top3').style.display = 'none';
 			an(0);
- 			// _LoadNumber = { a: false, b: false, c: false, d: false, e: false };
-			//_isPullRefresh = true;
+		 	_LoadNumber = { a: false };
+			_isPullRefresh = true;
 			var loadNumberTimeId = setInterval(function () {
-				// if (_LoadNumber.a && _LoadNumber.b && _LoadNumber.c && _LoadNumber.d && _LoadNumber.e) {
-					// _isPullRefresh = false;
-					// clearInterval(loadNumberTimeId);
-				// }
-				refresState = 1;
-				an(- refreshHeight);
-				clearInterval(loadNumberTimeId);
-			}, 3000); // ??????????????????????????????????
+				 if (_LoadNumber.a) {
+					 _isPullRefresh = false;
+					 refresState = 1;
+					an(- refreshHeight);
+					clearInterval(loadNumberTimeId);
+				 }
+				
+			}, 1000); 
 			// 请求接口数据
 			callback();
 		} else {
@@ -624,6 +633,7 @@ PullRefresh('scroll', function(){
 	pageNo = 1;
 	loadFlag = 1;
 	$("#orderListID").html("");
+	$("#load").hide();
 	// 获取数据
 	getOrderList();
 });
