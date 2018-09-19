@@ -73,6 +73,7 @@ function getCouponList(){
 		processData: false,  
 		dataType: "json",
 		success: function(res){
+			_LoadNumber.a = true;
 			ajaxLog(res);
 			var result=res.result;
 			if(res.resCode == 0){
@@ -355,17 +356,16 @@ function PullRefresh(id, callback) {
 			document.getElementById('top2').style.display = 'block';
 			document.getElementById('top3').style.display = 'none';
 			an(0);
- 			// _LoadNumber = { a: false, b: false, c: false, d: false, e: false };
-			//_isPullRefresh = true;
+   			 _LoadNumber = { a: false };
+			_isPullRefresh = true;
 			var loadNumberTimeId = setInterval(function () {
-				// if (_LoadNumber.a && _LoadNumber.b && _LoadNumber.c && _LoadNumber.d && _LoadNumber.e) {
-					// _isPullRefresh = false;
-					// clearInterval(loadNumberTimeId);
-				// }
-				refresState = 1;
-				an(- refreshHeight);
-				clearInterval(loadNumberTimeId);
-			}, 3000); // ??????????????????????????????????
+				if (_LoadNumber.a) {
+					_isPullRefresh = false;
+					refresState = 1;
+					an(- refreshHeight);
+					clearInterval(loadNumberTimeId);
+				}
+			}, 1000);
 			// 请求接口数据
 			callback();
 		} else {

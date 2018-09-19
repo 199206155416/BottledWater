@@ -98,9 +98,15 @@ body{
 /* 列表内容 */
 .mui-content{
 	padding-top: 1.76rem;
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: -44px;
+	overflow-y: scroll;
 }
 .coupon-list{
-	padding: .3rem;
+	padding: .3rem 0;
 }
 .coupon-item-body,.coupon-item-footer{
 	background: #fff;
@@ -146,5 +152,41 @@ body{
 .coupon-introduce{
 	font-size: .24rem;
 	line-height: .32rem;
+	color: #999;
+}
+
+.ticket-item{
+	height: 2.4rem;
+	background: #fff;
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+	-webkit-align-items: center;
+	padding: .3rem;
+}
+.ticket-img{
+	width: 1.8rem;
+	height: 1.8rem;
+	background: #f0f0f0;
+}
+.ticket-info{
+	flex: 1;
+	-webkit-flex: 1;
+	padding-left: .2rem;
+}
+.ticket-title{
+	font-size: .3rem;
+	line-height: .46rem;
+	color: #555;
+	margin-bottom: .1rem;
+}
+.ticket-time{
+	font-size: .28rem;
+	line-height: .46rem;
+	color: #999;
+}
+.ticket-count{
+	font-size: .28rem;
+	line-height: .36rem;
 	color: #999;
 }

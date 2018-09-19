@@ -571,12 +571,12 @@ function PullRefresh(id, callback) {
 		 	_LoadNumber = { a: false };
 			_isPullRefresh = true;
 			var loadNumberTimeId = setInterval(function () {
-				 if (_LoadNumber.a) {
-					 _isPullRefresh = false;
-					 refresState = 1;
+				if (_LoadNumber.a) {
+					_isPullRefresh = false;
+					refresState = 1;
 					an(- refreshHeight);
 					clearInterval(loadNumberTimeId);
-				 }
+				}
 				
 			}, 1000); 
 			// 请求接口数据

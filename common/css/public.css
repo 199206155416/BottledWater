@@ -16,7 +16,7 @@ body{
     -o-user-select: auto!important;
     user-select: auto!important;
 } 
-body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,code,form,fieldset,legend,button,input,textarea{padding:0px; margin:0px; border:none;}
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,code,form,fieldset,legend,button,input,textarea{padding:0px; margin:0px; border:none;-webkit-overflow-scrolling:touch;    /* 用于 ios5+ */  }
 a,a:visited{ color:#333; text-decoration:none;}
 a:active,
 a:hover { text-decoration:none;}

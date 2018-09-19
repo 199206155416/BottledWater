@@ -98,6 +98,12 @@ body{
 /* 列表内容 */
 .mui-content{
 	padding-top: 1.76rem;
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: -44px;
+	overflow-y: scroll;
 }
 .coupon-list{
 	padding: .3rem;
@@ -147,4 +153,7 @@ body{
 	font-size: .24rem;
 	line-height: .32rem;
 	color: #999;
+}
+.ticket-item{
+	background: #fff;
 }
