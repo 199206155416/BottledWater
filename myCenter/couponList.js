@@ -110,7 +110,7 @@ function getCouponList(){
 			}
 		}
 	});
-};
+}
 
 
 

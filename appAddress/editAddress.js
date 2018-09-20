@@ -17,7 +17,6 @@ mui.plusReady(function() {
 		getAddress();
 		editDataIndex=currentWebview.index;
 	}
-
 	// 获取区数据
 	getLocations();
 
@@ -84,7 +83,9 @@ mui.plusReady(function() {
 });
 
 function bindEvent(){
-
+     $("#strDetailaddress").click(function(){
+     	openMaps();
+     });
 	// 选择省市区
 	$("#showCityPicker3").on("click", function(){
 		cityPicker3.show(function(items) {
@@ -195,4 +196,17 @@ function getAddress(){
 		$("#homeAddress").removeAttr("checked");
 		$("#strTag").val(strTag);
 	}
+}
+
+function openMaps(){
+		pushWebView({
+			webType: 'newWebview_First',
+			id: 'appAddress/map.html',
+			href: 'appAddress/map.html',
+			aniShow: getaniShow(),
+			title: "地图",
+			isBars: false,
+			barsIcon: '',
+			extendOptions: {}
+		})
 }

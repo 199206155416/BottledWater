@@ -40,7 +40,12 @@
 			"appOrder/afterSale.html",
 			"appOrder/applyRefund.html",
 			"myCenter/myTicket.html",
-			"appOrder/afterSaleDetail.html"
+			"appOrder/afterSaleDetail.html",
+			"myCenter/message.html",
+			"login/changePassword.html",
+			"appAddress/map.html",
+			"appAddress/map1.html",
+			"appAddress/map2.html"
 		]
 	}
 }
