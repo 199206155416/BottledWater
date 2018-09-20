@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0"/>
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="../common/css/mui.min.css">
+	<link rel="stylesheet" href="../common/css/mui.picker.min.css">
+	<link rel="stylesheet" href="../common/css/public.css">
+	<link rel="stylesheet" href="css/editAddress.css">
+	<script src="../common/js/remScale.js"></script>
+	<title>编辑收货地址</title>
+		<script type="text/javascript">
+var em=null,map=null;
+// H5 plus事件处理
+function plusReady(){
+	// 确保DOM解析完成
+	if(!em||!window.plus||map){return};
+	map = new plus.maps.Map("map");
+	map.showUserLocation(true);
+	var b=map.isShowUserLocation();
+    getUserLocation();
+     var searchPoiResult=map.SearchPoiResult;
+     console.log(searchPoiResult);
+     console.log("totalNumber:"+searchPoiResult.totalNumber);
+     console.log("currentNumber:"+searchPoiResult.currentNumber);
+     console.log("pageIndex:"+searchPoiResult.pageIndex);
+      var data=searchPoiResult.getPosition(0);
+      var address=data.address;
+      var city=data.city; 
+      var name=data.name;
+      console.log("address:"+address+",city:"+city+",name:"+name);
+}
+if(window.plus){
+	plusReady();
+}else{
+	document.addEventListener("plusready",plusReady,false);
+}
+// DOMContentloaded事件处理
+document.addEventListener("DOMContentLoaded",function(){
+	em=document.getElementById("map");
+	plusReady();
+},false);
+
+// 获取用户的当前位置信息
+function getUserLocation(){
+	map.getUserLocation( function ( state, point ){
+		if( 0 == state ){
+			map.setCenter(point);
+		}else{
+			alert( "Failed!" );
+		}
+	} );
+	
+}
+
+function getCurrentBounds(){
+	alert( JSON.stringify(map.getBounds()) );
+}
+		</script>
+		<style type="text/css">
+#map {
+	width: 100%;
+	height:300px;
+	position: fixed;
+	top:50px;
+	bottom: 0px;
+	line-height: 200px;
+	text-align: center;
+}
+
+		</style>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	    <h1 class="mui-title"><input style="border: 1px solid green;" placeholder="查找小区/公司/大厦/学校"/></h1>
+	</header>
+	<div class="_personMessage mui-content">
+		<div id="map">地图加载中...</div>
+		<div style="margin-top:310px;">
+			<ul>
+				<li>qqqq</li>
+				<li>nnnn</li>
+				<li>ffff</li>
+			</ul>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../common/js/include.js" level="1"></script>	
+<script type="text/javascript" src="../common/js/city.data-3.js" level="1"></script>
+<script src="../common/js/mui.picker.min.js"></script>
+<script type="text/javascript" src="map.js"></script>
+</html>

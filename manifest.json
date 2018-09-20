@@ -190,7 +190,7 @@
 					"xxhdpi": ""
 				}
 			},
-			"plugins":{
+			"plugins":{"maps":{"baidu":{"appkey_ios":"DudDUgMbOFnIGr1qX14rqwZ7rKhqabtO","appkey_android":"b8uvkGoh37qWKgeB6x6eQmdBrAalyK3z","appkey":"","description":""}},
 				"payment":{
 					"alipay":{
 						"description":"支付宝支付"
@@ -268,7 +268,12 @@
 					"appOrder/applyAfterSale.html",
 					"appOrder/orderDetail.html",
 					"appOrder/afterSale.html",
-					"appOrder/applyRefund.html"
+					"appOrder/applyRefund.html",
+					"myCenter/myTicket.html",
+					"appOrder/afterSaleDetail.html",
+					"appAddress/map.html",
+					"appAddress/map1.html",
+					"appAddress/map2.html"
 				],
 				"priority": 0
 			},
