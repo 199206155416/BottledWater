@@ -61,7 +61,7 @@ function setShow(allPois){
                 var strHtml='<li class="addressDetailInfo">'+
 					'<div class="receiveInfo">'+
 						'<div>'+
-						'	<span>'+allPois[i].title+'</span>'+
+						'	<span style="font-size: .3rem;color: #333;">'+allPois[i].title+'</span>'+
 						'</div>'+
 						'<div>'+
 							'<span>'+allPois[i].address+'</span>'+
@@ -71,5 +71,6 @@ function setShow(allPois){
 				$("#peripheryInfo").append(strHtml);
                 map.addOverlay(new BMap.Marker(allPois[i].point));                
            }
+	 $("#load").hide();
 }
 
