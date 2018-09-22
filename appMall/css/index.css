@@ -2,6 +2,15 @@ body{
 	background: #f4f4f4;
 }
 
+.mui-scroll{
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: .88rem;
+	bottom: -44px;
+	overflow-y: scroll;
+}
+
 /* 频道列表 */
 .channel-list{
 	width: 7.5rem;
