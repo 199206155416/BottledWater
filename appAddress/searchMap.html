@@ -1,0 +1,33 @@
+<!DOCTYPE html>  
+<html>
+<head>  
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />  
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="../common/css/mui.min.css">
+	<link rel="stylesheet" href="../common/css/mui.picker.min.css">
+	<link rel="stylesheet" href="../common/css/public.css">
+	<link rel="stylesheet" href="css/addressList.css">
+	<script src="../common/js/remScale.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=GzuyqWuRzXCRfO6n2EVVqO1i3yPRzGlA">
+//v2.0版本的引用方式：src="http://api.map.baidu.com/api?v=2.0&ak=您的密钥"
+</script>
+<title>Hello, World</title>  
+<style type="text/css">  
+html{height:100%}  
+body{height:100%;margin:0px;padding:0px}   
+</style>  
+</head>  
+ 
+<body> 
+	<header class="mui-bar mui-bar-nav">
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	    <h1 class="mui-title"><input placeholder="小区/学校/公司/大厦"/></h1>
+	</header>
+	<div>
+		<ul id="peripheryInfo">
+		</ul>
+	</div> 
+</body>
+<script type="text/javascript" src="../common/js/include.js" level="1"></script>
+<script type="text/javascript" src="searchMap.js" level="1"></script>
+</html>
