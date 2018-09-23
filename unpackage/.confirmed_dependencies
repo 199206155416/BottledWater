@@ -45,7 +45,8 @@
 			"login/changePassword.html",
 			"appAddress/map.html",
 			"appAddress/map1.html",
-			"appAddress/map2.html"
+			"appAddress/map2.html",
+			"appAddress/searchMap.html"
 		]
 	}
 }

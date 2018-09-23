@@ -129,7 +129,7 @@ function getGoodsList(){
 				var result = e.result;
 				$("#goodsList").html("");
 				for(var i = 0, len = result.length; i < len; i++){
-					var activityImg = result[i].mallCategory.strImg;
+					var activityImg = result[i].strImg;
 					var mallGoodsList = result[i].mallGoodsList;
 					var htmlTemplate = $("#goodsListTemplate").html();
 

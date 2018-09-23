@@ -4,6 +4,9 @@ var id = null; // 地址id(id不为0时编辑地址否则添加新地址)
 var addressId;
 var editDataIndex;
 var addreddListWebView;
+var chooselng;
+var chooselat;
+var chooseData;
 mui.init({
 	swipeBack: true
 });
@@ -83,7 +86,15 @@ mui.plusReady(function() {
 });
 
 function bindEvent(){
-     $("#strDetailaddress").click(function(){
+	 window.addEventListener('chooseMap',function(event){
+  	    chooseData=event.detail;
+        var chooseTitle=chooseData["chooseTitle"];
+        chooselng=chooseData.lng;
+        chooselat=chooseData.lat;
+        $("#chooseTitle").val(chooseTitle);
+	},false);
+
+     $("#chooseTitle").click(function(){
      	openMaps();
      });
 	// 选择省市区
@@ -105,12 +116,14 @@ function bindEvent(){
 		dataObj.isDefault = $("#defaultAddress").is(":checked") ? 1 : 0; // 是否默认地址，0：不是，1：是
 		dataObj.strDetailaddress = $("#strDetailaddress").val().trim() || ""; // 详细地址
 		dataObj.strTag = $(".address-label:checked").val().trim() || ""; // 地址标签
+		dataObj.strChooseAddress=JSON.stringify(chooseData);
 		if(dataObj.strTag==""){
 			dataObj.strTag=$("#strTag").val();
 		}
 		if(addressId){
 			dataObj.id=addressId;
 		}
+		
 		console.log("strUserId", dataObj.strUserId);
 
 		$.ajax({
@@ -179,6 +192,7 @@ function getAddress(){
 	var strDetailaddress = currentWebview.strDetailaddress;
 	var isDefault = currentWebview.isDefault;
 	var strTag = currentWebview.strTag;
+	var strChooseAddress=currentWebview.strChooseAddress;
 	$("#strReceiptUserName").val(strReceiptUserName);
 	$("#strReceiptMobile").val(strReceiptMobile);
 	$("#strFullDistrictName").html(strLocation);
@@ -196,17 +210,25 @@ function getAddress(){
 		$("#homeAddress").removeAttr("checked");
 		$("#strTag").val(strTag);
 	}
+	if(strChooseAddress){
+		var jsonChooseAddress=eval("("+strChooseAddress+")");
+		chooseData=jsonChooseAddress;
+		var chooseTitle=jsonChooseAddress["chooseTitle"];
+		$("#chooseTitle").val(chooseTitle);
+		chooselng=jsonChooseAddress["lng"];
+        chooselat=jsonChooseAddress["lat"];
+	}
 }
 
 function openMaps(){
 		pushWebView({
 			webType: 'newWebview_First',
-			id: 'appAddress/map.html',
+			id: 'appAddress/map.html_1',
 			href: 'appAddress/map.html',
 			aniShow: getaniShow(),
 			title: "地图",
 			isBars: false,
 			barsIcon: '',
-			extendOptions: {}
+			extendOptions: {chooselng:chooselng,chooselat:chooselat}
 		})
 }
