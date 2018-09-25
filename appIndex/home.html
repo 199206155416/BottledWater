@@ -1,74 +1,87 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-	<title>智慧订水</title>
-	<link rel="stylesheet" type="text/css" href="../common/css/mui.min.css" />
-	<link rel="stylesheet" type="text/css" href="../common/css/public.css" />
-	<link rel="stylesheet" type="text/css" href="../common/css/iconfont.css" />
-	<link rel="stylesheet" href="./css/home.css" />
-	<script type="text/javascript" src="../common/js/remScale.js"></script>
-</head>
-<body>
-<div class="mui-content">
-	<!-- 图片轮播 -->
-	<div id="slider" class="mui-slider" >
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>智慧订水</title>
+		<link rel="stylesheet" type="text/css" href="../common/css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../common/css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../common/css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../common/css/swiper.min.css" />
+		<link rel="stylesheet" href="./css/home.css" />
+		<script type="text/javascript" src="../common/js/remScale.js"></script>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<!-- 图片轮播 -->
+			<!--<div id="slider" class="mui-slider" >
 		
-	</div>
-
-	<!-- 频道列表 -->
-	<ul class="channel-list">
-		<li class="channel-item">
-			<img class="channel-item-logo" src="./image/youzhitongzhuangshui@2x.png" />
-			<p class="channel-item-label">优质桶装水</p>
-		</li>
-		<li class="channel-item">
-			<img class="channel-item-logo" src="./image/kuaisudingshui@2x.png" />
-			<p class="channel-item-label">快速订水</p>
-		</li>
-		<li class="channel-item">
-			<img class="channel-item-logo" src="./image/shengxian@2x.png" />
-			<p class="channel-item-label">生鲜</p>
-		</li>
-		<li class="channel-item">
-			<img class="channel-item-logo" src="./image/shuizhishi@2x.png" />
-			<p class="channel-item-label">水知识</p>
-		</li>
-		<li class="channel-item">
-			<img class="channel-item-logo" src="./image/youhuishuoming@2x.png" />
-			<p class="channel-item-label">优惠说明</p>
-		</li>
-		<li class="channel-item">
-			<img class="channel-item-logo" src="./image/fuwu@2x.png" />
-			<p class="channel-item-label">服务</p>
-		</li>
-	</ul>
-
-	<!-- 商品列表 -->
-	<div id="goodsList"></div>
-
-	<!-- 商品列表模板 -->
-	<div id="goodsListTemplate" style="display: none;">
-		<div>
-			<div>#activityImg#</div>
-			<ul class="goods-list"></ul>
-		</div>
-	</div>
-
-	<!-- 商品模板 -->
-	<div id="goodsTemplate" style="display: none;">
-		<li class="goods-item" id="#id#">
-			<div class="goods-item-wrap">
-				<div class="goods-img"><img src="#strMainImg#" /></div>
-				<div class="goods-name">#strGoodsName#</div>
-				<div class="goods-slogn">#goodsSlogn#</div>
-				<div class="goods-price">售价： ￥#defaultSkuPrice#</div>
+			</div>-->
+			<div class="swiper-container">
+				<div class="swiper-wrapper" id="banner">
+					<!--<div class="swiper-slide">slider1</div>
+					<div class="swiper-slide">slider2</div>
+					<div class="swiper-slide">slider3</div>-->
+				</div>
+				<div class="swiper-pagination"></div>
 			</div>
-		</li>
-	</div>
-</div>
-</body>
-<script src="../common/js/include.js" charset="UTF-8" level="1"></script>
-<script src="home.js"></script>
+
+			<!-- 频道列表 -->
+			<ul class="channel-list">
+				<li class="channel-item">
+					<img class="channel-item-logo" src="./image/youzhitongzhuangshui@2x.png" />
+					<p class="channel-item-label">优质桶装水</p>
+				</li>
+				<li class="channel-item">
+					<img class="channel-item-logo" src="./image/kuaisudingshui@2x.png" />
+					<p class="channel-item-label">快速订水</p>
+				</li>
+				<li class="channel-item">
+					<img class="channel-item-logo" src="./image/shengxian@2x.png" />
+					<p class="channel-item-label">生鲜</p>
+				</li>
+				<li class="channel-item">
+					<img class="channel-item-logo" src="./image/shuizhishi@2x.png" />
+					<p class="channel-item-label">水知识</p>
+				</li>
+				<li class="channel-item">
+					<img class="channel-item-logo" src="./image/youhuishuoming@2x.png" />
+					<p class="channel-item-label">优惠说明</p>
+				</li>
+				<li class="channel-item">
+					<img class="channel-item-logo" src="./image/fuwu@2x.png" />
+					<p class="channel-item-label">服务</p>
+				</li>
+			</ul>
+
+			<!-- 商品列表 -->
+			<div id="goodsList"></div>
+
+			<!-- 商品列表模板 -->
+			<div id="goodsListTemplate" style="display: none;">
+				<div>
+					<div>#activityImg#</div>
+					<ul class="goods-list"></ul>
+				</div>
+			</div>
+
+			<!-- 商品模板 -->
+			<div id="goodsTemplate" style="display: none;">
+				<li class="goods-item" id="#id#">
+					<div class="goods-item-wrap">
+						<div class="goods-img"><img src="#strMainImg#" /></div>
+						<div class="goods-name">#strGoodsName#</div>
+						<div class="goods-slogn">#goodsSlogn#</div>
+						<div class="goods-price">售价： ￥#defaultSkuPrice#</div>
+					</div>
+				</li>
+			</div>
+		</div>
+	</body>
+	<script src="../common/js/include.js" charset="UTF-8" level="1"></script>
+	<script src="../common/js/swiper.min.js"></script>
+	<script src="home.js"></script>
+
 </html>

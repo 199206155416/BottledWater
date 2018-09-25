@@ -75,9 +75,11 @@ body {
 .goodsContainer .goodsExplain {
 	color: #555555;
 	font-size: 0.26rem;	
-	line-height: .34rem;
+	line-height: .38rem;
 	height: .38rem;
 	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 	margin-bottom: 0.2rem;	
 }
 .goodsContainer .goodsSKUName {

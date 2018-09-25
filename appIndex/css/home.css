@@ -23,6 +23,28 @@ body{
     -webkit-transform: rotateZ(45deg);
 }
 
+.swiper-container{
+	height: 4.6rem;
+	position: relative;
+}
+.swiper-container .swiper-pagination{
+	position:absolute;
+	bottom: 1.2rem;
+}
+.swiper-pagination-bullet{
+	width: .1rem;
+	height: .1rem;
+	background: #a1c7f8;
+	border-radius: .02rem;
+	box-shadow: 0 0 1px rgba(255,255,255,.1);
+	-webkit-box-shadow: 0 0 1px rgba(255,255,255,.1);
+}
+.swiper-pagination-bullet-active{
+	background: #60a3fb;
+    transform: rotateZ(45deg);
+    -webkit-transform: rotateZ(45deg);
+}
+
 /* 频道列表 */
 .channel-list{
 	width: 7.1rem;
