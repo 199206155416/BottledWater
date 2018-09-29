@@ -47,3 +47,38 @@ function addListevent() {
 	});
 }
 
+/**
+ * 退出登录
+ */
+function loginout(){
+	   var userId = localStorage.getItem('userId'); // 用户id
+	   var sendData={"userId":userId};
+       $.ajax({
+				url: prefix + "/user/loginout",
+				type: "POST",
+				data: sendData,
+				dataType: "json",
+				success: function(res){
+					ajaxLog(res);
+					var result=res.result;
+					if(res.resCode == 0){
+					   localStorage.removeItem("userId");
+					   localStorage.removeItem("userMobile");
+					   localStorage.removeItem("userRoleNames");
+					   localStorage.removeItem("userLoginFlag");
+					   id = "login/login.html";
+						aniShow = 'slide-in-bottom';
+						pushWebView({
+							webType: 'newWebview_First',
+							id: id,
+							href: id,
+							aniShow: aniShow,
+							extendOptions: {}
+							});
+					}else{
+						mui.alert(result);
+					}
+				}
+			})
+}
+

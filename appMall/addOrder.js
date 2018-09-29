@@ -15,6 +15,7 @@ var bucketNum=0;
 var bucketMoney=0.0;
 var ticketTotalCount=0;
 var isSubmit=false;
+var strTitle;//副标题
 mui.init({
 	swipeBack: false
 });
@@ -70,6 +71,7 @@ function getPayDetail(){
 		var nCount=itemGoods["nCount"];
 		formData.append("mallOrderDetailList["+i+"].mallGoodsSku.id", strSkuId);
 		formData.append("mallOrderDetailList["+i+"].count", nCount);
+		formData.append("mallOrderDetailList["+i+"].strTitle", strTitle);
 	}
 	$.ajax({
 		url: prefix + "/pay/getPayDetail",
@@ -112,6 +114,7 @@ function getPayDetail(){
 			}
 	});
 }
+
 /**
  * 初始化支付渠道
  * @param {Object} payType
@@ -170,7 +173,7 @@ function setProduct(){
 	for(var i = 0, len = goodsList.length; i < len; i++){
 		var strSkuName = goodsList[i]["strSkuName"];
 		var strGoodsImg = goodsList[i]["strMainImg"];
-		var remarks = goodsList[i]["remarks"];
+		var strTitle = goodsList[i]["strTitle"];
 		var goodsFactPrice = goodsList[i]["goodsFactPrice"];
 		var skuPrice = goodsList[i]["skuPrice"];
 		var count = goodsList[i]["count"];
@@ -180,7 +183,7 @@ function setProduct(){
 
 		goodsTemplate = goodsTemplate.replace("#strGoodsImg#", strGoodsImg);
 		goodsTemplate = goodsTemplate.replace("#strSkuName#", strSkuName);
-		goodsTemplate = goodsTemplate.replace("#remarks#", remarks);
+		goodsTemplate = goodsTemplate.replace("#remarks#", strTitle);
 		goodsTemplate = goodsTemplate.replace("#skuPrice#", skuPrice);
 		goodsTemplate = goodsTemplate.replace("#nCount#", count);
 		var goodsDom = $(goodsTemplate);
@@ -238,7 +241,7 @@ function bindEvent(){
 			isBars: false, 
 			barsIcon: '',
 			extendOptions: {
-				factPrice: factPrice
+				factPrice: factPrice,openType:0
 			}
 		});
 	});
@@ -251,6 +254,20 @@ function bindEvent(){
                 doAddOrder();
             }
         },"div");
+	});
+	//桶押金说明
+	$("#bucketNum").on('click',function() {
+		var extendOptionsData={};
+		extendOptionsData={conType:3};
+		id="myCenter/conshow.html";
+		var aniShow = getaniShow();
+		pushWebView({
+			webType: 'newWebview_First',
+			id: id,
+			href: id,
+			aniShow: aniShow,
+			extendOptions: extendOptionsData
+		});
 	});
 }
 
@@ -274,8 +291,10 @@ function doAddOrder(){
 			strBuyerMessage="";
 		}
 		formData.append("remarks", strBuyerMessage);
-		formData.append("bucketNum", bucketNum);
-		formData.append("bucketMoney", bucketMoney);
+		if(bucketNum){
+			formData.append("bucketNum", bucketNum);
+		   formData.append("bucketMoney", bucketMoney);
+		}
 		if(ticketTotalCount){
 			formData.append("ticketTotalCount", ticketTotalCount);
 		}
@@ -286,6 +305,7 @@ function doAddOrder(){
 			var itemGoods=goodsList[i];
 			var strSkuId=itemGoods["strSkuId"];
 			var nCount=itemGoods["count"];
+			var strTitle=itemGoods["strTitle"];
 			var goodsTotalPrice=itemGoods["goodsTotalPrice"];
 			var goodsFactPrice=itemGoods["goodsFactPrice"];
 			var useTickecCount=itemGoods["useTickecCount"];
@@ -294,6 +314,7 @@ function doAddOrder(){
 			formData.append("mallOrderDetailList["+i+"].goodsFactPrice", goodsFactPrice);
 			formData.append("mallOrderDetailList["+i+"].goodsTotalPrice", goodsTotalPrice);
 			formData.append("mallOrderDetailList["+i+"].waterTicketsNum", useTickecCount);
+			formData.append("mallOrderDetailList["+i+"].strTitle", strTitle);
 		}
 		isSubmit=true;
 		$.ajax({
@@ -319,7 +340,6 @@ function doAddOrder(){
 				}
 			}
 		});
-		
 	}
 
 function doPay(payInfo){
@@ -327,19 +347,21 @@ function doPay(payInfo){
 	if(payType==1){//微信
 		var appid=payInfo["appid"];
 		var noncestr=payInfo["noncestr"];
-		var package=payInfo["package"];
+		var packagea=payInfo["package"];
 		var partnerid=payInfo["partnerid"];
 		var prepayid=payInfo["prepayid"];
 		var timestamp=payInfo["timestamp"];
 		var sign=payInfo["sign"];
-		var payInfoNew={"appid":appid,"noncestr":noncestr,"package":package,"partnerid":partnerid,"prepayid":prepayid,"timestamp":timestamp,"sign":sign};
+		var payInfoNew={"appid":appid,"noncestr":noncestr,"package":packagea,"partnerid":partnerid,"prepayid":prepayid,"timestamp":timestamp,"sign":sign};
 		var stra=JSON.stringify(payInfoNew);
+		//alert("channel:"+JSON.stringify(channel)+"stra:"+stra);
 		plus.payment.request(channel,stra,function(result){
                     plus.nativeUI.alert("支付成功！",function(){
                         openPaySuccess(strOrderId);
                     });
                 },function(error){
                     plus.nativeUI.alert("支付失败：" + JSON.stringify(error));
+                    	isSubmit=false;
                 });
 	}else if(payType==0){
 		plus.payment.request(channel,payInfo,function(result){
@@ -348,6 +370,7 @@ function doPay(payInfo){
                     });
                 },function(error){
                     plus.nativeUI.alert("支付失败：" + JSON.stringify(error));
+                    isSubmit=false;
                 });
 	}else if(payType==2){//余额
 		openPaySuccess(strOrderId);

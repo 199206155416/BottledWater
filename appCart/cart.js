@@ -247,7 +247,7 @@ function getCartList(){
 						strSkuName: result[i].mallGoodsSku.strSkuName,
 						skuStock: result[i].mallGoodsSku.skuStock,
 						skuPrice: result[i].mallGoodsSku.skuPrice,
-						remarks: result[i].mallGoodsSku.remarks,
+						remarks: result[i].mallGoodsSku.mallGoods.strTitle,
 					};
                     console.log(JSON.stringify(mallGoodsSku));
 					var goodsTemplate = $("#goodsTemplate").html();

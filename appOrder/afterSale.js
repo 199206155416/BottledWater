@@ -114,7 +114,7 @@ function getRefundLogList(){
 						var id = itemGoods.id;
 						var strGoodsName = itemGoods.strSkuName;
 						var strGoodsImg = itemGoods.strGoodsImg;
-						var strGoodsSKUDetail = itemGoods.remarks;
+						var strGoodsSKUDetail = itemGoods.strTitle;
 						var skuPrice = itemGoods.skuPrice;
 						var count = itemGoods.count;
 						var goodsTemplate = $("#goodsTemplate").html();

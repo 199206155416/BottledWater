@@ -22,6 +22,7 @@ function bindEvent(){
 	
 }
 
+
 /**
  * 获取订单列表
  * @author xuezhenxiang
