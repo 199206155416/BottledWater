@@ -1,13 +1,13 @@
 var currentWebview;
 var type = -1; // -1 == 全部， -2 == 待付款， -3 == 待发货， -4 == 待收货， -5 == 已完成, 默认为-1
 var pageNo = 1;
-var pageSize = 20; 
+var pageSize =20; 
 var loadFlag = 1; // 上拉加载标志
 var payChannels;
 var payType;
 var channel;
 var _LoadNumber = { a: false };
-
+var payStrOrderId
 mui.init({
 	swipeBack: false,
 	pullRefresh: {
@@ -51,6 +51,7 @@ function bindEvent(){
 		if (scrollTop + windowHeight >= scrollHeight - 300) {
 			if(loadFlag == 1){
 				loadFlag = 0;
+				console.log("pageNo:"+pageNo);
 				getOrderList();
 			}
 		}
@@ -69,6 +70,12 @@ function bindEvent(){
 		getOrderList();
 		
 	});
+	
+	 window.addEventListener('choosePayType',function(event){
+  	    var data=event.detail;
+  	    payType=parseInt(data["payType"]);
+		getPayInfo();
+	},false);
 }
 
 /**
@@ -129,9 +136,9 @@ function getOrderList(){
 					$("#orderNullTemp").hide();
 				}
 				
-				$("#load").show();
+				$("#load").hide();
 				if(list.length <= 0){
-					$("#load").hide();
+					$("#load").hide(); 
 					return false;
 				}
 
@@ -167,7 +174,8 @@ function getOrderList(){
 						});
 						orderList.find(".payment").click(function(){
 							    var strPayType=order.strPayType;
-							    nowPay(lOrderId,strPayType);
+							    var factPrice=order.factPrice
+							    nowPay(lOrderId,strPayType,factPrice);
 							    return false;
 						});
 						
@@ -190,7 +198,7 @@ function getOrderList(){
 						var id = item.id;
 						var strGoodsName = item.strSkuName;
 						var strGoodsImg = item.strGoodsImg;
-						var strGoodsSKUDetail = item.remarks;
+						var strGoodsSKUDetail = item.strTitle;
 						var skuPrice = item.skuPrice;
 						var count = item.count;
 						var goodsTemplate = $("#goodsTemplate").html();
@@ -262,21 +270,38 @@ function cancelOrder(strOrderId){
 		});
 }
 
+function openPayType(factPrice){
+	pushWebView({
+			webType: 'newWebview_First',
+			id: 'appMall/payCenter.html-1',
+			href: 'appMall/payCenter.html',
+			aniShow: getaniShow(),
+			title: "支付方式",
+			isBars: false, 
+			barsIcon: '',
+			extendOptions: {
+				factPrice: factPrice,openType:1
+			}
+		});
+}
+
 /**
  * 立即支付
  * @param {Object} strOrderId
  * @param {Object} strPayType
  * @param {Object} factPrice
  */
-function nowPay(strOrderId,strPayType){
-	payType=parseInt(strPayType);
-	if("0"==strPayType||"1"==strPayType){
-		channel=payChannels[payType];
-	}
+function nowPay(strOrderId,strPayType,factPrice){
+	openPayType(factPrice);
+	payStrOrderId=strOrderId;
+}
+
+function getPayInfo(){
+	channel=payChannels[payType];
 	$.ajax({
 		url: prefix + "/pay/againPay",
 		type: "POST",
-		data: {"strOrderId":strOrderId,"strPayType":strPayType,"strOrderType":"0"}, 
+		data: {"strOrderId":payStrOrderId,"strPayType":payType,"strOrderType":"0"}, 
 		dataType: "json",
 		success: function(res){
 				ajaxLog(res);

@@ -55,7 +55,7 @@ function getGoodsDetail(){
 				mallGoods = {
 					strSkuId: result.mallGoods.strDefaultSkuId,
 					strSkuName: result.mallGoods.strDefaultSkuName,
-					remarks: result.mallGoods.remarks,
+					strTitle: result.mallGoods.strTitle,
 					strIntroduce: result.mallGoods.strIntroduce,
 					nSkuPrice: result.mallGoods.defaultSkuPrice,
 					strDetailIcon: result.mallGoods.strDetailIcon,
@@ -116,13 +116,13 @@ function setSldiderHtml(focusImgs){
 function setproductMessage(){
 	var strGoodsName = mallGoods.strSkuName;
 	var strIntroduce = mallGoods.strIntroduce;
-	var remarks = mallGoods.remarks;
+	var strTitle = mallGoods.strTitle;
 	var nSkuPrice = mallGoods.nSkuPrice;
 	var strDetailIcon = mallGoods.strDetailIcon;
 	var nSaleNum = mallGoods.nSaleNum;
 
 	$("#strDetailName, #strDetailName1").html(strGoodsName); // 商品名称
-	$("#strNotice").html(remarks); // 商品描述
+	$("#strNotice").html(strTitle); // 商品描述
 	$("#nPrice, #nPrice1").html("<span>￥</span>" + nSkuPrice); // 商品价格
 	$("#saleNum").html("已售 " + nSaleNum); // 商品已售
 	$("#appendRove").html(currentSku); // 当前商品sku信息
@@ -200,7 +200,6 @@ function bindEvent(){
 	$("#submitBtn").on("click", function(){
 		var strUserId = localStorage.getItem('userId'); // 用户id
 		var nCount = $("#num_id").html();
-		
 		//检测已经存在sessionkey否者运行下面的登陆代码
 		if (localStorage.getItem('userMobile') && strUserId) {} else {
 			id = "login/login.html";

@@ -13,6 +13,8 @@ mui.plusReady(function() {
 		$("#titleEle").html("关于我们");
 	}else if(conType==2){
 		$("#titleEle").html("优惠券使用说明");
+	}else if(conType==3){
+		$("#titleEle").html("桶押金说明");
 	}
 	getContent();
 })

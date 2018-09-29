@@ -15,7 +15,14 @@ mui.init({
 
 mui.plusReady(function() {
 	currentWebview = plus.webview.currentWebview();
-	addOrderWebView=plus.webview.getWebviewById("appMall/addOrder.html");
+	var openType=currentWebview.openType;
+	var pageId=""
+	if(0==openType){
+		pageId="appMall/addOrder.html";
+	}else if(1==openType){
+		pageId="appOrder/orderList.html";
+	}
+	addOrderWebView=plus.webview.getWebviewById(pageId);
 	paredntWebview = currentWebview.parent();
 	detailcontent = document.getElementById('detailcontent');
 	//监听页面隐藏的隐藏的时候清空数据信息

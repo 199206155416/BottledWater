@@ -90,7 +90,7 @@ function login(){
 					setStringValue("userRoleNames", result.roleNames);
 					// 存储启用状态
 					setStringValue("userLoginFlag", result.loginFlag);
-
+					setClientInfo();
 					
 
 					//添加事件接收close事件，并且要判断是否已经登录成功，然后页面close，因为login页面是预先加载的页面
@@ -115,5 +115,50 @@ function login(){
 			}
 		})
 	})
-};
+}
+
+function setClientInfo(){
+	var clientId=localStorage.getItem("clientId");
+    if(!clientId){
+    	var pushClientInfo=plus.push.getClientInfo();
+	    var token=pushClientInfo.token;
+	    clientId=pushClientInfo.clientid;
+	    var clientType=""//客户端类型
+	    if(clientId==token){
+	       clientType="android";
+	    }else{
+	       clientType="ios";
+	    }
+	    setStringValue("clientId",clientId);
+	    //更新设备信息
+	    updateUserClientInfo(clientId,clientType);
+    }
+
+}
+
+/**
+ * 更新用户设备信息
+ * @param {Object} clientId
+ * @param {Object} clientType
+ */
+function updateUserClientInfo(clientId,clientType){
+var userId= localStorage.getItem("userId"); // 用户id
+var sendData={"clientId":clientId,"clientType":clientType,"userId":userId};
+  $.ajax({
+		url: prefix + "/user/updateUserClientInfo",
+		type: "POST",
+		data: sendData,
+		dataType: "json",
+		success: function(res){
+				ajaxLog(res);
+				var result=res.result;
+				if(res.resCode == 0){
+					
+				}else{
+					mui.alert(result);
+				}
+			}
+	});
+}
+
 

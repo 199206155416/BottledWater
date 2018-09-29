@@ -49,7 +49,7 @@ function bindEvent(){
 function getOrderDetail(){
 				var mallOrderDetailList = order.mallOrderDetailList; // 商品列表
 				for(var i = 0, len = mallOrderDetailList.length; i < len; i++){
-					var remarks = mallOrderDetailList[i].remarks;
+					var remarks = mallOrderDetailList[i].strTitle;
 					var strSkuName = mallOrderDetailList[i].strSkuName; // 商品名称
 					var skuPrice = mallOrderDetailList[i].skuPrice; // 商品价格
 					var strGoodsImg = mallOrderDetailList[i].strGoodsImg; // 商品图片
