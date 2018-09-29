@@ -128,6 +128,7 @@ function addListevent() {
 		pushWebView({
 			webType: 'newWebview_First',
 			id: id,
+			title:"",
 			href: id,
 			aniShow: aniShow,
 			extendOptions: optionsData
@@ -146,6 +147,7 @@ function addListevent() {
 			pushWebView({
 				webType: 'newWebview_First',
 				id: id,
+				title:"",
 				href: id,
 				aniShow: aniShow,
 				extendOptions: {}
@@ -155,6 +157,7 @@ function addListevent() {
 		pushWebView({
 			webType: 'newWebview_First',
 			id: "myCenter/message.html",
+			title:"",
 			href: "myCenter/message.html",
 			aniShow: aniShow,
 			extendOptions: {}

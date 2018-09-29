@@ -33,7 +33,35 @@ mui.plusReady(function() {
 
 	// 获取商品列表
 	getGoodsList();
+ 
+    // 监听点击消息事件
+    plus.push.addEventListener( "click", function( msg ) {
+        // 判断是从本地创建还是离线推送的消息
+        switch( msg.payload ) {
+            case "LocalMSG":
+                outSet( "点击本地创建消息启动：" );
+            break;
+            default:
+                outSet( "点击离线推送消息启动：");
+            break;
+        }
+        // 提示点击的内容
+        plus.ui.alert( msg.content );
+        // 处理其它数据
+        logoutPushMsg( msg );
+    }, false );
+    // 监听在线消息事件
+    plus.push.addEventListener( "receive", function( msg ) {
+        if ( msg.aps ) {  // Apple APNS message
+            outSet( "接收到在线APNS消息：" );
+        } else {
+            outSet( "接收到在线透传消息：" );
+        }
+        logoutPushMsg( msg );
+    }, false );
 });
+
+
 
 /**
  * 获取焦点图
@@ -171,7 +199,7 @@ function getGoodsList() {
 						var id = mallGoodsList[i1].id;
 						var strGoodsName = mallGoodsList[i1].strGoodsName;
 						var strMainImg = mallGoodsList[i1].strMainImg;
-						var goodsSlogn = mallGoodsList[i1].remarks || "";
+						var goodsSlogn = mallGoodsList[i1].strTitle || "";
 						var defaultSkuPrice = mallGoodsList[i1].defaultSkuPrice;
 
 						var goodsTemplate = $("#goodsTemplate").html();
