@@ -47,7 +47,9 @@
 			"appAddress/map1.html",
 			"appAddress/map2.html",
 			"appAddress/searchMap.html",
-			"appCart/cart.html"
+			"appCart/cart.html",
+			"login/forgetPassword.html",
+			"login/login.html"
 		]
 	}
 }

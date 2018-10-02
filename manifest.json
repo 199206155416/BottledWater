@@ -275,7 +275,8 @@
 					"appAddress/map1.html",
 					"appAddress/map2.html",
 					"appAddress/searchMap.html",
-					"login/login.html"
+					"login/login.html",
+					"login/forgetPassword.html"
 				],
 				"priority": 0
 			},

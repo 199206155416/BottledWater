@@ -66,6 +66,7 @@ function bindEvent(){
 		pageNo = 1;
 		loadFlag = 1;
 		$("#orderListID").html("");
+		$("#load").show();
 		// 获取数据
 		getOrderList();
 		

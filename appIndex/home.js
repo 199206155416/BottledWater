@@ -233,6 +233,8 @@ function getGoodsList() {
 
 					$("#goodsList").append(goodslist);
 				}
+			}else{
+			  mui.alert(e.result);
 			}
 		}
 	})

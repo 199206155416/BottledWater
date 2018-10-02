@@ -17,7 +17,7 @@ mui.plusReady(function() {
 	// 点击跳转注册页
 	goToRegister();
 	// 点击忘记密码页
-	// forgetPassword();
+	 forgetPassword();
 	
 	// //检测本地的登录过的账号。
 	// if (localStorage.getItem('account')) {
@@ -32,8 +32,8 @@ function forgetPassword(){
 	$("#forgetPassword").on("click", function(){
 		pushWebView({
 			webType: 'newWebview_First',
-			id: 'login/changePassword.html',
-			href: 'login/changePassword.html',
+			id: 'login/forgetPassword.html',
+			href: 'login/forgetPassword.html',
 			aniShow: getaniShow(),
 			title: "忘记密码",
 			isBars: false,
@@ -68,7 +68,21 @@ function login(){
 	$("#loginBtn").on("click", function(){
 		var strMobile = $("#mobile").val().trim();
 		var strPassword = $("#password").val().trim();
-
+        var mobileRegs=/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+		  if(strMobile==""){
+		     mui.toast("请输入手机号");
+		     return;
+		  }
+		  if(strMobile.match(mobileRegs)==null){
+		      mui.toast("手机号格式不正确");
+		     return;
+		  }
+		  
+		  var regx =/^(?!([a-zA-Z]+|\d+)$)[a-zA-Z\d]{6,20}$/;
+		  if(strPassword.match(regx)==null){
+		    mui.toast("密码同时包含数字和字母！");
+		    return;
+		   }
 		$.ajax({
 			url: prefix + "/user/login",
 			type: "POST",
