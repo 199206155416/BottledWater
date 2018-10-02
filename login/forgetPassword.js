@@ -28,19 +28,20 @@ function addListevent() {
 		       mui.toast("请输入验证码");
 		        return;
 		  }
-		  var regx4 =/^\d{4}$/;
+		  
+		   var regx4 =/^\d{4}$/;
 		  if(strCode.match(regx4)==null){
 		    mui.toast("验证码只能是4位数字");
 		    return;
 		   }
-		  var paypassword=$("#paypassword").val();
-		  var regx =/^\d{6}$/;
-		  if(paypassword.match(regx)==null){
-		    mui.toast("支付密码只能是6位数字");
+		  var password=$("#password").val();
+		  var regx =/^(?!([a-zA-Z]+|\d+)$)[a-zA-Z\d]{6,20}$/;
+		  if(password.match(regx)==null){
+		    mui.toast("密码同时包含数字和字母！");
 		    return;
 		   }
 		  
-		  editPayPwd(mobile,strCode,paypassword);
+		  forgetPwd(mobile,strCode,password);
 	});
 }
 
@@ -49,11 +50,11 @@ function addListevent() {
  * @param {Object} strCode
  * @param {Object} paypassword
  */
-function editPayPwd(mobile,strCode,paypassword){
+function forgetPwd(mobile,strCode,password){
 	   var userId = localStorage.getItem('userId'); // 用户id
-	   var sendData={"userId":userId,mobile:mobile,strCode:strCode,paypassword:paypassword};
+	   var sendData={"userId":userId,mobile:mobile,strUserSmsCode:strCode,password:password};
        $.ajax({
-				url: prefix + "/user/editPayPwd",
+				url: prefix + "/user/forgetPwd",
 				type: "POST",
 				data: sendData,
 				dataType: "json",
@@ -118,3 +119,4 @@ function editDivText(){
       window.clearInterval(timer0);
    }
 }
+
