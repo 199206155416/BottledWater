@@ -26,3 +26,18 @@ body{
     transform: scaleY(.5);
     background-color: #c8c7cc;
 }
+
+.own-btn {
+    border-radius: 1rem;
+    background: transparent;
+    border-color: #60a3fb;
+    color: #60a3fb;
+    font-size: .3rem;
+    line-height: .4rem;
+    padding: .22rem 0;
+}
+.mui-btn.mui-active:enabled, .mui-btn:enabled:active, button.mui-active:enabled, button:enabled:active, input[type=button].mui-active:enabled, input[type=button]:enabled:active, input[type=reset].mui-active:enabled, input[type=reset]:enabled:active, input[type=submit].mui-active:enabled, input[type=submit]:enabled:active {
+    color: #fff;
+    background-color: #ddd;
+    border-color: #ddd;
+}
