@@ -49,7 +49,8 @@
 			"appAddress/searchMap.html",
 			"appCart/cart.html",
 			"login/forgetPassword.html",
-			"login/login.html"
+			"login/login.html",
+			"appCategory/goodsBrandList.html"
 		]
 	}
 }
