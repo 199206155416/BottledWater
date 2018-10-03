@@ -8,9 +8,9 @@ var mallCategory2Id = null; // 三级类目id（非必传）
 var mallBrandId = null; // 品牌id（非必传）
 var orderByField = "-1"; // 排序字段，销量传：default_sku_sale_num，价格传：defaultSkuPrice,传-1：综合排序
 var orderByType = "-1"; // 排序方式，递增：asc,递减：desc，传-1：综合排序
-
+var priceFlag=true;
 mui.init({
-	swipeBack: false,
+	swipeBack: true,
 	// pullRefresh: {
 	//     container: ".mui-content",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
 	//     down : {
@@ -32,8 +32,8 @@ mui.plusReady(function() {
 	// parentWebView = plus.webview.currentWebview().parent();
 
 
-	mallCategory0Id = currentWebview.firstCategoryId; // 一级类目id（非必传）
-	mallCategory2Id = currentWebview.thirdCategoryId; // 三级类目id（非必传）
+	mallCategory0Id = currentWebview.catId0; // 一级类目id（非必传）
+	mallCategory2Id = currentWebview.catId2; // 三级级类目id（非必传）
 	mallBrandId = currentWebview.brandId; // 品牌id（非必传）
 
 	$("#mallUp").html(currentWebview.title);
@@ -68,19 +68,21 @@ function bindEvent(){
 		}
 
 		if(lId == "costNum"){
-			if(sortType == 3){
-				$(this).attr("sortType", 4);
+			if(!priceFlag){
 				$(".topImg").attr("src","image/gray.png");
 				$(".bottomImg").attr("src", "image/color.png");
+				priceFlag=true;
+				orderByType='asc';
 			}else{
-				$(this).attr("sortType", 3);
 				$(".topImg").attr("src", "image/color.png");
 				$(".bottomImg").attr("src", "image/gray.png");
+				priceFlag=false;
+				orderByType='desc';
 			}
 		}else{
-			$(this).attr("sortType", 3);
 			$(".topImg").attr("src", "image/gray.png");
 			$(".bottomImg").attr("src", "image/gray.png");
+			orderByType=-1;
 		}
 
 		$(this).addClass("active").siblings().removeClass("active");
@@ -90,6 +92,7 @@ function bindEvent(){
 		$("#mallListID").html("");
 		pageNo = 1;
 		loadFlag == 1;
+		orderByField=sortType;
 		getGoodsList();
 	});	
 };
@@ -100,12 +103,12 @@ function bindEvent(){
  */
 function getGoodsList(){
 	var formData = new FormData();
-	mui.toast(pageNo);
 	formData.append("pageNo", pageNo);
 	formData.append("pageSize", pageSize);
 	if(mallCategory0Id){
 		formData.append("mallCategory0Id", mallCategory0Id);
 	}
+	
 
 	if(mallCategory2Id){
 		formData.append("mallCategory2Id", mallCategory2Id);
@@ -147,7 +150,7 @@ function getGoodsList(){
 				for (var i = 0; i < goodsList.length; i++) {
 					var goodsId = goodsList[i].id; // 商品id
 					var strGoodsName = goodsList[i].strGoodsName; // 商品名称
-					var strIntroduce = goodsList[i].strIntroduce; // 商品名称
+					var strTitle = goodsList[i].strTitle; // 商品名称
 					var strMainImg = goodsList[i].strMainImg; // 商品图片
 					var allStock = goodsList[i].allStock; // 商品库存
 					var skuPrice = goodsList[i].defaultSkuPrice; // 商品库存
@@ -155,7 +158,7 @@ function getGoodsList(){
 
 					goodsTemp = goodsTemp.replace("#strMainImg#", strMainImg);
 					goodsTemp = goodsTemp.replace("#strGoodsName#", strGoodsName);
-					goodsTemp = goodsTemp.replace("#strIntroduce#", strIntroduce);
+					goodsTemp = goodsTemp.replace("#strTitle#", strTitle);
 					goodsTemp = goodsTemp.replace("#skuPrice#", skuPrice);
 
 					var mallListDom = $(goodsTemp);
