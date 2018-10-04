@@ -1,88 +1,85 @@
 <!DOCTYPE html>
 <html>
-<head>
-   	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0"/>
-	<meta name="format-detection" content="telephone=no">
-	<link rel="stylesheet" href="../common/css/mui.min.css">
-	<link rel="stylesheet" href="../common/css/public.css">
-	<link rel="stylesheet" href="css/goodsBrandList.css">	
-	<script src="../common/js/remScale.js"></script>
-	<title>智慧订水</title>
-</head>
-<body>
-	<header class="header">
-	    <img src="../common/image/back@2x.png" alt="" class="back mui-action-back">
-	    <h1 class="title" id="mallUp"></h1>
-	    <ul class="tab-list" id="sort">
-	    	<li class="synthesizeSort active" id="synthesizeSort" sortType="-1">综合</li>
-			<li id="saleNum" sortType="default_sku_sale_num">销量</li>
-			<li id="costNum" sortType="defaultSkuPrice">价格
-				<span id="" class="priceSort">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0" />
+		<meta name="format-detection" content="telephone=no">
+		<link rel="stylesheet" href="../common/css/mui.min.css">
+		<link rel="stylesheet" href="../common/css/public.css">
+		<link rel="stylesheet" href="css/goodsBrandList.css">
+		<script src="../common/js/remScale.js"></script>
+		<title>智慧订水</title>
+	</head>
+
+	<body>
+		<header class="header">
+			<img src="../common/image/back@2x.png" alt="" class="back mui-action-back">
+			<h1 class="title" id="mallUp"></h1>
+			<ul class="tab-list" id="sort">
+				<li class="synthesizeSort active" id="synthesizeSort" sortType="-1">综合</li>
+				<li id="saleNum" sortType="default_sku_sale_num">销量</li>
+				<li id="costNum" sortType="defaultSkuPrice">价格
+					<span id="" class="priceSort">
 					<img src="image/gray.png" class="priceImg topImg"/>
 					<img src="image/gray.png" class="priceImg bottomImg"/>
 				</span>
-			</li>
-			<li id="filtrate" class="filtrate">筛选<!-- <img src="img/filter.png" class="filterImg"/> --></li>
-	    </ul>
-	</header>
+				</li>
+				<li id="filtrate" class="filtrate">筛选
+					<!-- <img src="img/filter.png" class="filterImg"/> --></li>
+			</ul>
+		</header>
 
-	<div class="mui-content">
 		<!-- 商品列表模板 -->
 		<div id="goodsTemp" style="display: none">
-			<li>				
+			<li>
 				<div class="widthpad">
-					<div class="cutLimg">		
-					    <div class="lootAll">已抢光</div>
-						<img src="#strMainImg#"/>
-					</div>			
+					<div class="cutLimg">
+						<div class="lootAll">已抢光</div>
+						<img src="#strMainImg#" />
+					</div>
 					<div class="rightMallcontent clearfix">
 						<div class="hrTitle">#strGoodsName#</div>
 						<div class="mallActivity">#strIntroduce#</div>
 						<div id="quane" class="quane">
 							<div class="goodsLeftsfMoney">
-								<div class="sfText">售价：</div><div class="sfLeftMoney">¥#skuPrice#</div>
+								<div class="sfText">售价：</div>
+								<div class="sfLeftMoney">¥#skuPrice#</div>
 							</div>
 						</div>
-					</div>			
+					</div>
 				</div>
 			</li>
 		</div>
 
-		<div class="mallList clearfix">
+		<div class="mallList" id="scroll" style="-webkit-transform:  translate3d(0,-44px,0);transform: translate3d(0,-44px,0);">
+			<div style="font-size: .3rem; line-height:44px;color: #999;">
+				<div id='top1' style="text-align: center;">
+					<div class="mui-pull-loading mui-icon mui-icon-pulldown" style="-webkit-transform: rotate(180deg);transform: rotate(180deg); "></div> 下拉即可刷新...
+				</div>
+				<div id='top2' style="display: none;text-align: center;">
+					<div class="mui-pull-loading mui-icon mui-spinner"></div> 加载中...
+				</div>
+				<div id='top3' style="display: none;text-align: center;">
+					<div class="mui-pull-loading mui-icon mui-icon-pulldown"></div>释放即可刷新...
+				</div>
+			</div>
 			<ul id="mallListID">
-				
+
 			</ul>
+			<div id='load' style="text-align: center;font-size: .3rem; line-height:44px;color: #999;">
+				<div class="mui-pull-loading mui-icon mui-spinner"></div> 加载中...
+			</div>
 		</div>
 
 		<!-- 查询无结果 -->
 		<div id="shopPingNullTemp" style="display: none">
-	        <div class="empty">
-	            <img class="empty_img" src="../common/image/blank.png" />
-	            <p>没有数据...</p>
-	        </div>
-	    </div>
-	</div>		
-
-	
-
-	<!--筛选品牌弹出层背景-->
-	<div class="brandFilter">
-		<div class="brandName">
-			品牌
+			<div class="empty">
+				<img class="empty_img" src="../common/image/blank.png" />
+				<p>没有数据...</p>
+			</div>
 		</div>
-		<div class="brandBox">	
-			<ul class="brandList clearfix" id="brandList">
-				
-			</ul>
-		</div>			
-		<div class="selectBtn">
-			<!-- <span class="btn resize" id="resize">重置</span> -->
-			<span class="comfirm" id="comfirm">确定</span>
-		</div>
-	</div>	
-	<div class="backGround" style="display: none;"></div>	
- </body>
- <script type="text/javascript" src="../common/js/include.js" level="1"></script>
- <script type="text/javascript" src="goodsBrandList.js"></script>
+	</body>
+	<script type="text/javascript" src="../common/js/include.js" level="1"></script>
+	<script type="text/javascript" src="goodsBrandList.js"></script>
 </html>

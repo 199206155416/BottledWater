@@ -1,8 +1,4 @@
-body {
-	position: relative;
-	width: 7.5rem;
-	overflow: hidden;
-}
+
 .header{
 	position: fixed;
 	left: 0;
@@ -104,6 +100,16 @@ body {
 	-webkit-transform-origin: center bottom;
 }*/
 /* 列表内容 */
+
+.mallList {
+	padding-top: 1.68rem;
+	position: fixed !important;
+	left: 0;
+	top: 0;
+	right: 0;
+	overflow-y: scroll;
+	bottom: -44px;
+}
 .mui-content{
 	padding-top: 1.76rem;
 }
