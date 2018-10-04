@@ -41,7 +41,7 @@ function getCategoryList(){
 					categoryStairTemplate = categoryStairTemplate.replace("#firstCategoryName#", firstCategoryName);
 					var categoryStairDom = $(categoryStairTemplate);
 
-					;(function(categoryStairDom, brands, secondCategoryList){
+					;(function(categoryStairDom, brands, secondCategoryList,firstCategoryId){
 						// 点击一级分类
 						categoryStairDom.on("click", function(){
 							$(this).addClass("mui-active").siblings().removeClass("mui-active");
@@ -49,13 +49,12 @@ function getCategoryList(){
 							// 清空品牌列表和二级分类列表
 							$("#brandList").html("");
 							$("#secondCategoryList").html("");
-
-							renderChildCategory(brands, secondCategoryList);
+							renderChildCategory(brands, secondCategoryList,firstCategoryId);
 						});
 
 
 
-					})(categoryStairDom, brands, secondCategoryList);
+					})(categoryStairDom, brands, secondCategoryList,firstCategoryId);
 
 					$("#categoryStair").append(categoryStairDom);
 				}
@@ -71,7 +70,7 @@ function getCategoryList(){
 /**
  * 渲染子级品牌和分类
  */ 
-function renderChildCategory(brands, secondCategoryList){
+function renderChildCategory(brands, secondCategoryList,catId0){
 	// 1、品牌
 	if(brands.length <= 0){
 		$("#hotBrand").hide();
@@ -112,8 +111,8 @@ function renderChildCategory(brands, secondCategoryList){
 	for(var i = 0, len = secondCategoryList.length; i < len; i++){
 		var secondCategoryTemplate = $("#secondCategoryTemplate").html();
 		var secondCategoryName = secondCategoryList[i].name;
+		var catId1=secondCategoryList[i].id;
 		var thirdCategoryList = secondCategoryList[i].chileCategory;
-
 		if(!thirdCategoryList || thirdCategoryList.length <= 0){
 			continue;
 		}
@@ -121,18 +120,18 @@ function renderChildCategory(brands, secondCategoryList){
 		secondCategoryTemplate = secondCategoryTemplate.replace("#secondCategoryName#", secondCategoryName);
 
 		var secondCategoryDom = $(secondCategoryTemplate);
-		;(function(secondCategoryDom, thirdCategoryList){
+		if(thirdCategoryList){
+				;(function(secondCategoryDom, thirdCategoryList,catId0){
 			for(var ii = 0, ll = thirdCategoryList.length; ii < ll; ii++){
 				var thirdCategoryTemplate = $("#thirdCategoryTemplate").html();
 				var thirdCategoryImg = thirdCategoryList[ii].strImg;
 				var thirdCategoryName = thirdCategoryList[ii].name;
 				var thirdCategoryId = thirdCategoryList[ii].id;
-
 				thirdCategoryTemplate = thirdCategoryTemplate.replace("#thirdCategoryImg#", thirdCategoryImg);
 				thirdCategoryTemplate = thirdCategoryTemplate.replace("#thirdCategoryName#", thirdCategoryName);
 
 				var thirdCategoryDom = $(thirdCategoryTemplate);
-				;(function(thirdCategoryDom, thirdCategoryName){
+				;(function(thirdCategoryDom, thirdCategoryName,catId0,thirdCategoryId){
 					thirdCategoryDom.on("click", function(){
 						pushWebView({
 							webType: 'newWebview_First',
@@ -143,17 +142,19 @@ function renderChildCategory(brands, secondCategoryList){
 							isBars: false,
 							barsIcon: '',
 							extendOptions: {
-								title: thirdCategoryName,
+								catId0: catId0,
+								catId2: thirdCategoryId,
 							}
 						});
 					});
-				})(thirdCategoryDom, thirdCategoryName);
+				})(thirdCategoryDom, thirdCategoryName,catId0,thirdCategoryId);
 
 				secondCategoryDom.find(".categoryListID").append(thirdCategoryDom);
 			}
 
-		})(secondCategoryDom, thirdCategoryList);
-
+		})(secondCategoryDom, thirdCategoryList,catId0);
+		}
+		
 		$("#secondCategoryList").append(secondCategoryDom);
 	}
 };
