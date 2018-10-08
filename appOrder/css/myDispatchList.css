@@ -388,22 +388,34 @@ body {
 	margin:0 auto;
 	margin-top:1.75rem;
 }
-.total-price{
+.item-footer{
 	height: .8rem;
 	display: flex;
 	display: -webkit-flex;
 	align-items: center;
 	-webkit-align-items: center;
-	padding-left: .3rem;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	padding: 0 .3rem;
 }
-.total-price p{
+.total-price{
 	font-size: .28rem;
 	line-height: .36rem;
 	color: #777;
 }
-.total-price .total-price-money{
-	font-size: .32rem;
-	color: #ff2a2a;
+
+.confirmOrder,.confirmDispatch {
+	float: left;
+	width: 1.5rem;
+	height: 0.52rem;
+	line-height: 0.52rem;
+	text-align: center;
+	font-size: 0.28rem;
+	box-shadow: 0 0 0 1px #cccccc;
+	-webkit-box-shadow: 0 0 0 1px #cccccc;
+	border-radius: 0.1rem;
+	color: #999999;
+	margin-left: .3rem;
 }
 
 .address{
