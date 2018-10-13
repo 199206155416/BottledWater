@@ -20,8 +20,8 @@
 
 		<div class="completeOrderTap">
 			<ul id="myTapWidth">
-				<li type="-1" class="row">在配送</li>
-				<li type="-2">已配送</li>
+				<li type="0" class="row">待配送</li>
+				<li type="1">已配送</li>
 			</ul>
 		</div>
 
@@ -38,49 +38,66 @@
 				</div>
 			</div>
 			<ul id="orderListID">
-				<li id="#lOrderId#" class="comOrderList">
-					<div class="onclickBind">
-						<div class="comOrderWidth clearfix">
-							<div class="comOrderNumber">
-								<span>订单编号：</span><span class="strFlagNumber">123123123</span>
-							</div>
-							<div class="comOrderState">
-								<span>订单状态：</span><span class="strFlagstage">已完成</span>
-							</div>
-						</div>
-						<p class="null"></p>
-						<div class="goodsList">
-							<div class="comOrderGoods clearfix">
-								<div class="goods_img">
-									<img src="#strGoodsLogoURL#" />
-								</div>
-								<div class="orderGoodsInfo">
-									<div class="goodsTitle">
-										中秋大月饼中秋大月饼中秋大月饼中秋大月
-									</div>
-									<p class="goodsInfos">中秋大月饼中秋大月饼</p>
-									<div class="orderMoney">
-										<span class="goodsPrice">￥100</span>
-										<span class="goodsNum">X10</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="address">
-						<p>张三 15711019382</p>
-						<p>河北撒大苏打实打实的</p>
-					</div>
-					<div class="total-price">
-						<p>总价：</p>
-						<p class="total-price-money">￥100</p>
-					</div>
-				</li>
+				
 			</ul>
 			<div id='load' style="text-align: center;font-size: .3rem; line-height:44px;color: #999;">
 				<div class="mui-pull-loading mui-icon mui-spinner"></div> 加载中...
 			</div>
 		</div>
+		<div id="orderListTemp" style="display: none;">
+				<li  class="comOrderList" >
+					<div class="onclickBind">
+						<div class="comOrderWidth clearfix">
+							<div class="comOrderNumber">
+								<span>订单编号：</span><span class="strFlagNumber">#strOrderNum#</span>
+							</div>
+							<div class="comOrderState">
+								<span>订单状态：</span><span class="strFlagstage">#strStateName#</span>
+							</div>
+						</div>
+						<p class="null"></p>
+						<div class="goodsList">
+							
+						</div>
+					</div>
+					<div class="address">
+						<p>#strReceiptUserName# #strReceiptMobile#</p>
+						<p>#strDetailAddress#</p>
+					</div>
+					<div class="total-price" id="bucketNumDiv" style="display: none;">
+						<p>压桶：</p>
+						<p class="total-price-money">#bucketNum#个</p>
+					</div>
+					<div class="total-price" id="remarksDiv" style="display: none;">
+						<p>备注：</p>
+						<p class="total-price-money">#remarks#</p>
+					</div>
+					<div class="total-price">
+						<p>支付金额：</p>
+						<p class="total-price-money">￥#factPrice#</p>
+					</div>
+				</li>
+		</div>
+		
+		<div id="goodsTemplate" style="display: none;">
+			<div class="comOrderGoods clearfix">
+								<div class="goods_img">
+									<img src="#strGoodsImg#" />
+								</div>
+								<div class="orderGoodsInfo">
+									<div class="goodsTitle">
+										#strGoodsTitle#
+									</div>
+									<p class="goodsInfos">#strGoodsSKUDetail#</p>
+									<div class="orderMoney">
+										<span class="goodsPrice">￥#skuPrice#</span>
+										<span class="goodsNum">X#count#</span>
+									</div>
+								</div>
+							</div>
+		
+		</div>
+		
 		<div class="empty" id="orderNullTemp" style="display: none">
 			<img class="empty_img" src="../common/image/blank.png" />
 		</div>

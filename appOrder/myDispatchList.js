@@ -1,5 +1,6 @@
 var currentWebview;
 var type = -1; // -1 == 全部， -2 == 待付款， -3 == 待发货， -4 == 待收货， -5 == 已完成, 默认为-1
+var  sendState=0;//0:未配送，1：已经配送
 var pageNo = 1;
 var pageSize =20; 
 var loadFlag = 1; // 上拉加载标志
@@ -27,15 +28,8 @@ mui.init({
 
 mui.plusReady(function() {
 	currentWebview = plus.webview.currentWebview();
-	
-	type = currentWebview.type ? currentWebview.type : -1;
-	
-	renderTab(type);
-
 	// 获取订单列表
 	getOrderList();
-	initPayChannel();
-	
 	// 绑定事件
 	bindEvent();
 
@@ -60,7 +54,7 @@ function bindEvent(){
 	
 	// 点击切换tab
 	$("#myTapWidth").on("click", "li", function(){
-		type = $(this).attr("type");
+		sendState = $(this).attr("type");
 		$(this).addClass("row").siblings().removeClass("row");
 		
 		pageNo = 1;
@@ -72,48 +66,21 @@ function bindEvent(){
 		
 	});
 	
-	 window.addEventListener('choosePayType',function(event){
-  	    var data=event.detail;
-  	    payType=parseInt(data["payType"]);
-		getPayInfo();
-	},false);
 }
 
-/**
- * 初始化支付渠道
- * @param {Object} payType
- */
-function initPayChannel(){
-	plus.payment.getChannels(function(channels){
-			payChannels=channels;
-	    },function(e){
-	        alert("获取支付通道失败："+e.message);
-	    });
-	
-}
 
 /**
- * 渲染tab
- * @author xuezhenxiang
- * */
-function renderTab(type){
-	$("#myTapWidth li[type="+ type +"]").addClass("row").siblings().removeClass("row");
-};
-
-/**
- * 获取订单列表
+ * 获取配送列表
  * @author xuezhenxiang
  */
 function getOrderList(){
-	
-	console.log(pageNo);
 	var userId = localStorage.getItem("userId");
 	var formData = new FormData();
-	formData.append("strBuyerId",userId);
+	formData.append("deliveryId",userId);
 	formData.append("pageNo", pageNo);
 	formData.append("pageSize", pageSize);
-	formData.append("state", type);
-	
+	formData.append("state", 3);
+	formData.append("sendState", sendState);
 	$.ajax({
 		url: prefix + "/order/list",
 		type: 'POST',
@@ -149,13 +116,22 @@ function getOrderList(){
 					var strOrderNum = list[i].strOrderNum; // 订单编号
 					var strStateName = list[i].strStateName; // 订单状态
 					var factPrice=list[i].factPrice;
+					var strReceiptUserName=list[i].strReceiptUserName;
+					var strReceiptMobile=list[i].strReceiptMobile;
+					var strLocation=list[i].strLocation;
+					var strDetailAddress=list[i].strDetailAddress;
+					var factPrice=list[i].factPrice;
+					var remarks=list[i].remarks;
+					var bucketNum=list[i].bucketNum;
 					var orderListTemp = $("#orderListTemp").html();
-
-					orderListTemp = orderListTemp.replace("#lOrderId#", lOrderId);
 					orderListTemp = orderListTemp.replace("#strOrderNum#", strOrderNum);
 					orderListTemp = orderListTemp.replace("#strStateName#", strStateName);
+					orderListTemp = orderListTemp.replace("#strReceiptUserName#", strReceiptUserName);
+					orderListTemp = orderListTemp.replace("#strReceiptMobile#", strReceiptMobile);
+					orderListTemp = orderListTemp.replace("#strDetailAddress#", strLocation+" "+strDetailAddress);
+					orderListTemp = orderListTemp.replace("#remarks#", remarks);
+					orderListTemp = orderListTemp.replace("#bucketNum#", bucketNum);
 					orderListTemp = orderListTemp.replace("#factPrice#", factPrice);
-					
 					var orderList = $(orderListTemp);
 					var mallOrderDetailList=list[i].mallOrderDetailList
 					;(function(orderList, lOrderId,order){
@@ -201,6 +177,7 @@ function getOrderList(){
 						var strGoodsImg = item.strGoodsImg;
 						var strGoodsSKUDetail = item.strTitle;
 						var skuPrice = item.skuPrice;
+						console.log(skuPrice);
 						var count = item.count;
 						var goodsTemplate = $("#goodsTemplate").html();
 						goodsTemplate = goodsTemplate.replace("#strGoodsImg#", strGoodsImg);
@@ -208,7 +185,7 @@ function getOrderList(){
 						goodsTemplate = goodsTemplate.replace("#strGoodsSKUDetail#", commonNameSubstr(strGoodsSKUDetail, 28));
 						goodsTemplate = goodsTemplate.replace("#skuPrice#", skuPrice);
 						goodsTemplate = goodsTemplate.replace("#count#", count);
-						
+						console.log(goodsTemplate);
 						var goods = $(goodsTemplate);
 						;(function(){
 
@@ -216,13 +193,6 @@ function getOrderList(){
 						orderList.find(".goodsList").append(goods);
 					}
 					$("#orderListID").append(orderList);
-					if(strStateName=="待付款"){
-						$("#orderListID li").last().find(".checkBill>div").eq(0).show();
-						$("#orderListID li").last().find(".checkBill>div").eq(1).show();
-					}else if(strStateName=="待发货"&&factPrice!=0){
-						$("#orderListID li").last().find(".checkBill>div").eq(2).show();
-					}
-
 				}
 				
 				pageNo++;
@@ -232,126 +202,9 @@ function getOrderList(){
 	})
 }
 
-function openRefund(order){
-		pushWebView({
-			webType: 'newWebview_First',
-			id: 'appOrder/applyAfterSale.html-1',
-			href: 'appOrder/applyAfterSale.html',
-			aniShow: getaniShow(),
-			title: "退款/售后",
-			isBars: false, 
-			barsIcon: '',
-			extendOptions: {
-				order: order
-			}
-		});
-}
 
-/**
- * 取消订单
- * @param {Object} strOrderId
- */
-function cancelOrder(strOrderId){
-		$.ajax({
-		url: prefix + "/order/cancelOrder",
-		type: "POST",
-		data: {"strOrderId":strOrderId}, 
-		dataType: "json",
-		success: function(res){
-				ajaxLog(res);
-				var result=res.result;
-				if(res.resCode == 0){
-					mui.toast("取消成功");
-					getOrderList();
-				}else{
-				   mui.alert(result, '提示', function(e) {
-			        },"div");
-				}
-			}
-		});
-}
 
-function openPayType(factPrice){
-	pushWebView({
-			webType: 'newWebview_First',
-			id: 'appMall/payCenter.html-1',
-			href: 'appMall/payCenter.html',
-			aniShow: getaniShow(),
-			title: "支付方式",
-			isBars: false, 
-			barsIcon: '',
-			extendOptions: {
-				factPrice: factPrice,openType:1
-			}
-		});
-}
 
-/**
- * 立即支付
- * @param {Object} strOrderId
- * @param {Object} strPayType
- * @param {Object} factPrice
- */
-function nowPay(strOrderId,strPayType,factPrice){
-	openPayType(factPrice);
-	payStrOrderId=strOrderId;
-}
-
-function getPayInfo(){
-	channel=payChannels[payType];
-	$.ajax({
-		url: prefix + "/pay/againPay",
-		type: "POST",
-		data: {"strOrderId":payStrOrderId,"strPayType":payType,"strOrderType":"0"}, 
-		dataType: "json",
-		success: function(res){
-				ajaxLog(res);
-				var result=res.result;
-				if(res.resCode == 0){
-					doPay(result);
-				}else{
-				   mui.alert(result, '提示', function(e) {
-			        },"div");
-				}
-			}
-		});
-}
-
-function doPay(payInfo){
-	console.log("payInfo:"+payInfo);
-	if(payType==1){//微信
-		var appid=payInfo["appid"];
-		var noncestr=payInfo["noncestr"];
-		var package=payInfo["package"];
-		var partnerid=payInfo["partnerid"];
-		var prepayid=payInfo["prepayid"];
-		var timestamp=payInfo["timestamp"];
-		var sign=payInfo["sign"];
-		var payInfoNew={"appid":appid,"noncestr":noncestr,"package":package,"partnerid":partnerid,"prepayid":prepayid,"timestamp":timestamp,"sign":sign};
-		var stra=JSON.stringify(payInfoNew);
-		plus.payment.request(channel,stra,function(result){
-                    plus.nativeUI.alert("支付成功！",function(){
-                       getOrderList();
-                    });
-                },function(error){
-                    plus.nativeUI.alert("支付失败：" + JSON.stringify(error));
-                });
-	}else if(payType==0){
-		plus.payment.request(channel,payInfo,function(result){
-                    plus.nativeUI.alert("支付成功！",function(){
-                        getOrderList();
-                    });
-                },function(error){
-                    plus.nativeUI.alert("支付失败：" + JSON.stringify(error));
-                });
-	}else if(payType==2){//余额
-		 plus.nativeUI.alert("支付成功！",function(){
-                      getOrderList();
-          });
-
-		
-	}
-};
 
 //下拉刷新
 function PullRefresh(id, callback) {

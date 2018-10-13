@@ -50,7 +50,8 @@
 			"appCart/cart.html",
 			"login/forgetPassword.html",
 			"login/login.html",
-			"appCategory/goodsBrandList.html"
+			"appCategory/goodsBrandList.html",
+			"appOrder/myDispatchList.html"
 		]
 	}
 }

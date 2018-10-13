@@ -29,7 +29,10 @@ var accountBalance;
 mui.plusReady(function() {
 	//注册列表的点击事件
 	addListevent();
-
+    var userRoleNames=localStorage.getItem("userRoleNames");
+    if(userRoleNames.indexOf("配送员")!=-1){//如果角色有配送员就显示我的配送单
+         $("li[name='dis']").show();
+    }
 	// parentWebView = plus.webview.currentWebview().parent();
 	// touxiangimg = document.getElementById('touxiangimg');
 	// logoutBtn = document.getElementById('logoutBtn');
