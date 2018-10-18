@@ -22,9 +22,10 @@ var recommendArray = []; //推荐商品数组
 mui.plusReady(function() {
 	currentWebview = plus.webview.currentWebview();
 	homeDiv = document.getElementById('homeDiv');
+	getTopCategory();
 	// 获取商品列表
 	getGoodsList();
-
+    
 	//添加每个item点击的监听事件
 	$('#channelList').on('click', 'li', function() {
 		var id = $(this).attr('id');
@@ -44,22 +45,48 @@ mui.plusReady(function() {
 
 			return false;
 		}
-
-		var extendOptions = {
-			id: id
-		};
-		pushWebView({
-			webType: 'newWebview_First',
-			id: 'appIndex/productDetail.html',
-			href: 'appIndex/productDetail.html',
-			aniShow: getaniShow(),
-			title: "商品详情",
-			isBars: false,
-			barsIcon: '',
-			extendOptions: extendOptions
-		});
 	});
 });
+
+
+/**
+ * 获取所有分类
+ * @author lsw
+ */
+function getTopCategory(){
+	$.ajax({
+		url: prefix + "/category/topList",
+		type: 'GET',
+		dataType: "json",
+		success: function(res){
+			// 打印请求报错日志
+			ajaxLog(res);
+
+			if(res.resCode == 0){
+				var categoryList = res.result;
+				for (var i = 0; i < categoryList.length; i++) {
+					var id = categoryList[i].id; // 一级类目id
+					var name = categoryList[i].name; // 一级类目的名称
+					var strTopImg = categoryList[i].strTopImg;//图片
+					var categoryTemplate = $("#catTemp").html();
+
+					categoryTemplate = categoryTemplate.replace("#id#", id);
+					categoryTemplate = categoryTemplate.replace("#name#", name);
+					categoryTemplate = categoryTemplate.replace("#strTopImg#", strTopImg);
+					var categoryTemplateDom = $(categoryTemplate);
+					;(function(id,categoryTemplateDom,name){
+							categoryTemplateDom.on("click",function(){
+								openCatGoods(id,0,name);u
+								return false;
+							});
+					})(id,categoryTemplateDom,name);
+					$("#all").before(categoryTemplateDom);
+				}
+				
+			}
+		}
+	});
+}
 
 
 /**
@@ -134,7 +161,24 @@ function getGoodsList(){
 			}
 		}
 	})
-};
+}
+
+
+function openCatGoods(catId0,thirdCategoryId,categoryName){
+	     pushWebView({
+	 						webType: 'newWebview_First',
+							id: 'appCategory/goodsBrandList.html',
+							href: 'appCategory/goodsBrandList.html',
+							aniShow: getaniShow(),
+							title: categoryName,
+							isBars: false,
+							barsIcon: '',
+							extendOptions: {
+								catId0: catId0,
+								catId2: thirdCategoryId,
+							}
+						});			
+}
 
 //下拉刷新
 function PullRefresh(id) {

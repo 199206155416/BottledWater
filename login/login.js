@@ -100,7 +100,8 @@ function login(){
 					setStringValue("userId", result.id);
 					// 存储电话
 					setStringValue("userMobile", result.mobile);
-					// 存储姓名
+					setStringValue("userName", result.name);
+					// 存储角色
 					setStringValue("userRoleNames", result.roleNames);
 					// 存储启用状态
 					setStringValue("userLoginFlag", result.loginFlag);

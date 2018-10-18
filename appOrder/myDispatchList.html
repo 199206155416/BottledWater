@@ -45,7 +45,7 @@
 			</div>
 		</div>
 		<div id="orderListTemp" style="display: none;">
-				<li  class="comOrderList" >
+				<li  class="comOrderList" id="#strOrderId#" >
 					<div class="onclickBind">
 						<div class="comOrderWidth clearfix">
 							<div class="comOrderNumber">
@@ -72,9 +72,12 @@
 						<p>备注：</p>
 						<p class="total-price-money">#remarks#</p>
 					</div>
-					<div class="total-price">
-						<p>支付金额：</p>
-						<p class="total-price-money">￥#factPrice#</p>
+					<div class="item-footer">
+						<p class="total-price">支付金额：￥#factPrice#</p>
+						<div>
+							<div class="confirmOrder">确认接单</div>
+							<div class="confirmDispatch">确认配送</div>
+						</div>
 					</div>
 				</li>
 		</div>
@@ -97,17 +100,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="address">
-						<p>张三 15711019382</p>
-						<p>河北撒大苏打实打实的</p>
-					</div>
-					<div class="item-footer">
-						<p class="total-price">总价：￥100</p>
-						<div>
-							<div class="confirmOrder">确认接单</div>
-							<div class="confirmDispatch">确认配送</div>
-						</div>
-					</div>
+					
 				</li>
 			</ul>
 			<div id='load' style="text-align: center;font-size: .3rem; line-height:44px;color: #999;">
@@ -120,6 +113,6 @@
 		</div>
 		<script src="../common/js/include.js" level="1"></script>
 		<script src="myDispatchList.js"></script>
-	</body>
+	</body> 
 
 </html>

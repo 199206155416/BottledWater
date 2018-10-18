@@ -79,7 +79,7 @@ function getOrderList(){
 	formData.append("deliveryId",userId);
 	formData.append("pageNo", pageNo);
 	formData.append("pageSize", pageSize);
-	formData.append("state", 3);
+	formData.append("state", -1);
 	formData.append("sendState", sendState);
 	$.ajax({
 		url: prefix + "/order/list",
@@ -124,6 +124,7 @@ function getOrderList(){
 					var remarks=list[i].remarks;
 					var bucketNum=list[i].bucketNum;
 					var orderListTemp = $("#orderListTemp").html();
+					orderListTemp = orderListTemp.replace("#strOrderId#", lOrderId);
 					orderListTemp = orderListTemp.replace("#strOrderNum#", strOrderNum);
 					orderListTemp = orderListTemp.replace("#strStateName#", strStateName);
 					orderListTemp = orderListTemp.replace("#strReceiptUserName#", strReceiptUserName);
@@ -135,39 +136,25 @@ function getOrderList(){
 					var orderList = $(orderListTemp);
 					var mallOrderDetailList=list[i].mallOrderDetailList
 					;(function(orderList, lOrderId,order){
-						orderList.find(".goodsList").on("click", function(){
-							pushWebView({
-								webType: 'newWebview_First',
-								id: 'appOrder/orderDetail.html',
-								href: 'appOrder/orderDetail.html',
-								aniShow: getaniShow(),
-								title: "订单详情",
-								isBars: false,
-								barsIcon: '',
-								extendOptions: {
-									strOrderId: lOrderId
-								}
+							orderList.find(".confirmOrder").on("click", function(){
+									editDeliverState(0,lOrderId);
+									return false;
 							});
-						});
-						orderList.find(".payment").click(function(){
-							    var strPayType=order.strPayType;
-							    var factPrice=order.factPrice
-							    nowPay(lOrderId,strPayType,factPrice);
-							    return false;
-						});
-						
-						orderList.find(".applySale").click(function(){
-									openRefund(order);
-						});
-						
-						orderList.find(".cancel").click(function(){
-									var btnArray = ['取消', '确认'];
-							        mui.confirm("确认删除此订单?", '取消订单', btnArray, function(e) {
-							            if (e.index == 1) {
-							                cancelOrder(lOrderId);
-							            }
-							        },"div");
-						});
+							var deliverState=order.deliverState;
+							orderList.find(".confirmDispatch").click(function(){
+									editDeliverState(1,lOrderId);
+								    return false;
+							});
+							
+					        var sendState=order.sendState;
+							if(deliverState==1){
+								orderList.find(".confirmOrder").hide();
+							}
+							
+							if(sendState==1){
+								orderList.find(".confirmDispatch").hide();
+							}
+							
 					})(orderList, lOrderId,order);
 
 					for(var i1 = 0, len1 = mallOrderDetailList.length; i1 < len1; i1++){
@@ -177,7 +164,6 @@ function getOrderList(){
 						var strGoodsImg = item.strGoodsImg;
 						var strGoodsSKUDetail = item.strTitle;
 						var skuPrice = item.skuPrice;
-						console.log(skuPrice);
 						var count = item.count;
 						var goodsTemplate = $("#goodsTemplate").html();
 						goodsTemplate = goodsTemplate.replace("#strGoodsImg#", strGoodsImg);
@@ -193,6 +179,7 @@ function getOrderList(){
 						orderList.find(".goodsList").append(goods);
 					}
 					$("#orderListID").append(orderList);
+					
 				}
 				
 				pageNo++;
@@ -202,8 +189,34 @@ function getOrderList(){
 	})
 }
 
-
-
+function editDeliverState(stateValue,strOrderId){
+	   var userId= localStorage.getItem("userId"); // 用户id
+	   var userMobile= localStorage.getItem("userMobile"); // 手机号
+	   var userName= localStorage.getItem("userName"); // 用户
+		$.ajax({
+		url: prefix + "/order/editDeliverState",
+		type: "POST",
+		data: {"strOrderId":strOrderId,"stateType":stateValue,userId:userId,userName:userName,strMobile:userMobile}, 
+		dataType: "json",
+		success: function(res){
+				ajaxLog(res);
+				var result=res.result;
+				if(res.resCode == 0){
+					if(0==stateValue){
+						mui.toast("接单成功");
+						$("#"+strOrderId).find(".confirmOrder").hide();
+					}else{
+						mui.toast("配送成功！");
+						$("#"+strOrderId).remove();
+						
+					}
+					
+				}else{
+					mui.toast(result);
+				}
+			}
+		});
+}
 
 
 //下拉刷新

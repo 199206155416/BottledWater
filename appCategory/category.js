@@ -65,7 +65,7 @@ function getCategoryList(){
 			}
 		}
 	});
-};
+}
 
 /**
  * 渲染子级品牌和分类
