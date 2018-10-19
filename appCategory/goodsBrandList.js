@@ -11,13 +11,13 @@ var orderByType = "-1"; // 排序方式，递增：asc,递减：desc，传-1：�
 var _LoadNumber = { a: false };
 
 
-var priceFlag=true;
+var priceFlag = true;
 mui.init({
 	swipeBack: true,
 
 });
 
-mui.plusReady(function() {
+mui.plusReady(function () {
 	currentWebview = plus.webview.currentWebview();
 
 	mallCategory0Id = currentWebview.catId0; // 一级类目id（非必传）
@@ -36,70 +36,70 @@ mui.plusReady(function() {
 /**
  * 绑定事件
  * @author xuezhenxiang
- */ 
-function bindEvent(){
+ */
+function bindEvent() {
 
 	// 筛选数据
-	$("#sort").on("click", "li", function(){
+	$("#sort").on("click", "li", function () {
 		var sortType = $(this).attr("sortType") || "";
 		var flag = $(this).hasClass("active"); // 当前是否选中
 		var lId = $(this).attr("id");
 
-		if(flag && lId != "costNum"){
+		if (flag && lId != "costNum") {
 			return false;
 		}
 
-		if(lId == "costNum"){
-			if(!priceFlag){
-				$(".topImg").attr("src","image/gray.png");
+		if (lId == "costNum") {
+			if (!priceFlag) {
+				$(".topImg").attr("src", "image/gray.png");
 				$(".bottomImg").attr("src", "image/color.png");
-				priceFlag=true;
-				orderByType='asc';
-			}else{
+				priceFlag = true;
+				orderByType = 'asc';
+			} else {
 				$(".topImg").attr("src", "image/color.png");
 				$(".bottomImg").attr("src", "image/gray.png");
-				priceFlag=false;
-				orderByType='desc';
+				priceFlag = false;
+				orderByType = 'desc';
 			}
-		}else{
+		} else {
 			$(".topImg").attr("src", "image/gray.png");
 			$(".bottomImg").attr("src", "image/gray.png");
-			orderByType=-1;
+			orderByType = -1;
 		}
 
 		$(this).addClass("active").siblings().removeClass("active");
-		
-		
-		$("#scroll").animate({scrollTop: 0},10);	
+
+
+		$("#scroll").animate({ scrollTop: 0 }, 10);
 		$("#mallListID").html("");
 		pageNo = 1;
 		loadFlag == 1;
-		orderByField=sortType;
+		orderByField = sortType;
 		getGoodsList();
-	});	
+	});
 };
 
 /**
  * 获取所有商品
  * @author xuezhenxiang
  */
-function getGoodsList(){
+function getGoodsList() {
 	var formData = new FormData();
 	formData.append("pageNo", pageNo);
 	formData.append("pageSize", pageSize);
-	if(mallCategory0Id){
+	if (mallCategory0Id) {
 		formData.append("mallCategory0Id", mallCategory0Id);
 	}
-	
 
-	if(mallCategory2Id){
+
+	if (mallCategory2Id) {
 		formData.append("mallCategory2Id", mallCategory2Id);
 	}
 
-	if(mallBrandId){
+	if (mallBrandId) {
 		formData.append("mallBrandId", mallBrandId);
 	}
-	
+
 	formData.append("orderByField", orderByField);
 	formData.append("orderByType", orderByType);
 
@@ -108,25 +108,25 @@ function getGoodsList(){
 		type: 'POST',
 		data: formData,
 		contentType: false,
-	 	processData: false,  
+		processData: false,
 		dataType: "json",
-		success: function(res){
+		success: function (res) {
 			_LoadNumber.a = true;
 			// 打印请求报错日志
 			ajaxLog(res);
 
-			if(res.resCode == 0){
+			if (res.resCode == 0) {
 				var nCount = res.result.count;
 				var goodsList = res.result.list;
 
-				if(nCount == 0){
+				if (nCount == 0) {
 					$("#shopPingNullTemp").show();
 					return false;
-				}else{
+				} else {
 					$("#shopPingNullTemp").hide();
 				}
 
-				if(goodsList.length == 0){
+				if (goodsList.length == 0) {
 					return false;
 				}
 
@@ -140,15 +140,15 @@ function getGoodsList(){
 					var goodsTemp = $("#goodsTemp").html();
 
 					goodsTemp = goodsTemp.replace("#strMainImg#", strMainImg);
-					goodsTemp = goodsTemp.replace("#strGoodsName#", strGoodsName);
+					goodsTemp = goodsTemp.replace("#strGoodsName#", commonNameSubstr(strGoodsName, 36));
 					goodsTemp = goodsTemp.replace("#strTitle#", strTitle);
 					goodsTemp = goodsTemp.replace("#skuPrice#", skuPrice);
 
 					var mallListDom = $(goodsTemp);
 
-					;(function(mallListDom, goodsId){
+					; (function (mallListDom, goodsId) {
 						// 点击一级分类
-						mallListDom.on("click", function(){
+						mallListDom.on("click", function () {
 							var extendOptions = {
 								goodsId: goodsId
 							};
@@ -177,13 +177,13 @@ function getGoodsList(){
 };
 
 // 屏幕滚动后加载列表
-$("#scroll").scroll(function(){
+$("#scroll").scroll(function () {
 	var scrollTop = $(this).scrollTop();	// 滚动高度		    
 	var scrollHeight = $(this).height(); // 文档高度
 	var windowHeight = $(window).height(); // 文档窗口高度
-		
+
 	if (scrollTop + windowHeight >= scrollHeight - 300) {
-		if(loadFlag == 1){
+		if (loadFlag == 1) {
 			loadFlag = 0;
 			getGoodsList();
 		}
@@ -434,7 +434,7 @@ function PullRefresh(id, callback) {
 			document.getElementById('top2').style.display = 'block';
 			document.getElementById('top3').style.display = 'none';
 			an(0);
-		 	_LoadNumber = { a: false };
+			_LoadNumber = { a: false };
 			_isPullRefresh = true;
 			var loadNumberTimeId = setInterval(function () {
 				if (_LoadNumber.a) {
@@ -443,8 +443,8 @@ function PullRefresh(id, callback) {
 					an(- refreshHeight);
 					clearInterval(loadNumberTimeId);
 				}
-				
-			}, 1000); 
+
+			}, 1000);
 			// 请求接口数据
 			callback();
 		} else {
@@ -495,7 +495,7 @@ function PullRefresh(id, callback) {
 	}
 }
 //下拉刷新调用
-PullRefresh('scroll', function(){
+PullRefresh('scroll', function () {
 	pageNo = 1;
 	loadFlag = 1;
 	$("#mallListID").html("");
