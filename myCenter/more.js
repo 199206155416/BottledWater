@@ -66,6 +66,7 @@ function loginout(){
 					   localStorage.removeItem("userMobile");
 					   localStorage.removeItem("userRoleNames");
 					   localStorage.removeItem("userLoginFlag");
+					   localStorage.removeItem("clientId");
 					   id = "login/login.html";
 						aniShow = 'slide-in-bottom';
 						pushWebView({

@@ -174,8 +174,7 @@ function openCatGoods(catId0,thirdCategoryId,categoryName){
 							isBars: false,
 							barsIcon: '',
 							extendOptions: {
-								catId0: catId0,
-								catId2: thirdCategoryId,
+								catId0: catId0
 							}
 						});			
 }

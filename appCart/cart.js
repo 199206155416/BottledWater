@@ -241,13 +241,16 @@ function getCartList(){
 					var strSpuId = result[i].strSpuId;
 					var strSpuImg = result[i].strSpuImg;
 					var skuCount = result[i].skuCount;
-					
+					var strTitle="";
+					if(result[i].mallGoodsSku.mallGoods){
+						strTitle=result[i].mallGoodsSku.mallGoods.strTitle
+					}
 					var mallGoodsSku = {
 						id: result[i].mallGoodsSku.id,
 						strSkuName: result[i].mallGoodsSku.strSkuName,
 						skuStock: result[i].mallGoodsSku.skuStock,
 						skuPrice: result[i].mallGoodsSku.skuPrice,
-						remarks: result[i].mallGoodsSku.mallGoods.strTitle,
+						remarks: strTitle
 					};
                     console.log(JSON.stringify(mallGoodsSku));
 					var goodsTemplate = $("#goodsTemplate").html();
