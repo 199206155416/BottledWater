@@ -102,7 +102,7 @@ function getGoodsList(){
 	
 	formData.append("orderByField", orderByField);
 	formData.append("orderByType", orderByType);
-
+    $("#load").show();
 	$.ajax({
 		url: prefix + "/goods/searchGoods",
 		type: 'POST',
@@ -114,7 +114,7 @@ function getGoodsList(){
 			_LoadNumber.a = true;
 			// 打印请求报错日志
 			ajaxLog(res);
-
+			 $("#load").hide();
 			if(res.resCode == 0){
 				var nCount = res.result.count;
 				var goodsList = res.result.list;

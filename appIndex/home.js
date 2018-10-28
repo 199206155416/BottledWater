@@ -62,6 +62,39 @@ mui.plusReady(function() {
 });
 
 
+function openCouponCon(){
+	     var extendOptionsData={conType:2};
+		var aniShow = getaniShow();
+
+		pushWebView({
+			webType: 'newWebview_First',
+			id:"myCenter/conshow.html",
+			href: "myCenter/conshow.html",
+			aniShow: aniShow,
+			extendOptions: extendOptionsData
+		})
+	
+}
+
+function tipFun(){
+	mui.toast("正在建设中");
+}
+
+function openCatGoods(catId0,thirdCategoryId,categoryName){
+	     pushWebView({
+	 						webType: 'newWebview_First',
+							id: 'appCategory/goodsBrandList.html',
+							href: 'appCategory/goodsBrandList.html',
+							aniShow: getaniShow(),
+							title: categoryName,
+							isBars: false,
+							barsIcon: '',
+							extendOptions: {
+								catId0: catId0
+							}
+						});			
+}
+
 
 /**
  * 获取焦点图
