@@ -4,10 +4,11 @@ body{
 
 /* 轮播图 */
 .mui-slider{
-	height: 4.6rem;
+	height: 4rem;
+	overflow: hidden;
 }
 .mui-slider-indicator{
-	bottom: 1.2rem;
+	/* bottom: 1.2rem; */
 }
 .mui-slider-indicator .mui-indicator{
 	width: .1rem;
@@ -24,12 +25,13 @@ body{
 }
 
 .swiper-container{
-	height: 4.6rem;
+	height: 4rem;
+	overflow: hidden;
 	position: relative;
 }
 .swiper-container .swiper-pagination{
-	position:absolute;
-	bottom: 1.2rem;
+	/* position:absolute;
+	bottom: 1.2rem; */
 }
 .swiper-pagination-bullet{
 	width: .1rem;
@@ -48,7 +50,7 @@ body{
 /* 频道列表 */
 .channel-list{
 	width: 7.1rem;
-	margin: -1.1rem auto .2rem auto;
+	margin: .1rem auto .2rem auto;
 	background: #fff;
 	border-radius: .12rem;
 	display: flex;
