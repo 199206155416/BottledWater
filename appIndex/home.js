@@ -35,6 +35,7 @@ mui.plusReady(function() {
 	getGoodsList();
  
     // 监听点击消息事件
+    /*
     plus.push.addEventListener( "click", function( msg ) {
         // 判断是从本地创建还是离线推送的消息
         switch( msg.payload ) {
@@ -59,6 +60,7 @@ mui.plusReady(function() {
         }
         logoutPushMsg( msg );
     }, false );
+   */
 });
 
 

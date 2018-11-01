@@ -35,9 +35,9 @@ function addListevent() {
 		    return;
 		   }
 		  var password=$("#password").val();
-		  var regx =/^(?!([a-zA-Z]+|\d+)$)[a-zA-Z\d]{6,20}$/;
+		  var regx =/^[\w]{6,12}$/;
 		  if(password.match(regx)==null){
-		    mui.toast("密码同时包含数字和字母！");
+		    mui.toast("密码必须至少6位");
 		    return;
 		   }
 		  
