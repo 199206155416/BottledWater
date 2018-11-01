@@ -23,14 +23,19 @@ mui.plusReady(function() {
 });
 
 function bindEvent(){
-	$("#searchKey").bind('input propertychange', function() {
-		 changeValue=$(this).val();
-		 searchMap();
+	$("#searchKey").bind('click', function() {
+		 openSearchMap();
        }
      );
+     
+    window.addEventListener('chooseAddress',function(event){
+  	    chooseData=event.detail;
+	   mui.fire(editAddressWebView,"chooseMap",chooseData);
+	   mui.back(); 
+	},false);
 }
 
-function openSearchMap(v){
+function openSearchMap(){
 	pushWebView({
 			webType: 'newWebview_First',
 			id: 'appAddress/searchMap.html',
@@ -39,7 +44,7 @@ function openSearchMap(v){
 			title: "地图检索",
 			isBars: false,
 			barsIcon: '',
-			extendOptions: {changeValue:v,map:map}
+			extendOptions: {}
 		});
 }
 
@@ -52,7 +57,7 @@ function openSearchMap(v){
 function initMap(){
 	map= new BMap.Map("container");
 // 创建地图实例  
-var point = new BMap.Point(116.404, 39.915);;
+var point = new BMap.Point(116.404, 39.915);
 map.centerAndZoom(point, 15);
 // 初始化地图，设置中心点坐标和地图级别 
 	var geolocation = new BMap.Geolocation();
@@ -114,17 +119,21 @@ function setShow(allPois){
 	 $("#peripheryInfo li").click(function(){
 	 	    var n=$(this).data("i");
 	 	    var choosePoi=allPois[n];
-	 	    var chooseTitle=choosePoi.title;
+	 	    chooseAddress(choosePoi);
+	 	    
+	 });
+	 $("#load").hide();
+}
+
+function chooseAddress(choosePoi){
+	        var chooseTitle=choosePoi.title;
 	 	    var chooseAddress=choosePoi.address;
 	 	    var choosePoit=choosePoi.point;
 	 	    var lng=choosePoit.lng;//经度
 	 	    var lat=choosePoit.lat;//纬度
 	 	    var data={chooseTitle:chooseTitle,chooseAddress:chooseAddress,lng:lng,lat:lat};
 	 	    mui.fire(editAddressWebView,"chooseMap",data);
-	 	    mui.back();
-	 	    
-	 });
-	 $("#load").hide();
+	 	    mui.back();  
 }
 
 function searchMap(){

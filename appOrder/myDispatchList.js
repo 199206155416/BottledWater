@@ -9,6 +9,8 @@ var payType;
 var channel;
 var _LoadNumber = { a: false };
 var payStrOrderId
+var currentPoit;
+var map;
 mui.init({
 	swipeBack: false,
 	pullRefresh: {
@@ -22,8 +24,48 @@ mui.init({
 			auto: true,//可选,默认false.首次加载自动上拉刷新一次
 			callback: function(){} //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
 	    }
-  	}
+ }
 });
+
+mui.plusReady(function() {
+	getCurrentLocation();
+	map= new BMap.Map("container");
+    map.centerAndZoom("石家庄",12);
+	
+});
+/**
+ * 获取当前定位
+ */
+function getCurrentLocation(){
+	var geolocation = new BMap.Geolocation();
+	  geolocation.getCurrentPosition(function(r){
+		if(this.getStatus() == BMAP_STATUS_SUCCESS){
+			currentPoit=r.point;
+		}
+		else {
+			alert('failed'+this.getStatus());
+		}        
+	});
+}
+
+ function getdist(pointA,pointB){
+        //var pointA = new BMap.Point(106.486654,29.490295);  // 创建点坐标A--大渡口区
+        //var pointB = new BMap.Point(106.581515,29.615467);  // 创建点坐标B--江北区
+        //alert((map.getDistance(pointA,pointB)));  //获取两点距离,保留小数点后两位
+        var flag=false;
+        var distNum=map.getDistance(pointA,pointB);
+        distNum=parseInt(distNum);
+        if(distNum<=100){
+        	flag=true;
+        }else{
+        	flag=false;
+        	mui.alert("距离目的地直线距离还有"+distNum+ "米,不能点击配送完成,小于100米才能点击！");
+        }
+        //G("dist").innerHTML = "直线距离"+map.getDistance(pointA,pointB) + "米";
+        //var polyline = new BMap.Polyline([pointA,pointB], {strokeColor:"blue", strokeWeight:6, strokeOpacity:0.5});  //定义折线
+       // map.addOverlay(polyline);     //添加折线到地图上
+       return flag;
+    }
 
 
 mui.plusReady(function() {
@@ -142,6 +184,17 @@ function getOrderList(){
 							});
 							var deliverState=order.deliverState;
 							orderList.find(".confirmDispatch").click(function(){
+								    //判定直线距离
+								    var lng=order.strLng;
+								    var lat=order.strLat;
+								    lng=parseFloat(lng);
+								    lat=parseFloat(lat);
+								    //console.log(order.strLng+"  "+order.strLat+", "+lng+"  "+lat);
+								    var pointDist = new BMap.Point(lng, lat);
+								    var f=getdist(currentPoit,pointDist);
+								    if(!f){//说明大于100啦
+								    	return false;
+								    }
 									editDeliverState(1,lOrderId);
 								    return false;
 							});
