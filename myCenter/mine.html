@@ -5,110 +5,125 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0 , maximum-scale=1.0, user-scalable=0">
 	<meta name="format-detection" content="telephone=no">
 	<title>我的</title>
-	<link type="text/css" href="../common/css/mui.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../common/css/mui.min.css" />
 	<link rel="stylesheet" href="../common/css/public.css">
 	<link rel="stylesheet" href="css/mine.css" />
 	<script src="../common/js/remScale.js"></script>
 </head>
 <body>
 	<!-- container -->
-	<div class="container">
-		<header class='header'>
-			<div class="myIndex_right" id='messageBtn'>
-				<span id="domInfoCount" style="display:none;"></span>
-			</div>
-			<div class="user_info">
-				<div class="user_img">
-					<img id="grxx" src="./img/index/personimg.png" alt="">
+	<div class="mui-content" >
+		<div class="mui-scroll" id="scroll" style="-webkit-transform:  translate3d(0,-44px,0);transform: translate3d(0,-44px,0);">
+			<div style="font-size: .3rem; line-height:44px;color: #999;">
+				<div id='top1' style="text-align: center;">
+					<div class="mui-pull-loading mui-icon mui-icon-pulldown" style="-webkit-transform: rotate(180deg);transform: rotate(180deg); "></div> 下拉即可刷新...
 				</div>
-				<div id='userName' class="user_name"></div>
-				<div id='userPhone' class="user_phone"></div>
+				<div id='top2' style="display: none;text-align: center;">
+					<div class="mui-pull-loading mui-icon mui-spinner"></div> 加载中...
+				</div>
+				<div id='top3' style="display: none;text-align: center;">
+					<div class="mui-pull-loading mui-icon mui-icon-pulldown"></div>释放即可刷新...
+				</div>
 			</div>
-		</header>
-		<!-- 订单 -->
-		<div class="my_order">
-			<div class="order_title" id='myOrder'>
-				<p class='order_title_label'>全部订单</p>
-				<p class='more_btn' style="line-height: 0;"></p>
+			<div class="container ">
+				<header class='header'>
+					<div class="myIndex_right" id='messageBtn'>
+						<span id="domInfoCount" style="display:none;"></span>
+					</div>
+					<div class="user_info">
+						<div class="user_img">
+							<img id="grxx" src="./img/index/personimg.png" alt="">
+						</div>
+						<div id='userName' class="user_name"></div>
+						<div id='userPhone' class="user_phone"></div>
+					</div>
+				</header>
+				<!-- 订单 -->
+				<div class="my_order">
+					<div class="order_title" id='myOrder'>
+						<p class='order_title_label'>全部订单</p>
+						<p class='more_btn' style="line-height: 0;"></p>
+					</div>
+					<div id='openOrder' class="order_classify">
+						<div class='wait_pay_order item' type="-2" id='wait_pay_order'>待付款<span class='badge'></span></div>
+						<div class='wait_send_order item' type="-3" id='wait_send_order'>待发货<span class='badge'></span></div>
+						<div class='wait_receive_order item' type="-4" id='wait_receive_order'>待收货<span class='badge'></span></div>
+						<div class='success_order item' type="-5" id='success_order'>已完成</div>
+						<div class='success_order item' type="-6" id='afterSale'>退换/售后</div>
+					</div>
+				</div>	
 			</div>
-			<div id='openOrder' class="order_classify">
-				<div class='wait_pay_order item' type="-2" id='wait_pay_order'>待付款<span class='badge'></span></div>
-				<div class='wait_send_order item' type="-3" id='wait_send_order'>待发货<span class='badge'></span></div>
-				<div class='wait_receive_order item' type="-4" id='wait_receive_order'>待收货<span class='badge'></span></div>
-				<div class='success_order item' type="-5" id='success_order'>已完成</div>
-				<div class='success_order item' type="-6" id='afterSale'>退换/售后</div>
+			<div class="myIndex_list clearfix" id="mineHandleList">
+				<ul>
+					<li id="myCenter/accountCharge.html">
+						<div class='li_wrap'>
+							<p>账户余额</p>
+							<!--<p class='account_balance_price' >0</p>-->
+							<p class='more_btn' id='lAccountBalance' style="color: #60A3FB"></p>
+						</div>
+					</li>
+					<li id='myCenter/couponList.html'>
+						<div class='li_wrap'>
+							<p>优惠券</p>
+							<p class='more_btn'></p>
+						</div>
+					</li>
+				</ul>
+				<ul>
+	               	<li id='myCenter/safetyCenter.html'>
+						<div class='li_wrap'>
+							<p>安全中心</p>
+							<p class='more_btn'></p>
+						</div>
+					</li>
+					<li id='appAddress/addressList.html'>
+						<div class='li_wrap'>
+							<p>地址管理</p>
+							<p class='more_btn'></p>
+						</div>
+					</li>
+					<li id='appOrder/myDispatchList.html' name="dis" style="display: none;">
+						<div class='li_wrap'>
+							<p>我的配送单</p>
+							<p class='more_btn'></p>
+						</div>
+					</li>
+				</ul>
+				<ul>
+					<li id='safety_center'>
+						<div class='li_wrap'>
+							<p>我的邀请</p>
+							<p class='more_btn'></p>
+						</div>
+					</li>
+					<li id='myCenter/myBucket.html'>
+						<div class='li_wrap'>
+							<p>我的水桶</p>
+							<p class='more_btn'></p>
+						</div>
+					</li>
+					<li id="myCenter/myTicket.html">
+						<div class='li_wrap'>
+							<p>我的水票</p>
+							<p class='more_btn'></p>
+						</div>
+					</li>		
+				</ul>
+				<ul>
+					<li id='set'>
+						<div class='li_wrap'>
+							<p>客服</p>
+							<p class='more_btn'>400-625-9898</p>
+						</div>
+					</li>
+					<li id="myCenter/more.html">
+						<div class='li_wrap'>
+							<p>设置</p>
+							<p class='more_btn'></p>
+						</div>
+					</li>
+				</ul>
 			</div>
-		</div>	
-		<div class="myIndex_list clearfix" id="mineHandleList">
-			<ul>
-				<li id="myCenter/accountCharge.html">
-					<div class='li_wrap'>
-						<p>账户余额</p>
-						<!--<p class='account_balance_price' >0</p>-->
-						<p class='more_btn' id='lAccountBalance' style="color: #60A3FB"></p>
-					</div>
-				</li>
-				<li id='myCenter/couponList.html'>
-					<div class='li_wrap'>
-						<p>优惠券</p>
-						<p class='more_btn'></p>
-					</div>
-				</li>
-			</ul>
-			<ul>
-               	<li id='myCenter/safetyCenter.html'>
-					<div class='li_wrap'>
-						<p>安全中心</p>
-						<p class='more_btn'></p>
-					</div>
-				</li>
-				<li id='appAddress/addressList.html'>
-					<div class='li_wrap'>
-						<p>地址管理</p>
-						<p class='more_btn'></p>
-					</div>
-				</li>
-				<li id='appOrder/myDispatchList.html' name="dis" style="display: none;">
-					<div class='li_wrap'>
-						<p>我的配送单</p>
-						<p class='more_btn'></p>
-					</div>
-				</li>
-			</ul>
-			<ul>
-				<li id='safety_center'>
-					<div class='li_wrap'>
-						<p>我的邀请</p>
-						<p class='more_btn'></p>
-					</div>
-				</li>
-				<li id='myCenter/myBucket.html'>
-					<div class='li_wrap'>
-						<p>我的水桶</p>
-						<p class='more_btn'></p>
-					</div>
-				</li>
-				<li id="myCenter/myTicket.html">
-					<div class='li_wrap'>
-						<p>我的水票</p>
-						<p class='more_btn'></p>
-					</div>
-				</li>		
-			</ul>
-			<ul>
-				<li id='set'>
-					<div class='li_wrap'>
-						<p>客服</p>
-						<p class='more_btn'>400-625-9898</p>
-					</div>
-				</li>
-				<li id="myCenter/more.html">
-					<div class='li_wrap'>
-						<p>设置</p>
-						<p class='more_btn'></p>
-					</div>
-				</li>
-			</ul>
 		</div>
 	</div>
 </body>

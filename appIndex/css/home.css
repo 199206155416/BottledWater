@@ -1,6 +1,14 @@
 body{
 	background: #f4f4f4;
 }
+.mui-scroll{
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: -44px;
+	overflow-y: scroll;
+}
 
 /* 轮播图 */
 .mui-slider{

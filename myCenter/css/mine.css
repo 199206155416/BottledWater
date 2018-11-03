@@ -4,6 +4,14 @@ body{
 .container{
 	background: url("../image/mine@2x.png") no-repeat left top/ 100% auto;
 }
+.mui-scroll{
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: -44px;
+	overflow-y: scroll;
+}
 .back_img{
     position: absolute;
  	width: 100%;
