@@ -423,3 +423,8 @@ body {
 	border-bottom: 1px solid #f2f5f7;
 	background: url("../image/timg.jpg") no-repeat .3rem .26rem/ .2rem .3rem;
 }
+
+.addresrs{
+	padding: .2rem .2rem .2rem .3rem; 
+	border-bottom: 1px solid #f2f5f7;
+}

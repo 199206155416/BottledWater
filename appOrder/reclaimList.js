@@ -2,16 +2,14 @@ var currentWebview;
 var type = -1; // -1 == 全部， -2 == 待付款， -3 == 待发货， -4 == 待收货， -5 == 已完成, 默认为-1
 var  sendState=0;//0:未配送，1：已经配送
 var pageNo = 1;
-var pageSize =20; 
+var pageSize =200; 
 var loadFlag = 1; // 上拉加载标志
 var payChannels;
 var payType;
 var channel;
 var _LoadNumber = { a: false };
 var payStrOrderId
-var currentPoit;
-var map;
-
+var isReclaim=0;
 mui.init({
 	swipeBack: false,
 	pullRefresh: {
@@ -28,58 +26,14 @@ mui.init({
  }
 });
 
-
 mui.plusReady(function() {
 	currentWebview = plus.webview.currentWebview();
 	// 获取订单列表
-	getOrderList();
+	getReclaimList();
 	// 绑定事件
 	bindEvent();
-	
-	getCurrentLocation();
-	map= new BMap.Map("container");
-    map.centerAndZoom("石家庄",12);
 
 });
-
-
-
-
-/**
- * 获取当前定位
- */
-function getCurrentLocation(){
-	var geolocation = new BMap.Geolocation();
-	  geolocation.getCurrentPosition(function(r){
-		if(this.getStatus() == BMAP_STATUS_SUCCESS){
-			currentPoit=r.point;
-		}
-		else {
-			alert('failed'+this.getStatus());
-		}        
-	});
-}
-
- function getdist(pointA,pointB){
-        //var pointA = new BMap.Point(106.486654,29.490295);  // 创建点坐标A--大渡口区
-        //var pointB = new BMap.Point(106.581515,29.615467);  // 创建点坐标B--江北区
-        //alert((map.getDistance(pointA,pointB)));  //获取两点距离,保留小数点后两位
-        var flag=false;
-        var distNum=map.getDistance(pointA,pointB);
-        distNum=parseInt(distNum);
-        if(distNum<=100){
-        	flag=true;
-        }else{
-        	flag=false;
-        	mui.alert("距离目的地直线距离还有"+distNum+ "米,不能点击配送完成,小于100米才能点击！");
-        }
-        //G("dist").innerHTML = "直线距离"+map.getDistance(pointA,pointB) + "米";
-        //var polyline = new BMap.Polyline([pointA,pointB], {strokeColor:"blue", strokeWeight:6, strokeOpacity:0.5});  //定义折线
-       // map.addOverlay(polyline);     //添加折线到地图上
-       return flag;
-    }
-
-
 
 function bindEvent(){
 	// 屏幕滚动后加载列表
@@ -92,7 +46,7 @@ function bindEvent(){
 			if(loadFlag == 1){
 				loadFlag = 0;
 				console.log("pageNo:"+pageNo);
-				getOrderList();
+				getReclaimList();
 			}
 		}
 
@@ -100,15 +54,15 @@ function bindEvent(){
 	
 	// 点击切换tab
 	$("#myTapWidth").on("click", "li", function(){
-		sendState = $(this).attr("type");
+		isReclaim = $(this).attr("type");
 		$(this).addClass("row").siblings().removeClass("row");
 		
 		pageNo = 1;
 		loadFlag = 1;
-		$("#orderListID").html("");
+		$("#reclaimListID").html("");
 		$("#load").show();
 		// 获取数据
-		getOrderList();
+		getReclaimList();
 		
 	});
 	
@@ -119,16 +73,15 @@ function bindEvent(){
  * 获取配送列表
  * @author xuezhenxiang
  */
-function getOrderList(){
+function getReclaimList(){
 	var userId = localStorage.getItem("userId");
 	var formData = new FormData();
-	formData.append("deliveryId",userId);
-	formData.append("pageNo", pageNo);
+	formData.append("lreclaimId",userId);//回收人
+	formData.append("isReclaim", isReclaim);
 	formData.append("pageSize", pageSize);
-	formData.append("state", -1);
-	formData.append("sendState", sendState);
+	formData.append("pageNo", pageNo);
 	$.ajax({
-		url: prefix + "/order/list",
+		url: prefix + "/refund/refundBucketList",
 		type: 'POST',
 		data: formData,
 		contentType: false,
@@ -140,8 +93,8 @@ function getOrderList(){
 			ajaxLog(res);
 
 			if(res.resCode == 0){
-				var list = res.result.list; // 列表数据
-				var count = res.result.count; // 数据总量
+				var list = res.result; // 列表数据
+				var count = list.length; // 数据总量
 				
 				if(count == 0){
 					$("#orderNullTemp").show();
@@ -157,85 +110,31 @@ function getOrderList(){
 				}
 
 				for(var i = 0, len = list.length; i < len; i++){
-					var order = list[i];
-					var lOrderId = list[i].id; // 订单id
-					var strOrderNum = list[i].strOrderNum; // 订单编号
-					var strStateName = list[i].strStateName; // 订单状态
-					var factPrice=list[i].factPrice;
-					var strReceiptUserName=list[i].strReceiptUserName;
-					var strReceiptMobile=list[i].strReceiptMobile;
-					var strLocation=list[i].strLocation;
-					var strDetailAddress=list[i].strDetailAddress;
-					var factPrice=list[i].factPrice;
-					var remarks=list[i].remarks;
-					var bucketNum=list[i].bucketNum;
-					var orderListTemp = $("#orderListTemp").html();
-					orderListTemp = orderListTemp.replace("#strOrderId#", lOrderId);
-					orderListTemp = orderListTemp.replace("#strOrderNum#", strOrderNum);
-					orderListTemp = orderListTemp.replace("#strStateName#", strStateName);
-					orderListTemp = orderListTemp.replace("#strReceiptUserName#", strReceiptUserName);
-					orderListTemp = orderListTemp.replace("#strReceiptMobile#", strReceiptMobile);
-					orderListTemp = orderListTemp.replace("#strDetailAddress#", strLocation+" "+strDetailAddress);
-					orderListTemp = orderListTemp.replace("#remarks#", remarks);
-					orderListTemp = orderListTemp.replace("#bucketNum#", bucketNum);
-					orderListTemp = orderListTemp.replace("#factPrice#", factPrice);
-					var orderList = $(orderListTemp);
-					var mallOrderDetailList=list[i].mallOrderDetailList
-					;(function(orderList, lOrderId,order){
+					var itemData = list[i];
+					var bucketCount = itemData.bucketCount;
+					var bucketMoney = itemData.bucketMoney;
+					var strUserName = itemData.strUserName;
+					var strMobile = itemData.strMobile;
+					var createDate = itemData.createDate;
+					var reclaimListTemp = $("#reclaimListTemp").html();
+					reclaimListTemp = reclaimListTemp.replace("#bucketCount#", bucketCount);
+					reclaimListTemp = reclaimListTemp.replace("#bucketMoney#", bucketMoney);
+					reclaimListTemp = reclaimListTemp.replace("#strUserName#", strUserName);
+					reclaimListTemp = reclaimListTemp.replace("#strMobile#", strMobile);
+					reclaimListTemp = reclaimListTemp.replace("#createDate#", createDate);
+					var reclaimList = $(reclaimListTemp);
+					;(function(reclaimList,itemData){
 							orderList.find(".confirmOrder").on("click", function(){
-									editDeliverState(0,lOrderId);
+									editDeliverState(0,lOrderId);//确认回收
 									return false;
-							});
-							var deliverState=order.deliverState;
-							orderList.find(".confirmDispatch").click(function(){
-								    //判定直线距离
-								    var lng=order.strLng;
-								    var lat=order.strLat;
-								    lng=parseFloat(lng);
-								    lat=parseFloat(lat);
-								    //console.log(order.strLng+"  "+order.strLat+", "+lng+"  "+lat);
-								    var pointDist = new BMap.Point(lng, lat);
-								    var f=getdist(currentPoit,pointDist);
-								    if(!f){//说明大于100啦
-								    	return false;
-								    }
-									editDeliverState(1,lOrderId);
-								    return false;
-							});
+							});	
+					      //  var sendState=order.sendState;
+							//if(deliverState==1){
+							//	orderList.find(".confirmOrder").hide();
+						//	}
 							
-					        var sendState=order.sendState;
-							if(deliverState==1){
-								orderList.find(".confirmOrder").hide();
-							}
-							
-							if(sendState==1){
-								orderList.find(".confirmDispatch").hide();
-							}
-							
-					})(orderList, lOrderId,order);
-
-					for(var i1 = 0, len1 = mallOrderDetailList.length; i1 < len1; i1++){
-						var item=mallOrderDetailList[i1];
-						var id = item.id;
-						var strGoodsName = item.strSkuName;
-						var strGoodsImg = item.strGoodsImg;
-						var strGoodsSKUDetail = item.strTitle;
-						var skuPrice = item.skuPrice;
-						var count = item.count;
-						var goodsTemplate = $("#goodsTemplate").html();
-						goodsTemplate = goodsTemplate.replace("#strGoodsImg#", strGoodsImg);
-						goodsTemplate = goodsTemplate.replace("#strGoodsTitle#", commonNameSubstr(strGoodsName, 34));
-						goodsTemplate = goodsTemplate.replace("#strGoodsSKUDetail#", commonNameSubstr(strGoodsSKUDetail, 28));
-						goodsTemplate = goodsTemplate.replace("#skuPrice#", skuPrice);
-						goodsTemplate = goodsTemplate.replace("#count#", count);
-						console.log(goodsTemplate);
-						var goods = $(goodsTemplate);
-						;(function(){
-
-						})();
-						orderList.find(".goodsList").append(goods);
-					}
-					$("#orderListID").append(orderList);
+					})(reclaimList,itemData);
+					$("#reclaimListID").append(reclaimList);
 					
 				}
 				
@@ -581,10 +480,10 @@ function PullRefresh(id, callback) {
 PullRefresh('scroll', function(){
 	pageNo = 1;
 	loadFlag = 1;
-	$("#orderListID").html("");
+	$("#reclaimListID").html("");
 	$("#load").hide();
 	// 获取数据
-	getOrderList();
+	getReclaimList();
 });
 
 

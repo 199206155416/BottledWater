@@ -8,6 +8,19 @@ mui.plusReady(function() {
 	
 });
 
+function openRetreatLog(){
+	pushWebView({
+				webType: 'newWebview_First',
+				id: 'myCenter/retreatRecord.html_1',
+				href: 'myCenter/retreatRecord.html',
+				aniShow: getaniShow(),
+				title: "充值记录",
+				isBars: false,
+				barsIcon: '',
+				extendOptions: {}
+		   });
+}
+
 function bindEent(){
 	$("#bucketBtn").click(function(){
 		  	mui.prompt('请输入退桶个数', '只能输入数字', '退桶', '', function(e) {

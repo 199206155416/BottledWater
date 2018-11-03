@@ -277,7 +277,11 @@
 					"appAddress/searchMap.html",
 					"login/login.html",
 					"login/forgetPassword.html",
-					"appOrder/myDispatchList.html"
+					"appOrder/myDispatchList.html",
+					"myCenter/accountCharge.html",
+					"myCenter/retreatRecord.html",
+					"myCenter/reclaimList.html",
+					"appOrder/reclaimList.html"
 				],
 				"priority": 0
 			},
