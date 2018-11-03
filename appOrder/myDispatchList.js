@@ -11,6 +11,7 @@ var _LoadNumber = { a: false };
 var payStrOrderId
 var currentPoit;
 var map;
+
 mui.init({
 	swipeBack: false,
 	pullRefresh: {
@@ -27,12 +28,23 @@ mui.init({
  }
 });
 
+
 mui.plusReady(function() {
+	currentWebview = plus.webview.currentWebview();
+	// 获取订单列表
+	getOrderList();
+	// 绑定事件
+	bindEvent();
+	
 	getCurrentLocation();
 	map= new BMap.Map("container");
     map.centerAndZoom("石家庄",12);
-	
+
 });
+
+
+
+
 /**
  * 获取当前定位
  */
@@ -68,14 +80,6 @@ function getCurrentLocation(){
     }
 
 
-mui.plusReady(function() {
-	currentWebview = plus.webview.currentWebview();
-	// 获取订单列表
-	getOrderList();
-	// 绑定事件
-	bindEvent();
-
-});
 
 function bindEvent(){
 	// 屏幕滚动后加载列表

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0" />
+		<meta name="format-detection" content="telephone=no">
+		<link rel="stylesheet" href="../common/css/mui.min.css">
+		<link rel="stylesheet" href="../common/css/public.css">
+		<link rel="stylesheet" href="css/myDispatchList.css">
+		<script src="../common/js/remScale.js"></script>
+		<title>我的回收单</title>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">我的回收单</h1>
+		</header>
+
+		<div class="completeOrderTap">
+			<ul id="myTapWidth">
+				<li type="0" class="row">待回收</li>
+				<li type="1">已回收</li>
+			</ul>
+		</div>
+
+		<div class="completeOrderList" id="scroll" style="-webkit-transform:  translate3d(0,-44px,0);transform: translate3d(0,-44px,0);">
+			<div style="font-size: .3rem; line-height:44px;color: #999;">
+				<div id='top1' style="text-align: center;">
+					<div class="mui-pull-loading mui-icon mui-icon-pulldown" style="-webkit-transform: rotate(180deg);transform: rotate(180deg); "></div> 下拉即可刷新...
+				</div>
+				<div id='top2' style="display: none;text-align: center;">
+					<div class="mui-pull-loading mui-icon mui-spinner"></div> 加载中...
+				</div>
+				<div id='top3' style="display: none;text-align: center;">
+					<div class="mui-pull-loading mui-icon mui-icon-pulldown"></div>释放即可刷新...
+				</div>
+			</div>
+			<ul id="reclaimListID">
+				
+			</ul>
+			<div id='load' style="text-align: center;font-size: .3rem; line-height:44px;color: #999;">
+				<div class="mui-pull-loading mui-icon mui-spinner"></div> 加载中...
+			</div>
+		</div>
+		<div id="reclaimListTemp" style="display: none;">
+				<li  class="comOrderList" id="#strOrderId#" >
+					<div class="onclickBind">
+						<div class="comOrderWidth clearfix">
+							<div class="comOrderNumber">
+								<span>退桶个数：</span><span class="strFlagNumber">#bucketCount#</span>
+							</div>
+							<div class="comOrderState">
+								<span>退桶金额：</span><span class="strFlagstage">￥#bucketMoney#</span>
+							</div>
+						</div>
+					</div>
+					<div class="addresrs">
+						<p>#strUserName# #strMobile#</p>
+					</div>
+					<div class="item-footer">
+						<p class="total-price">申请时间：#createDate#</p>
+						<div>
+							<div class="confirmDispatch">确认回收</div>
+						</div>
+					</div>
+				</li>
+		</div>
+					</div>
+					
+				</li>
+			</ul>
+			<div id='load' style="text-align: center;font-size: .3rem; line-height:44px;color: #999;">
+				<div class="mui-pull-loading mui-icon mui-spinner"></div> 加载中...
+			</div>
+		</div>
+		
+		<div class="empty" id="orderNullTemp" style="display: none">
+			<img class="empty_img" src="../common/image/blank.png" />
+		</div>
+		<script src="../common/js/include.js" level="1"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=GzuyqWuRzXCRfO6n2EVVqO1i3yPRzGlA">
+			//v2.0版本的引用方式：src="http://api.map.baidu.com/api?v=2.0&ak=您的密钥"
+		</script>
+		<script src="reclaimList.js"></script>
+		<div id="container" style="display: none;"></div>
+	</body> 
+
+</html>
