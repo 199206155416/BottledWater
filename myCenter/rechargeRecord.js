@@ -1,14 +1,14 @@
-mui.init({
-	swipeBack: false
-});
-
 mui.plusReady(function() {
 	queryLogList();
 });
 
+mui.init({
+	swipeBack: false
+});
+
 function queryLogList(){
 	var strUserId = localStorage.getItem("userId"); // 用户id
-	var sendData={strUserId:strUserId,pageNo:1,pageSize:20}
+	var sendData={strUserId:strUserId,pageNo:1,pageSize:500}
 	$.ajax({
 		url: prefix + "/account/log/list",
 		type: 'POST',
@@ -18,6 +18,7 @@ function queryLogList(){
 			// 打印请求报错日志
 			ajaxLog(res);
 			var result = res.result;
+			$("#load").hide();
 			if(res.resCode == 0){
 				 for(var i in result){
 				 	var item=result[i];

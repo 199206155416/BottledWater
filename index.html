@@ -145,11 +145,9 @@
 			mui('.mui-bar-tab').on('tap','.mui-tab-item',function(){
 				var baritem = this;
 				var baritemurl = baritem.getAttribute('href'); 
-alert(baritemurl);
 				if(baritemurl == "appCart/cart.html" || baritemurl == "myCenter/mine.html"){
 					//检测已经存在sessionkey否者运行下面的登陆代码
 					if (localStorage.getItem('userMobile') && localStorage.getItem('userId')) {} else {
-						alert("www");
 						id = "login/login.html";
 						aniShow = 'slide-in-bottom';
 

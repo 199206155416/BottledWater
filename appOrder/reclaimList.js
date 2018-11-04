@@ -1,243 +1,179 @@
+var currentWebview;
+var type = -1; // -1 == 全部， -2 == 待付款， -3 == 待发货， -4 == 待收货， -5 == 已完成, 默认为-1
+var  sendState=0;//0:未配送，1：已经配送
+var pageNo = 1;
+var pageSize =200; 
+var loadFlag = 1; // 上拉加载标志
+var payChannels;
+var payType;
+var channel;
 var _LoadNumber = { a: false };
-
+var payStrOrderId
+var isReclaim=0;
 mui.init({
 	swipeBack: false,
-//	pullRefresh: {
-//	    container: ".mui-content",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-//	    down : {
-//			// style: 'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
-//			// color:' #2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
-//			// height: '50px',//可选,默认50px.下拉刷新控件的高度,
-//			// range: '100px', //可选 默认100px,控件可下拉拖拽的范围
-//			// offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
-//			// auto: true,//可选,默认false.首次加载自动上拉刷新一次
-//			callback: function(){ //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-//				// 获取余额
-//				getBalace();
-//
-////				setTimeout(function(){
-////					mui('.container').pullRefresh().endPulldown();
-////				}, 3000);
-//			}
-//	    }
-//	}
-});
-var parentWebView;
-var touxiangimg;
-var logoutBtn;
-var trueimg;
-var touxiangword;
-var accountBalance;
-mui.plusReady(function() {
-	//注册列表的点击事件
-	addListevent();
-    var userRoleNames=localStorage.getItem("userRoleNames");
-    console.log("userRoleNames:"+userRoleNames);
-    if(userRoleNames&&userRoleNames.indexOf("配送员")!=-1){//如果角色有配送员就显示我的配送单
-         $("li[name='dis']").show();
-    }
-	// parentWebView = plus.webview.currentWebview().parent();
-	// touxiangimg = document.getElementById('touxiangimg');
-	// logoutBtn = document.getElementById('logoutBtn');
-	// trueimg = document.getElementById('trueimg');
-	// touxiangword = document.getElementById('touxiangword');
-	// //检测是否已经登录
-	// trueimg.style.display = 'none';
-	// logoutBtn.style.display = 'none'
-	// touxiangimg.style.display = 'inline'
-	// touxiangword.style.color = 'indianred'
-	
-	// //点击头像事件
-	// addHeadevent();
-	// //接收登录成功事件
-	// window.addEventListener('loginSuccess', function() {
-	// 	//登出按钮显示出来 头像图片显示出来名字显示出来
-	// 	logoutBtn.style.display = 'block';
-	// 	touxiangimg.style.display = 'none';
-	// 	trueimg.style.display = 'inline';
-	// 	touxiangword.innerText = "测试号";
-	// 	touxiangword.style.color = 'black';
-	// }, false);
-	// logoutBtn.addEventListener('tap', function() {
-	// 	var btnArray = ['否', '是'];
-	// 	mui.confirm('确认要退出登录吗？', 'Hello MUI', btnArray, function(e) {
-	// 		if (e.index == 1) {
-	// 			//确定
-	// 			trueimg.style.display = 'none';
-	// 			logoutBtn.style.display = 'none';
-	// 			touxiangimg.style.display = 'inline';
-	// 			touxiangword.style.color = 'indianred';
-	// 			localStorage.removeItem('user');
-	// 			mui.toast("退出登录")
-	// 			//发出退出登录给wishlish和cart页面
-	// 			var cartwebview = plus.webview.getWebviewById('appCart/cart.html');
-	// 			var xinyuandanwebview = plus.webview.getWebviewById('mallTicket/ticket.html');
-	// 			mui.fire(cartwebview,'logout',{});
-	// 			mui.fire(xinyuandanwebview,'logout',{})
-	// 		} else {
-	// 			//取消
-	// 		}
-	// 	});
-	// }, false)
-	
-	renderHtml();
-	getBalace();
+	pullRefresh: {
+	    container: ".mui-content",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+	    down : {
+			style: 'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+			color:' #2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+			height: '50px',//可选,默认50px.下拉刷新控件的高度,
+			range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+			offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
+			auto: true,//可选,默认false.首次加载自动上拉刷新一次
+			callback: function(){} //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+	    }
+ }
 });
 
-//获取账户余额
-function getBalace(){
-	var userId= localStorage.getItem("userId"); // 用户id
+mui.plusReady(function() {
+	currentWebview = plus.webview.currentWebview();
+	// 获取订单列表
+	getReclaimList();
+	// 绑定事件
+	bindEvent();
+
+});
+
+function bindEvent(){
+	// 屏幕滚动后加载列表
+	$("#scroll").scroll(function(){
+		var scrollTop = $(this).scrollTop();	// 滚动高度		    
+		var scrollHeight = $(this).height(); // 文档高度
+		var windowHeight = $(window).height(); // 文档窗口高度
+			
+		if (scrollTop + windowHeight >= scrollHeight - 300) {
+			if(loadFlag == 1){
+				loadFlag = 0;
+				console.log("pageNo:"+pageNo);
+				getReclaimList();
+			}
+		}
+
+	});
+	
+	// 点击切换tab
+	$("#myTapWidth").on("click", "li", function(){
+		isReclaim = $(this).attr("type");
+		$(this).addClass("row").siblings().removeClass("row");
+		
+		pageNo = 1;
+		loadFlag = 1;
+		$("#reclaimListID").html("");
+		$("#load").show();
+		// 获取数据
+		getReclaimList();
+		
+	});
+	
+}
+
+
+/**
+ * 获取配送列表
+ * @author xuezhenxiang
+ */
+function getReclaimList(){
+	var userId = localStorage.getItem("userId");
+	var formData = new FormData();
+	formData.append("lreclaimId",userId);//回收人
+	formData.append("isReclaim", isReclaim);
+	formData.append("pageSize", pageSize);
+	formData.append("pageNo", pageNo);
 	$.ajax({
-		url: prefix + "/account/getBalace/"+userId,
-		type: "GET",
+		url: prefix + "/refund/refundBucketList",
+		type: 'POST',
+		data: formData,
+		contentType: false,
+	 	processData: false,  
 		dataType: "json",
 		success: function(res){
 			_LoadNumber.a = true;
+			// 打印请求报错日志
 			ajaxLog(res);
+
 			if(res.resCode == 0){
-				var result = res.result;
-				accountBalance=result;
-				$("#lAccountBalance").html(result);
-			}else{
-				alert(result);
+				var list = res.result; // 列表数据
+				var count = list.length; // 数据总量
+				
+				if(count == 0){
+					$("#orderNullTemp").show();
+					// return false;
+				}else{
+					$("#orderNullTemp").hide();
+				}
+				
+				$("#load").hide();
+				if(list.length <= 0){
+					$("#load").hide(); 
+					return false;
+				}
+
+				for(var i = 0, len = list.length; i < len; i++){
+					var itemData = list[i];
+					var bucketCount = itemData.bucketCount;
+					var bucketMoney = itemData.bucketMoney;
+					var strUserName = itemData.strUserName;
+					var strMobile = itemData.strMobile;
+					var createDate = itemData.createDate;
+					var reclaimListTemp = $("#reclaimListTemp").html();
+					reclaimListTemp = reclaimListTemp.replace("#bucketCount#", bucketCount);
+					reclaimListTemp = reclaimListTemp.replace("#bucketMoney#", bucketMoney);
+					reclaimListTemp = reclaimListTemp.replace("#strUserName#", strUserName);
+					reclaimListTemp = reclaimListTemp.replace("#strMobile#", strMobile);
+					reclaimListTemp = reclaimListTemp.replace("#createDate#", createDate);
+					var reclaimList = $(reclaimListTemp);
+					;(function(reclaimList,itemData){
+							orderList.find(".confirmOrder").on("click", function(){
+									editDeliverState(0,lOrderId);//确认回收
+									return false;
+							});	
+					      //  var sendState=order.sendState;
+							//if(deliverState==1){
+							//	orderList.find(".confirmOrder").hide();
+						//	}
+							
+					})(reclaimList,itemData);
+					$("#reclaimListID").append(reclaimList);
+					
+				}
+				
+				pageNo++;
+				loadFlag = 1;
 			}
 		}
 	})
 }
 
-// 渲染页面
-function renderHtml(){
-	var userRoleNames = localStorage.getItem("userRoleNames");
-	var userMobile = localStorage.getItem("userMobile");
-	
-	$("#userName").html(userRoleNames);
-	$("#userPhone").html(userMobile);
-};
-
-//注册列表的点击事件
-function addListevent() {
-	$("#mineHandleList").on('click', 'li', function() {
-		var id = $(this).attr("id");
-		
-		var aniShow = getaniShow();
-		//检测已经存在sessionkey否者运行下面的登陆代码
-		if (localStorage.getItem('userMobile') && localStorage.getItem('userId')) {} else {
-			id = "login/login.html";
-			aniShow = 'slide-in-bottom';
-		}
-		var optionsData={};
-		if("appAddress/addressList.html"==id){
-			optionsData={openType:1};
-		}else if(id=="mycenter/accountCharge.html"){
-			optionsData={accountBalance:accountBalance};
-		}
-		pushWebView({
-			webType: 'newWebview_First',
-			id: id,
-			title:"",
-			href: id,
-			aniShow: aniShow,
-			extendOptions: optionsData
-		})
-	});
-
-	$("#messageBtn").on("click", function(){
-		var aniShow = getaniShow();
-		//检测已经存在sessionkey否者运行下面的登陆代码
-		if (localStorage.getItem('userMobile') && localStorage.getItem('userId')) {
-			
-		}else {
-			id = "login/login.html";
-			aniShow = 'slide-in-bottom';
-			
-			pushWebView({
-				webType: 'newWebview_First',
-				id: id,
-				title:"",
-				href: id,
-				aniShow: aniShow,
-				extendOptions: {}
-			})
-			return false;
-		}
-		pushWebView({
-			webType: 'newWebview_First',
-			id: "myCenter/message.html",
-			title:"",
-			href: "myCenter/message.html",
-			aniShow: aniShow,
-			extendOptions: {}
-		})
-	});
-	
-	// 去订单页
-	$("#openOrder").on("click", '.item', function(){
-		var type = $(this).attr("type"); 
-		var aniShow = getaniShow();
-		//检测已经存在sessionkey否者运行下面的登陆代码
-		if (localStorage.getItem('userMobile') && localStorage.getItem('userId')) {} else {
-			id = "login/login.html";
-			aniShow = 'slide-in-bottom';
-			pushWebView({
-				webType: 'newWebview_First',
-				id: id,
-				href: id,
-				aniShow: aniShow,
-				extendOptions: {}
-			})
-			return false;
-		}
-		
-		if(type == -6){
-			pushWebView({
-				webType: 'newWebview_First',
-				id: "appOrder/afterSale.html",
-				href: "appOrder/afterSale.html",
-				aniShow: aniShow,
-				extendOptions: {}
-			});
-			return false;
-		}
-		
-		pushWebView({
-			webType: 'newWebview_First',
-			id: "appOrder/orderList.html",
-			href: "appOrder/orderList.html",
-			aniShow: aniShow,
-			extendOptions: {
-				type: type
+function editDeliverState(stateValue,strOrderId){
+	   var userId= localStorage.getItem("userId"); // 用户id
+	   var userMobile= localStorage.getItem("userMobile"); // 手机号
+	   var userName= localStorage.getItem("userName"); // 用户
+		$.ajax({
+		url: prefix + "/order/editDeliverState",
+		type: "POST",
+		data: {"strOrderId":strOrderId,"stateType":stateValue,userId:userId,userName:userName,strMobile:userMobile}, 
+		dataType: "json",
+		success: function(res){
+				ajaxLog(res);
+				var result=res.result;
+				if(res.resCode == 0){
+					if(0==stateValue){
+						mui.toast("接单成功");
+						$("#"+strOrderId).find(".confirmOrder").hide();
+					}else{
+						mui.toast("配送成功！");
+						$("#"+strOrderId).remove();
+						
+					}
+					
+				}else{
+					mui.toast(result);
+				}
 			}
 		});
-	});
-	// 全部订单
-	$("#myOrder").on("click", function(){
-		var aniShow = getaniShow();
-		//检测已经存在sessionkey否者运行下面的登陆代码
-		if (localStorage.getItem('userMobile') && localStorage.getItem('userId')) {} else {
-			id = "login/login.html";
-			aniShow = 'slide-in-bottom';
-			
-			pushWebView({
-				webType: 'newWebview_First',
-				id: id,
-				href: id,
-				aniShow: aniShow,
-				extendOptions: {}
-			})
-			return false;
-		}
-		
-		pushWebView({
-			webType: 'newWebview_First',
-			id: "appOrder/orderList.html",
-			href: "appOrder/orderList.html",
-			aniShow: aniShow,
-			extendOptions: {
-				type: -1
-			}
-		});
-	});
-};
+}
+
 
 //下拉刷新
 function PullRefresh(id, callback) {
@@ -480,7 +416,7 @@ function PullRefresh(id, callback) {
 			document.getElementById('top2').style.display = 'block';
 			document.getElementById('top3').style.display = 'none';
 			an(0);
-		 	_LoadNumber = { a: false, b:false };
+		 	_LoadNumber = { a: false };
 			_isPullRefresh = true;
 			var loadNumberTimeId = setInterval(function () {
 				if (_LoadNumber.a) {
@@ -542,6 +478,15 @@ function PullRefresh(id, callback) {
 }
 //下拉刷新调用
 PullRefresh('scroll', function(){
-	// 获取余额
-	getBalace();
+	pageNo = 1;
+	loadFlag = 1;
+	$("#reclaimListID").html("");
+	$("#load").hide();
+	// 获取数据
+	getReclaimList();
 });
+
+
+
+
+
