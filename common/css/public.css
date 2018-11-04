@@ -247,3 +247,11 @@ input[type=color], input[type=date], input[type=datetime-local], input[type=date
 html,body{
     height: auto;
 }
+
+.scroll-y-ios {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: -2px;
+    display: none;
+}
