@@ -125,7 +125,7 @@ function getReclaimList(){
 					var reclaimList = $(reclaimListTemp);
 					;(function(reclaimList,itemData){
 							orderList.find(".confirmOrder").on("click", function(){
-									editDeliverState(0,lOrderId);//确认回收
+									doConfirmReclaim(itemData["id"]);//确认回收
 									return false;
 							});	
 					      //  var sendState=order.sendState;
@@ -144,29 +144,27 @@ function getReclaimList(){
 		}
 	})
 }
-
-function editDeliverState(stateValue,strOrderId){
-	   var userId= localStorage.getItem("userId"); // 用户id
-	   var userMobile= localStorage.getItem("userMobile"); // 手机号
-	   var userName= localStorage.getItem("userName"); // 用户
+var btnFlag=false;
+function doConfirmReclaim(id){
+	   if(!btnFlag){//防止多点击
+	   	  btnFlag=true;
+	   }else{
+	   	 return false;
+	   }
+	   var lreclaimId= localStorage.getItem("userId"); // 用户id
+	   var strReclaimMobile= localStorage.getItem("userMobile"); // 手机号
+	   var strReclaimName= localStorage.getItem("userName"); // 用户
 		$.ajax({
-		url: prefix + "/order/editDeliverState",
+		url: prefix + "/refund/confirmReclaim",
 		type: "POST",
-		data: {"strOrderId":strOrderId,"stateType":stateValue,userId:userId,userName:userName,strMobile:userMobile}, 
+		data: {"id":id,"lreclaimId":lreclaimId,"strReclaimName":strReclaimName,"strReclaimMobile":strReclaimMobile}, 
 		dataType: "json",
 		success: function(res){
 				ajaxLog(res);
 				var result=res.result;
 				if(res.resCode == 0){
-					if(0==stateValue){
-						mui.toast("接单成功");
-						$("#"+strOrderId).find(".confirmOrder").hide();
-					}else{
-						mui.toast("配送成功！");
-						$("#"+strOrderId).remove();
-						
-					}
-					
+				        mui.toast("回收成功！");
+						$("#"+id).remove();
 				}else{
 					mui.toast(result);
 				}
