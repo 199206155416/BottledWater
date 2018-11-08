@@ -6,10 +6,13 @@ var payType;
 var channel;
 var isSubmit=false;
 var payChannels;
+var accountMoney;
+var mineWebView;
 mui.plusReady(function(){
 	currentWebview = plus.webview.currentWebview();
     var accountBalance = currentWebview.accountBalance;
     $("#accountBalance").html(accountBalance);
+    mineWebView=plus.webview.getWebviewById("myCenter/mine.html");
 	bindEvent();
 	initPayChannel();
 });
@@ -60,7 +63,7 @@ function doCharge(){
 	      return false;
 	}
 	channel=payChannels[payType];
-	var accountMoney=$("input[name='accountMoney']").val();
+	accountMoney=$("input[name='accountMoney']").val();
 	if(isNaN(accountMoney)){
 		  mui.alert("只能输入数字", '提示', function(e) {
 			        },"div");
@@ -110,6 +113,12 @@ function doPay(payInfo){
 		plus.payment.request(channel,stra,function(result){
                     plus.nativeUI.alert("支付成功！",function(){
                         hideDialog();
+                        var m=$("#accountBalance").html();
+						 m=parseFloat(m)+parseFloat(accountMoney);
+						 $("#accountBalance").html(m);
+						 //修改父窗口余额
+						 var dataObj = {"m":m};
+						 mui.fire(mineWebView,"setAccount",dataObj);
                         isSubmit=false;
                     });
                 },function(error){
@@ -122,6 +131,12 @@ function doPay(payInfo){
                     plus.nativeUI.alert("支付成功！",function(){
                     	hideDialog();
                     	isSubmit=false;
+                    	var m=$("#accountBalance").html();
+						 m=parseFloat(m)+parseFloat(accountMoney);
+						 $("#accountBalance").html(m);
+						 //修改父窗口余额
+						 var dataObj = {"m":m};
+						 mui.fire(mineWebView,"setAccount",dataObj);
                     });
                 },function(error){
                     plus.nativeUI.alert("支付失败：" + JSON.stringify(error));

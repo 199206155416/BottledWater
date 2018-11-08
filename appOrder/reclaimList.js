@@ -76,7 +76,7 @@ function bindEvent(){
 function getReclaimList(){
 	var userId = localStorage.getItem("userId");
 	var formData = new FormData();
-	formData.append("lreclaimId",userId);//回收人
+	formData.append("strReclaimId",userId);//回收人
 	formData.append("isReclaim", isReclaim);
 	formData.append("pageSize", pageSize);
 	formData.append("pageNo", pageNo);
@@ -111,12 +111,14 @@ function getReclaimList(){
 
 				for(var i = 0, len = list.length; i < len; i++){
 					var itemData = list[i];
+					var id=itemData.id;
 					var bucketCount = itemData.bucketCount;
 					var bucketMoney = itemData.bucketMoney;
 					var strUserName = itemData.strUserName;
 					var strMobile = itemData.strMobile;
 					var createDate = itemData.createDate;
 					var reclaimListTemp = $("#reclaimListTemp").html();
+					reclaimListTemp = reclaimListTemp.replace("#id#", id);
 					reclaimListTemp = reclaimListTemp.replace("#bucketCount#", bucketCount);
 					reclaimListTemp = reclaimListTemp.replace("#bucketMoney#", bucketMoney);
 					reclaimListTemp = reclaimListTemp.replace("#strUserName#", strUserName);
@@ -124,14 +126,13 @@ function getReclaimList(){
 					reclaimListTemp = reclaimListTemp.replace("#createDate#", createDate);
 					var reclaimList = $(reclaimListTemp);
 					;(function(reclaimList,itemData){
-							orderList.find(".confirmOrder").on("click", function(){
+							reclaimList.find(".confirmDispatch").on("click", function(){
 									doConfirmReclaim(itemData["id"]);//确认回收
 									return false;
 							});	
-					      //  var sendState=order.sendState;
-							//if(deliverState==1){
-							//	orderList.find(".confirmOrder").hide();
-						//	}
+					        if(isReclaim==1){
+					        	reclaimList.find(".confirmDispatch").hide();
+					        }
 							
 					})(reclaimList,itemData);
 					$("#reclaimListID").append(reclaimList);
@@ -151,13 +152,13 @@ function doConfirmReclaim(id){
 	   }else{
 	   	 return false;
 	   }
-	   var lreclaimId= localStorage.getItem("userId"); // 用户id
+	   var strReclaimId= localStorage.getItem("userId"); // 用户id
 	   var strReclaimMobile= localStorage.getItem("userMobile"); // 手机号
 	   var strReclaimName= localStorage.getItem("userName"); // 用户
 		$.ajax({
 		url: prefix + "/refund/confirmReclaim",
 		type: "POST",
-		data: {"id":id,"lreclaimId":lreclaimId,"strReclaimName":strReclaimName,"strReclaimMobile":strReclaimMobile}, 
+		data: {"id":id,"strReclaimId":strReclaimId}, 
 		dataType: "json",
 		success: function(res){
 				ajaxLog(res);

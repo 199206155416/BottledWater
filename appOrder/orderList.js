@@ -105,8 +105,6 @@ function renderTab(type){
  * @author xuezhenxiang
  */
 function getOrderList(){
-	
-	console.log(pageNo);
 	var userId = localStorage.getItem("userId");
 	var formData = new FormData();
 	formData.append("strBuyerId",userId);
@@ -125,11 +123,9 @@ function getOrderList(){
 			_LoadNumber.a = true;
 			// 打印请求报错日志
 			ajaxLog(res);
-
 			if(res.resCode == 0){
 				var list = res.result.list; // 列表数据
 				var count = res.result.count; // 数据总量
-				
 				if(count == 0){
 					$("#orderNullTemp").show();
 					// return false;
@@ -139,7 +135,6 @@ function getOrderList(){
 				
 				$("#load").hide();
 				if(list.length <= 0){
-					$("#load").hide(); 
 					return false;
 				}
 

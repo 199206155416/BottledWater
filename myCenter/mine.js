@@ -116,9 +116,16 @@ function renderHtml(){
 
 //注册列表的点击事件
 function addListevent() {
+	
+	 window.addEventListener('setAccount',function(e){
+			console.log(JSON.stringify(e.detail));
+			var data=e.detail;
+			accountBalance=data["m"];
+		    $("#lAccountBalance").html(accountBalance);
+	},false);
+	
 	$("#mineHandleList").on('click', 'li', function() {
 		var id = $(this).attr("id");
-		
 		var aniShow = getaniShow();
 		//检测已经存在sessionkey否者运行下面的登陆代码
 		if (localStorage.getItem('userMobile') && localStorage.getItem('userId')) {} else {
@@ -128,7 +135,7 @@ function addListevent() {
 		var optionsData={};
 		if("appAddress/addressList.html"==id){
 			optionsData={openType:1};
-		}else if(id=="mycenter/accountCharge.html"){
+		}else if(id=="myCenter/accountCharge.html"){
 			optionsData={accountBalance:accountBalance};
 		}
 		pushWebView({
