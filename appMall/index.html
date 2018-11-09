@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
@@ -10,29 +11,31 @@
 	<link rel="stylesheet" href="./css/index.css" />
 	<script type="text/javascript" src="../common/js/remScale.js"></script>
 </head>
-<body>
-	
-<header class="mui-bar mui-bar-nav">
-    <h1 class="mui-title">商城</h1>
-</header>
 
-<div class="mui-content">
-	<div class="mui-scroll" id="scroll" style="-webkit-transform:  translate3d(0,-44px,0);transform: translate3d(0,-44px,0);">
-		<div class="scroll-y-ios"></div>
-		<div style="font-size: .3rem; line-height:44px;color: #999;">
-			<div id='top1' style="text-align: center;">
-				<div class="mui-pull-loading mui-icon mui-icon-pulldown" style="-webkit-transform: rotate(180deg);transform: rotate(180deg); "></div> 下拉即可刷新...
+<body>
+
+	<header class="mui-bar mui-bar-nav">
+		<h1 class="mui-title">商城</h1>
+	</header>
+
+	<div class="mui-content">
+		<div class="mui-scroll" id="scroll" style="-webkit-transform:  translate3d(0,-44px,0);transform: translate3d(0,-44px,0);">
+			<div class="scroll-y-ios"></div>
+			<div style="font-size: .3rem; line-height:44px;color: #999;">
+				<div id='top1' style="text-align: center;">
+					<div class="mui-pull-loading mui-icon mui-icon-pulldown" style="-webkit-transform: rotate(180deg);transform: rotate(180deg); "></div>
+					下拉即可刷新...
+				</div>
+				<div id='top2' style="display: none;text-align: center;">
+					<div class="mui-pull-loading mui-icon mui-spinner"></div> 加载中...
+				</div>
+				<div id='top3' style="display: none;text-align: center;">
+					<div class="mui-pull-loading mui-icon mui-icon-pulldown"></div>释放即可刷新...
+				</div>
 			</div>
-			<div id='top2' style="display: none;text-align: center;">
-				<div class="mui-pull-loading mui-icon mui-spinner"></div> 加载中...
-			</div>
-			<div id='top3' style="display: none;text-align: center;">
-				<div class="mui-pull-loading mui-icon mui-icon-pulldown"></div>释放即可刷新...
-			</div>
-		</div>
-		<!-- 频道列表 -->
-		<ul class="channel-list" id="channelList">
-			<!-- 
+			<!-- 频道列表 -->
+			<ul class="channel-list" id="channelList">
+				<!-- 
 			<li class="channel-item" id="">
 				<img class="channel-item-logo" src="./image/haiwaidaigou.png" />
 				<p class="channel-item-label">海外代购</p>
@@ -58,45 +61,48 @@
 				<p class="channel-item-label">手机数码</p>
 			</li>
 			-->
-			<li class="channel-item" id="all">
-				<img class="channel-item-logo" src="./image/category.png" />
-				<p class="channel-item-label">更多</p>
-			</li>
-		</ul>
-	
-		<!-- 商品列表 -->
-		<div id="goodsList"></div>
-	
-		<!-- 商品列表模板 -->
-		<div id="goodsListTemplate" style="display: none;">
-			<div>
-				<div class="activity-img"><img src="#activityImg#"/></div>
-				<ul class="goods-list"></ul>
+				<li class="channel-item" id="all">
+					<img class="channel-item-logo" src="./image/category.png" />
+					<p class="channel-item-label">更多</p>
+				</li>
+			</ul>
+
+			<!-- 商品列表 -->
+			<div id="goodsList"></div>
+
+			<!-- 商品列表模板 -->
+			<div id="goodsListTemplate" style="display: none;">
+				<div>
+					<div class="activity-img">
+						<div class="banner-bar-arrow"></div><img src="#activityImg#" />
+					</div>
+					<ul class="goods-list"></ul>
+				</div>
+			</div>
+
+			<div id="catTemp" style="display: none;">
+				<li class="channel-item" id="#id#">
+					<img class="channel-item-logo" src="#strTopImg#" />
+					<p class="channel-item-label">#name#</p>
+				</li>
+
+			</div>
+
+			<!-- 商品模板 -->
+			<div id="goodsTemplate" style="display: none;">
+				<li class="goods-item" id="#id#">
+					<div class="goods-item-wrap">
+						<div class="goods-img"><img src="#strMainImg#" /></div>
+						<div class="goods-name">#strGoodsName#</div>
+						<div class="goods-slogn">#goodsSlogn#</div>
+						<div class="goods-price">售价： ￥#defaultSkuPrice#</div>
+					</div>
+				</li>
 			</div>
 		</div>
-		
-		<div id="catTemp" style="display: none;">
-			<li class="channel-item" id="#id#">
-				<img class="channel-item-logo" src="#strTopImg#" />
-				<p class="channel-item-label">#name#</p>
-			</li>
-			
-		</div>
-	
-		<!-- 商品模板 -->
-		<div id="goodsTemplate" style="display: none;">
-			<li class="goods-item" id="#id#">
-				<div class="goods-item-wrap">
-					<div class="goods-img"><img src="#strMainImg#" /></div>
-					<div class="goods-name">#strGoodsName#</div>
-					<div class="goods-slogn">#goodsSlogn#</div>
-					<div class="goods-price">售价： ￥#defaultSkuPrice#</div>
-				</div>
-			</li>
-		</div>
 	</div>
-</div>
 </body>
 <script src="../common/js/include.js" charset="UTF-8" level="1"></script>
 <script src="index.js"></script>
+
 </html>
