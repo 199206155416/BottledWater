@@ -172,3 +172,30 @@ body{
 	line-height: .36rem;
 	color: #ff2a2a;
 }
+
+.banner-bar{
+	position: relative;
+}
+
+.banner-bar-arrow{
+	position: absolute;
+	right: .3rem;
+	top: 50%;
+	margin-top: -.3rem;
+	width: .6rem;
+	height: .6rem;
+	border-radius: 100%;
+	background: rgba(255,255,255, .3);
+}
+.banner-bar-arrow:after{
+	content: "";
+	position: absolute;
+	left: .15rem;
+	top: .2rem;
+	width: .2rem;
+	height: .2rem;
+	border-top: 2px solid rgba(255,255,255,.7);
+	border-right: 2px solid rgba(255,255,255,.7);
+	transform: rotateZ(45deg);
+	-webkit-transform: rotateZ(45deg);
+}
