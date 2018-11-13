@@ -1,0 +1,61 @@
+body{
+	background: #f4f4f4;
+}
+.mui-content>.mui-table-view:first-child {
+    margin-top: .3rem;
+}
+.mui-table-view:before {
+    height: 0;
+}
+.mui-table-view:after {
+    height: 0;
+}
+.mui-table-view-cell>a:not(.mui-btn) {
+    font-size: .28rem;
+    line-height: .44rem;
+    color: #555;
+}
+.mui-table-view-cell:after {
+    position: absolute;
+    right: 15px;
+    bottom: 0;
+    left: 15px;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
+}
+
+.own-btn {
+    border-radius: 1rem;
+    background: transparent;
+    border-color: #60a3fb;
+    color: #60a3fb;
+    font-size: .3rem;
+    line-height: .4rem;
+    padding: .22rem 0;
+}
+.mui-btn.mui-active:enabled, .mui-btn:enabled:active, button.mui-active:enabled, button:enabled:active, input[type=button].mui-active:enabled, input[type=button]:enabled:active, input[type=reset].mui-active:enabled, input[type=reset]:enabled:active, input[type=submit].mui-active:enabled, input[type=submit]:enabled:active {
+    color: #fff;
+    background-color: #ddd;
+    border-color: #ddd;
+}
+.container{
+	width: 7.1rem;
+	margin: .3rem auto;
+	padding-bottom: 1rem;
+	background: #fff;
+	border-radius: .1rem;
+	overflow: hidden;
+}
+.container img{
+	width: 100%;
+}
+.invite-code{
+	font-size: .4rem;
+	line-height: 1rem;
+	color: #60a3fb;
+	font-weight: 600;
+	text-align:center;
+}
