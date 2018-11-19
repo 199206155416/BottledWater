@@ -21,14 +21,17 @@
 	    <ul id="orderListID">	
 			
 		</ul>	
+		<div id='load' style="text-align: center;font-size: .3rem; line-height:44px;color: #999;">
+			<div class="mui-pull-loading mui-icon mui-spinner"></div> 加载中...
+		</div>
 		<!-- 列表没有数据 -->
 		<div class="empty" id="orderNullTemp" style="display: none">
 			<img class="empty_img" src="../common/image/blank.png" />
 		</div>
 	</div>
 	<div id="orderListTemp" style="display: none;">
-		<li class="order-item">
-				<div class="order-item-head">
+		<li class="order-item" id="#id#">
+				<div class="order-item-head" name="refundStateName">
 					<p>#refundStateName#</p>
 				</div>
 				<div class="order-item-body">

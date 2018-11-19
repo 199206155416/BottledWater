@@ -17,7 +17,7 @@ mui.plusReady(function() {
 	queryAddressList();
 	// 绑定事件
 	bindEvent();
-
+	addressList=new Array();
 
 });
 
@@ -74,7 +74,7 @@ function queryAddressList(){
 
 			if(res.resCode == 0){
 				var result = res.result;
-
+                $("#load").hide();
 				if(result.length == 0){
 					$("#blankPage").show();
 					return;
@@ -112,12 +112,13 @@ function queryAddressList(){
 					if(isDefault==1){
 						defaultAddressIndex=i;
 					}
+					addressTemplate = addressTemplate.replace("#id#", id);
 					addressTemplate = addressTemplate.replace("#strReceiptUserName#", strReceiptUserName);
 					addressTemplate = addressTemplate.replace("#strReceiptMobile#", strReceiptMobile);
 					addressTemplate = addressTemplate.replace("#strLocation#", strLocation);
 					addressTemplate = addressTemplate.replace("#strDetailaddress#", strDetailaddress);
 					addressTemplate = addressTemplate.replace("#strTag#", strTag);
-					addressTemplate = addressTemplate.replace("#isDefault#", isDefault == 1 ? "defaultAddress" : "");
+					//addressTemplate = addressTemplate.replace("#isDefault#", isDefault == 1 ? "defaultAddress" : "");
 					var address = $(addressTemplate);
 					address.find(".default1").data("i",i);
 					address.find(".editAddress").data("i",i);
@@ -179,6 +180,7 @@ function queryAddressList(){
 									}
 								}
 							});
+							return false;
 						})
 						
 					})(id, address);
@@ -206,6 +208,10 @@ function queryAddressList(){
 							mui.fire(addOrderWebView,"chooseAddressEvent",chooseAddress);
 						    mui.back();
 						});
+					}
+					
+					if(isDefault==1){
+						$("#"+id).find(".default1").trigger("click");
 					}
 					
 					

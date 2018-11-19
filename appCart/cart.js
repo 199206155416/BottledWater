@@ -152,7 +152,10 @@ function bindEvent(){
 				})
 			}
 		}
-
+        if(deleteList.length==0){
+        	mui.toast("请选择要删除的商品！");
+        	return false;
+        }
 		deleteCartList(deleteList);
 	});
 
@@ -366,7 +369,7 @@ function deleteCartList(goodsList){
 				    $("#shopList li[lid="+ delId +"]").remove();
 				    for (var j = list.length - 1; j >= 0; j--) {
 				        var allId = list[j].id;
-				        if (allId != delId) {
+				        if (allId == delId) {
 				            goodsList.splice(i, 1);
 				            list.splice(j, 1);
 				            break;
@@ -375,7 +378,7 @@ function deleteCartList(goodsList){
 				}
 				mui.toast("删除成功");
 				cartObj.list = list;
-				calculatePrice()
+				calculatePrice();
 			}
 		}
 	});

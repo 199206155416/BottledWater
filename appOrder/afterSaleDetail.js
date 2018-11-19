@@ -1,6 +1,7 @@
 var currentWebview;
 var refundItem; // 退款数据
-alert(mui);
+var afterSaleWebView;
+var pageNo;
 mui.init({
 	swipeBack: false
 	// pullRefresh: {
@@ -19,44 +20,47 @@ mui.init({
 
 mui.plusReady(function() {
 	currentWebview = plus.webview.currentWebview();
-	
-	//refundItem = currentWebview.refundItem;
-
+	afterSaleWebView=plus.webview.getWebviewById("appOrder/afterSale.html");
+	refundItem = currentWebview.refundItem;
+    pageNo = currentWebview.pageNo;
 	// 获取退款详情
-	//getRefundDetail();
+	getRefundDetail();
 	
 	// 绑定事件
-	//bindEvent();
+	bindEvent();
 });
 
 function bindEvent(){
-	$(".recall-apply").click(function(){
-		doCloseRefund();
-	});
+	//$(".recall-apply").click(function(){
+		//doCloseRefund();
+	//});
 	
 	$(".change-apply").click(function(){
-		openEdit();
+		//openEdit();
+		doCloseRefund();
 	});
 	
 }
 
 function openEdit(){
-	var id=refundItem.id;
-	
+	var id=refundItem.id;	
 }
 
 function doCloseRefund(){
 	var id=refundItem.id;
+	var state=refundItem.state;
 		$.ajax({
 		url: prefix + "/refund/closeRedund",
 		type: "POST",
-		data: {"id":id}, 
+		data: {"id":id,"state":state}, 
 		dataType: "json",
 		success: function(res){
 				ajaxLog(res);
 				var result=res.result;
 				if(res.resCode == 0){
 					mui.toast("撤销成功");
+					var backData={"type":0,"id":id,"pageNo":pageNo};
+					mui.fire(afterSaleWebView,"editData",backData);
 					mui.back();
 				}else{
 				   mui.alert(result, '提示', function(e) {
@@ -81,7 +85,7 @@ function getRefundDetail(){
 					var strImgPath=item.strImgPath;
 					$('#refundReason').html(refundReason);
 					if(refundMoney&&0!=refundMoney){
-						$('#refundMoney').html("￥"+"refundMoney");
+						$('#refundMoney').html("￥"+refundMoney);
 					}else{
 						$('#refundMoney').parent().hide();
 					}
@@ -99,6 +103,7 @@ function getRefundDetail(){
 					if(state!=0){
 						$(".order-state-title").html(strStateName);
 						$(".order-state-introduce").hide();
+						$(".footer-bar").hide();
 					}
 					var order=item.mallOrder;
 				   var mallOrderDetailList=order.mallOrderDetailList;
@@ -107,13 +112,13 @@ function getRefundDetail(){
 						var id = itemGoods.id;
 						var strGoodsName = itemGoods.strSkuName;
 						var strGoodsImg = itemGoods.strGoodsImg;
-						var strGoodsSKUDetail = itemGoods.remarks;
+						var strSkuAttr = itemGoods.strSkuAttr;
 						var skuPrice = itemGoods.skuPrice;
 						var count = itemGoods.count;
 						var goodsTemplate = $("#goodsTemplate").html();
 						goodsTemplate = goodsTemplate.replace("#strGoodsImg#", strGoodsImg);
 						goodsTemplate = goodsTemplate.replace("#strGoodsTitle#", commonNameSubstr(strGoodsName, 34));
-						goodsTemplate = goodsTemplate.replace("#strGoodsSKUDetail#", commonNameSubstr(strGoodsSKUDetail, 28));
+						goodsTemplate = goodsTemplate.replace("#strGoodsSKUDetail#", commonNameSubstr(strSkuAttr, 28));
 						goodsTemplate = goodsTemplate.replace("#skuPrice#", skuPrice);
 						goodsTemplate = goodsTemplate.replace("#count#", count);
 						var goods = $(goodsTemplate);

@@ -64,7 +64,7 @@
 								</div>		
 								<div class="rightContent">			
 									<div class="beforeTitle">#strSkuName#</div>
-									<p>#remarks#</p>
+									<p>#strSkuSttrs#</p>
 									<div class="orderMoney">
 										<span class="subOrderMoney">#skuPrice#</span>
 										<span class="ordernum">X#nCount#</span>
@@ -91,8 +91,17 @@
 		                <div class="own-list-label">使用水票</div>
 		                <div class="freight-charge" id="useTickecTotalCount"></div>
 			        </li>
-			    </ul>
-			
+			        <li class="mui-table-view-cell">
+		                <div class="own-list-label">配送方式</div>
+		                <div class="discounts-content" >
+		                	<select id="strDeliveryType">
+		                		<option value="-1">请选择</option>
+		                		<option value="1">自取</option>
+		                		<option value="0">配送</option>
+		                	</select>
+		                </div>
+			        </li>
+			   </ul>
 				<div class="mjleave">
 					<div class="buyerMessageHr clearfix">
 						<div class="detailName">备注：</div>	
@@ -114,11 +123,11 @@
 	<!-- 支付确认弹出框 -->
 	<div class="black-bg"></div>
 	<div class="confirm-modal" id="payDailog">
-		<div class="confirm-title">立即支付</div>
+		<div class="confirm-title">配送方式</div>
 		<div class="confirm-content">
 			<ul>
 				<li>
-					<p>支付方式：</p>
+					<input type="radio" name="strDeliveryType" value="0"/> 配送
 					<p>账户余额</p>
 				</li>
 				<li>

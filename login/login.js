@@ -23,6 +23,27 @@ mui.plusReady(function() {
 	// if (localStorage.getItem('account')) {
 	// 	account.value = localStorage.getItem('account');
 	// }
+	
+	//添加事件接收close事件，并且要判断是否已经登录成功，然后页面close，因为login页面是预先加载的页面
+					//在这里向需要的页面发送消息事件通知已经登录做响应的处理
+					loginWebview.addEventListener('hide', function() {
+						mui.each(plus.webview.all(), function(index, item) {
+							console.log(item.id)
+						})
+						var cartwebview = plus.webview.getWebviewById('appCart/cart.html');
+						var minewebview = plus.webview.getWebviewById('myCenter/mine.html');
+						mui.fire(cartwebview, 'loginSuccess', {});
+						mui.fire(minewebview, 'loginSuccess', {});
+						loginWebview.close();
+					}, false);
+					
+	 window.addEventListener('doLogin',function(event){
+  	    var data=event.detail;
+  	    var m=data["strMobile"];
+  	    var p=data["strPassword"];
+		doLogin(m,p);
+	},false);				
+
 });
 
 /**
@@ -83,7 +104,12 @@ function login(){
 		    mui.toast("密码必须至少6位");
 		    return;
 		   }
-		$.ajax({
+		  doLogin(strMobile,strPassword);
+	})
+}
+
+function doLogin(strMobile,strPassword){
+	$.ajax({
 			url: prefix + "/user/login",
 			type: "POST",
 			dataType: "json",
@@ -106,30 +132,12 @@ function login(){
 					// 存储启用状态
 					setStringValue("userLoginFlag", result.loginFlag);
 					setClientInfo();
-					
-
-					//添加事件接收close事件，并且要判断是否已经登录成功，然后页面close，因为login页面是预先加载的页面
-					//在这里向需要的页面发送消息事件通知已经登录做响应的处理
-					loginWebview.addEventListener('hide', function() {
-						mui.each(plus.webview.all(), function(index, item) {
-							console.log(item.id)
-						})
-						var cartwebview = plus.webview.getWebviewById('appCart/cart.html');
-						var minewebview = plus.webview.getWebviewById('myCenter/mine.html');
-						
-						mui.fire(cartwebview, 'loginSuccess', {});
-						mui.fire(minewebview, 'loginSuccess', {});
-
-						loginWebview.close();
-					}, false);
-
 					mui.back();
 					mui.toast('登录成功');
 
 				}
 			}
-		})
-	})
+		});
 }
 
 function setClientInfo(){

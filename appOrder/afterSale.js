@@ -1,6 +1,7 @@
 var currentWebview;
 var type = 0; // -1 == 全部， -2 == 待付款， -3 == 待发货， -4 == 待收货， -5 == 已完成, 默认为-1
 var pageNo = 1;
+var pageNoOld;
 var pageSize = 20; 
 var loadFlag = 1; // 上拉加载标志
 mui.init({
@@ -39,11 +40,24 @@ function bindEvent(){
 		if (scrollTop + windowHeight >= scrollHeight - 300) {
 			if(loadFlag == 1){
 				loadFlag == 0;
-				getOrderList();
+				getRefundLogList();
 			}
 		}
 
 	});
+	
+	window.addEventListener('editData',function(event){
+  	    var data=event.detail;
+  	    var type=parseInt(data["type"]);
+		if(type==0){
+			$("#orderListID").html("");
+			pageNo=data["pageNo"];
+			getRefundLogList();
+		}else if(type==1){
+			
+			
+		}
+	},false);
 };
 
 /**
@@ -51,9 +65,11 @@ function bindEvent(){
  * @author xuezhenxiang
  */
 function getRefundLogList(){
+	$("#load").show();
 	var userId = localStorage.getItem(userId);
 	var formData = new FormData();
 	formData.append("strBuyerId", userId);
+	pageNoOld=pageNo;
 	formData.append("pageNo", pageNo);
 	formData.append("pageSize", pageSize);
 	$.ajax({
@@ -70,7 +86,7 @@ function getRefundLogList(){
 			if(res.resCode == 0){
 				var list = res.result.list; // 列表数据
 				var count = res.result.count; // 数据总量
-				
+				$("#load").hide();
 				if(count == 0){
 					$("#orderNullTemp").show();
 					return false;
@@ -86,9 +102,13 @@ function getRefundLogList(){
 					var strStateName=item.strStateName
 					var id=item.id;//退款ID
 					var order=item.mallOrder;
+					if(!order){
+						continue;
+					}
 					var lOrderId = order.id; // 订单id
 					var orderListTemp = $("#orderListTemp").html();
 					orderListTemp = orderListTemp.replace("#refundStateName#", strStateName);
+					orderListTemp = orderListTemp.replace("#id#", id);
 					var orderList = $(orderListTemp);
 					
 					;(function(orderList,item){
@@ -102,7 +122,7 @@ function getRefundLogList(){
 								isBars: false,
 								barsIcon: '',
 								extendOptions: {
-									strOrderId: lOrderId
+									refundItem: item,"pageNo":pageNoOld
 								}
 							});
 							
@@ -114,7 +134,7 @@ function getRefundLogList(){
 						var id = itemGoods.id;
 						var strGoodsName = itemGoods.strSkuName;
 						var strGoodsImg = itemGoods.strGoodsImg;
-						var strGoodsSKUDetail = itemGoods.strTitle;
+						var strGoodsSKUDetail = itemGoods.strSkuAttr;
 						var skuPrice = itemGoods.skuPrice;
 						var count = itemGoods.count;
 						var goodsTemplate = $("#goodsTemplate").html();

@@ -57,9 +57,6 @@ function bindEvent(){
 		 		{value:'掉漆了', text:'掉漆了'},
 			]);
 		 	pickerGoodsState.show(function (selectItems) {
-			    // console.log(selectItems[0].text);//智子
-			    // console.log(selectItems[0].value);//zz 
-		
 			    $("#goodsState").html(selectItems[0].text);
 		  });
 	});

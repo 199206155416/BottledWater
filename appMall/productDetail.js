@@ -6,7 +6,7 @@ var currentWebview; // 当前子页面
 var paredntWebview; // 父页面
 var goodsId; // 商品id
 var buyNowFlag = 0; // buyNowFlag == 0 点击sku选择弹层确定按钮立即购买, buyNowFlag == 1 加入购物车
-
+var isSubmitFlag=true;//是否可以提交
 
 mui.init({
 	swipeBack: false
@@ -95,7 +95,8 @@ function setSldiderHtml(focusImgs){
 	var focusImgs = slideImgList; // 图片
 	var focusImgHtml = "";
 	for(var i = 0; i < focusImgs.length; i++){
-		focusImgHtml += "<div class='swiper-slide'><img src="+ focusImgs +" class='slide_img'/></div>";
+		var strImg=focusImgs[i];
+		focusImgHtml += "<div class='swiper-slide'><img src="+ strImg +" class='slide_img'/></div>";
 	}		
 	$("#slide_a").html(focusImgHtml);
 	// 轮播图数字
@@ -140,9 +141,9 @@ function setChooseSku(){
 		strHtml += "<div class='class'><h3>"+ i +"</h3>";
 		for(var ii = 0,ll = attrMap[i].length; ii < ll; ii++){
 			if(ii == 0){
-				strHtml += "<span class='row' name="+ i +">"+ attrMap[i] +"</span>";
+				strHtml += "<span class='row' name="+ i +">"+ attrMap[i][ii] +"</span>";
 			}else{
-				strHtml += "<span name="+ i +">"+ attrMap[i] +"</span>";
+				strHtml += "<span name="+ i +">"+ attrMap[i][ii] +"</span>";
 			}
 		}
 		strHtml += "</div>";
@@ -170,7 +171,7 @@ function bindEvent(){
 		$("#mallSelection")
 			.show()
 			.animate({bottom: 0}, 300);
-		// 确定按钮加入购物车
+		//立即购买
 		buyNowFlag = 0;
 	});
 	// 关闭sku选择弹层
@@ -198,6 +199,10 @@ function bindEvent(){
 
 	// 提交按钮绑定事件
 	$("#submitBtn").on("click", function(){
+		if(!isSubmitFlag){
+			mui.toast("库存不足,请购买其他类型");
+			return false;
+		}
 		var strUserId = localStorage.getItem('userId'); // 用户id
 		var nCount = $("#num_id").html();
 		//检测已经存在sessionkey否者运行下面的登陆代码
@@ -284,7 +289,6 @@ function bindEvent(){
 			$(this).addClass("row").siblings().removeClass("row");
 
 			var formData = new FormData();
-			
 			formData.append("mallGoods.id", goodsId);
 
 
@@ -310,15 +314,21 @@ function bindEvent(){
 					if(res.resCode == 0){
 
 						var result = res.result;
-
+                        if("无"==result){
+                        	mui.toast("暂无库存");
+                        	isSubmitFlag=false;
+                        	return false;
+                        }else{
+                        	isSubmitFlag=true;
+                        }
 						mallGoods = {
 							strSkuId: result.id,
-							strSkuName: result.mallGoods.strSkuName,
-							strIntroduce: result.mallGoods.strIntroduce,
-							nSkuPrice: result.mallGoods.skuPrice,
-							strGoodsImg: result.mallGoods.strDetailMainImg,
-							strDetailIcon: result.mallGoods.strDetailIcon,
-							nSaleNum: result.mallGoods.saleNum
+							strSkuName: result.strSkuName,
+							strIntroduce: mallGoods.strIntroduce,
+							nSkuPrice: result.skuPrice,
+							strGoodsImg: mallGoods.strDetailMainImg,
+							strDetailIcon: mallGoods.strDetailIcon,
+							nSaleNum: result.saleNum
 						};
 
 						// 第二步设置商品名字价钱等

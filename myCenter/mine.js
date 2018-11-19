@@ -31,11 +31,6 @@ var accountBalance;
 mui.plusReady(function() {
 	//注册列表的点击事件
 	addListevent();
-    var userRoleNames=localStorage.getItem("userRoleNames");
-    console.log("userRoleNames:"+userRoleNames);
-    if(userRoleNames&&userRoleNames.indexOf("配送员")!=-1){//如果角色有配送员就显示我的配送单
-         $("li[name='dis']").show();
-    }
 	// parentWebView = plus.webview.currentWebview().parent();
 	// touxiangimg = document.getElementById('touxiangimg');
 	// logoutBtn = document.getElementById('logoutBtn');
@@ -109,7 +104,13 @@ function getBalace(){
 function renderHtml(){
 	var userRoleNames = localStorage.getItem("userRoleNames");
 	var userMobile = localStorage.getItem("userMobile");
-	
+	var userRoleNames=localStorage.getItem("userRoleNames");
+    if(userRoleNames&&userRoleNames.indexOf("配送员")!=-1){//如果角色有配送员就显示我的配送单
+         $("li[name='dis']").show();
+    }
+    if(!userRoleNames){
+    	userRoleNames="";
+    }
 	$("#userName").html(userRoleNames);
 	$("#userPhone").html(userMobile);
 };
@@ -122,6 +123,10 @@ function addListevent() {
 			var data=e.detail;
 			accountBalance=data["m"];
 		    $("#lAccountBalance").html(accountBalance);
+	},false);
+	
+	window.addEventListener('loginSuccess',function(e){
+			renderHtml()
 	},false);
 	
 	$("#mineHandleList").on('click', 'li', function() {

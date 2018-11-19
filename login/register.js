@@ -7,7 +7,9 @@ var login;
 var register;
 var repsd;
 var loginWebview;
+var registerWebview;
 mui.plusReady(function() {
+	registerWebview = plus.webview.currentWebview();
 	// 注册
 	register();
 });
@@ -95,8 +97,11 @@ function register(){
 				ajaxLog(e);
 
 				if(e.resCode == 0){
-					mui.back();
-					mui.toast('注册成功');
+					//mui.toast('注册成功');
+					//直接登录
+					var loginwebview = plus.webview.getWebviewById('login/login.html');
+					registerWebview.close();
+					mui.fire(loginwebview, 'doLogin', {"strMobile":mobile,"strPassword":password});
 				}
 			}
 		})
