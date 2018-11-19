@@ -323,6 +323,13 @@
 				],
 				"refer": [],
 				"priority": 0
+			},
+			"myCenter/mine.html": {
+				"resources": [
+					"myCenter/image/personimg.png"
+				],
+				"refer": [],
+				"priority": 0
 			}
 		},
 		"idle": {

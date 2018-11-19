@@ -53,7 +53,7 @@ mui.plusReady(function() {
 function openAddress(){
 	pushWebView({
 			webType: 'newWebview_First',
-			id: "appAddress/addressList.html_1",
+			id: "appAddress/addressList.html",
 			href: "appAddress/addressList.html",
 			aniShow: getaniShow(),
 			title: "收货地址",
@@ -103,7 +103,7 @@ function getPayDetail(){
 					bucketMoney=result["bucketMoney"];
 					if(bucketNum){
 						$("#bucketNum").show();
-						$("#bucketNumText").html(bucketNum+"/50元 ");
+						$("#bucketNumText").html(bucketNum+"/"+bucketMoney+"￥");
 					}
 					ticketTotalCount=result["useTickecTotalCount"];
 					if(ticketTotalCount){
@@ -153,6 +153,7 @@ function queryDefaultAddress(){
 	var strReceiptUserName=receiptAddress["strReceiptUserName"];
 	var strReceiptMobile=receiptAddress["strReceiptMobile"];
 	var strDetailaddress=receiptAddress["strDetailaddress"];
+	var strLocation=receiptAddress["strLocation"];
 	var isDefault=receiptAddress["isDefault"];
 	var strIsDefault="";
 	if(1==isDefault){
@@ -163,7 +164,7 @@ function queryDefaultAddress(){
 	$("#strConsigneeName").html(strReceiptUserName);
 	$("#strIsDefault").html(strIsDefault);
 	$("#strMobile").html(strReceiptMobile);
-	$("#strFullAdress").html(strDetailaddress);
+	$("#strFullAdress").html(strLocation+" "+strDetailaddress);
 }
 /**
  * 设置商品
@@ -174,6 +175,18 @@ function setProduct(){
 		var strSkuName = goodsList[i]["strSkuName"];
 		var strGoodsImg = goodsList[i]["strMainImg"];
 		var strTitle = goodsList[i]["strTitle"];
+		var strSkuSttrs=goodsList[i]["strSkuSttrs"];
+		var strSttrs=strSkuSttrs.split(",");
+		for(var j in strSttrs){
+			var strSttrValue=strSttrs[j];
+			var n=strSttrValue.indexOf(":");
+			var v=strSttrValue.substr(n+1);
+			if(j==0){
+				strSkuSttrs=v;
+			}else{
+				strSkuSttrs+=" "+v;
+			}
+		}
 		var goodsFactPrice = goodsList[i]["goodsFactPrice"];
 		var skuPrice = goodsList[i]["skuPrice"];
 		var count = goodsList[i]["count"];
@@ -183,7 +196,7 @@ function setProduct(){
 
 		goodsTemplate = goodsTemplate.replace("#strGoodsImg#", strGoodsImg);
 		goodsTemplate = goodsTemplate.replace("#strSkuName#", strSkuName);
-		goodsTemplate = goodsTemplate.replace("#remarks#", strTitle);
+		goodsTemplate = goodsTemplate.replace("#strSkuSttrs#", strSkuSttrs);
 		goodsTemplate = goodsTemplate.replace("#skuPrice#", skuPrice);
 		goodsTemplate = goodsTemplate.replace("#nCount#", count);
 		var goodsDom = $(goodsTemplate);
@@ -247,6 +260,15 @@ function bindEvent(){
 	});
 	//$("#payDailog").show();
 	$("#doPay").on("click", function(){
+		if(!receiptAddress){
+			mui.toast("选择收货地址");
+			return false;
+		}
+		var strDeliveryType=$("#strDeliveryType").val();
+		if(strDeliveryType==-1){
+			mui.toast("请选择配送方式");
+			return false;
+		}
 		var showCon="<div class='confirm-item'><p>支付方式：</p><p>"+strPayText+"</p></div><div class='confirm-item'><p>支付金额：</p><p>"+factPrice+"</p></div>";
 		var btnArray = ['取消', '确认'];
         mui.confirm(showCon, '立即支付', btnArray, function(e) {
@@ -255,6 +277,7 @@ function bindEvent(){
             }
         },"div");
 	});
+
 	//桶押金说明
 	$("#bucketNum").on('click',function() {
 		var extendOptionsData={};
@@ -286,6 +309,8 @@ function doAddOrder(){
 		formData.append("factPrice", factPrice);
 		formData.append("totalPrice", totalPrice);
 		formData.append("strPayType", payType);
+		var strDeliveryType=$("#strDeliveryType").val();
+		formData.append("strDeliveryType", strDeliveryType);
 		var strBuyerMessage=$("#strBuyerMessage").val();//商品备注
 		if(!strBuyerMessage){
 			strBuyerMessage="";
@@ -306,6 +331,19 @@ function doAddOrder(){
 			var strSkuId=itemGoods["strSkuId"];
 			var nCount=itemGoods["count"];
 			var strTitle=itemGoods["strTitle"];
+			var strSkuSttrs=goodsList[i]["strSkuSttrs"];
+			var strSttrs=strSkuSttrs.split(",");
+			var strSkuAttr="";
+			for(var j in strSttrs){
+				var strSttrValue=strSttrs[j];
+				var n=strSttrValue.indexOf(":");
+				var v=strSttrValue.substr(n+1);
+				if(j==0){
+					strSkuAttr=v;
+				}else{
+					strSkuAttr+=" "+v;
+				}
+			}
 			var goodsTotalPrice=itemGoods["goodsTotalPrice"];
 			var goodsFactPrice=itemGoods["goodsFactPrice"];
 			var useTickecCount=itemGoods["useTickecCount"];
@@ -315,6 +353,7 @@ function doAddOrder(){
 			formData.append("mallOrderDetailList["+i+"].goodsTotalPrice", goodsTotalPrice);
 			formData.append("mallOrderDetailList["+i+"].waterTicketsNum", useTickecCount);
 			formData.append("mallOrderDetailList["+i+"].strTitle", strTitle);
+			formData.append("mallOrderDetailList["+i+"].strSkuAttr", strSkuAttr);
 		}
 		isSubmit=true;
 		$.ajax({

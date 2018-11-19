@@ -7,7 +7,7 @@ var payChannels;
 var payType;
 var channel;
 var _LoadNumber = { a: false };
-var payStrOrderId
+var payStrOrderId;
 mui.init({
 	swipeBack: false,
 //	pullRefresh: {
@@ -195,12 +195,16 @@ function getOrderList(){
 						var strGoodsName = item.strSkuName;
 						var strGoodsImg = item.strGoodsImg;
 						var strGoodsSKUDetail = item.strTitle;
+						var strSkuAttr=item.strSkuAttr;
+						if(!strSkuAttr){
+							strSkuAttr="";
+						}
 						var skuPrice = item.skuPrice;
 						var count = item.count;
 						var goodsTemplate = $("#goodsTemplate").html();
 						goodsTemplate = goodsTemplate.replace("#strGoodsImg#", strGoodsImg);
 						goodsTemplate = goodsTemplate.replace("#strGoodsTitle#", commonNameSubstr(strGoodsName, 34));
-						goodsTemplate = goodsTemplate.replace("#strGoodsSKUDetail#", commonNameSubstr(strGoodsSKUDetail, 28));
+						goodsTemplate = goodsTemplate.replace("#strGoodsSKUDetail#", commonNameSubstr(strSkuAttr, 28));
 						goodsTemplate = goodsTemplate.replace("#skuPrice#", skuPrice);
 						goodsTemplate = goodsTemplate.replace("#count#", count);
 						
@@ -257,7 +261,7 @@ function cancelOrder(strOrderId){
 				var result=res.result;
 				if(res.resCode == 0){
 					mui.toast("取消成功");
-					getOrderList();
+					$("#"+strOrderId).remove();
 				}else{
 				   mui.alert(result, '提示', function(e) {
 			        },"div");

@@ -58,5 +58,10 @@
 			"myCenter/reclaimList.html",
 			"appOrder/reclaimList.html"
 		]
+	},
+	"myCenter/mine.html": {
+		"resources": [
+			"myCenter/image/personimg.png"
+		]
 	}
 }

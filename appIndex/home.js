@@ -231,8 +231,14 @@ function getGoodsList() {
 					} else {
 						htmlTemplate = htmlTemplate.replace("#activityImg#", "");
 					}
-
+                    var catId=result[i].mallCategory.id;
 					var goodslist = $(htmlTemplate);
+					(function(catId){
+						goodslist.find(".banner-bar").click(function(){
+							  openCatGoods(catId,'0','')
+						});
+					})(catId);
+					
 
 					for(var i1 = 0, len1 = mallGoodsList.length; i1 < len1; i1++) {
 						var id = mallGoodsList[i1].id;

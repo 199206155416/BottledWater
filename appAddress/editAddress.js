@@ -13,7 +13,7 @@ mui.init({
 
 mui.plusReady(function() {
 	currentWebview = plus.webview.currentWebview();
-	addressListWebView=plus.webview.getWebviewById("appAddress/addressList.html_1");
+	addressListWebView=plus.webview.getWebviewById("appAddress/addressList.html");
 	addressId = currentWebview.addressId;
 	// 如果id存在查询地址信息
 	if(addressId){
