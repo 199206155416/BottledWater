@@ -49,7 +49,7 @@ body{
 	left: 0;
 	top: 0;
 	right: 0;
-	bottom: -44px;
+	bottom: 0;
 	overflow-y: scroll;
 }
 .record-list{ }
@@ -166,4 +166,24 @@ body{
 	line-height: .6rem;
 	color: #888;
 	padding-left: .2rem;
+}
+
+.withdraw-btn-wrap{
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 7.5rem;
+	height: 1rem;
+	background: #fff;
+	padding: .2rem .3rem;
+}
+.withdraw-btn{
+	width: 6.9rem;
+	height: .6rem;
+	background: #60a3fb;
+	border-radius: .06rem;
+	font-size: .3rem;
+	line-height: .6rem;
+	color: #fff;
+	text-align: center;
 }
