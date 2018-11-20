@@ -1,0 +1,169 @@
+body{
+	background: #f4f4f4;
+}
+.header{
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 7.5rem;
+	z-index: 10;
+	border-bottom: 0;
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, .2);
+    box-shadow: 0 0 1px rgba(0, 0, 0, .2);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.header .back{
+	position: absolute;
+	left: .2rem;
+	top: .2rem;
+	width: .16rem;
+	height: .3rem;
+	z-index: 10;
+}
+.header .title{
+	font-size: .3rem;
+	line-height: .88rem;
+	color: #666;
+	text-align: center;
+	position: relative;
+	font-weight: normal;
+}
+.header .title:after{
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 1px;
+	transform: scaleY(.5);
+	-webkit-transform: scaleY(.5);
+	background: #ccc;
+}
+
+/* 列表内容 */
+.mui-content{
+	padding-top: .88rem;
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: -44px;
+	overflow-y: scroll;
+}
+.record-list{ }
+.record-item{
+	background: #fff;
+	padding: .3rem;
+}
+.record-left{
+	width: 4rem;
+	float: left;
+}
+.record-right{
+	width: 2rem;
+	float: right;
+	text-align: right;
+}
+.record-title{
+	font-size: .28rem;
+	line-height: .3rem;
+	color: #666;
+	margin-bottom: .1rem;
+}
+.record-date{
+	font-size: .26rem;
+	line-height: .3rem;
+	color: #666;
+	margin-bottom: .1rem;
+}
+.record-tip{
+	font-size: .26rem;
+	line-height: .3rem;
+	color: #999;
+}
+.record-status{
+	font-size: .26rem;
+	line-height: .3rem;
+	color: #6a6;
+	margin-bottom: .1rem;
+}
+.record-money{
+	font-size: .32rem;
+	line-height: .32rem;
+	color: #444;
+}
+
+/*货款总额*/
+.total-account{
+	background: #fff;
+	margin: .2rem 0;
+	padding: .3rem;
+	text-align: center;
+}
+.total-account-label{
+	font-size: .3rem;
+	line-height: .5rem;
+	color: #333;
+	margin-bottom: .1rem;
+}
+.total-account-money{
+	font-size: .6rem;
+	line-height: .6rem;
+	color: #333;
+}
+.total-account-money .money-label{
+	font-size: .3rem;
+}
+
+/*提现中金额、欠款金额*/
+.handle-section{
+	background: #fff;
+	display: flex;
+	display: -webkit-flex;
+}
+.handle-section div{
+	flex: 1;
+	-webkit-flex: 1;
+	padding: .2rem .5rem;
+	position: relative;
+}
+.handle-section div:after{
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 1px;
+	height: 100%;
+	background: #888;
+	transform: scaleX(.5);
+	-webkit-transform: scaleX(.5);
+}
+.handle-section div:first-child:after{
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 0px;
+}
+.handle-section-label{
+	font-size: .26rem;
+	color: #888;
+	line-height: .4rem;
+	margin-bottom: .04rem;
+}
+.handle-section-money{
+	font-size: .36rem;
+	line-height: .44rem;
+	color: #333;
+}
+.handle-section-money .money-label{
+	font-size: .24rem;
+}
+.withdraw-record-title{
+	font-size: .26rem;
+	line-height: .6rem;
+	color: #888;
+	padding-left: .2rem;
+}
