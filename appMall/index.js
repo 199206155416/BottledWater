@@ -2,36 +2,36 @@ var _LoadNumber = { a: false };
 
 mui.init({
 	swipeBack: false,
-//	 pullRefresh: {
-//	     container: ".mui-content",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-//	     down : {
-////	 		style: 'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
-////	 		color:' #2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
-////	 		height: '50px',//可选,默认50px.下拉刷新控件的高度,
-////	 		range: '100px', //可选 默认100px,控件可下拉拖拽的范围
-////	 		offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
-////	 		auto: true,//可选,默认false.首次加载自动上拉刷新一次
-//	 		callback: function(){} //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-//	     }
-//   	}
+	//	 pullRefresh: {
+	//	     container: ".mui-content",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+	//	     down : {
+	////	 		style: 'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+	////	 		color:' #2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+	////	 		height: '50px',//可选,默认50px.下拉刷新控件的高度,
+	////	 		range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+	////	 		offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
+	////	 		auto: true,//可选,默认false.首次加载自动上拉刷新一次
+	//	 		callback: function(){} //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+	//	     }
+	//   	}
 });
 var currentWebview;
 var homeDiv;
 var marqueeArray = []; //跑马灯数据数组
 var recommendArray = []; //推荐商品数组
-mui.plusReady(function() {
+mui.plusReady(function () {
 	currentWebview = plus.webview.currentWebview();
 	homeDiv = document.getElementById('homeDiv');
 	getTopCategory();
 	// 获取商品列表
 	getGoodsList();
-    
+
 	//添加每个item点击的监听事件
-	$('#channelList').on('click', 'li', function() {
+	$('#channelList').on('click', 'li', function () {
 		var id = $(this).attr('id');
 
 		// 所有分类
-		if(id == "all"){
+		if (id == "all") {
 			pushWebView({
 				webType: 'newWebview_First',
 				id: 'appCategory/category.html',
@@ -53,16 +53,16 @@ mui.plusReady(function() {
  * 获取所有分类
  * @author lsw
  */
-function getTopCategory(){
+function getTopCategory() {
 	$.ajax({
 		url: prefix + "/category/topList",
 		type: 'GET',
 		dataType: "json",
-		success: function(res){
+		success: function (res) {
 			// 打印请求报错日志
 			ajaxLog(res);
 
-			if(res.resCode == 0){
+			if (res.resCode == 0) {
 				var categoryList = res.result;
 				for (var i = 0; i < categoryList.length; i++) {
 					var id = categoryList[i].id; // 一级类目id
@@ -74,15 +74,15 @@ function getTopCategory(){
 					categoryTemplate = categoryTemplate.replace("#name#", name);
 					categoryTemplate = categoryTemplate.replace("#strTopImg#", strTopImg);
 					var categoryTemplateDom = $(categoryTemplate);
-					;(function(id,categoryTemplateDom,name){
-							categoryTemplateDom.on("click",function(){
-								openCatGoods(id,0,name);u
-								return false;
-							});
-					})(id,categoryTemplateDom,name);
+					; (function (id, categoryTemplateDom, name) {
+						categoryTemplateDom.on("click", function () {
+							openCatGoods(id, 0, name);
+							return false;
+						});
+					})(id, categoryTemplateDom, name);
 					$("#all").before(categoryTemplateDom);
 				}
-				
+
 			}
 		}
 	});
@@ -93,34 +93,34 @@ function getTopCategory(){
  * 获取商品列表
  * @author xuezhenxiang
  */
-function getGoodsList(){
+function getGoodsList() {
 	$.ajax({
 		url: prefix + "/goods/getModularGoods/1",
 		type: 'GET',
 		dataType: "json",
-		success: function(e){
+		success: function (e) {
 			_LoadNumber.a = true;
 			// 打印请求报错日志
 			ajaxLog(e);
 
-			if(e.resCode == 0){
+			if (e.resCode == 0) {
 				var result = e.result;
-				
+
 				$("#goodsList").html("");
 
-				for(var i = 0, len = result.length; i < len; i++){
+				for (var i = 0, len = result.length; i < len; i++) {
 					var activityImg = result[i].strImg;
 					var mallGoodsList = result[i].mallGoodsList;
 					var htmlTemplate = $("#goodsListTemplate").html();
-					if(activityImg){
+					if (activityImg) {
 						htmlTemplate = htmlTemplate.replace("#activityImg#", activityImg);
-					}else{
+					} else {
 						htmlTemplate = htmlTemplate.replace("#activityImg#", "");
 					}
 
 					var goodslist = $(htmlTemplate);
 
-					for(var i1 = 0, len1 = mallGoodsList.length; i1 < len1; i1++){
+					for (var i1 = 0, len1 = mallGoodsList.length; i1 < len1; i1++) {
 						var id = mallGoodsList[i1].id;
 						var strGoodsName = mallGoodsList[i1].strGoodsName;
 						var strMainImg = mallGoodsList[i1].strMainImg;
@@ -135,8 +135,8 @@ function getGoodsList(){
 						goodsTemplate = goodsTemplate.replace("#defaultSkuPrice#", defaultSkuPrice);
 
 						var goods = $(goodsTemplate);
-						;(function(){
-							goods.on("tap", function(){
+						; (function () {
+							goods.on("tap", function () {
 								var goodsId = this.getAttribute('id');
 								var extendOptions = {
 									goodsId: goodsId
@@ -155,7 +155,7 @@ function getGoodsList(){
 						})();
 						goodslist.find(".goods-list").append(goods);
 					}
-					
+
 					$("#goodsList").append(goodslist);
 				}
 			}
@@ -164,19 +164,19 @@ function getGoodsList(){
 }
 
 
-function openCatGoods(catId0,thirdCategoryId,categoryName){
-	     pushWebView({
-	 						webType: 'newWebview_First',
-							id: 'appCategory/goodsBrandList.html',
-							href: 'appCategory/goodsBrandList.html',
-							aniShow: getaniShow(),
-							title: categoryName,
-							isBars: false,
-							barsIcon: '',
-							extendOptions: {
-								catId0: catId0
-							}
-						});			
+function openCatGoods(catId0, thirdCategoryId, categoryName) {
+	pushWebView({
+		webType: 'newWebview_First',
+		id: 'appCategory/goodsBrandList.html',
+		href: 'appCategory/goodsBrandList.html',
+		aniShow: getaniShow(),
+		title: categoryName,
+		isBars: false,
+		barsIcon: '',
+		extendOptions: {
+			catId0: catId0
+		}
+	});
 }
 
 //下拉刷新
@@ -420,16 +420,16 @@ function PullRefresh(id) {
 			document.getElementById('top2').style.display = 'block';
 			document.getElementById('top3').style.display = 'none';
 			an(0);
-   			 _LoadNumber = { a: false };
+			_LoadNumber = { a: false };
 			_isPullRefresh = true;
 			var loadNumberTimeId = setInterval(function () {
-				 if (_LoadNumber.a) {
-				 	_isPullRefresh = false;
+				if (_LoadNumber.a) {
+					_isPullRefresh = false;
 					refresState = 1;
 					an(- refreshHeight);
 					clearInterval(loadNumberTimeId);
-				 }
-				
+				}
+
 			}, 1000);
 			// 请求接口数据
 			getGoodsList();

@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0" />
 	<meta name="format-detection" content="telephone=no">
-	<link type="text/css" rel="stylesheet"  href="../common/css/mui.min.css">
-	<link type="text/css" rel="stylesheet"  href="../common/css/swiper.min.css">
+	<link type="text/css" rel="stylesheet" href="../common/css/mui.min.css">
+	<link type="text/css" rel="stylesheet" href="../common/css/swiper.min.css">
 	<link rel="stylesheet" href="../common/css/public.css">
-	<link rel="stylesheet" href="css/productDetail.css">	
+	<link rel="stylesheet" href="css/productDetail.css">
 	<script src="../common/js/remScale.js"></script>
 	<title>商城详情</title>
 </head>
+
 <body>
 	<header class="mui-bar mui-bar-nav">
-	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 	</header>
-    <div class="swiper-pages">
+	<div class="swiper-pages">
 		<div class="swiper-wrapper">
 			<div class="mallTapDetall">
 				<div class="swiper-container" id="banner-swiper">
@@ -40,7 +42,7 @@
 						<!-- 已售 150 -->
 					</div>
 				</div>
-				
+
 				<div id="appDetailApprove" class="detailClass">
 					<img src="../common/image/tiaozhuan@2x.png" />
 					<span id="spanSelect" class="yxz">已选：</span>
@@ -48,33 +50,37 @@
 						<!-- 浆果红，4G+64G，移动联通电信 -->
 					</div>
 				</div>
-		
+
 				<!-- 商品详情图片 -->
 				<div class="mallDetailImgList">
 					<div class="mallDetailLeftLine"></div>
 					<div class="mallDetailRightLine"></div>
-					<div class="mallDetail" id="mallDetail"></div>	
+					<div class="mallDetail" id="mallDetail"></div>
 				</div>
 			</div>
-		</div>   	
+		</div>
 	</div>
-		
+
 	<!-- sku选择 -->
-    <div class="mallbackground backselectPop" id="mallbackground" style="display: none;"></div>
+	<div class="mallbackground backselectPop" id="mallbackground" style="display: none;"></div>
 	<div class="mallSelection clearfix" id="mallSelection" style="display: none;">
 		<div class="seleHead clearfix">
 			<div class="mallclose" id="closeBtn">
-				<img src="../common/image/ic_guanbi_nor@2x.png"/>
+				<img src="../common/image/ic_guanbi_nor@2x.png" />
 			</div>
 			<div class="popupThimg">
 				<div class="detailLootAll">已抢光</div>
 				<img id="selectIMG" src="" />
-			</div>					
+			</div>
 			<div class="popupright clearfix">
 				<div class="paddLeft">
-					<p id="strDetailName1"><!-- vivo x21 屏幕指纹版 双摄拍照游戏手机 6G+128GB冰钻黑 移动联 --></p>
-					<div class="money" id="nPrice1"><!-- <span>￥</span>500.00 --></div>					
-				</div>						
+					<p id="strDetailName1">
+						<!-- vivo x21 屏幕指纹版 双摄拍照游戏手机 6G+128GB冰钻黑 移动联 -->
+					</p>
+					<div class="money" id="nPrice1">
+						<!-- <span>￥</span>500.00 -->
+					</div>
+				</div>
 			</div>
 		</div>
 		<div id="optionSelect" class="optionSelect">
@@ -88,14 +94,14 @@
 					<span>银色</span>
 				</div> -->
 			</div>
-			
-		 	<div class="stageClass classtop clearfix">
-			 	<div class="leftNum">数量</div>
+
+			<div class="stageClass classtop clearfix">
+				<div class="leftNum">数量</div>
 				<div class="addNum" id="count">
 					<div id="upreduce" class="left">-</div>
 					<div id='num_id' class="content">1</div>
 					<div id="addnumId" class="right">+</div>
-				</div>	
+				</div>
 			</div>
 			<!-- <div class="insurance_Width" id="appreciation">
 				<div class="insurance" index="2" >
@@ -116,9 +122,10 @@
 		<div class="add-cart" id="addCart">加入购物车</div>
 		<div class="buy-now" id="buyNow">立即购买</div>
 	</div>
-		
+
 	<script type="text/javascript" src="../common/js/include.js" level="1"></script>
 	<script type="text/javascript" src="../common/js/swiper.min.js"></script>
 	<script type="text/javascript" src="productDetail.js"></script>
 </body>
+
 </html>

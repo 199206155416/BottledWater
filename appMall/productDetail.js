@@ -6,31 +6,31 @@ var currentWebview; // 当前子页面
 var paredntWebview; // 父页面
 var goodsId; // 商品id
 var buyNowFlag = 0; // buyNowFlag == 0 点击sku选择弹层确定按钮立即购买, buyNowFlag == 1 加入购物车
-var isSubmitFlag=true;//是否可以提交
+var isSubmitFlag = true;//是否可以提交
 
 mui.init({
 	swipeBack: false
 });
 
 
-mui.plusReady(function() {
+mui.plusReady(function () {
 	currentWebview = plus.webview.currentWebview();
 	paredntWebview = currentWebview.parent();
 	detailcontent = document.getElementById('detailcontent');
 	//监听页面隐藏的隐藏的时候清空数据信息
-	currentWebview.addEventListener('hide', function() {
+	currentWebview.addEventListener('hide', function () {
 		goodsId = null;
 	}, false);
 
 	goodsId = currentWebview.goodsId;
-	
+
 	//如果要获取当前页面的数据
-	mui.fire(paredntWebview,'getExtendOptions',{});
+	mui.fire(paredntWebview, 'getExtendOptions', {});
 	//监听返回获取到options数据
-	window.addEventListener('postExtendOptions',function(e){
+	window.addEventListener('postExtendOptions', function (e) {
 		console.log(JSON.stringify(e.detail.extendOptions))
-	},false);
-	
+	}, false);
+
 	// 查询商品详情
 	getGoodsDetail();
 
@@ -42,14 +42,14 @@ mui.plusReady(function() {
  * 查询商品详情
  * @author xuezhenxiang
  */
-function getGoodsDetail(){
+function getGoodsDetail() {
 	$.ajax({
 		url: prefix + "/goods/detail/" + goodsId,
 		type: "GET",
 		dataType: "json",
-		success: function(res){
+		success: function (res) {
 			ajaxLog(res);
-			if(res.resCode == 0){
+			if (res.resCode == 0) {
 				var result = res.result;
 
 				mallGoods = {
@@ -62,13 +62,10 @@ function getGoodsDetail(){
 					nSaleNum: result.mallGoods.defaultSkuSaleNum
 				};
 
-				
-
 				slideImgList = result.mallGoods.strDetailMainImg.split("|");
-
 				attrMap = result.attrMap;
 
-				for(var i in attrMap){
+				for (var i in attrMap) {
 					currentSku += attrMap[i][0] + " ";
 				}
 				setHtml();
@@ -84,29 +81,30 @@ function setHtml() {
 	setproductMessage();
 	// 设置sku选择
 	setChooseSku();
-	
+
 };
 
 /**
  * 设置图片轮播
  * @author xuezhenxiang
  */
-function setSldiderHtml(focusImgs){
+function setSldiderHtml(focusImgs) {
 	var focusImgs = slideImgList; // 图片
 	var focusImgHtml = "";
-	for(var i = 0; i < focusImgs.length; i++){
-		var strImg=focusImgs[i];
-		focusImgHtml += "<div class='swiper-slide'><img src="+ strImg +" class='slide_img'/></div>";
-	}		
+	for (var i = 0; i < focusImgs.length; i++) {
+		var strImg = focusImgs[i];
+		focusImgHtml += "<div class='swiper-slide'><img src=" + strImg + " class='slide_img'/></div>";
+	}
 	$("#slide_a").html(focusImgHtml);
 	// 轮播图数字
 	//Swiper  轮播插件
-	window.swiper = new Swiper('#banner-swiper',{
-		pagination : '.swiper-pagination',
-		paginationClickable :true,
-		autoplayDisableOnInteraction:false,
-		initialSlide :0,
-		resistanceRatio : 0
+	window.swiper = new Swiper('#banner-swiper', {
+		pagination: '.swiper-pagination',
+		paginationType: 'fraction',
+		paginationClickable: true,
+		autoplayDisableOnInteraction: false,
+		initialSlide: 0,
+		resistanceRatio: 0
 	});
 };
 
@@ -114,7 +112,7 @@ function setSldiderHtml(focusImgs){
  * 第二步设置商品名字价钱等
  * @author xuezhenxiang
  */
-function setproductMessage(){
+function setproductMessage() {
 	var strGoodsName = mallGoods.strSkuName;
 	var strIntroduce = mallGoods.strIntroduce;
 	var strTitle = mallGoods.strTitle;
@@ -134,16 +132,16 @@ function setproductMessage(){
 /**
  * 设置sku选择
  * @author xuezhenxiang
- */ 
-function setChooseSku(){
+ */
+function setChooseSku() {
 	var strHtml = ""
-	for(var i in attrMap){
-		strHtml += "<div class='class'><h3>"+ i +"</h3>";
-		for(var ii = 0,ll = attrMap[i].length; ii < ll; ii++){
-			if(ii == 0){
-				strHtml += "<span class='row' name="+ i +">"+ attrMap[i][ii] +"</span>";
-			}else{
-				strHtml += "<span name="+ i +">"+ attrMap[i][ii] +"</span>";
+	for (var i in attrMap) {
+		strHtml += "<div class='class'><h3>" + i + "</h3>";
+		for (var ii = 0, ll = attrMap[i].length; ii < ll; ii++) {
+			if (ii == 0) {
+				strHtml += "<span class='row' name=" + i + ">" + attrMap[i][ii] + "</span>";
+			} else {
+				strHtml += "<span name=" + i + ">" + attrMap[i][ii] + "</span>";
 			}
 		}
 		strHtml += "</div>";
@@ -155,34 +153,34 @@ function setChooseSku(){
  * 事件绑定
  * @author xuezhenxiang
  */
-function bindEvent(){
+function bindEvent() {
 	// 添加购物车
-	$("#addCart").on("click", function(){
+	$("#addCart").on("click", function () {
 		$("#mallbackground").show();
 		$("#mallSelection")
 			.show()
-			.animate({bottom: 0}, 300);
+			.animate({ bottom: 0 }, 300);
 		// 确定按钮加入购物车
 		buyNowFlag = 1;
 	});
 	// 立即购买
-	$("#buyNow, #appDetailApprove").on("click", function(){
+	$("#buyNow, #appDetailApprove").on("click", function () {
 		$("#mallbackground").show();
 		$("#mallSelection")
 			.show()
-			.animate({bottom: 0}, 300);
+			.animate({ bottom: 0 }, 300);
 		//立即购买
 		buyNowFlag = 0;
 	});
 	// 关闭sku选择弹层
-	$("#closeBtn, #mallbackground").on("click", function(){
-		$("#mallSelection").animate({bottom: "-8rem"}, 300, function(){
+	$("#closeBtn, #mallbackground").on("click", function () {
+		$("#mallSelection").animate({ bottom: "-8rem" }, 300, function () {
 			$("#mallbackground").hide();
 			$("#mallSelection").hide();
 		});
 	});
 	// 点击购物车
-	$("#shopCart").on("click", function(){
+	$("#shopCart").on("click", function () {
 		pushWebView({
 			webType: 'newWebview_First',
 			id: 'appCart/cart.html-1',
@@ -198,18 +196,18 @@ function bindEvent(){
 	});
 
 	// 提交按钮绑定事件
-	$("#submitBtn").on("click", function(){
-		if(!isSubmitFlag){
+	$("#submitBtn").on("click", function () {
+		if (!isSubmitFlag) {
 			mui.toast("库存不足,请购买其他类型");
 			return false;
 		}
 		var strUserId = localStorage.getItem('userId'); // 用户id
 		var nCount = $("#num_id").html();
 		//检测已经存在sessionkey否者运行下面的登陆代码
-		if (localStorage.getItem('userMobile') && strUserId) {} else {
+		if (localStorage.getItem('userMobile') && strUserId) { } else {
 			id = "login/login.html";
 			aniShow = 'slide-in-bottom';
-				pushWebView({
+			pushWebView({
 				webType: 'newWebview_First',
 				id: id,
 				href: id,
@@ -219,7 +217,7 @@ function bindEvent(){
 			return false;
 		}
 
-		if(buyNowFlag == 0){
+		if (buyNowFlag == 0) {
 			pushWebView({
 				webType: 'newWebview_First',
 				id: 'appMall/addOrder.html',
@@ -239,14 +237,14 @@ function bindEvent(){
 							"nCount": nCount
 						}
 					],
-					buyType:0
-					
+					buyType: 0
+
 				}
 
 			});
-		}else if(buyNowFlag == 1){
+		} else if (buyNowFlag == 1) {
 			var formData = new FormData();
-			
+
 			formData.append("strUserId", strUserId);
 			formData.append("strSpuId", goodsId);
 			formData.append("skuCount", nCount);
@@ -257,18 +255,18 @@ function bindEvent(){
 				type: "POST",
 				data: formData,
 				contentType: false,
-			 	processData: false,  
+				processData: false,
 				dataType: "json",
-				success: function(res){
+				success: function (res) {
 					ajaxLog(res);
-					if(res.resCode == 0){
+					if (res.resCode == 0) {
 						mui.toast(res.result);
-						$("#mallSelection").animate({bottom: "-8rem"}, 300, function(){
+						$("#mallSelection").animate({ bottom: "-8rem" }, 300, function () {
 							$("#mallbackground").hide();
 							$("#mallSelection").hide();
 						});
 
-						mui.each(plus.webview.all(), function(index, item) {
+						mui.each(plus.webview.all(), function (index, item) {
 							console.log(item.id)
 						})
 						var cartwebview = plus.webview.getWebviewById('appCart/cart.html');
@@ -280,47 +278,47 @@ function bindEvent(){
 	});
 
 	// 切换sku
-	$("#mallSku").on("click", "span", function(){
+	$("#mallSku").on("click", "span", function () {
 		var flag = $(this).hasClass("row");
 		var name = $(this).attr("name");
 		currentSku = "";
 
-		if(!flag){
+		if (!flag) {
 			$(this).addClass("row").siblings().removeClass("row");
 
 			var formData = new FormData();
 			formData.append("mallGoods.id", goodsId);
 
 
-			$("#mallSku .row").each(function(i, v){
+			$("#mallSku .row").each(function (i, v) {
 				var strAttrName = $(v).attr('name');
 				var strSttrValue = $(v).html();
 
-				formData.append("mallSkuAttrList["+i+"].strAttrName", strAttrName);
-				formData.append("mallSkuAttrList["+i+"].strSttrValue", strSttrValue);
+				formData.append("mallSkuAttrList[" + i + "].strAttrName", strAttrName);
+				formData.append("mallSkuAttrList[" + i + "].strSttrValue", strSttrValue);
 
 				currentSku += strSttrValue + " ";
 			});
-			
+
 			$.ajax({
 				url: prefix + "/goods/skuDetailByAttr",
 				type: "POST",
 				data: formData,
 				contentType: false,
-			 	processData: false,  
+				processData: false,
 				dataType: "json",
-				success: function(res){
+				success: function (res) {
 					ajaxLog(res);
-					if(res.resCode == 0){
+					if (res.resCode == 0) {
 
 						var result = res.result;
-                        if("无"==result){
-                        	mui.toast("暂无库存");
-                        	isSubmitFlag=false;
-                        	return false;
-                        }else{
-                        	isSubmitFlag=true;
-                        }
+						if ("无" == result) {
+							mui.toast("暂无库存");
+							isSubmitFlag = false;
+							return false;
+						} else {
+							isSubmitFlag = true;
+						}
 						mallGoods = {
 							strSkuId: result.id,
 							strSkuName: result.strSkuName,
@@ -340,14 +338,14 @@ function bindEvent(){
 	});
 
 	// 选择购买数量
-	$("#count").on("click", "div", function(){
+	$("#count").on("click", "div", function () {
 		var count = $("#num_id").html();
-		if($(this).hasClass("left")){
+		if ($(this).hasClass("left")) {
 			count--;
-			if(count <= 1){
+			if (count <= 1) {
 				count = 1;
 			}
-		}else if($(this).hasClass("right")){
+		} else if ($(this).hasClass("right")) {
 			count++;
 		}
 		$("#num_id").html(count);
