@@ -118,7 +118,6 @@ function getGoodsList() {
 			if(res.resCode == 0){
 				var nCount = res.result.count;
 				var goodsList = res.result.list;
-
 				if (nCount == 0) {
 					$("#shopPingNullTemp").show();
 					return false;

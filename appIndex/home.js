@@ -29,6 +29,7 @@ var marqueeArray = []; //跑马灯数据数组
 var recommendArray = []; //推荐商品数组
 
 mui.plusReady(function() {
+	alert("aaaa");
 	currentWebview = plus.webview.currentWebview();
 	// 获取焦点图
 	getFocusImg();
@@ -66,8 +67,8 @@ mui.plusReady(function() {
 });
 
 
-function openCouponCon(){
-	     var extendOptionsData={conType:2};
+function openUseCon(){
+	     var extendOptionsData={conType:4};
 		var aniShow = getaniShow();
 
 		pushWebView({
