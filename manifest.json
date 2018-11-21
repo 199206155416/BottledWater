@@ -3,7 +3,7 @@
 	"id": "H55EFBA87",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "智慧订水",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.0.0",/*应用版本名称*/
+		"name": "2.0.0",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -190,7 +190,7 @@
 					"xxhdpi": ""
 				}
 			},
-			"plugins":{"push":{"igexin":{"appid":"MdtWK8HuJN6xdEBRi5qK68","appkey":"qAuMR2LBvt6oZnRcrw6s12","appsecret":"asXTzGn0a179qq1Osk4Sv2"}},"maps":{"baidu":{"appkey_ios":"DudDUgMbOFnIGr1qX14rqwZ7rKhqabtO","appkey_android":"b8uvkGoh37qWKgeB6x6eQmdBrAalyK3z","appkey":"","description":""}},
+			"plugins":{"push":{"igexin":{"appid":"5T2pD7mQ2Y56ambeYRDiF3","appkey":"jr9vdGShwV6beOEr98YtO3","appsecret":"9GOcEaiPs69rVqm2yYYyQ5"}},"maps":{"baidu":{"appkey_ios":"DudDUgMbOFnIGr1qX14rqwZ7rKhqabtO","appkey_android":"b8uvkGoh37qWKgeB6x6eQmdBrAalyK3z","appkey":"","description":""}},
 				"payment":{
 					"alipay":{
 						"description":"支付宝支付"
@@ -281,7 +281,8 @@
 					"myCenter/accountCharge.html",
 					"myCenter/retreatRecord.html",
 					"myCenter/reclaimList.html",
-					"appOrder/reclaimList.html"
+					"appOrder/reclaimList.html",
+					"myCenter/myInvite.html"
 				],
 				"priority": 0
 			},

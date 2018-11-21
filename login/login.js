@@ -124,6 +124,7 @@ function doLogin(strMobile,strPassword){
 					var result = e.result;
 					// 存储用户id
 					setStringValue("userId", result.id);
+					setStringValue("strInviteCode", result.strInviteCode);
 					// 存储电话
 					setStringValue("userMobile", result.mobile);
 					setStringValue("userName", result.name);

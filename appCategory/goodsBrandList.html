@@ -15,7 +15,7 @@
 	    <img src="../common/image/back@2x.png" alt="" class="back mui-action-back">
 	    <h1 class="title" id="mallUp"></h1>
 	    <ul class="tab-list" id="sort">
-	    	<li class="synthesizeSort active" id="synthesizeSort" sortType="-1">综合</li>
+	    	<li class="synthesizeSort active" id="synthesizeSort" sortType="default_sku_sale_num">综合</li>
 			<li id="saleNum" sortType="default_sku_sale_num">销量</li>
 			<li id="costNum" sortType="defaultSkuPrice">价格
 				<span id="" class="priceSort">
@@ -69,11 +69,7 @@
 			<div id='load' style="text-align: center;font-size: .3rem; line-height:44px;color: #999;">
 				<div class="mui-pull-loading mui-icon mui-spinner"></div> 加载中...
 			</div>
-		</div>
-
-		<!-- 查询无结果 -->
-		<div id="shopPingNullTemp" style="display: none">
-			<div class="empty">
+			<div class="empty" id="shopPingNullTemp" style="display: none;" >
 				<img class="empty_img" src="../common/image/blank.png" />
 				<p>没有数据...</p>
 			</div>
