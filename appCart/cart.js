@@ -13,9 +13,7 @@ mui.init({
 
 mui.plusReady(function(){
 	cartWebview = plus.webview.currentWebview();
-
 	hasBack = cartWebview.hasBack;
-
 	if(hasBack == 1){
 		$(".mui-action-back").show();
 	}
@@ -79,6 +77,8 @@ mui.plusReady(function(){
 	// 事件绑定
 	bindEvent();
 });
+
+
 
 /**
  * 事件绑定
@@ -213,7 +213,6 @@ function getCartList(){
 	formData.append("strUserId", strUserId);
 	formData.append("pageNo", 1);
 	formData.append("pageSize", 50);
-
 	$.ajax({
 		url: prefix + "/shoppingcard/list",
 		type: 'POST',
@@ -253,6 +252,7 @@ function getCartList(){
 						strSkuName: result[i].mallGoodsSku.strSkuName,
 						skuStock: result[i].mallGoodsSku.skuStock,
 						skuPrice: result[i].mallGoodsSku.skuPrice,
+						strSkuSttrs:result[i].mallGoodsSku.strSkuSttrs,
 						remarks: strTitle
 					};
                     console.log(JSON.stringify(mallGoodsSku));
@@ -265,7 +265,8 @@ function getCartList(){
 					goodsTemplate = goodsTemplate.replace("#skuStock#", mallGoodsSku.skuStock);
 					goodsTemplate = goodsTemplate.replace("#skuCount#", skuCount);
 					goodsTemplate = goodsTemplate.replace("#curIndex#", i);
-					goodsTemplate = goodsTemplate.replace("#strSKUItemValues#", mallGoodsSku.remarks);
+					//goodsTemplate = goodsTemplate.replace("#remarks#", mallGoodsSku.remarks);
+					goodsTemplate = goodsTemplate.replace("#strSkuSttrs#", mallGoodsSku.strSkuSttrs);
 					
 
 					cartObj.list[i].isCheck = 0;
@@ -409,7 +410,7 @@ function calculatePrice(){
 	}
 
 	$("#shopNumId").html("(" + nCount + ")");
-	$("#priceMoney").html("￥" + nTotalPrice);
+	$("#priceMoney").html("¥" + nTotalPrice);
 };
 
 

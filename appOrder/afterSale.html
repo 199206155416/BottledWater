@@ -17,13 +17,26 @@
 	</header>
 	
 	<div class="mui-content">
-		<!-- 订单列表 -->
-	    <ul id="orderListID">	
+		<div class="completeOrderList" id="scroll" style="-webkit-transform:  translate3d(0,-44px,0);transform: translate3d(0,-44px,0);">	
+		<div class="scroll-y-ios"></div>
+		<div style="font-size: .3rem; line-height:44px;color: #999;">
+			<div id='top1' style="text-align: center;">
+				<div class="mui-pull-loading mui-icon mui-icon-pulldown" style="-webkit-transform: rotate(180deg);transform: rotate(180deg); "></div> 下拉即可刷新...
+			</div>
+			<div id='top2' style="display: none;text-align: center;">
+				<div class="mui-pull-loading mui-icon mui-spinner"></div> 加载中...
+			</div>
+			<div id='top3' style="display: none;text-align: center;">
+				<div class="mui-pull-loading mui-icon mui-icon-pulldown"></div>释放即可刷新...
+			</div>
+		</div>
+		<ul id="orderListID">
 			
-		</ul>	
+		</ul>
 		<div id='load' style="text-align: center;font-size: .3rem; line-height:44px;color: #999;">
 			<div class="mui-pull-loading mui-icon mui-spinner"></div> 加载中...
 		</div>
+	</div>
 		<!-- 列表没有数据 -->
 		<div class="empty" id="orderNullTemp" style="display: none">
 			<img class="empty_img" src="../common/image/blank.png" />
@@ -50,7 +63,7 @@
 							<div class="goods-info">
 								<p class="goods-title">#strGoodsTitle#</p>
 								<p class="goods-sku">#strGoodsSKUDetail#</p>
-								<p class="goods-price">￥#skuPrice#<span class="goods-count">X#count#</span></p>
+								<p class="goods-price">¥#skuPrice#<span class="goods-count">X#count#</span></p>
 							</div>
 						</div>
 		

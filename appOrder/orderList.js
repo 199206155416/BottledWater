@@ -204,7 +204,7 @@ function getOrderList(){
 						var goodsTemplate = $("#goodsTemplate").html();
 						goodsTemplate = goodsTemplate.replace("#strGoodsImg#", strGoodsImg);
 						goodsTemplate = goodsTemplate.replace("#strGoodsTitle#", commonNameSubstr(strGoodsName, 34));
-						goodsTemplate = goodsTemplate.replace("#strGoodsSKUDetail#", commonNameSubstr(strSkuAttr, 28));
+						goodsTemplate = goodsTemplate.replace("#strGoodsSKUDetail#",strSkuAttr);
 						goodsTemplate = goodsTemplate.replace("#skuPrice#", skuPrice);
 						goodsTemplate = goodsTemplate.replace("#count#", count);
 						
@@ -529,6 +529,7 @@ function PullRefresh(id, callback) {
 		if (prevMoveY > clientY) {
 			direction = 'up'
 		}
+		console.log("topState："+topState+",scroll:+"+$("#scroll").scrollTop()+"direction:"+direction);
 		//触碰到下滑临界值
 		if (topState === 1 && $("#scroll").scrollTop() <= 0 && direction == 'down') {
 			event.preventDefault();

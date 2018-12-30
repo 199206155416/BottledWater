@@ -85,7 +85,7 @@ function getRefundDetail(){
 					var strImgPath=item.strImgPath;
 					$('#refundReason').html(refundReason);
 					if(refundMoney&&0!=refundMoney){
-						$('#refundMoney').html("￥"+refundMoney);
+						$('#refundMoney').html("¥"+refundMoney);
 					}else{
 						$('#refundMoney').parent().hide();
 					}

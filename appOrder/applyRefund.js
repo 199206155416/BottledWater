@@ -156,7 +156,7 @@ function initSelect(){
  */
 function getOrderDetail(){
 	            var factPrice=order.factPrice;
-	            $("#factPrice").html("￥"+factPrice);
+	            $("#factPrice").html("¥"+factPrice);
 				var mallOrderDetailList = order.mallOrderDetailList; // 商品列表
 				for(var i = 0, len = mallOrderDetailList.length; i < len; i++){
 					var remarks = mallOrderDetailList[i].remarks;
@@ -169,7 +169,7 @@ function getOrderDetail(){
 									'<div class="goods-info">'+
 										'<p class="goods-title">'+strSkuName+'</p>'+
 										'<p class="goods-sku">'+remarks+'</p>'+
-										'<p class="goods-price">￥'+skuPrice+'<span class="goods-count">X'+count+'</span></p>'+
+										'<p class="goods-price">¥'+skuPrice+'<span class="goods-count">X'+count+'</span></p>'+
 									'</div>'+
 								'</div>';
 					$(".goods-list").append(orderListTemp);

@@ -122,7 +122,7 @@ function setproductMessage() {
 
 	$("#strDetailName, #strDetailName1").html(strGoodsName); // 商品名称
 	$("#strNotice").html(strTitle); // 商品描述
-	$("#nPrice, #nPrice1").html("<span>￥</span>" + nSkuPrice); // 商品价格
+	$("#nPrice, #nPrice1").html("<span>¥</span>" + nSkuPrice); // 商品价格
 	$("#saleNum").html("已售 " + nSaleNum); // 商品已售
 	$("#appendRove").html(currentSku); // 当前商品sku信息
 	$("#selectIMG").attr("src", strDetailIcon);

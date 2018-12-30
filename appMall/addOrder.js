@@ -15,7 +15,9 @@ var bucketNum=0;
 var bucketMoney=0.0;
 var ticketTotalCount=0;
 var isSubmit=false;
+var distributionFee=0;
 var strTitle;//副标题
+var flag0=false;
 mui.init({
 	swipeBack: false
 });
@@ -41,7 +43,8 @@ mui.plusReady(function() {
 		console.log(JSON.stringify(e.detail.extendOptions))
 	},false);
 	userId= localStorage.getItem("userId"); // 用户id
-	getPayDetail();
+	initPayChannel();
+	getPayDetail(0);
 
 	// 绑定事件
 	bindEvent();
@@ -61,9 +64,17 @@ function openAddress(){
 	});
 }
 
-function getPayDetail(){
+function chooseDeliveryType(){
+	var v=$("#strDeliveryType").val();
+	goodsList = currentWebview.goodsList;
+	flag0=true;
+	getPayDetail(v);
+}
+
+function getPayDetail(strDeliveryType){
 	var formData = new FormData();
 	formData.append("buyerId", userId);
+	formData.append("strDeliveryType", strDeliveryType);
 	formData.append("buyType", buyType);//购买类型分为：购物车结算和非购物车结算
 	for(var i=0;i<goodsList.length;i++){
 		var itemGoods=goodsList[i];
@@ -85,25 +96,35 @@ function getPayDetail(){
 				if(res.resCode == 0){
 					var result=res.result;
 					goodsList=result["goodsData"];
-					receiptAddress=result["defaultAddress"];
-		            factPrice=result["factPrice"];
+					distributionFee=result["distributionFee"];
+					factPrice=result["factPrice"];
 		            totalPrice=result["totalPrice"];
-		            payType=result["payType"];
-		            console.log("支付渠道："+payType);
-                    $("#paymentAmount").html(factPrice);
-					setHtml();
-					initPayChannel();
-					initPayText(payType);
-					var strTip=result["strTip"];
+		            if(distributionFee&&distributionFee!=0){
+						$("#distribution_feeLi").show();
+						$("#distributionFee").html("¥"+distributionFee);
+					}else{
+						distributionFee=0;
+						$("#distribution_feeLi").hide();
+					}
+		            var strTip=result["strTip"];
 					if(strTip){
-					    mui.alert(strTip, '桶押金提示', function(e) {
+					    mui.alert(strTip, '提示', function(e) {
 				        },"div");
 					}
+					 $("#paymentAmount").html(+factPrice);
+					if(flag0){
+						return;
+					}
+					receiptAddress=result["defaultAddress"];
+		            payType=result["payType"];
+		            console.log("支付渠道："+payType);
+					setHtml();
+					initPayText(payType);
 					bucketNum=result["bucketNum"];
 					bucketMoney=result["bucketMoney"];
 					if(bucketNum){
 						$("#bucketNum").show();
-						$("#bucketNumText").html(bucketNum+"/"+bucketMoney+"￥");
+						$("#bucketNumText").html(bucketNum+"/"+bucketMoney+"¥");
 					}
 					ticketTotalCount=result["useTickecTotalCount"];
 					if(ticketTotalCount){
@@ -309,6 +330,7 @@ function doAddOrder(){
 		formData.append("factPrice", factPrice);
 		formData.append("totalPrice", totalPrice);
 		formData.append("strPayType", payType);
+		formData.append("distributionFee",distributionFee);
 		var strDeliveryType=$("#strDeliveryType").val();
 		formData.append("strDeliveryType", strDeliveryType);
 		var strBuyerMessage=$("#strBuyerMessage").val();//商品备注
@@ -399,8 +421,9 @@ function doPay(payInfo){
                         openPaySuccess(strOrderId);
                     });
                 },function(error){
-                    plus.nativeUI.alert("支付失败：" + JSON.stringify(error));
-                    	isSubmit=false;
+                    plus.nativeUI.alert("支付失败1：" + JSON.stringify(error));
+                    payFailHandle(strOrderId,error.message);
+                    isSubmit=false;
                 });
 	}else if(payType==0){
 		plus.payment.request(channel,payInfo,function(result){
@@ -408,13 +431,32 @@ function doPay(payInfo){
                         openPaySuccess(strOrderId);
                     });
                 },function(error){
-                    plus.nativeUI.alert("支付失败：" + JSON.stringify(error));
+                    plus.nativeUI.alert("支付失败2：" + JSON.stringify(error));
+                    payFailHandle(strOrderId,error.message);
                     isSubmit=false;
                 });
 	}else if(payType==2){//余额
 		openPaySuccess(strOrderId);
 	}
     isSubmit=false;
+}
+
+function payFailHandle(strOrderId,message){
+	$.ajax({
+			url: prefix + "/order/payFailState",
+			type: "POST",
+			dataType: "json",
+			data: {
+				strOrderId: strOrderId,
+				payRemarks: message
+			},
+			success: function(e){
+				ajaxLog(e);
+				if(e.resCode == 0){
+				}
+			}
+		});
+	
 }
 
 function openPaySuccess(strOrderId){

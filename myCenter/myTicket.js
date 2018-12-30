@@ -92,7 +92,7 @@ function getCouponList(){
 										'<p class="coupon-time">过期：'+dtExpire+'</p>'+
 									'</div>'+
 									'<div>'+
-										'<p class="coupon-price">￥'+couponPrice+'</p>'+
+										'<p class="coupon-price">¥'+couponPrice+'</p>'+
 										'<p class="coupon-comment">满'+fullPrice+'可用</p>'+
 									'</div>'+
 								'</div>'+

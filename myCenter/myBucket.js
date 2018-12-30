@@ -82,7 +82,7 @@ function getBucketInfo(){
 				bucketNum=data.bucketNum;
 				var bucketMoney=data.bucketMoney;
 				$("#bucketNum").html(bucketNum+"桶");
-				$("#bucketMoney").html("￥"+bucketMoney);
+				$("#bucketMoney").html("¥"+bucketMoney);
 			}
 		}
 	});

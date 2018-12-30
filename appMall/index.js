@@ -25,7 +25,6 @@ mui.plusReady(function () {
 	getTopCategory();
 	// 获取商品列表
 	getGoodsList();
-
 	//添加每个item点击的监听事件
 	$('#channelList').on('click', 'li', function () {
 		var id = $(this).attr('id');
@@ -69,14 +68,17 @@ function getTopCategory() {
 					var name = categoryList[i].name; // 一级类目的名称
 					var strTopImg = categoryList[i].strTopImg;//图片
 					var categoryTemplate = $("#catTemp").html();
-
 					categoryTemplate = categoryTemplate.replace("#id#", id);
 					categoryTemplate = categoryTemplate.replace("#name#", name);
 					categoryTemplate = categoryTemplate.replace("#strTopImg#", strTopImg);
 					var categoryTemplateDom = $(categoryTemplate);
 					; (function (id, categoryTemplateDom, name) {
 						categoryTemplateDom.on("click", function () {
-							openCatGoods(id, 0, name);
+							if("生活超市"==name){
+								openSuperMarket();
+							}else{
+								openCatGoods(id, 0, name);
+							}
 							return false;
 						});
 					})(id, categoryTemplateDom, name);
@@ -163,6 +165,19 @@ function getGoodsList() {
 	})
 }
 
+
+function openSuperMarket(){
+	pushWebView({
+				webType: 'newWebview_First',
+				id: 'appCategory/category.html',
+				href: 'appCategory/category.html',
+				aniShow: getaniShow(),
+				title: "商品分类",
+				isBars: false,
+				barsIcon: '',
+				extendOptions: {}
+			});
+}
 
 function openCatGoods(catId0, thirdCategoryId, categoryName) {
 	pushWebView({

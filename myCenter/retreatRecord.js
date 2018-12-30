@@ -40,7 +40,7 @@ function queryLogList(){
 			                	'<p class="recharge-time">'+createDate+'</p>'+
 				                '</div>'+
 				                '<div>'+
-				                	'<p class="recharge-price">+￥'+bucketMoney+'</p>'+
+				                	'<p class="recharge-price">+¥'+bucketMoney+'</p>'+
 				                	'<p class="recharge-type">'+stateName+'</p>'+
 				                '</div>'+
 				            			'</li>';

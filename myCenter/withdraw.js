@@ -3,7 +3,7 @@ var state = 0; // tab状态  0：未使用，1：已使用，2：过期
 var pageNo = 1;
 var loadFlag = 1; // 上拉加载标志
 var _LoadNumber = { a: false };
-
+var deliveryMoney=0;
 mui.init({
 	swipeBack: true
 });
@@ -11,64 +11,19 @@ mui.init({
 mui.plusReady(function() {
 	bindEvent();
 	userId = localStorage.getItem("userId"); // 用户id
-	getCouponList();
+	getSettlInfo();//获得结算信息
+	getMallCashLogList();
 });
 
-/**
- * 绑定事件
- */
-function bindEvent() {
-	// 点击tab切换列表
-	$(".tab-list").on("click", "li", function() {
-		state = $(this).index();
-		$(".active").removeClass("active"); //移除原来的
-		$(this).addClass("active"); //当前添加选中状态
-		$("#coupons").html(""); //清空原来内容
-		$("#load").show();
-		getCouponList();
-	});
-
-	// 屏幕滚动后加载列表
-	$(window).scroll(function() {
-		var scrollTop = $(this).scrollTop();	// 滚动高度		    
-		var scrollHeight = $(this).height(); // 文档高度
-		var windowHeight = $(window).height(); // 文档窗口高度
-			
-		if (scrollTop + windowHeight >= scrollHeight - 300) {
-			if(loadFlag == 1){
-				loadFlag = 0;
-				getCouponList();
-			}
-		}
-	});
-};
-/**
- * 优惠券使用说明
- */
-function openCouponCon() {
-	pushWebView({
-		webType: 'newWebview_First',
-		id: "myCenter/conshow.html",
-		href: "myCenter/conshow.html",
-		aniShow: getaniShow(),
-		extendOptions: {
-			conType: 2
-		}
-	});
-}
-
-/**
- * 获取优惠券 0：未使用，1：已使用，2：过期
- * @param {Object} state
- */
-function getCouponList() {
+function saveCash(){
+	if(deliveryMoney==0){
+		mui.toast("可提现金额不能为0");
+		return false;
+	}
 	var formData = new FormData();
-	formData.append("strUserId", userId);
-	formData.append("state", state);
-	formData.append("pageNo", pageNo);
-	formData.append("pageSize", 20);
+	formData.append("userId", userId);
 	$.ajax({
-		url: prefix + "/coupon/list",
+		url: prefix + "/settl/saveCash",
 		type: "POST",
 		data: formData,
 		contentType: false,
@@ -80,36 +35,120 @@ function getCouponList() {
 			var result = res.result;
 			if(res.resCode == 0) {
 				console.log(result);
-				
-				if(result.length < 10){
-					$("#load").hide();
-				}else{
-					$("#load").show();
+				mui.toast("提交成功！");
+				resetData();
+			} else {
+				mui.alert(result, '提示', function(e) {}, "div");
+			}
+		}
+	});
+}
+
+function resetData(){
+	getSettlInfo();
+	pageNo=1;
+	getMallCashLogList();
+}
+
+function getSettlInfo(){
+		$.ajax({
+		url: prefix + "/settl/getSettlInfo/"+userId,
+		type: "GET",
+		dataType: "json",
+		success: function(res) {
+			_LoadNumber.a = true;
+			ajaxLog(res);
+			var result = res.result;
+			if(res.resCode == 0) {
+				console.log(result);
+				var todayMoney=result["todayMoney"];
+				if(!todayMoney){
+					todayMoney=0;
 				}
-				
-				for(var i in result) {
-					var item = result[i];
-					var strCouponName = item["strCouponName"];
-					var dtExpire = item["dtExpire"];
-					var fullPrice = item["fullPrice"];
-					var couponPrice = item["couponPrice"];
-					var remarks = item["remarks"];
-					var strHtml = '<li class="coupon-item">' +
-						'<div class="coupon-item-body">' +
-						'<div>' +
-						'<p class="coupon-name">' + strCouponName + '</p>' +
-						'<p class="coupon-time">过期：' + dtExpire + '</p>' +
-						'</div>' +
-						'<div>' +
-						'<p class="coupon-price">￥' + couponPrice + '</p>' +
-						'<p class="coupon-comment">满' + fullPrice + '可用</p>' +
-						'</div>' +
-						'</div>' +
-						'<div class="coupon-item-footer">' +
-						'<p class="coupon-introduce">' + remarks + '</p>' +
-						'</div>' +
-						'</li>';
-					$("#coupons").append(strHtml);
+				deliveryMoney=result["deliveryMoney"];
+				if(!deliveryMoney){
+					deliveryMoney=0;
+				}
+				$("#deliveryMoney").html(deliveryMoney);
+				$("#todayMoney").html(todayMoney);
+				var t=parseFloat(todayMoney)+parseFloat(deliveryMoney);
+				$("#t").html(t);
+			} else {
+				mui.alert(result, '提示', function(e) {}, "div");
+			}
+		}
+	});
+}
+
+/**
+ * 绑定事件
+ */
+function bindEvent() {
+	// 点击tab切换列表
+	$(".tab-list").on("click", "li", function() {
+		state = $(this).index();
+		$(".active").removeClass("active"); //移除原来的
+		$(this).addClass("active"); //当前添加选中状态
+		$("#datas").html(""); //清空原来内容
+		$("#load").show();
+		getMallCashLogList();
+	});
+
+	// 屏幕滚动后加载列表
+	$(window).scroll(function() {
+		var scrollTop = $(this).scrollTop();	// 滚动高度		    
+		var scrollHeight = $(this).height(); // 文档高度
+		var windowHeight = $(window).height(); // 文档窗口高度
+			
+		if (scrollTop + windowHeight >= scrollHeight - 300) {
+			if(loadFlag == 1){
+				loadFlag = 0;
+				getMallCashLogList();
+			}
+		}
+	});
+};
+
+
+/**
+ * 提现记录
+ */
+function getMallCashLogList() {
+	var formData = new FormData();
+	formData.append("userId", userId);
+	formData.append("pageNo", pageNo);
+	formData.append("pageSize", 20);
+	$.ajax({
+		url: prefix + "/settl/list",
+		type: "POST",
+		data: formData,
+		contentType: false,
+		processData: false,
+		dataType: "json",
+		success: function(res) {
+			_LoadNumber.a = true;
+			ajaxLog(res);
+			var result = res.result;
+			if(res.resCode == 0) {
+				$("#load").hide();
+				var datas=result.list;
+				for(var i in datas) {
+					var item = datas[i];
+					var carryMoney = item["carryMoney"];
+					var state = item["state"];
+					var stateName="";
+					if("0"==state){
+						stateName="未结算";
+					}else if("1"==state){
+						stateName="已结算";
+					}
+					var createDate = item["createDate"];
+					//var remarks = item["remarks"];
+					var tempHtml=$("#temp").html();
+					tempHtml = tempHtml.replace("#carryMoney#", carryMoney);
+					tempHtml = tempHtml.replace("#stateName#", stateName);
+					tempHtml = tempHtml.replace("#createDate#", createDate);
+					$("#datas").append(tempHtml);
 				}
 
 				pageNo++;
@@ -438,7 +477,7 @@ function PullRefresh(id, callback) {
 PullRefresh('scroll', function() {
 	pageNo = 1;
 	loadFlag = 1;
-	$("#coupons").html("");
+	$("#datas").html("");
 	// 获取数据
-	getCouponList();
+	getMallCashLogList();
 });

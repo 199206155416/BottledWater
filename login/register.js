@@ -44,7 +44,9 @@ function getMsgCode(){
 					   $("#getCodeBtn").html("重新获取60s");
 					   timer0=window.setInterval("editDivText()",1000);
 					}else{
-						mui.alert(result);
+						mui.toast(result);
+						flag=false;
+      					window.clearInterval(timer0);
 					}
 				}
 			})
@@ -73,16 +75,20 @@ function register(){
 	$("#registerBtn").on("click", function(){
 		var mobile = $("#mobile").val().trim();
 		var password = $("#password").val().trim();
+		var strUserSmsCode = $("#strUserSmsCode").val().trim();
+		if(!strUserSmsCode){
+			mui.toast("请输入验证码");
+		    return;
+		}
 		 var regx =/^[\w]{6,12}$/;
 		  if(password.match(regx)==null){
 		    mui.toast("密码必须至少6位");
 		    return;
 		   }
-		var strUserSmsCode = $("#strUserSmsCode").val().trim();
-        var strInviteCode=$("#strInviteCode").val();
-        if(!strInviteCode){
-        	strInviteCode="";
-        }
+		var strInviteCode=$("#strInviteCode").val();
+		if(!strInviteCode){
+			strInviteCode="";
+		}
 		$.ajax({
 			url: prefix + "/user/register",
 			type: "POST",

@@ -3,26 +3,29 @@ mui.init({
 });
 
 mui.plusReady(function() {
-	var strInviteCode=localStorage.getItem("strInviteCode");
+	var strInviteCode=localStorage.getItem("myInviteCode");
 	$(".invite-code").html(strInviteCode);
-})
-// //点击头像事件
-// function addHeadevent() {
-// 	//点击头像登录
-// 	touxiangimg.addEventListener('tap', function() {
-// 		if (!localStorage.getItem('user')) {
-// 			pushWebView({
-// 				webType: 'newWebview_First',
-// 				id: 'login/login.html',
-// 				href: 'login/login.html',
-// 				aniShow: getaniShow(),
-// 				title: "登录",
-// 				isBars: false,
-// 				barsIcon: '',
-// 				extendOptions: {}
-// 			})
-// 		}
-// 	}, false);
-// }
+	getFocusImg();
+});
 
-
+/**
+ * 获取焦点图
+ */
+function getFocusImg() {
+	$.ajax({
+		url: prefix + "/sys/getTopImgs",
+		type: 'GET',
+		dataType: "json",
+		success: function(e) {
+			// 打印请求报错日志
+			ajaxLog(e);
+			if(e.resCode == 0) {
+				var result = e.result;
+				var strLink= result[0].strLink;
+			    var strImg= result[0].strImg;
+				$("#strImg").attr("src",strImg);
+				
+			}
+		}
+	});
+};

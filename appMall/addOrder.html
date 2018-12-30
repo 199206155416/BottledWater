@@ -77,11 +77,11 @@
 				<ul class="last-item-no-border">
 			        <li class="mui-table-view-cell" id="elePayType">
 		                <div class="own-list-label">支付方式</div>
-		                <div class="pay-type-content" id="elePayTypeText">账户余额</div>
+		                <div class="pay-type-content" id="elePayTypeText">微信</div>
 			        </li>
 			        <li class="mui-table-view-cell">
 		                <div class="own-list-label">优惠</div>
-		                <div class="discounts-content">0</div>
+		                <div class="freight-charge" style="color:red;">¥0</div>
 			        </li>
 			          <li class="mui-table-view-cell" id="bucketNum" style="display:none;">
 		                <div class="own-list-label">桶押金</div>
@@ -94,12 +94,15 @@
 			        <li class="mui-table-view-cell">
 		                <div class="own-list-label">配送方式</div>
 		                <div class="discounts-content" >
-		                	<select id="strDeliveryType">
-		                		<option value="-1">请选择</option>
+		                	<select id="strDeliveryType" onchange="chooseDeliveryType()">
 		                		<option value="1">自取</option>
-		                		<option value="0">配送</option>
+		                		<option value="0" selected="selected">配送</option>
 		                	</select>
 		                </div>
+			        </li>
+			         <li class="mui-table-view-cell" id="distribution_feeLi" style="display: none;">
+		                <div class="own-list-label">配送费</div>
+		                <div class="freight-charge" id="distributionFee" style="color: red;"></div>
 			        </li>
 			   </ul>
 				<div class="mjleave">
@@ -115,7 +118,7 @@
 	<!-- 底部确定按钮条 -->
 	<div class="detailFootBottom">
 		<div class="allSumPayID paysWidth clearfix">
-			<div class="sfkMoney">需支付：<span id="paymentAmount"><span class="yjFh">￥</span></span></div>
+			<div class="sfkMoney">需支付：<span class="yjFh">¥</span><span id="paymentAmount"></span></div>
 		</div>
 		<div class="mailDetailBotton" id="doPay">提交订单</div>
 	</div>
@@ -132,7 +135,7 @@
 				</li>
 				<li>
 					<p>支付金额：</p>
-					<p>￥3298.00</p>
+					<p>¥3298.00</p>
 				</li>
 			</ul>
 		</div>

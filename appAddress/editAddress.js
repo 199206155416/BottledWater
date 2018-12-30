@@ -124,7 +124,20 @@ function bindEvent(){
 			dataObj.id=addressId;
 		}
 		
-		console.log("strUserId", dataObj.strUserId);
+		if(!dataObj.strReceiptUserName||dataObj.strReceiptUserName==''){
+			mui.toast("收货人姓名必填");
+			return false;
+		}
+		
+		if(!dataObj.strReceiptMobile||dataObj.strReceiptMobile==''){
+			mui.toast("收货人手机必填");
+			return false;
+		}
+		
+		if(!dataObj.strDetailaddress||dataObj.strDetailaddress==''){
+			mui.toast("详情地址必填");
+			return false;
+		}
 
 		$.ajax({
 			url: prefix + "/address/save",

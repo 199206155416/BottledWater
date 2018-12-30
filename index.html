@@ -147,7 +147,9 @@
 				var baritemurl = baritem.getAttribute('href'); 
 				if(baritemurl == "appCart/cart.html" || baritemurl == "myCenter/mine.html"){
 					//检测已经存在sessionkey否者运行下面的登陆代码
-					if (localStorage.getItem('userMobile') && localStorage.getItem('userId')) {} else {
+					if (localStorage.getItem('userMobile') && localStorage.getItem('userId')) {
+
+					} else {
 						id = "login/login.html";
 						aniShow = 'slide-in-bottom';
 
@@ -180,6 +182,23 @@
 				}
 			});
 		}
+		
+
+// 更新应用资源 
+function installWgt(path){ 
+    plus.nativeUI.showWaiting("安装wgt文件..."); 
+    plus.runtime.install(path,{},function(){ 
+        plus.nativeUI.closeWaiting(); 
+        console.log("安装wgt文件成功！"); 
+        plus.nativeUI.alert("应用资源更新完成!\n点击确定按钮重启完成升级",function(){ 
+            plus.runtime.restart(); 
+        }); 
+    },function(e){ 
+        plus.nativeUI.closeWaiting(); 
+        console.log("安装wgt文件失败["+e.code+"]："+e.message); 
+        plus.nativeUI.alert("安装wgt文件失败["+e.code+"]："+e.message); 
+    }); 
+} 
 		
 		
 		//预加载template

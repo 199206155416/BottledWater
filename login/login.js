@@ -31,9 +31,7 @@ mui.plusReady(function() {
 							console.log(item.id)
 						})
 						var cartwebview = plus.webview.getWebviewById('appCart/cart.html');
-						var minewebview = plus.webview.getWebviewById('myCenter/mine.html');
-						mui.fire(cartwebview, 'loginSuccess', {});
-						mui.fire(minewebview, 'loginSuccess', {});
+						
 						loginWebview.close();
 					}, false);
 					
@@ -124,7 +122,7 @@ function doLogin(strMobile,strPassword){
 					var result = e.result;
 					// 存储用户id
 					setStringValue("userId", result.id);
-					setStringValue("strInviteCode", result.strInviteCode);
+					setStringValue("myInviteCode", result.myInviteCode);
 					// 存储电话
 					setStringValue("userMobile", result.mobile);
 					setStringValue("userName", result.name);
@@ -133,6 +131,10 @@ function doLogin(strMobile,strPassword){
 					// 存储启用状态
 					setStringValue("userLoginFlag", result.loginFlag);
 					setClientInfo();
+					var minewebview = plus.webview.getWebviewById('myCenter/mine.html');
+					mui.fire(minewebview, 'loginSuccess', {});
+					var cartbview = plus.webview.getWebviewById('appCart/cart.html');
+					mui.fire(cartbview, 'loginSuccess', {});
 					mui.back();
 					mui.toast('登录成功');
 

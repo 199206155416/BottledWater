@@ -31,40 +31,45 @@
 		<!-- 货款总额 -->
 		<div class="total-account">
 			<p class="total-account-label">货款总额</p>
-			<p class="total-account-money"><span class="money-label">￥</span>100.00</p>
+			<p class="total-account-money"><span class="money-label">¥</span><span id="t">0</span></p>
 		</div>
 		<!-- handle-section -->
 		<div class="handle-section">
 			<div>
-				<p class="handle-section-label">提现中金额</p>
-				<p class="handle-section-money"><span class="money-label">￥</span>100.00</p>
+				<p class="handle-section-label">可提现</p>
+				<p class="handle-section-money"><span class="money-label">¥</span><span id="deliveryMoney">0</span></p>
 			</div>
 			<div>
-				<p class="handle-section-label">欠款金额</p>
-				<p class="handle-section-money"><span class="money-label">￥</span>100.00</p>
+				<p class="handle-section-label">不可提现</p>
+				<p class="handle-section-money"><span class="money-label">¥</span><span id="todayMoney">0</span></p>
 			</div>
 		</div>
-		<p class="withdraw-record-title">提现记录</p>
-		<ul class="record-list" id="coupons">
-			<li class="record-item clearfix">
-				<div class="record-left">
-					<p class="record-title">货款提现-到中国建设银行股份有限公司金信支行（尾号3778）张亚飞</p>
-					<p class="record-date">发起10-31 14：06</p>
-					<p class="record-tip">请留意账户余额变化</p>
-				</div>
-				<div class="record-right">
-					<p class="record-status">银行受理成功</p>
-					<p class="record-money">￥2300.00</p>
-				</div>
-			</li>
+		<p class="withdraw-record-title">提现记录(受理时间:9:00-16:00)</p>
+		<ul class="record-list" id="datas">
+			
 		</ul>
 		<div id='load' style="text-align: center;font-size: .3rem; line-height:44px;color: #999;">
 			<div class="mui-pull-loading mui-icon mui-spinner"></div> 加载中...
 		</div>
 	</div>
+	
+	<div id="temp" style="display: none;">
+		<li class="record-item clearfix">
+				<div class="record-left">
+					<p class="record-title">提现</p>
+					<p class="record-date">发起#createDate#</p>
+					<p class="record-tip"></p>
+				</div>
+				<div class="record-right">
+					<p class="record-status">#stateName#</p>
+					<p class="record-money">¥#carryMoney#</p>
+				</div>
+			</li>
+		
+	</div>
 
 	<div class="withdraw-btn-wrap">
-		<div class="withdraw-btn">提现</div>
+		<div class="withdraw-btn" onclick="saveCash()">提现</div>
 	</div>
 
 	<script src="../common/js/include.js" charset="UTF-8" level="1"></script>

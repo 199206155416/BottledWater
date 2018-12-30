@@ -29,11 +29,11 @@ var marqueeArray = []; //跑马灯数据数组
 var recommendArray = []; //推荐商品数组
 
 mui.plusReady(function() {
-	alert("aaaa");
 	currentWebview = plus.webview.currentWebview();
 	// 获取焦点图
 	getFocusImg();
-
+    checkUpdate();
+    
 	// 获取商品列表
 	getGoodsList();
  
@@ -66,6 +66,74 @@ mui.plusReady(function() {
    */
 });
 
+//检查更新
+function checkUpdate(){
+	plus.runtime.getProperty(plus.runtime.appid,function(inf){
+		var wgtVer = inf.version;
+		var formData=new FormData();
+		formData.append("version",wgtVer);
+		$.ajax({
+		url: prefix + "/appupdate/checkAppUpdate",
+		type: 'POST',
+		data: formData,
+		contentType: false,
+	 	processData: false,  
+		dataType: "json",
+		success: function(res){
+			// 打印请求报错日志
+			ajaxLog("代码更新"+res);
+			if(res.resCode == 0){
+				var downUrl=res.result;
+				if(downUrl!=""&&downUrl){
+					downWgt(downUrl);
+				}
+			}	
+	
+		}
+		});
+	});
+}
+		// 下载wgt文件 
+// 实际项目中需要更换为自己服务器的地址 
+function downWgt(url){ 
+   //var url='http://www.zhilonggk.com/appupdate.wgtu';
+    plus.nativeUI.showWaiting("升级中...");
+    var dtask = plus.downloader.createDownload( url, {method:"GET"}, function(d,status){
+        if ( status == 200 ) { 
+            console.log( "Download wgtu success: " + d.filename );
+            plus.runtime.install(d.filename,{},function(){
+                plus.nativeUI.closeWaiting();
+                plus.nativeUI.alert("资源包更新成功,是否重启",function(){
+                    plus.runtime.restart();
+                });
+            },function(e){
+                plus.nativeUI.closeWaiting();
+                alert("资源包更新失败: "+e.message);
+            });
+        } else {
+            plus.nativeUI.closeWaiting();
+             alert( "下载资源包失败: " + status ); 
+        } 
+    } );
+    dtask.addEventListener('statechanged',function(d,status){
+        console.log("statechanged: "+d.state);
+    });
+    dtask.start();
+} 
+
+function openSuperMarket(){
+	pushWebView({
+				webType: 'newWebview_First',
+				id: 'appCategory/category.html',
+				href: 'appCategory/category.html',
+				aniShow: getaniShow(),
+				title: "商品分类",
+				isBars: false,
+				barsIcon: '',
+				extendOptions: {}
+			});
+}
+
 
 function openUseCon(){
 	     var extendOptionsData={conType:4};
@@ -86,7 +154,7 @@ function tipFun(){
 }
 
 function openCatGoods(catId0,thirdCategoryId,categoryName){
-	     pushWebView({
+	            pushWebView({
 	 						webType: 'newWebview_First',
 							id: 'appCategory/goodsBrandList.html',
 							href: 'appCategory/goodsBrandList.html',
@@ -97,7 +165,7 @@ function openCatGoods(catId0,thirdCategoryId,categoryName){
 							extendOptions: {
 								catId0: catId0
 							}
-						});			
+						});	
 }
 
 
@@ -236,7 +304,8 @@ function getGoodsList() {
 					var goodslist = $(htmlTemplate);
 					(function(catId){
 						goodslist.find(".banner-bar").click(function(){
-							  openCatGoods(catId,'0','')
+							openSuperMarket();
+							  //openCatGoods(catId,'0','');
 						});
 					})(catId);
 					

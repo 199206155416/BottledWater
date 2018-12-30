@@ -105,8 +105,17 @@ function renderHtml(){
 	var userRoleNames = localStorage.getItem("userRoleNames");
 	var userMobile = localStorage.getItem("userMobile");
 	var userRoleNames=localStorage.getItem("userRoleNames");
-    if(userRoleNames&&userRoleNames.indexOf("配送员")!=-1){//如果角色有配送员就显示我的配送单
+    if(userRoleNames&&userRoleNames.indexOf("配送员")!=-1&&userRoleNames.indexOf("便利店")==-1){//如果角色有配送员就显示我的配送单
          $("li[name='dis']").show();
+    }else{
+    	 $("li[name='dis']").hide();
+    }
+     if(userRoleNames&&userRoleNames.indexOf("便利店配送员")!=-1){
+         $("li[name='dis']").eq(0).show();
+         $("li[name='zwjs']").show();
+    }else{
+    	  $("li[name='dis']").eq(0).hide();
+         $("li[name='zwjs']").hide();
     }
     if(!userRoleNames){
     	userRoleNames="";

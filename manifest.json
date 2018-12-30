@@ -1,9 +1,9 @@
 {
 	"@platforms": ["android", "iPhone", "iPad"],
 	"id": "H55EFBA87",/*应用的标识，创建应用时自动生成，勿手动修改*/
-	"name": "智慧订水",/*应用名称，程序桌面图标名称*/
+	"name": "智享生活",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "2.0.0",/*应用版本名称*/
+		"name": "2.0",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -108,7 +108,7 @@
 		"splashscreen": {
 			//将自动关闭设置为false，因为在加载完成index页面的时候，我们还需要加载模版页面。加载完成后手动关闭
 			"autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
-			"waiting": true,"delay":"3"
+			"waiting": true,"delay":"3000"
 		},
 		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
@@ -211,15 +211,15 @@
 					"mallTicket/ticket.html",
 					"appIndex/home.html",
 					"mallCategory/category.html",
-					"appCart/cart.html"
+					"appCart/cart.html",
+					"appMall/index.html"
 				],
 				"refer": [
 					"myCenter/mine.html",
 					"template.html",
 					"mallCart/cart.html",
 					"myCenter/login.html",
-					"login/login.html",
-					"appMall/index.html"
+					"login/login.html"
 				],
 				"priority": 0
 			},
@@ -282,7 +282,8 @@
 					"myCenter/retreatRecord.html",
 					"myCenter/reclaimList.html",
 					"appOrder/reclaimList.html",
-					"myCenter/myInvite.html"
+					"myCenter/myInvite.html",
+					"myCenter/withdraw.html"
 				],
 				"priority": 0
 			},

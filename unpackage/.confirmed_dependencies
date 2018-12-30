@@ -1,68 +1,71 @@
 {
-  "index.html": {
-    "resources": [
-      "appIndex/home.html"
-    ],
-    "refer": [
-      "appCart/cart.html",
-      "myCenter/mine.html",
-      "login/login.html",
-      "appMall/index.html",
-      "appIndex/home.html",
-      "template.html"
-    ]
-  },
-  "template.html": {
-    "refer": [
-      "template-main-third.html",
-      "template-main-second.html",
-      "template-main-first.html",
-      "appMall/productDetail.html",
-      "appMall/addOrder.html",
-      "appMall/paySuccess.html",
-      "appCategory/category.html",
-      "myCenter/safetyCenter.html",
-      "login/changePayPassword.html",
-      "appAddress/addressList.html",
-      "myCenter/more.html",
-      "myCenter/myBucket.html",
-      "myCenter/agreement.html",
-      "myCenter/feedback.html",
-      "myCenter/about.html",
-      "appMall/payCenter.html",
-      "appAddress/editAddress.html",
-      "appOrder/orderList.html",
-      "myCenter/rechargeRecord.html",
-      "myCenter/couponList.html",
-      "myCenter/conshow.html",
-      "appOrder/orderDetail.html",
-      "appOrder/applyAfterSale.html",
-      "appOrder/afterSale.html",
-      "appOrder/applyRefund.html",
-      "myCenter/myTicket.html",
-      "appOrder/afterSaleDetail.html",
-      "myCenter/message.html",
-      "login/changePassword.html",
-      "appAddress/map.html",
-      "appAddress/map1.html",
-      "appAddress/map2.html",
-      "appAddress/searchMap.html",
-      "appCart/cart.html",
-      "login/forgetPassword.html",
-      "login/login.html",
-      "appCategory/goodsBrandList.html",
-      "appOrder/myDispatchList.html",
-      "login/register.html",
-      "myCenter/accountCharge.html",
-      "myCenter/retreatRecord.html",
-      "myCenter/reclaimList.html",
-      "appOrder/reclaimList.html",
-      "myCenter/myInvite.html"
-    ]
-  },
-  "myCenter/mine.html": {
-    "resources": [
-      "myCenter/image/personimg.png"
-    ]
-  }
+	"index.html": {
+		"resources": [
+			"appIndex/home.html",
+			"appMall/index.html",
+			"appCart/cart.html"
+		],
+		"refer": [
+			"appCart/cart.html",
+			"myCenter/mine.html",
+			"login/login.html",
+			"appMall/index.html",
+			"appIndex/home.html",
+			"template.html"
+		]
+	},
+	"template.html": {
+		"refer": [
+			"template-main-third.html",
+			"template-main-second.html",
+			"template-main-first.html",
+			"appMall/productDetail.html",
+			"appMall/addOrder.html",
+			"appMall/paySuccess.html",
+			"appCategory/category.html",
+			"myCenter/safetyCenter.html",
+			"login/changePayPassword.html",
+			"appAddress/addressList.html",
+			"myCenter/more.html",
+			"myCenter/myBucket.html",
+			"myCenter/agreement.html",
+			"myCenter/feedback.html",
+			"myCenter/about.html",
+			"appMall/payCenter.html",
+			"appAddress/editAddress.html",
+			"appOrder/orderList.html",
+			"myCenter/rechargeRecord.html",
+			"myCenter/couponList.html",
+			"myCenter/conshow.html",
+			"appOrder/orderDetail.html",
+			"appOrder/applyAfterSale.html",
+			"appOrder/afterSale.html",
+			"appOrder/applyRefund.html",
+			"myCenter/myTicket.html",
+			"appOrder/afterSaleDetail.html",
+			"myCenter/message.html",
+			"login/changePassword.html",
+			"appAddress/map.html",
+			"appAddress/map1.html",
+			"appAddress/map2.html",
+			"appAddress/searchMap.html",
+			"appCart/cart.html",
+			"login/forgetPassword.html",
+			"login/login.html",
+			"appCategory/goodsBrandList.html",
+			"appOrder/myDispatchList.html",
+			"login/register.html",
+			"myCenter/accountCharge.html",
+			"myCenter/retreatRecord.html",
+			"myCenter/reclaimList.html",
+			"appOrder/reclaimList.html",
+			"myCenter/myInvite.html",
+			"myCenter/withdraw.html"
+		]
+	},
+	"myCenter/mine.html": {
+		"resources": [
+			"myCenter/image/personimg.png"
+		]
+	}
 }

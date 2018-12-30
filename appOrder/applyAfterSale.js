@@ -59,7 +59,7 @@ function getOrderDetail(){
 									'<div class="goods-info">'+
 										'<p class="goods-title">'+strSkuName+'</p>'+
 										'<p class="goods-sku">'+remarks+'</p>'+
-										'<p class="goods-price">￥'+skuPrice+'<span class="goods-count">X'+count+'</span></p>'+
+										'<p class="goods-price">¥'+skuPrice+'<span class="goods-count">X'+count+'</span></p>'+
 									'</div>'+
 								'</div>';
 					$(".goods-list").append(orderListTemp);

@@ -65,18 +65,32 @@
 						<p>#strReceiptUserName# #strReceiptMobile#</p>
 						<p>#strDetailAddress#</p>
 					</div>
-					<div class="total-price" id="bucketNumDiv" style="display: none;">
-						<p>压桶：</p>
-						<p class="total-price-money">#bucketNum#个</p>
+					<div class="onclickBind">
+						<div class="comOrderWidth clearfix">
+							<div class="comOrderNumber">
+								<span>配送方式：</span><span class="strFlagNumber">#strDeliveryTypeName#</span>
+							</div>
+						</div>
 					</div>
-					<div class="total-price" id="remarksDiv" style="display: none;">
-						<p>备注：</p>
-						<p class="total-price-money">#remarks#</p>
+					<div class="onclickBind" name="bucketNumDiv" style="display: none;">
+						<div class="comOrderWidth clearfix">
+							<div class="comOrderNumber">
+								<span>压桶：</span><span class="strFlagNumber">#bucketNum#</span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="onclickBind" name="remarksDiv" style="display: none;">
+						<div class="comOrderWidth clearfix">
+							<div class="comOrderNumber">
+								<span>备注：</span><span class="strFlagNumber">#remarks#</span>
+							</div>
+						</div>
 					</div>
 					<div class="item-footer">
-						<p class="total-price">支付金额：￥#factPrice#</p>
+						<p class="total-price">支付金额：¥#factPrice#</p>
 						<div>
-							<div class="confirmOrder">确认接单</div>
+							<div class="confirmOrder" style="display: none;">取货</div>
 							<div class="confirmDispatch">确认配送</div>
 						</div>
 					</div>
@@ -93,8 +107,9 @@
 										#strGoodsTitle#
 									</div>
 									<p class="goodsInfos">#strGoodsSKUDetail#</p>
+									<p class="goodsInfos">#strTitle#</p>
 									<div class="orderMoney">
-										<span class="goodsPrice">￥#skuPrice#</span>
+										<span class="goodsPrice">¥#skuPrice#</span>
 										<span class="goodsNum">X#count#</span>
 									</div>
 								</div>

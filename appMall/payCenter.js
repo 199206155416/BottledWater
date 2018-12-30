@@ -31,7 +31,7 @@ mui.plusReady(function() {
 	}, false);
 
 	factPrice = currentWebview.factPrice;
-	$("#factPrice").html("￥"+factPrice);
+	$("#factPrice").html("¥"+factPrice);
 	// 绑定事件
 	bindEvent();
 	getBalace();

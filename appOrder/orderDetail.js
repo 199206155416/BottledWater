@@ -1,6 +1,6 @@
 var currentWebview;
 var strOrderId; // 订单id
-
+var state;
 mui.init({
 	swipeBack: false
 });
@@ -38,7 +38,7 @@ function getOrderDetail(){
 
 			if(res.resCode == 0){
 				var result = res.result; // 数据
-				
+				state=result.state;
 				var strReceiptUserName = result.strReceiptUserName; // 收货人姓名
 				$("#strConsigneeName").html(strReceiptUserName);
 				var strReceiptMobile = result.strReceiptMobile; // 收货人电话
@@ -47,15 +47,26 @@ function getOrderDetail(){
 				var strDetailAddress = result.strDetailAddress; // 详细地址
 				$("#strAddress").html(strDetailAddress);
 				var totalPrice = result.totalPrice; // 总价
-				$("#nAmount1").html(totalPrice);
+				$("#nAmount1").html("¥"+totalPrice);
 				var factPrice = result.factPrice; // 实付价格
-				$("#factPrice").html(factPrice);
+				$("#factPrice").html("¥"+factPrice);
+				var distributionFee=result.distributionFee;
+				if(distributionFee&&distributionFee!=0){
+					$("#distributionFeeDiv").show();
+					$("#distributionFee").html(factPrice);
+				}
+				var isWater=result.isWater;
+				if('0'==isWater){
+					$("#spanName").html("配送员");
+				}else{
+					$("#spanName").html("店主");
+				}
 				var dtPayTime = result.dtPayTime; // 支付时间
 				var bucketNum = result.bucketNum; // 桶数量
 				var bucketMoney = result.bucketMoney; // 桶价格
 				if(bucketMoney&&bucketMoney!=0){
 					$("#bucketMoneyDiv").show();
-					$("#bucketMoney").html(bucketMoney);
+					$("#bucketMoney").html("¥"+bucketMoney);
 				}
 				var ticketTotalCount=result.ticketTotalCount;
 				if(ticketTotalCount&&ticketTotalCount!=0){
@@ -72,7 +83,9 @@ function getOrderDetail(){
 				if("待付款"==strStateName){
 					$("#cancleOrderBtn").show();
 				}
-				if("已收货"!=strStateName&&"退款成功"!=strStateName){
+				
+				
+				if("已发货"==strStateName&&"退款成功"!=strStateName&&state==3){
 					$(".confirmToReceipt").show();
 				}
 				$("#orderstate").html(strStateName);
@@ -82,11 +95,16 @@ function getOrderDetail(){
 				$("#createTime").html(createDate);
 				var dtPayTime=result.dtPayTime;
 				$("#dtPayTime").html(dtPayTime);
-				
+				var strDeliveryName=result.strDeliveryName;
+				var strDeliveryMobile=result.strDeliveryMobile;
+				if(strDeliveryName){
+					$("#strDeliveryName").html(strDeliveryName+" "+strDeliveryMobile);
+				}
 				var mallOrderDetailList = result.mallOrderDetailList; // 商品列表
 				for(var i = 0, len = mallOrderDetailList.length; i < len; i++){
 					var lGoodsId = mallOrderDetailList[i].id; // 商品id
 					var strSkuName = mallOrderDetailList[i].strSkuName; // 商品名称
+					var strSkuAttr=mallOrderDetailList[i].strSkuAttr;
 					var skuPrice = mallOrderDetailList[i].skuPrice; // 商品价格
 					var strGoodsImg = mallOrderDetailList[i].strGoodsImg; // 商品图片
 					var count = mallOrderDetailList[i].count; // 商品数量
@@ -96,9 +114,10 @@ function getOrderDetail(){
 							'</div>'+
 							'<div class="rightContent">'+
 								'<div class="beforeTitle" id="strGoodsTitle">'+strSkuName+'</div>'+
+								'<div class="beforeTitle" id="strSkuSttrs">'+strSkuAttr+'</div>'+
 								'<p id="specValue"></p>'+
 								'<div class="orderMoney">'+
-									'<span class="subOrderMoney" id="strAmountOne">￥'+skuPrice+'</span>'+
+									'<span class="subOrderMoney" id="strAmountOne">¥'+skuPrice+'</span>'+
 									'<span class="ordernum" id="strGoodsAmount">X'+count+'</span>'+
 								'</div>'+
 							'</div>'+

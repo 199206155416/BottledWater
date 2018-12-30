@@ -11,7 +11,6 @@ var _LoadNumber = { a: false };
 var payStrOrderId
 var currentPoit;
 var map;
-
 mui.init({
 	swipeBack: false,
 	pullRefresh: {
@@ -162,14 +161,26 @@ function getOrderList(){
 					var strOrderNum = list[i].strOrderNum; // 订单编号
 					var strStateName = list[i].strStateName; // 订单状态
 					var factPrice=list[i].factPrice;
+					var distributionFee=list[i].distributionFee;
+					if(distributionFee){
+						factPrice=factPrice-distributionFee;
+					}
 					var strReceiptUserName=list[i].strReceiptUserName;
 					var strReceiptMobile=list[i].strReceiptMobile;
 					var strLocation=list[i].strLocation;
 					var strDetailAddress=list[i].strDetailAddress;
-					var factPrice=list[i].factPrice;
+					var strDeliveryType=list[i].strDeliveryType;
+					var strDeliveryTypeName;
+					if(strDeliveryType=="0"){
+						strDeliveryTypeName="配送";
+					}else if(strDeliveryType=="1"){
+						strDeliveryTypeName="自取";
+					}
 					var remarks=list[i].remarks;
-					var bucketNum=list[i].bucketNum;
+					var isWater=list[i].isWater;
+							var bucketNum=list[i].bucketNum;
 					var orderListTemp = $("#orderListTemp").html();
+					orderListTemp = orderListTemp.replace("#strDeliveryTypeName#", strDeliveryTypeName);
 					orderListTemp = orderListTemp.replace("#strOrderId#", lOrderId);
 					orderListTemp = orderListTemp.replace("#strOrderNum#", strOrderNum);
 					orderListTemp = orderListTemp.replace("#strStateName#", strStateName);
@@ -180,10 +191,20 @@ function getOrderList(){
 					orderListTemp = orderListTemp.replace("#bucketNum#", bucketNum);
 					orderListTemp = orderListTemp.replace("#factPrice#", factPrice);
 					var orderList = $(orderListTemp);
-					var mallOrderDetailList=list[i].mallOrderDetailList
+					var mallOrderDetailList=list[i].mallOrderDetailList;
 					;(function(orderList, lOrderId,order){
+						    var remarks=order.remarks;
+							if(remarks){
+								orderList.find("div[name='remarksDiv']").show();
+							}
+							var isWater=order.isWater;
+							var bucketNum=order.bucketNum;
+							if(bucketNum&&bucketNum!=0&&isWater=='0'){
+								orderList.find("div[name='bucketNumDiv']").show();
+							}
 							orderList.find(".confirmOrder").on("click", function(){
-									editDeliverState(0,lOrderId);
+									$(this).hide();
+									sendDaDaOrder(lOrderId);
 									return false;
 							});
 							var deliverState=order.deliverState;
@@ -193,7 +214,6 @@ function getOrderList(){
 								    var lat=order.strLat;
 								    lng=parseFloat(lng);
 								    lat=parseFloat(lat);
-								    //console.log(order.strLng+"  "+order.strLat+", "+lng+"  "+lat);
 								    var pointDist = new BMap.Point(lng, lat);
 								    var f=getdist(currentPoit,pointDist);
 								    if(!f){//说明大于100啦
@@ -204,8 +224,11 @@ function getOrderList(){
 							});
 							
 					        var sendState=order.sendState;
-							if(deliverState==1){
+					        var strDeliveryType=order.strDeliveryType;
+							if(deliverState==1||order.strDeliveryType=="1"){//如果是已经配送或者自取就不显示取货
 								orderList.find(".confirmOrder").hide();
+							}else{
+								orderList.find(".confirmOrder").show();
 							}
 							
 							if(sendState==1){
@@ -219,13 +242,21 @@ function getOrderList(){
 						var id = item.id;
 						var strGoodsName = item.strSkuName;
 						var strGoodsImg = item.strGoodsImg;
-						var strGoodsSKUDetail = item.strTitle;
+						var strTitle = item.strTitle;
+						if(!strTitle){
+							strTitle="";
+						}
 						var skuPrice = item.skuPrice;
 						var count = item.count;
+						var strSkuAttr=item.strSkuAttr;
+						if(!strSkuAttr){
+							strSkuAttr="";
+						}
 						var goodsTemplate = $("#goodsTemplate").html();
 						goodsTemplate = goodsTemplate.replace("#strGoodsImg#", strGoodsImg);
 						goodsTemplate = goodsTemplate.replace("#strGoodsTitle#", commonNameSubstr(strGoodsName, 34));
-						goodsTemplate = goodsTemplate.replace("#strGoodsSKUDetail#", commonNameSubstr(strGoodsSKUDetail, 28));
+						goodsTemplate = goodsTemplate.replace("#strGoodsSKUDetail#", strSkuAttr);
+						goodsTemplate = goodsTemplate.replace("#strTitle#", strTitle);
 						goodsTemplate = goodsTemplate.replace("#skuPrice#", skuPrice);
 						goodsTemplate = goodsTemplate.replace("#count#", count);
 						console.log(goodsTemplate);
@@ -244,6 +275,28 @@ function getOrderList(){
 			}
 		}
 	})
+}
+
+function sendDaDaOrder(strOrderId){
+	   var userId= localStorage.getItem("userId"); // 用户id
+	   var userMobile= localStorage.getItem("userMobile"); // 手机号
+	   var userName= localStorage.getItem("userName"); // 用户
+		$.ajax({
+		url: prefix + "/order/sendDaDaOrder",
+		type: "POST",
+		data: {"strOrderId":strOrderId,userId:userId,userName:userName,strMobile:userMobile}, 
+		dataType: "json",
+		success: function(res){
+				ajaxLog(res);
+				var result=res.result;
+				if(res.resCode == 0){
+					mui.toast("通知成功");
+				    $("#"+strOrderId).find(".confirmOrder").hide();
+				}else{
+					mui.toast(result);
+				}
+			}
+		});
 }
 
 function editDeliverState(stateValue,strOrderId){
