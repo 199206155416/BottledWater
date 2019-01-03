@@ -1,6 +1,7 @@
 var currentWebview;
 var order; // 退款订单
 var refundType;
+var applyAfterSale;
 mui.init({
 	swipeBack: false,
 	// pullRefresh: {
@@ -18,6 +19,7 @@ mui.init({
 });
 
 mui.plusReady(function() {
+	applyAfterSaleView=plus.webview.getWebviewById("appOrder/applyAfterSale.html-1");
 	currentWebview = plus.webview.currentWebview();
 	order = currentWebview.order;
 	var index=currentWebview.index;
@@ -117,17 +119,8 @@ function doSave(){
 }
 
 function openOrderList(){
-		pushWebView({
-			webType: 'newWebview_First',
-			id: 'appOrder/orderList.html-1',
-			href: 'appOrder/orderList.html',
-			aniShow: getaniShow(),
-			title: "订单列表",
-			isBars: false, 
-			barsIcon: '',
-			extendOptions: {
-			}
-		});
+		mui.fire(applyAfterSaleView,"backEvent",{});
+	    mui.back();
 }
 
 /**
@@ -159,7 +152,7 @@ function getOrderDetail(){
 	            $("#factPrice").html("¥"+factPrice);
 				var mallOrderDetailList = order.mallOrderDetailList; // 商品列表
 				for(var i = 0, len = mallOrderDetailList.length; i < len; i++){
-					var remarks = mallOrderDetailList[i].remarks;
+					var strSkuAttr = mallOrderDetailList[i].strSkuAttr;
 					var strSkuName = mallOrderDetailList[i].strSkuName; // 商品名称
 					var skuPrice = mallOrderDetailList[i].skuPrice; // 商品价格
 					var strGoodsImg = mallOrderDetailList[i].strGoodsImg; // 商品图片
@@ -168,7 +161,7 @@ function getOrderDetail(){
 									'<div class="goods-item-img"><img src="'+strGoodsImg+'" alt=""></div>'+
 									'<div class="goods-info">'+
 										'<p class="goods-title">'+strSkuName+'</p>'+
-										'<p class="goods-sku">'+remarks+'</p>'+
+										'<p class="goods-sku">'+strSkuAttr+'</p>'+
 										'<p class="goods-price">¥'+skuPrice+'<span class="goods-count">X'+count+'</span></p>'+
 									'</div>'+
 								'</div>';

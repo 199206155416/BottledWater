@@ -42,6 +42,13 @@ mui.plusReady(function() {
 	window.addEventListener('postExtendOptions',function(e){
 		console.log(JSON.stringify(e.detail.extendOptions))
 	},false);
+	
+	window.addEventListener('backEvent',function(e){
+	     var productDetailView = plus.webview.getWebviewById("appMall/productDetail.html");
+			mui.fire(productDetailView,'backEvent',null); 
+			mui.back();
+	},false);
+	
 	userId= localStorage.getItem("userId"); // 用户id
 	initPayChannel();
 	getPayDetail(0);

@@ -13,7 +13,7 @@ var _LoadNumber = { a: false };
 
 var priceFlag = true;
 mui.init({
-	swipeBack: true,
+	swipeBack: false,
 
 });
 
@@ -38,6 +38,9 @@ mui.plusReady(function () {
  * @author xuezhenxiang
  */
 function bindEvent() {
+	$("#backa").click(function(){
+		mui.back();
+	});
 
 	// 筛选数据
 	$("#sort").on("click", "li", function () {

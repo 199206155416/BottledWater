@@ -70,6 +70,7 @@ mui.plusReady(function() {
 function checkUpdate(){
 	plus.runtime.getProperty(plus.runtime.appid,function(inf){
 		var wgtVer = inf.version;
+		console.log("当前版本："+wgtVer);
 		var formData=new FormData();
 		formData.append("version",wgtVer);
 		$.ajax({
@@ -85,6 +86,7 @@ function checkUpdate(){
 			if(res.resCode == 0){
 				var downUrl=res.result;
 				if(downUrl!=""&&downUrl){
+					console.log("downUrl："+downUrl);
 					downWgt(downUrl);
 				}
 			}	

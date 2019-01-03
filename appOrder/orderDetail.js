@@ -85,7 +85,7 @@ function getOrderDetail(){
 				}
 				
 				
-				if("已发货"==strStateName&&"退款成功"!=strStateName&&state==3){
+				if("待收货"==strStateName&&"退款成功"!=strStateName&&state==3){
 					$(".confirmToReceipt").show();
 				}
 				$("#orderstate").html(strStateName);
