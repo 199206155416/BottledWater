@@ -170,6 +170,9 @@ function getOrderList(){
 					var strLocation=list[i].strLocation;
 					var strDetailAddress=list[i].strDetailAddress;
 					var strDeliveryType=list[i].strDeliveryType;
+					var dtPayTime=list[i].dtPayTime;
+					var dmName=list[i].dmName;
+					var dmMobile=list[i].dmMobile;
 					var strDeliveryTypeName;
 					if(strDeliveryType=="0"){
 						strDeliveryTypeName="配送";
@@ -180,6 +183,9 @@ function getOrderList(){
 					var isWater=list[i].isWater;
 							var bucketNum=list[i].bucketNum;
 					var orderListTemp = $("#orderListTemp").html();
+					orderListTemp = orderListTemp.replace("#dmName#", dmName);
+					orderListTemp = orderListTemp.replace("#dmMobile#", dmMobile);
+					orderListTemp = orderListTemp.replace("#dtPayTime#", dtPayTime);
 					orderListTemp = orderListTemp.replace("#strDeliveryTypeName#", strDeliveryTypeName);
 					orderListTemp = orderListTemp.replace("#strOrderId#", lOrderId);
 					orderListTemp = orderListTemp.replace("#strOrderNum#", strOrderNum);
@@ -191,6 +197,10 @@ function getOrderList(){
 					orderListTemp = orderListTemp.replace("#bucketNum#", bucketNum);
 					orderListTemp = orderListTemp.replace("#factPrice#", factPrice);
 					var orderList = $(orderListTemp);
+					console.log("dmName:"+dmName);
+					if(dmMobile){
+						orderList.find("div[name='dadaDiv']").show();
+					}
 					var mallOrderDetailList=list[i].mallOrderDetailList;
 					;(function(orderList, lOrderId,order){
 						    var remarks=order.remarks;
@@ -225,10 +235,12 @@ function getOrderList(){
 							
 					        var sendState=order.sendState;
 					        var strDeliveryType=order.strDeliveryType;
-							if(deliverState==1||order.strDeliveryType=="1"){//如果是已经配送或者自取就不显示取货
-								orderList.find(".confirmOrder").hide();
-							}else{
+					        var isWater=order.isWater;
+
+							if(deliverState==0&&order.strDeliveryType=="0"&&isWater=='1'){
 								orderList.find(".confirmOrder").show();
+							}else{
+								orderList.find(".confirmOrder").hide();
 							}
 							
 							if(sendState==1){
@@ -259,7 +271,7 @@ function getOrderList(){
 						goodsTemplate = goodsTemplate.replace("#strTitle#", strTitle);
 						goodsTemplate = goodsTemplate.replace("#skuPrice#", skuPrice);
 						goodsTemplate = goodsTemplate.replace("#count#", count);
-						console.log(goodsTemplate);
+						//console.log(goodsTemplate);
 						var goods = $(goodsTemplate);
 						;(function(){
 

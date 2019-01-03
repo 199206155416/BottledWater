@@ -30,7 +30,12 @@ mui.plusReady(function () {
 	window.addEventListener('postExtendOptions', function (e) {
 		console.log(JSON.stringify(e.detail.extendOptions))
 	}, false);
-
+	
+     window.addEventListener('backEvent',function(e){
+			mui.back();
+	},false);
+    
+  
 	// 查询商品详情
 	getGoodsDetail();
 

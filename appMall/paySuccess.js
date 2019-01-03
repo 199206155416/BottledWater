@@ -21,6 +21,17 @@ mui.plusReady(function() {
 	strOrderId = currentWebview.strOrderId;
 	// 获取订单支付状态
 	getOrderPayState();
+	
+	$("#backIndex").click(function(){
+		var allView=plus.webview.all();
+		for(var i=0;i<allView.length;i++){
+			var id=allView[i].id;
+			if(id=="appMall/addOrder.html"||id=="appMall/paySuccess.html-1"||id=="appMall/productDetail.html"){
+				allView[i].close();
+			}
+		}
+		
+	});
 });
 
 /**

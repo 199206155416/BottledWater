@@ -77,6 +77,16 @@ function bindEvent(){
   	    payType=parseInt(data["payType"]);
 		getPayInfo();
 	},false);
+	
+	//自动返回监听
+	window.addEventListener('freshList',function(event){
+  	    pageNo = 1;
+		loadFlag = 1;
+		$("#orderListID").html("");
+		$("#load").show();
+		// 获取数据
+		getOrderList();
+	},false);
 }
 
 /**
@@ -144,12 +154,20 @@ function getOrderList(){
 					var strOrderNum = list[i].strOrderNum; // 订单编号
 					var strStateName = list[i].strStateName; // 订单状态
 					var factPrice=list[i].factPrice;
+					var strDeliveryType=list[i].strDeliveryType;
+					var strDeliveryTypeName;
+					if(strDeliveryType=="0"){
+						strDeliveryTypeName="配送";
+					}else if(strDeliveryType=="1"){
+						strDeliveryTypeName="自取";
+					}
 					var orderListTemp = $("#orderListTemp").html();
 
 					orderListTemp = orderListTemp.replace("#lOrderId#", lOrderId);
 					orderListTemp = orderListTemp.replace("#strOrderNum#", strOrderNum);
 					orderListTemp = orderListTemp.replace("#strStateName#", strStateName);
 					orderListTemp = orderListTemp.replace("#factPrice#", factPrice);
+					orderListTemp = orderListTemp.replace("#strDeliveryTypeName#", strDeliveryTypeName);
 					
 					var orderList = $(orderListTemp);
 					var mallOrderDetailList=list[i].mallOrderDetailList
@@ -220,6 +238,7 @@ function getOrderList(){
 						$("#orderListID li").last().find(".checkBill>div").eq(1).show();
 					}else if(strStateName=="待发货"&&factPrice!=0){
 						$("#orderListID li").last().find(".checkBill>div").eq(2).show();
+						
 					}
 
 				}
