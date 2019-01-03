@@ -1,74 +1,74 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0"/>
-	<meta name="format-detection" content="telephone=no">
-	<link rel="stylesheet" href="../common/css/mui.min.css">
-	<link rel="stylesheet" href="../common/css/public.css">
-	<link rel="stylesheet" href="css/afterSale.css">
-	<script src="../common/js/remScale.js"></script>
-	<title>退款/售后</title>
-</head>
-<body>
-	<header class="mui-bar mui-bar-nav">
-	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-	    <h1 class="mui-title">退款/售后</h1>
-	</header>
-	
-	<div class="mui-content">
-		<div class="completeOrderList" id="scroll" style="-webkit-transform:  translate3d(0,-44px,0);transform: translate3d(0,-44px,0);">	
-		<div class="scroll-y-ios"></div>
-		<div style="font-size: .3rem; line-height:44px;color: #999;">
-			<div id='top1' style="text-align: center;">
-				<div class="mui-pull-loading mui-icon mui-icon-pulldown" style="-webkit-transform: rotate(180deg);transform: rotate(180deg); "></div> 下拉即可刷新...
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0" />
+		<meta name="format-detection" content="telephone=no">
+		<link rel="stylesheet" href="../common/css/mui.min.css">
+		<link rel="stylesheet" href="../common/css/public.css">
+		<link rel="stylesheet" href="css/afterSale.css">
+		<script src="../common/js/remScale.js"></script>
+		<title>退款/售后</title>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">退款/售后</h1>
+		</header>
+
+		<div class="mui-content">
+			<div class="completeOrderList" id="scroll" style="-webkit-transform:  translate3d(0,-44px,0);transform: translate3d(0,-44px,0);">
+				<div class="scroll-y-ios"></div>
+				<div style="font-size: .3rem; line-height:44px;color: #999;">
+					<div id='top1' style="text-align: center;">
+						<div class="mui-pull-loading mui-icon mui-icon-pulldown" style="-webkit-transform: rotate(180deg);transform: rotate(180deg); "></div>
+						下拉即可刷新...
+					</div>
+					<div id='top2' style="display: none;text-align: center;">
+						<div class="mui-pull-loading mui-icon mui-spinner"></div> 加载中...
+					</div>
+					<div id='top3' style="display: none;text-align: center;">
+						<div class="mui-pull-loading mui-icon mui-icon-pulldown"></div>释放即可刷新...
+					</div>
+				</div>
+				<ul id="orderListID">
+
+				</ul>
+				<div id='load' style="text-align: center;font-size: .3rem; line-height:44px;color: #999;">
+					<div class="mui-pull-loading mui-icon mui-spinner"></div> 加载中...
+				</div>
 			</div>
-			<div id='top2' style="display: none;text-align: center;">
-				<div class="mui-pull-loading mui-icon mui-spinner"></div> 加载中...
-			</div>
-			<div id='top3' style="display: none;text-align: center;">
-				<div class="mui-pull-loading mui-icon mui-icon-pulldown"></div>释放即可刷新...
+			<!-- 列表没有数据 -->
+			<div class="empty" id="orderNullTemp" style="display: none">
+				<img class="empty_img" src="../common/image/blank.png" />
 			</div>
 		</div>
-		<ul id="orderListID">
-			
-		</ul>
-		<div id='load' style="text-align: center;font-size: .3rem; line-height:44px;color: #999;">
-			<div class="mui-pull-loading mui-icon mui-spinner"></div> 加载中...
-		</div>
-	</div>
-		<!-- 列表没有数据 -->
-		<div class="empty" id="orderNullTemp" style="display: none">
-			<img class="empty_img" src="../common/image/blank.png" />
-		</div>
-	</div>
-	<div id="orderListTemp" style="display: none;">
-		<li class="order-item" id="#id#">
+		<div id="orderListTemp" style="display: none;">
+			<li class="order-item" id="#id#">
 				<div class="order-item-head" name="refundStateName">
 					<p>#refundStateName#</p>
 				</div>
 				<div class="order-item-body">
 					<div class="goods-list">
-						
+
 					</div>
 				</div>
 				<div class="order-item-foot">
 					<div class="go-to-detail">查看详情</div>
 				</div>
-		</li>
-	</div>
-	<div id="goodsTemplate" style="display: none;">
-		<div class="goods-item">
-							<div class="goods-item-img"><img src="#strGoodsImg#" alt=""></div>
-							<div class="goods-info">
-								<p class="goods-title">#strGoodsTitle#</p>
-								<p class="goods-sku">#strGoodsSKUDetail#</p>
-								<p class="goods-price">¥#skuPrice#<span class="goods-count">X#count#</span></p>
-							</div>
-						</div>
-		
-	</div>
-<script src="../common/js/include.js" level="1"></script>
-<script src="afterSale.js"></script>
-</body>
+			</li>
+		</div>
+		<div id="goodsTemplate" style="display: none;">
+			<div class="goods-item">
+				<div class="goods-item-img"><img src="#strGoodsImg#" alt=""></div>
+				<div class="goods-info">
+					<p class="goods-title">#strGoodsTitle#</p>
+					<p class="goods-sku">#strGoodsSKUDetail#</p>
+					<p class="goods-price">¥#skuPrice#<span class="goods-count">X#count#</span></p>
+				</div>
+			</div>
+		</div>
+		<script src="../common/js/include.js" level="1"></script>
+		<script src="afterSale.js"></script>
+	</body>
 </html>

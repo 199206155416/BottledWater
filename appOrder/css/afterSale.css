@@ -1,7 +1,16 @@
 body {
 	background: #f4f4f4;
 }
-
+.completeOrderList {
+    padding-top: .88rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: scroll;
+    bottom: -44px;
+}
 .order-item{
 	background: #fff;
 	margin-bottom: .2rem;

@@ -2,7 +2,7 @@ var currentWebview;
 var type = 0; // -1 == 全部， -2 == 待付款， -3 == 待发货， -4 == 待收货， -5 == 已完成, 默认为-1
 var pageNo = 1;
 var pageNoOld;
-var pageSize = 20; 
+var pageSize = 20;
 var loadFlag = 1; // 上拉加载标志
 mui.init({
 	swipeBack: false
@@ -17,37 +17,37 @@ mui.init({
 	// 		auto: true,//可选,默认false.首次加载自动上拉刷新一次
 	// 		callback: function(){} //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
 	//     }
- //  	}
+	//  	}
 });
 
 mui.plusReady(function() {
 	currentWebview = plus.webview.currentWebview();
-	
+
 	//获取退款列表
 	getRefundLogList();
-	
+
 	// 绑定事件
 	bindEvent();
 });
 
-function bindEvent(){
+function bindEvent() {
 	// 屏幕滚动后加载列表
-	$("#scroll").scroll(function(){
-		var scrollTop = $(this).scrollTop();	// 滚动高度		    
+	$("#scroll").scroll(function() {
+		var scrollTop = $(this).scrollTop(); // 滚动高度		    
 		var scrollHeight = $(this).height(); // 文档高度
 		var windowHeight = $(window).height(); // 文档窗口高度
-			
+
 		if (scrollTop + windowHeight >= scrollHeight - 300) {
-			if(loadFlag == 1){
+			if (loadFlag == 1) {
 				loadFlag = 0;
-				console.log("pageNo:"+pageNo);
+				console.log("pageNo:" + pageNo);
 				getRefundLogList();
 			}
 		}
 
 	});
-	
-	
+
+
 	/**
 	$(window).scroll(function(){
 		var scrollTop = $(window).scrollTop();	// 滚动高度		    
@@ -64,30 +64,30 @@ function bindEvent(){
 
 	});
 	**/
-	window.addEventListener('editData',function(event){
-  	    var data=event.detail;
-  	    var type=parseInt(data["type"]);
-		if(type==0){
+	window.addEventListener('editData', function(event) {
+		var data = event.detail;
+		var type = parseInt(data["type"]);
+		if (type == 0) {
 			$("#orderListID").html("");
-			pageNo=data["pageNo"];
+			pageNo = data["pageNo"];
 			getRefundLogList();
-		}else if(type==1){
-			
-			
+		} else if (type == 1) {
+
+
 		}
-	},false);
+	}, false);
 };
 
 /**
  * 获取退款列表
  * @author xuezhenxiang
  */
-function getRefundLogList(){
+function getRefundLogList() {
 	$("#load").show();
 	var userId = localStorage.getItem(userId);
 	var formData = new FormData();
 	formData.append("strBuyerId", userId);
-	pageNoOld=pageNo;
+	pageNoOld = pageNo;
 	formData.append("pageNo", pageNo);
 	formData.append("pageSize", pageSize);
 	$.ajax({
@@ -95,33 +95,34 @@ function getRefundLogList(){
 		type: 'POST',
 		data: formData,
 		contentType: false,
-	 	processData: false,  
+		processData: false,
 		dataType: "json",
-		success: function(res){
+		success: function(res) {
 			// 打印请求报错日志
 			ajaxLog(res);
 
-			if(res.resCode == 0){
+			if (res.resCode == 0) {
 				var list = res.result.list; // 列表数据
 				var count = res.result.count; // 数据总量
 				$("#load").hide();
-	            //$("#top2").hide();
-				if(count == 0){
+				//$("#top2").hide();
+				if (count == 0) {
 					$("#orderNullTemp").show();
 					return false;
-				}else{
+				} else {
 					$("#orderNullTemp").hide();
 				}
-				
-				if(list.length <= 0){
-					return false;				}
 
-				for(var i = 0, len = list.length; i < len; i++){
-					var item=list[i];
-					var strStateName=item.strStateName
-					var id=item.id;//退款ID
-					var order=item.mallOrder;
-					if(!order){
+				if (list.length <= 0) {
+					return false;
+				}
+
+				for (var i = 0, len = list.length; i < len; i++) {
+					var item = list[i];
+					var strStateName = item.strStateName
+					var id = item.id; //退款ID
+					var order = item.mallOrder;
+					if (!order) {
 						continue;
 					}
 					var lOrderId = order.id; // 订单id
@@ -129,9 +130,9 @@ function getRefundLogList(){
 					orderListTemp = orderListTemp.replace("#refundStateName#", strStateName);
 					orderListTemp = orderListTemp.replace("#id#", id);
 					var orderList = $(orderListTemp);
-					
-					;(function(orderList,item){
-						orderList.find(".go-to-detail").on("click", function(){
+
+					;(function(orderList, item) {
+						orderList.find(".go-to-detail").on("click", function() {
 							pushWebView({
 								webType: 'newWebview_First',
 								id: 'appOrder/afterSaleDetail.html',
@@ -141,15 +142,16 @@ function getRefundLogList(){
 								isBars: false,
 								barsIcon: '',
 								extendOptions: {
-									refundItem: item,"pageNo":pageNoOld
+									refundItem: item,
+									"pageNo": pageNoOld
 								}
 							});
-							
+
 						});
-					})(orderList,item);
-				   var mallOrderDetailList=order.mallOrderDetailList;
-					for(var i1 = 0, len1 = mallOrderDetailList.length; i1 < len1; i1++){
-						var itemGoods=mallOrderDetailList[i1];
+					})(orderList, item);
+					var mallOrderDetailList = order.mallOrderDetailList;
+					for (var i1 = 0, len1 = mallOrderDetailList.length; i1 < len1; i1++) {
+						var itemGoods = mallOrderDetailList[i1];
 						var id = itemGoods.id;
 						var strGoodsName = itemGoods.strSkuName;
 						var strGoodsImg = itemGoods.strGoodsImg;
@@ -162,16 +164,17 @@ function getRefundLogList(){
 						goodsTemplate = goodsTemplate.replace("#strGoodsSKUDetail#", commonNameSubstr(strGoodsSKUDetail, 28));
 						goodsTemplate = goodsTemplate.replace("#skuPrice#", skuPrice);
 						goodsTemplate = goodsTemplate.replace("#count#", count);
-						
+
 						var goods = $(goodsTemplate);
 						orderList.find(".goods-list").append(goods);
 					}
-					
+
 					$("#orderListID").append(orderList);
-					
+
 				}
 				pageNo++;
-			    loadFlag = 1;
+				loadFlag = 1;
+				_LoadNumber.a = true;
 			}
 		}
 	})
@@ -181,74 +184,76 @@ function getRefundLogList(){
 //下拉刷新
 function PullRefresh(id, callback) {
 	var Tween = {
-		Linear: function (t, b, c, d) { return c * t / d + b; },
+		Linear: function(t, b, c, d) {
+			return c * t / d + b;
+		},
 		Quad: {
-			easeIn: function (t, b, c, d) {
+			easeIn: function(t, b, c, d) {
 				return c * (t /= d) * t + b;
 			},
-			easeOut: function (t, b, c, d) {
+			easeOut: function(t, b, c, d) {
 				return -c * (t /= d) * (t - 2) + b;
 			},
-			easeInOut: function (t, b, c, d) {
+			easeInOut: function(t, b, c, d) {
 				if ((t /= d / 2) < 1) return c / 2 * t * t + b;
 				return -c / 2 * ((--t) * (t - 2) - 1) + b;
 			}
 		},
 		Cubic: {
-			easeIn: function (t, b, c, d) {
+			easeIn: function(t, b, c, d) {
 				return c * (t /= d) * t * t + b;
 			},
-			easeOut: function (t, b, c, d) {
+			easeOut: function(t, b, c, d) {
 				return c * ((t = t / d - 1) * t * t + 1) + b;
 			},
-			easeInOut: function (t, b, c, d) {
+			easeInOut: function(t, b, c, d) {
 				if ((t /= d / 2) < 1) return c / 2 * t * t * t + b;
 				return c / 2 * ((t -= 2) * t * t + 2) + b;
 			}
 		},
 		Quart: {
-			easeIn: function (t, b, c, d) {
+			easeIn: function(t, b, c, d) {
 				return c * (t /= d) * t * t * t + b;
 			},
-			easeOut: function (t, b, c, d) {
+			easeOut: function(t, b, c, d) {
 				return -c * ((t = t / d - 1) * t * t * t - 1) + b;
 			},
-			easeInOut: function (t, b, c, d) {
+			easeInOut: function(t, b, c, d) {
 				if ((t /= d / 2) < 1) return c / 2 * t * t * t * t + b;
 				return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
 			}
 		},
 		Quint: {
-			easeIn: function (t, b, c, d) {
+			easeIn: function(t, b, c, d) {
 				return c * (t /= d) * t * t * t * t + b;
 			},
-			easeOut: function (t, b, c, d) {
+			easeOut: function(t, b, c, d) {
 				return c * ((t = t / d - 1) * t * t * t * t + 1) + b;
 			},
-			easeInOut: function (t, b, c, d) {
+			easeInOut: function(t, b, c, d) {
 				if ((t /= d / 2) < 1) return c / 2 * t * t * t * t * t + b;
 				return c / 2 * ((t -= 2) * t * t * t * t + 2) + b;
 			}
 		},
 		Sine: {
-			easeIn: function (t, b, c, d) {
+			easeIn: function(t, b, c, d) {
 				return -c * Math.cos(t / d * (Math.PI / 2)) + c + b;
 			},
-			easeOut: function (t, b, c, d) {
+			easeOut: function(t, b, c, d) {
 				return c * Math.sin(t / d * (Math.PI / 2)) + b;
 			},
-			easeInOut: function (t, b, c, d) {
+			easeInOut: function(t, b, c, d) {
 				return -c / 2 * (Math.cos(Math.PI * t / d) - 1) + b;
 			}
 		},
 		Expo: {
-			easeIn: function (t, b, c, d) {
+			easeIn: function(t, b, c, d) {
 				return (t == 0) ? b : c * Math.pow(2, 10 * (t / d - 1)) + b;
 			},
-			easeOut: function (t, b, c, d) {
+			easeOut: function(t, b, c, d) {
 				return (t == d) ? b + c : c * (-Math.pow(2, -10 * t / d) + 1) + b;
 			},
-			easeInOut: function (t, b, c, d) {
+			easeInOut: function(t, b, c, d) {
 				if (t == 0) return b;
 				if (t == d) return b + c;
 				if ((t /= d / 2) < 1) return c / 2 * Math.pow(2, 10 * (t - 1)) + b;
@@ -256,58 +261,70 @@ function PullRefresh(id, callback) {
 			}
 		},
 		Circ: {
-			easeIn: function (t, b, c, d) {
+			easeIn: function(t, b, c, d) {
 				return -c * (Math.sqrt(1 - (t /= d) * t) - 1) + b;
 			},
-			easeOut: function (t, b, c, d) {
+			easeOut: function(t, b, c, d) {
 				return c * Math.sqrt(1 - (t = t / d - 1) * t) + b;
 			},
-			easeInOut: function (t, b, c, d) {
+			easeInOut: function(t, b, c, d) {
 				if ((t /= d / 2) < 1) return -c / 2 * (Math.sqrt(1 - t * t) - 1) + b;
 				return c / 2 * (Math.sqrt(1 - (t -= 2) * t) + 1) + b;
 			}
 		},
 		Elastic: {
-			easeIn: function (t, b, c, d, a, p) {
-				if (t == 0) return b; if ((t /= d) == 1) return b + c; if (!p) p = d * .3;
-				if (!a || a < Math.abs(c)) { a = c; var s = p / 4; }
-				else var s = p / (2 * Math.PI) * Math.asin(c / a);
+			easeIn: function(t, b, c, d, a, p) {
+				if (t == 0) return b;
+				if ((t /= d) == 1) return b + c;
+				if (!p) p = d * .3;
+				if (!a || a < Math.abs(c)) {
+					a = c;
+					var s = p / 4;
+				} else var s = p / (2 * Math.PI) * Math.asin(c / a);
 				return -(a * Math.pow(2, 10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p)) + b;
 			},
-			easeOut: function (t, b, c, d, a, p) {
-				if (t == 0) return b; if ((t /= d) == 1) return b + c; if (!p) p = d * .3;
-				if (!a || a < Math.abs(c)) { a = c; var s = p / 4; }
-				else var s = p / (2 * Math.PI) * Math.asin(c / a);
+			easeOut: function(t, b, c, d, a, p) {
+				if (t == 0) return b;
+				if ((t /= d) == 1) return b + c;
+				if (!p) p = d * .3;
+				if (!a || a < Math.abs(c)) {
+					a = c;
+					var s = p / 4;
+				} else var s = p / (2 * Math.PI) * Math.asin(c / a);
 				return (a * Math.pow(2, -10 * t) * Math.sin((t * d - s) * (2 * Math.PI) / p) + c + b);
 			},
-			easeInOut: function (t, b, c, d, a, p) {
-				if (t == 0) return b; if ((t /= d / 2) == 2) return b + c; if (!p) p = d * (.3 * 1.5);
-				if (!a || a < Math.abs(c)) { a = c; var s = p / 4; }
-				else var s = p / (2 * Math.PI) * Math.asin(c / a);
+			easeInOut: function(t, b, c, d, a, p) {
+				if (t == 0) return b;
+				if ((t /= d / 2) == 2) return b + c;
+				if (!p) p = d * (.3 * 1.5);
+				if (!a || a < Math.abs(c)) {
+					a = c;
+					var s = p / 4;
+				} else var s = p / (2 * Math.PI) * Math.asin(c / a);
 				if (t < 1) return -.5 * (a * Math.pow(2, 10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p)) + b;
 				return a * Math.pow(2, -10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p) * .5 + c + b;
 			}
 		},
 		Back: {
-			easeIn: function (t, b, c, d, s) {
+			easeIn: function(t, b, c, d, s) {
 				if (s == undefined) s = 1.70158;
 				return c * (t /= d) * t * ((s + 1) * t - s) + b;
 			},
-			easeOut: function (t, b, c, d, s) {
+			easeOut: function(t, b, c, d, s) {
 				if (s == undefined) s = 1.70158;
 				return c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b;
 			},
-			easeInOut: function (t, b, c, d, s) {
+			easeInOut: function(t, b, c, d, s) {
 				if (s == undefined) s = 1.70158;
 				if ((t /= d / 2) < 1) return c / 2 * (t * t * (((s *= (1.525)) + 1) * t - s)) + b;
 				return c / 2 * ((t -= 2) * t * (((s *= (1.525)) + 1) * t + s) + 2) + b;
 			}
 		},
 		Bounce: {
-			easeIn: function (t, b, c, d) {
+			easeIn: function(t, b, c, d) {
 				return c - Tween.Bounce.easeOut(d - t, 0, c, d) + b;
 			},
-			easeOut: function (t, b, c, d) {
+			easeOut: function(t, b, c, d) {
 				if ((t /= d) < (1 / 2.75)) {
 					return c * (7.5625 * t * t) + b;
 				} else if (t < (2 / 2.75)) {
@@ -318,12 +335,13 @@ function PullRefresh(id, callback) {
 					return c * (7.5625 * (t -= (2.625 / 2.75)) * t + .984375) + b;
 				}
 			},
-			easeInOut: function (t, b, c, d) {
+			easeInOut: function(t, b, c, d) {
 				if (t < d / 2) return Tween.Bounce.easeIn(t * 2, 0, c, d) * .5 + b;
 				else return Tween.Bounce.easeOut(t * 2 - d, 0, c, d) * .5 + c * .5 + b;
 			}
 		}
 	}
+
 	function xround(x, num) {
 		return Math.round(x * Math.pow(10, num)) / Math.pow(10, num);
 	}
@@ -339,23 +357,23 @@ function PullRefresh(id, callback) {
 	var refresState = 1;
 	//移动距离
 	var distance = 0;
-	scrollElement.addEventListener('scroll', function (event) {
+	scrollElement.addEventListener('scroll', function(event) {
 		//console.log(event);
 
 	}, false);
-	scrollElement.addEventListener('touchstart', function (event) {
+	scrollElement.addEventListener('touchstart', function(event) {
 		var touch = event.targetTouches[0];
 		startClientY = xround(touch.clientY, 2);
 		prevMoveY = startClientY;
 	}, false);
-	var touchmove = function (event) {
+	var touchmove = function(event) {
 		var touch = event.targetTouches[0];
 		var clientY = xround(touch.clientY, 2);
 		var direction = 'down';
 		if (prevMoveY > clientY) {
 			direction = 'up'
 		}
-		console.log("topState："+topState+",scroll:+"+$("#scroll").scrollTop()+"direction:"+direction);
+		console.log("topState：" + topState + ",scroll:+" + $("#scroll").scrollTop() + "direction:" + direction);
 		//触碰到下滑临界值
 		if (topState === 1 && $("#scroll").scrollTop() <= 0 && direction == 'down') {
 			event.preventDefault();
@@ -375,8 +393,7 @@ function PullRefresh(id, callback) {
 				setState(distance);
 				scrollElement.style.webkitTransform = 'translate3d(0,' + distance + 'px,0)';
 				scrollElement.style.transform = 'translate3d(0,' + distance + 'px,0)';
-			}
-			else {
+			} else {
 				distance = clientY - startClientY - refreshHeight;
 				if (distance > -refreshHeight) {
 					event.preventDefault();
@@ -384,8 +401,7 @@ function PullRefresh(id, callback) {
 					setState(distance);
 					scrollElement.style.webkitTransform = 'translate3d(0,' + distance + 'px,0)';
 					scrollElement.style.transform = 'translate3d(0,' + distance + 'px,0)';
-				}
-				else {
+				} else {
 					topState = 1;
 					setState(-refreshHeight)
 					scrollElement.style.webkitTransform = 'translate3d(0,' + -refreshHeight + 'px,0)';
@@ -396,6 +412,7 @@ function PullRefresh(id, callback) {
 		}
 		prevMoveY = clientY;
 	}
+
 	function setState(distance) {
 		if (refresState != 2 && distance >= 0) {
 			document.getElementById('top1').style.display = 'none';
@@ -411,7 +428,7 @@ function PullRefresh(id, callback) {
 		}
 	}
 	scrollElement.addEventListener('touchmove', touchmove, false);
-	var touchend = function (event) {
+	var touchend = function(event) {
 		scrollElement.removeEventListener('touchmove', touchmove, false);
 		scrollElement.removeEventListener('touchend', touchend, false);
 		var touch = event.targetTouches[0];
@@ -421,25 +438,25 @@ function PullRefresh(id, callback) {
 			document.getElementById('top2').style.display = 'block';
 			document.getElementById('top3').style.display = 'none';
 			an(0);
-		 	_LoadNumber = { a: false };
+			_LoadNumber = {
+				a: false
+			};
 			_isPullRefresh = true;
-			var loadNumberTimeId = setInterval(function () {
+			var loadNumberTimeId = setInterval(function() {
 				if (_LoadNumber.a) {
 					_isPullRefresh = false;
 					refresState = 1;
-					an(- refreshHeight);
+					an(-refreshHeight);
 					clearInterval(loadNumberTimeId);
 				}
-				
-			}, 1000); 
+			}, 1000);
 			// 请求接口数据
 			callback();
 		} else {
 
 			if (topState == 3) {
-				an(- refreshHeight);
-			}
-			else {
+				an(-refreshHeight);
+			} else {
 				scrollElement.addEventListener('touchmove', touchmove, false);
 				scrollElement.addEventListener('touchend', touchend, false);
 			}
@@ -450,26 +467,24 @@ function PullRefresh(id, callback) {
 	scrollElement.addEventListener('touchcancel', touchend, false);
 
 
-	var an = function (position) {
+	var an = function(position) {
 		position = +position;
 		var tdistance = +distance
-		var start = 0, during = 35;
-		var _run = function () {
+		var start = 0,
+			during = 35;
+		var _run = function() {
 			start++;
 			distance = Tween.Cubic.easeOut(start, tdistance, position - tdistance, during);
 			scrollElement.style.webkitTransform = 'translate3d(0,' + distance + 'px,0)';
 			scrollElement.style.transform = 'translate3d(0,' + distance + 'px,0)';
 			if (start < during) {
 				requestAnimationFrame(_run);
-			}
-			else {
+			} else {
 				if (refresState !== 3) {
 					scrollElement.addEventListener('touchmove', touchmove, false);
 					scrollElement.addEventListener('touchend', touchend, false);
-				}
-				else {
-				}
-				if (position == (- refreshHeight)) {
+				} else {}
+				if (position == (-refreshHeight)) {
 					document.getElementById('top1').style.display = 'block';
 					document.getElementById('top2').style.display = 'none';
 					document.getElementById('top3').style.display = 'none';
@@ -482,7 +497,7 @@ function PullRefresh(id, callback) {
 	}
 }
 //下拉刷新调用
-PullRefresh('scroll', function(){
+PullRefresh('scroll', function() {
 	pageNo = 1;
 	loadFlag = 1;
 	$("#orderListID").html("");
@@ -490,4 +505,3 @@ PullRefresh('scroll', function(){
 	// 获取数据
 	getRefundLogList();
 });
-
