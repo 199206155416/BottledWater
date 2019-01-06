@@ -1,8 +1,8 @@
 var userId; // 用户id
-var state = 0; // tab状态  0：未使用，1：已使用，2：过期
+var type = 0; // tab状态  0：未过期，1：已过期
 var pageNo = 1;
 var loadFlag = 1; // 上拉加载标志
-
+var _LoadNumber={};
 mui.init({
 	swipeBack:true
 });
@@ -11,7 +11,7 @@ mui.init({
 mui.plusReady(function(){
 	bindEvent();
 	userId= localStorage.getItem("userId"); // 用户id
-	getCouponList();
+	getMyTicketList();
 });
 
 /**
@@ -20,11 +20,13 @@ mui.plusReady(function(){
 function bindEvent(){
 	// 点击tab切换列表
 	$(".tab-list").on("click", "li", function(){
-		state = $(this).index();
+		type = $(this).index();
   		$(".active").removeClass("active");//移除原来的
   		$(this).addClass("active");//当前添加选中状态
-  		$("#coupons").html("");//清空原来内容
-  		getCouponList();
+  		$("#myTickets").html("");//清空原来内容
+  		pageNo = 1;
+     	loadFlag = 1; // 上拉加载标志
+  		getMyTicketList();
 	});
 	
 	// 屏幕滚动后加载列表
@@ -36,7 +38,7 @@ function bindEvent(){
 		if (scrollTop + windowHeight >= scrollHeight - 300) {
 			if(loadFlag == 1){
 				loadFlag == 0;
-				getCouponList();
+				getMyTicketList();
 			}
 		}
 
@@ -56,17 +58,17 @@ function openCouponCon(){
 }
 
 /**
- * 获取优惠券 0：未使用，1：已使用，2：过期
- * @param {Object} state
+ * 获取我的水票
  */
-function getCouponList(){
+function getMyTicketList(){
+	$("#top2").show();
 	var formData=new FormData();
- 	formData.append("strUserId",userId);
- 	formData.append("state",state);
+ 	formData.append("userId",userId);
+ 	formData.append("type",type);
  	formData.append("pageNo", pageNo);
  	formData.append("pageSize",20);
 	$.ajax({
-		url: prefix + "/coupon/list",
+		url: prefix + "/ticket/list",
 		type: "POST",
 		data: formData,
 		contentType: false,
@@ -77,32 +79,25 @@ function getCouponList(){
 			ajaxLog(res);
 			var result=res.result;
 			if(res.resCode == 0){
-				console.log(result);
-				for(var i in result){
-					var item=result[i];
-					var strCouponName=item["strCouponName"];
-					var dtExpire=item["dtExpire"];
-					var fullPrice=item["fullPrice"];
-					var couponPrice=item["couponPrice"];
-					var remarks=item["remarks"];
-					var strHtml='<li class="coupon-item">'+
-								'<div class="coupon-item-body">'+
-									'<div>'+
-										'<p class="coupon-name">'+strCouponName+'</p>'+
-										'<p class="coupon-time">过期：'+dtExpire+'</p>'+
-									'</div>'+
-									'<div>'+
-										'<p class="coupon-price">¥'+couponPrice+'</p>'+
-										'<p class="coupon-comment">满'+fullPrice+'可用</p>'+
-									'</div>'+
-								'</div>'+
-								'<div class="coupon-item-footer">'+
-									'<p class="coupon-introduce">'+remarks+'</p>'+
-								'</div>'+
-							'</li>';
-					$("#coupons").append(strHtml);
+				var list = res.result.list; // 列表数据
+				var count = res.result.count; // 数据总量
+				$("#top2").hide();
+				if(count==0){
+					$("#ticketNullTemp").show();
 				}
-				
+				for(var i in list){
+					var item=list[i];
+					var goodName=item["goodName"];
+					var goodImg=item["goodImg"];
+					var dtMyexpire=item["dtMyexpire"];
+					var remainingCount=item["remainingCount"];
+					var ticketTemplate = $("#ticketTemplate").html();
+					ticketTemplate = ticketTemplate.replace("#goodName#", goodName);
+					ticketTemplate = ticketTemplate.replace("#goodImg#", goodImg);
+					ticketTemplate = ticketTemplate.replace("#dtMyexpire#", dtMyexpire);
+					ticketTemplate = ticketTemplate.replace("#remainingCount#", remainingCount);
+					$("#myTickets").append(ticketTemplate);
+				}
 				pageNo++;
 				loadFlag = 1;
 			}else{
@@ -419,9 +414,9 @@ function PullRefresh(id, callback) {
 PullRefresh('scroll', function(){
 	pageNo = 1;
 	loadFlag = 1;
-	$("#coupons").html("");
+	$("#myTickets").html("");
 	// 获取数据
-	getCouponList();
+	getMyTicketList();
 });
 
 

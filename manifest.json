@@ -169,7 +169,7 @@
 					"iphone": {
 						"default": "", /*iPhone3启动图片选，分辨率：320x480*/
 						/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
-						"retina40": "E:/智隆/智慧生活2/智慧生活2/1080-1882.png","iphonex":"E:/智隆/智慧生活2/智慧生活2/1125-2436.png","retina47":"E:/智隆/智慧生活2/智慧生活2/1080-1882.png","iphonexl":"E:/智隆/智慧生活2/智慧生活2/2436-1125.png","retina55":"E:/智隆/智慧生活2/智慧生活2/1242-2208.png","retina35":"E:/智隆/智慧生活2/智慧生活2/1080-1882.png","retina55l":"E:/智隆/智慧生活2/智慧生活2/2208-1242.png"
+						"retina40": "E:/智隆/智慧生活3/智慧生活2/1080-1882.png","iphonex":"E:/智隆/智慧生活3/智慧生活2/1125-2436.png","retina47":"E:/智隆/智慧生活3/智慧生活2/750-1334.png","iphonexl":"E:/智隆/智慧生活3/智慧生活2/2436-1125.png","retina55":"E:/智隆/智慧生活3/智慧生活2/1242-2208.png","retina35":"E:/智隆/智慧生活3/智慧生活2/1080-1882.png","retina55l":"E:/智隆/智慧生活3/智慧生活2/2208-1242.png"
 					},
 					"ipad": {
 						"portrait": "", /*iPad竖屏启动图片，分辨率：768x1004*/
@@ -185,9 +185,9 @@
 				"android": {
 					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
 					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
-					"hdpi": "E:/智隆/智慧生活2/智慧生活2/480-762.png", /*高分屏启动图片，分辨率：480x762*/
-					"xhdpi": "E:/智隆/智慧生活2/智慧生活2/720-1242.png", /*720P高分屏启动图片，分辨率：720x1242*/
-					"xxhdpi": "E:/智隆/智慧生活2/智慧生活2/1080-1882.png"
+					"hdpi": "E:/智隆/智慧生活3/智慧生活2/480-762.png", /*高分屏启动图片，分辨率：480x762*/
+					"xhdpi": "E:/智隆/智慧生活3/智慧生活2/720-1242.png", /*720P高分屏启动图片，分辨率：720x1242*/
+					"xxhdpi": "E:/智隆/智慧生活3/智慧生活2/1080-1882.png"
 				}
 			},
 			"plugins":{"push":{"igexin":{"appid":"5T2pD7mQ2Y56ambeYRDiF3","appkey":"jr9vdGShwV6beOEr98YtO3","appsecret":"9GOcEaiPs69rVqm2yYYyQ5"}},"maps":{"baidu":{"appkey_ios":"DudDUgMbOFnIGr1qX14rqwZ7rKhqabtO","appkey_android":"b8uvkGoh37qWKgeB6x6eQmdBrAalyK3z","appkey":"","description":""}},

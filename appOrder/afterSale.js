@@ -4,6 +4,7 @@ var pageNo = 1;
 var pageNoOld;
 var pageSize = 20;
 var loadFlag = 1; // 上拉加载标志
+var _LoadNumber={};
 mui.init({
 	swipeBack: false
 	// pullRefresh: {
@@ -83,7 +84,7 @@ function bindEvent() {
  * @author xuezhenxiang
  */
 function getRefundLogList() {
-	$("#load").show();
+	$("#top2").show();
 	var userId = localStorage.getItem(userId);
 	var formData = new FormData();
 	formData.append("strBuyerId", userId);
@@ -104,7 +105,7 @@ function getRefundLogList() {
 			if (res.resCode == 0) {
 				var list = res.result.list; // 列表数据
 				var count = res.result.count; // 数据总量
-				$("#load").hide();
+				$("#top2").hide();
 				//$("#top2").hide();
 				if (count == 0) {
 					$("#orderNullTemp").show();

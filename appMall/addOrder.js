@@ -204,6 +204,11 @@ function setProduct(){
 		var strGoodsImg = goodsList[i]["strMainImg"];
 		var strTitle = goodsList[i]["strTitle"];
 		var strSkuSttrs=goodsList[i]["strSkuSttrs"];
+		var strCategoryName2=goodsList[i]["strCategoryName2"];
+		if("水票"==strCategoryName2){
+			$("#strDeliveryType").val(2);
+			$("#strDeliveryType").attr("disabled","disabled");
+		}
 		var strSttrs=strSkuSttrs.split(",");
 		for(var j in strSttrs){
 			var strSttrValue=strSttrs[j];
@@ -361,6 +366,7 @@ function doAddOrder(){
 			var nCount=itemGoods["count"];
 			var strTitle=itemGoods["strTitle"];
 			var strSkuSttrs=goodsList[i]["strSkuSttrs"];
+			var waterTicketsDetail=goodsList[i]["waterTicketsDetail"];
 			var strSttrs=strSkuSttrs.split(",");
 			var strSkuAttr="";
 			for(var j in strSttrs){
@@ -383,6 +389,10 @@ function doAddOrder(){
 			formData.append("mallOrderDetailList["+i+"].waterTicketsNum", useTickecCount);
 			formData.append("mallOrderDetailList["+i+"].strTitle", strTitle);
 			formData.append("mallOrderDetailList["+i+"].strSkuAttr", strSkuAttr);
+			if(waterTicketsDetail){
+				formData.append("mallOrderDetailList["+i+"].waterTicketsDetail", waterTicketsDetail);
+			}
+			
 		}
 		isSubmit=true;
 		$.ajax({
