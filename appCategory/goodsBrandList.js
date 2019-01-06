@@ -105,7 +105,7 @@ function getGoodsList() {
 
 	formData.append("orderByField", orderByField);
 	formData.append("orderByType", orderByType);
-    $("#top2").show();
+    // $("#top2").show();
 	$.ajax({
 		url: prefix + "/goods/searchGoods",
 		type: 'POST',
@@ -117,7 +117,7 @@ function getGoodsList() {
 			_LoadNumber.a = true;
 			// 打印请求报错日志
 			ajaxLog(res);
-			 $("#top2").hide();
+			 // $("#top2").hide();
 			if(res.resCode == 0){
 				var nCount = res.result.count;
 				var goodsList = res.result.list;
@@ -439,12 +439,12 @@ function PullRefresh(id, callback) {
 			_LoadNumber = { a: false };
 			_isPullRefresh = true;
 			var loadNumberTimeId = setInterval(function () {
-				if (_LoadNumber.a) {
+				// if (_LoadNumber.a) {
 					_isPullRefresh = false;
 					refresState = 1;
 					an(- refreshHeight);
 					clearInterval(loadNumberTimeId);
-				}
+				// }
 
 			}, 1000);
 			// 请求接口数据
