@@ -4,20 +4,9 @@ var pageNo = 1;
 var pageNoOld;
 var pageSize = 20;
 var loadFlag = 1; // 上拉加载标志
+var _LoadNumber={};
 mui.init({
 	swipeBack: false
-	// pullRefresh: {
-	//     container: ".mui-content",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-	//     down : {
-	// 		style: 'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
-	// 		color:' #2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
-	// 		height: '50px',//可选,默认50px.下拉刷新控件的高度,
-	// 		range: '100px', //可选 默认100px,控件可下拉拖拽的范围
-	// 		offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
-	// 		auto: true,//可选,默认false.首次加载自动上拉刷新一次
-	// 		callback: function(){} //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-	//     }
-	//  	}
 });
 
 mui.plusReady(function() {
@@ -83,7 +72,7 @@ function bindEvent() {
  * @author xuezhenxiang
  */
 function getRefundLogList() {
-	$("#load").show();
+	$("#top2").show();
 	var userId = localStorage.getItem(userId);
 	var formData = new FormData();
 	formData.append("strBuyerId", userId);
@@ -104,7 +93,7 @@ function getRefundLogList() {
 			if (res.resCode == 0) {
 				var list = res.result.list; // 列表数据
 				var count = res.result.count; // 数据总量
-				$("#load").hide();
+				$("#top2").hide();
 				//$("#top2").hide();
 				if (count == 0) {
 					$("#orderNullTemp").show();

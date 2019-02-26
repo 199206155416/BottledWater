@@ -25,6 +25,8 @@ function bindEvent() {
 		$(this).addClass("active"); //当前添加选中状态
 		$("#coupons").html(""); //清空原来内容
 		$("#load").show();
+		pageNo = 1;
+     	loadFlag = 1; // 上拉加载标志
 		getCouponList();
 	});
 

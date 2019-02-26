@@ -66,7 +66,7 @@ function getCurrentLocation(){
         var flag=false;
         var distNum=map.getDistance(pointA,pointB);
         distNum=parseInt(distNum);
-        if(distNum<=100){
+        if(distNum<=1000000){
         	flag=true;
         }else{
         	flag=false;
@@ -222,13 +222,15 @@ function getOrderList(){
 								    //判定直线距离
 								    var lng=order.strLng;
 								    var lat=order.strLat;
-								    lng=parseFloat(lng);
-								    lat=parseFloat(lat);
-								    var pointDist = new BMap.Point(lng, lat);
-								    var f=getdist(currentPoit,pointDist);
-								    if(!f){//说明大于100啦
-								    	return false;
-								    }
+									if(lng!='0'&&lat!='0'){
+										lng=parseFloat(lng);
+										lat=parseFloat(lat);
+										var pointDist = new BMap.Point(lng, lat);
+										var f=getdist(currentPoit,pointDist);
+										if(!f){//说明大于100啦
+											return false;
+										}
+									}
 									editDeliverState(1,lOrderId);
 								    return false;
 							});

@@ -106,8 +106,10 @@ function bindEvent(){
 	$("#toPayMent").on("click", function(){
 		var list = cartObj.list;
 		var goodsList = [];
-		
+		var flag0=false;//水标志
+		var flag1=false;//非水标志
 		for(var i = 0, len = list.length; i < len; i++){
+			var catName=list[i].catName;
 			if(list[i].isCheck == 1){
 				goodsList.push({
 					"mallGoodsSku.id": list[i].mallGoodsSku.id,
@@ -118,8 +120,19 @@ function bindEvent(){
 					"nCount": list[i].skuCount
 				})
 			}
+			if(catName=="桶装水"){
+				flag0=true;
+			}
+			
+			if(catName!="桶装水"){
+				flag1=true;
+			}
+			
+		} 
+        if(flag0&&flag1){
+			mui.toast("桶装水商品和非桶装水商品不能同时购买,请分开选择！");
+			return false;
 		}
-
 		if(goodsList.length == 0){
 			mui.toast("请选择商品");
 			return false;
@@ -243,6 +256,7 @@ function getCartList(){
 					var strSpuId = result[i].strSpuId;
 					var strSpuImg = result[i].strSpuImg;
 					var skuCount = result[i].skuCount;
+					var catName=result[i].catName;
 					var strTitle="";
 					if(result[i].mallGoodsSku.mallGoods){
 						strTitle=result[i].mallGoodsSku.mallGoods.strTitle
@@ -253,7 +267,8 @@ function getCartList(){
 						skuStock: result[i].mallGoodsSku.skuStock,
 						skuPrice: result[i].mallGoodsSku.skuPrice,
 						strSkuSttrs:result[i].mallGoodsSku.strSkuSttrs,
-						remarks: strTitle
+						remarks: strTitle,
+						catName:catName
 					};
                     console.log(JSON.stringify(mallGoodsSku));
 					var goodsTemplate = $("#goodsTemplate").html();

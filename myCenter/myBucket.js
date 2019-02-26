@@ -14,7 +14,7 @@ function openRetreatLog(){
 				id: 'myCenter/retreatRecord.html_1',
 				href: 'myCenter/retreatRecord.html',
 				aniShow: getaniShow(),
-				title: "充值记录",
+				title: "退桶记录",
 				isBars: false,
 				barsIcon: '',
 				extendOptions: {}

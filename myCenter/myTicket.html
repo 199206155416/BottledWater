@@ -12,7 +12,7 @@
 <body>
 	<header class="header">
 	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left back"></a>
-	    <a class="use-introduce" onclick="openCouponCon()">使用说明</a>
+	    <a class="use-introduce"></a>
 	    <h1 class="title">我的水票</h1>
 	    <ul class="tab-list">
 	    	<li class="active">未使用</li>
@@ -33,18 +33,25 @@
 				<div class="mui-pull-loading mui-icon mui-icon-pulldown"></div>释放即可刷新...
 			</div>
 		</div>
-		<ul class="coupon-list" id="coupons">
-			<li class="ticket-item">
-				<img src="" alt="" class="ticket-img" />
+		<ul class="coupon-list" id="myTickets">
+			
+		</ul>
+	</div>
+	<div class="empty" id="ticketNullTemp" style="display: none">
+		<img class="empty_img" src="../common/image/blank.png" />
+	</div>
+	<!-- 水票模板 -->
+	<div id="ticketTemplate" style="display: none;">
+		<li class="ticket-item">
+				<img src="#goodImg#" alt="" class="ticket-img" />
 				<div class="ticket-info">
-					<p class="ticket-title">莱特（天然矿泉水）</p>
-					<p class="ticket-time">有效期至：2019-09-09</p>
+					<p class="ticket-title">#goodName#</p>
+					<p class="ticket-time">有效期至：#dtMyexpire#</p>
 				</div>
 				<div class="ticket-count">
-					<p>10张</p>
+					<p>#remainingCount#张</p>
 				</div>
 			</li>
-		</ul>
 	</div>
 
 	<script src="../common/js/include.js" charset="UTF-8" level="1"></script>

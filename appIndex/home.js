@@ -1,28 +1,7 @@
 var _LoadNumber = { a: false,b:false };
 
 mui.init({
-	swipeBack: false,
-//	pullRefresh: {
-//		container: ".mui-content", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-//		down: {
-//			// style: 'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
-//			// color:' #2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
-//			// height: '50px',//可选,默认50px.下拉刷新控件的高度,
-//			// range: '100px', //可选 默认100px,控件可下拉拖拽的范围
-//			// offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
-//			auto: true, //可选,默认false.首次加载自动上拉刷新一次
-//			callback: function() { //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-//				// 获取焦点图
-//				getFocusImg();
-//				// 获取商品列表
-//				getGoodsList();
-//
-//				setTimeout(function() {
-//					mui('.mui-content').pullRefresh().endPulldown();
-//				}, 3000);
-//			}
-//		}
-//	}
+	swipeBack: false
 });
 var currentWebview;
 var marqueeArray = []; //跑马灯数据数组
@@ -36,34 +15,6 @@ mui.plusReady(function() {
     
 	// 获取商品列表
 	getGoodsList();
- 
-    // 监听点击消息事件
-    /*
-    plus.push.addEventListener( "click", function( msg ) {
-        // 判断是从本地创建还是离线推送的消息
-        switch( msg.payload ) {
-            case "LocalMSG":
-                outSet( "点击本地创建消息启动：" );
-            break;
-            default:
-                outSet( "点击离线推送消息启动：");
-            break;
-        }
-        // 提示点击的内容
-        plus.ui.alert( msg.content );
-        // 处理其它数据
-        logoutPushMsg( msg );
-    }, false );
-    // 监听在线消息事件
-    plus.push.addEventListener( "receive", function( msg ) {
-        if ( msg.aps ) {  // Apple APNS message
-            outSet( "接收到在线APNS消息：" );
-        } else {
-            outSet( "接收到在线透传消息：" );
-        }
-        logoutPushMsg( msg );
-    }, false );
-   */
 });
 
 //检查更新
@@ -201,53 +152,8 @@ function getFocusImg() {
 	});
 };
 
-///**
-// * 设置轮播图
-// * @author xuezhenxiang
-// */
-//function setMarquee(marqueeArray) {
-//	var sliderMarquee = document.getElementById('slider');
-//	var sliderGroup = document.createElement('div');
-//	sliderGroup.className = 'mui-slider-group mui-slider-loop';
-//	sliderMarquee.appendChild(sliderGroup);
-//	var sliderIndicator = document.createElement('div');
-//	sliderIndicator.className = 'mui-slider-indicator';
-//	sliderMarquee.appendChild(sliderIndicator);
-//	for (var i = 0; i < marqueeArray.length; i++) {
-//		if (0 == i) {
-//			var sliderItemDuplicate = document.createElement('div');
-//			sliderItemDuplicate.className = 'mui-slider-item mui-slider-item-duplicate';
-//			sliderItemDuplicate.innerHTML = '<a href="' + marqueeArray[marqueeArray.length - 1].contentId + '">\
-//					<img src="' + marqueeArray[marqueeArray.length - 1].imagerpath + '" />\
-//				</a>';
-//			sliderGroup.appendChild(sliderItemDuplicate);
-//		}
-//		var sliderItem = document.createElement('div');
-//		sliderItem.className = 'mui-slider-item';
-//		sliderItem.innerHTML = '<a href="' + marqueeArray[i].contentId + '">\
-//				<img src="' + marqueeArray[i].imagerpath + '" />\
-//			</a>';
-//		sliderGroup.appendChild(sliderItem);
-//		var indicatorItme = document.createElement('div');
-//		if (i == 0) {
-//			indicatorItme.className = 'mui-indicator mui-active';
-//		} else {
-//			indicatorItme.className = 'mui-indicator';
-//		}
-//		sliderIndicator.appendChild(indicatorItme);
-//		if (marqueeArray.length - 1 == i) {
-//			var sliderItemDuplicate = document.createElement('div');
-//			sliderItemDuplicate.className = 'mui-slider-item mui-slider-item-duplicate';
-//			sliderItemDuplicate.innerHTML = '<a href="' + marqueeArray[0].contentId + '">\
-//					<img src="' + marqueeArray[0].imagerpath + '" />\
-//				</a>';
-//			sliderGroup.appendChild(sliderItemDuplicate);
-//		}
-//		slider = mui('.mui-slider').slider({
-//			interval:2000
-//		});
-//	}
-//};
+
+
 
 /**
  * 设置轮播图

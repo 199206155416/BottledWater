@@ -155,6 +155,7 @@ function getOrderList(){
 					var strStateName = list[i].strStateName; // 订单状态
 					var factPrice=list[i].factPrice;
 					var strDeliveryType=list[i].strDeliveryType;
+					var isWater=list[i].isWater;
 					var strDeliveryTypeName;
 					if(strDeliveryType=="0"){
 						strDeliveryTypeName="配送";
@@ -236,7 +237,7 @@ function getOrderList(){
 					if(strStateName=="待付款"){
 						$("#orderListID li").last().find(".checkBill>div").eq(0).show();
 						$("#orderListID li").last().find(".checkBill>div").eq(1).show();
-					}else if(strStateName=="待发货"&&factPrice!=0){
+					}else if(strStateName=="待发货"&&factPrice!=0&&'1'==isWater){
 						$("#orderListID li").last().find(".checkBill>div").eq(2).show();
 						
 					}
@@ -326,7 +327,7 @@ function getPayInfo(){
 				ajaxLog(res);
 				var result=res.result;
 				if(res.resCode == 0){
-					doPay(result);
+					doPay(result,payStrOrderId);
 				}else{
 				   mui.alert(result, '提示', function(e) {
 			        },"div");
@@ -335,7 +336,7 @@ function getPayInfo(){
 		});
 }
 
-function doPay(payInfo){
+function doPay(payInfo,payStrOrderId){
 	console.log("payInfo:"+payInfo);
 	if(payType==1){//微信
 		var appid=payInfo["appid"];
@@ -349,27 +350,59 @@ function doPay(payInfo){
 		var stra=JSON.stringify(payInfoNew);
 		plus.payment.request(channel,stra,function(result){
                     plus.nativeUI.alert("支付成功！",function(){
-                       getOrderList();
+                       //getOrderList();
+                       $("#"+payStrOrderId).find(".payment").hide();
+                       $("#"+payStrOrderId).find(".cancel").hide();
+                       $("#"+payStrOrderId).find(".applySale").show();
+                       $("#"+payStrOrderId).find(".strFlagstage").html("待发货");
                     });
                 },function(error){
                     plus.nativeUI.alert("支付失败：" + JSON.stringify(error));
+                     payFailHandle(payStrOrderId,error.message);
                 });
 	}else if(payType==0){
 		plus.payment.request(channel,payInfo,function(result){
                     plus.nativeUI.alert("支付成功！",function(){
-                        getOrderList();
+                        //getOrderList();
+                        $("#"+payStrOrderId).find(".payment").hide();
+                       $("#"+payStrOrderId).find(".cancel").hide();
+                       $("#"+payStrOrderId).find(".applySale").show();
+                       $("#"+payStrOrderId).find(".strFlagstage").html("待发货");
                     });
                 },function(error){
                     plus.nativeUI.alert("支付失败：" + JSON.stringify(error));
+                     payFailHandle(payStrOrderId,error.message);
                 });
 	}else if(payType==2){//余额
 		 plus.nativeUI.alert("支付成功！",function(){
-                      getOrderList();
+                  //getOrderList();
+                  $("#"+payStrOrderId).find(".payment").hide();
+                  $("#"+payStrOrderId).find(".cancel").hide();
+                  $("#"+payStrOrderId).find(".applySale").show();
+                  $("#"+payStrOrderId).find(".strFlagstage").html("待发货");
           });
 
 		
 	}
-};
+}
+
+function payFailHandle(strOrderId,message){
+	$.ajax({
+			url: prefix + "/order/payFailState",
+			type: "POST",
+			dataType: "json",
+			data: {
+				strOrderId: strOrderId,
+				payRemarks: message
+			},
+			success: function(e){
+				ajaxLog(e);
+				if(e.resCode == 0){
+				}
+			}
+		});
+	
+}
 
 //下拉刷新
 function PullRefresh(id, callback) {

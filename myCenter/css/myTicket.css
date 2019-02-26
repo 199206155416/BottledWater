@@ -190,3 +190,25 @@ body{
 	line-height: .36rem;
 	color: #999;
 }
+
+.empty{
+	margin-top: 3rem;
+}
+.empty .empty_img{
+	width:2.2rem;
+	height: 2.2rem;
+    display: block;
+    margin: 0 auto;
+}
+.empty p{
+	text-align: center;
+    font-size: 0.3rem;
+    color: #999999;
+    margin-top: 0.4rem;
+}
+.empty .empty_con{
+	
+	width:4.5rem;
+	margin:0 auto;
+	margin-top:1.75rem;
+}

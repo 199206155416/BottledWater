@@ -124,6 +124,11 @@ function bindEvent(){
 			dataObj.id=addressId;
 		}
 		
+		if(!dataObj.strChooseAddress){
+			mui.toast("请选择地址定位");
+			return false;
+		}
+		
 		if(!dataObj.strReceiptUserName||dataObj.strReceiptUserName==''){
 			mui.toast("收货人姓名必填");
 			return false;
