@@ -117,6 +117,7 @@ function getReclaimList(){
 					var strUserName = itemData.strUserName;
 					var strMobile = itemData.strMobile;
 					var createDate = itemData.createDate;
+					var strAddressDetail=itemData.strStandby4
 					var reclaimListTemp = $("#reclaimListTemp").html();
 					reclaimListTemp = reclaimListTemp.replace("#id#", id);
 					reclaimListTemp = reclaimListTemp.replace("#bucketCount#", bucketCount);
@@ -124,6 +125,7 @@ function getReclaimList(){
 					reclaimListTemp = reclaimListTemp.replace("#strUserName#", strUserName);
 					reclaimListTemp = reclaimListTemp.replace("#strMobile#", strMobile);
 					reclaimListTemp = reclaimListTemp.replace("#createDate#", createDate);
+					reclaimListTemp = reclaimListTemp.replace("#strAddressDetail#", strAddressDetail);
 					var reclaimList = $(reclaimListTemp);
 					;(function(reclaimList,itemData){
 							reclaimList.find(".confirmDispatch").on("click", function(){

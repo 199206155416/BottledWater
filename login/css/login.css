@@ -3,6 +3,9 @@
 .mui-input-row {
     height: 1rem;
 }
+input{
+		margin-top: 1.5em;
+}
 .own-group{
 	background: #fff;
 	padding: .7rem .3rem 0 .3rem;
@@ -33,7 +36,6 @@
     padding-left: 0;
     border: 0;
     font-size: .24rem;
-    line-height: 1rem;
     color: #555;
 }
 .mui-btn-block {

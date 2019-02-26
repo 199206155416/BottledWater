@@ -30,9 +30,9 @@ function queryLogList(){
 				 	if(0==state||1==state){
 				 		stateName="退桶中";
 				 	}else if(2==state){
-				 		stateName="退桶成功";
-				 	}else if(3==state){
 				 		stateName="退桶失败";
+				 	}else if(3==state){
+				 		stateName="退桶成功";
 				 	}
 				 	var strHtml='<li class="mui-table-view-cell">'+
                                 '<div>'+
